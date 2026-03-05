@@ -1,0 +1,22 @@
+{
+  "name": "@shoparch/web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ShopArch — Application web Next.js (front-end)",
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zustand": "^4.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "typescript": "^5.1.0"
+  }
+}
