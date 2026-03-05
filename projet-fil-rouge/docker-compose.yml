@@ -1,0 +1,103 @@
+# =============================================================================
+# ShopArch — Environnement de développement local
+# =============================================================================
+# Pour démarrer tous les services :
+#   docker compose up -d
+#
+# Pour vérifier que tout fonctionne :
+#   docker compose ps
+#
+# Pour arrêter tous les services :
+#   docker compose down
+#
+# Pour tout supprimer (y compris les données) :
+#   docker compose down -v
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # PostgreSQL — Base de données relationnelle principale
+  # ---------------------------------------------------------------------------
+  postgres:
+    image: postgres:16
+    container_name: shoparch-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: shoparch
+      POSTGRES_PASSWORD: shoparch
+      POSTGRES_DB: shoparch
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shoparch -d shoparch"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ---------------------------------------------------------------------------
+  # Redis — Cache et file de messages (pub/sub, sessions, etc.)
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7
+    container_name: shoparch-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  # ---------------------------------------------------------------------------
+  # MinIO — Stockage objet compatible S3 (pour les images produits, etc.)
+  # Console d'admin : http://localhost:9001
+  # ---------------------------------------------------------------------------
+  minio:
+    image: minio/minio
+    container_name: shoparch-minio
+    restart: unless-stopped
+    ports:
+      - "9000:9000"   # API S3
+      - "9001:9001"   # Console d'administration
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ---------------------------------------------------------------------------
+  # Mailhog — Serveur SMTP de test (capture tous les e-mails envoyés)
+  # Interface web : http://localhost:8025
+  # ---------------------------------------------------------------------------
+  mailhog:
+    image: mailhog/mailhog
+    container_name: shoparch-mailhog
+    restart: unless-stopped
+    ports:
+      - "1025:1025"   # SMTP
+      - "8025:8025"   # Interface web
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8025"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:

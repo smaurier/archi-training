@@ -1,0 +1,19 @@
+{
+  "name": "shoparch-exercises",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ex01": "vitest run 01-refactoring-solid",
+    "test:ex05": "vitest run 05-layered-to-hexagonal",
+    "test:ex11": "vitest run 11-fsm-commande",
+    "test:ex12": "vitest run 12-api-rest-nestjs",
+    "test:ex21": "vitest run 21-component-tree",
+    "test:ex33": "vitest run 33-cqrs-catalogue-commandes"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "vitest": "^1.6.0"
+  }
+}

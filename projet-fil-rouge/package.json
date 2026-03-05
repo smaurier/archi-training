@@ -1,0 +1,22 @@
+{
+  "name": "shoparch",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ShopArch — Projet fil rouge de formation en architecture logicielle",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently --names api,web --prefix-colors blue,green \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "npm run dev --workspace=@shoparch/api",
+    "dev:web": "npm run dev --workspace=@shoparch/web",
+    "build": "npm run build --workspaces",
+    "start:api": "npm run start --workspace=@shoparch/api",
+    "start:web": "npm run start --workspace=@shoparch/web",
+    "postinstall": "echo '✅ Installation terminée. Lancez : docker compose up -d && npm run dev'"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "shoparch-domain",
+  "version": "0.1.0",
+  "description": "ShopArch domain model — Module 00 starter",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vitest": "^2.0.0"
+  }
+}

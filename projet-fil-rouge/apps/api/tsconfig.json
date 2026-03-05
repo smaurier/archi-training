@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    /* Cible et modules */
+    "module": "commonjs",
+    "target": "ES2021",
+    "lib": ["ES2021"],
+    "moduleResolution": "node",
+
+    /* Répertoires */
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": "./",
+
+    /* Mode strict — on active tout pour apprendre les bonnes pratiques */
+    "strict": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Décorateurs — indispensable pour NestJS */
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    /* Interopérabilité */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+
+    /* Sortie */
+    "declaration": true,
+    "removeComments": false,
+    "incremental": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
