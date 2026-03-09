@@ -12,13 +12,13 @@
 
 ### 1. Destructuring (objet + tableau)
 
-```javascript
+```typescript
 // Objet
-const product = { name: 'Clavier', price: 89, stock: 42 };
+const product: { name: string; price: number; stock: number } = { name: 'Clavier', price: 89, stock: 42 };
 const { name, price } = product; // name = 'Clavier', price = 89
 
 // Tableau
-const [first, second, ...rest] = [1, 2, 3, 4, 5];
+const [first, second, ...rest]: number[] = [1, 2, 3, 4, 5];
 // first = 1, second = 2, rest = [3, 4, 5]
 
 // Renommage
@@ -27,76 +27,81 @@ const { name: productName } = product; // productName = 'Clavier'
 
 ### 2. Spread operator (objets + tableaux)
 
-```javascript
+```typescript
 // Copier et étendre un objet
-const updated = { ...product, price: 99 }; // nouveau objet, price changé
+const updated: { name: string; price: number; stock: number } = { ...product, price: 99 }; // nouveau objet, price changé
 
 // Fusionner des tableaux
-const all = [...arrayA, ...arrayB];
+const all: number[] = [...arrayA, ...arrayB];
 
 // Copier un objet (shallow copy — attention aux objets imbriqués)
-const copy = { ...product };
+const copy: typeof product = { ...product };
 ```
 
 ### 3. Optional chaining (?.) et nullish coalescing (??)
 
-```javascript
+```typescript
 // Optional chaining : accéder sans crash si null/undefined
-const city = user?.address?.city; // undefined si user ou address est null
+const city: string | undefined = user?.address?.city; // undefined si user ou address est null
 
 // Nullish coalescing : valeur par défaut SEULEMENT si null ou undefined
-const name = user?.name ?? 'Anonyme'; // 'Anonyme' si name est null/undefined
+const name: string = user?.name ?? 'Anonyme'; // 'Anonyme' si name est null/undefined
 // Attention : '' ?? 'default' donne '' (pas 'default') — contrairement à ||
-const empty = '' || 'default';  // 'default' (|| traite '' comme falsy)
-const empty2 = '' ?? 'default'; // '' (?? ne traite que null/undefined)
+const empty: string = '' || 'default';  // 'default' (|| traite '' comme falsy)
+const empty2: string = '' ?? 'default'; // '' (?? ne traite que null/undefined)
 ```
 
 ### 4. Méthodes de tableau (map, filter, reduce, find, some, every)
 
-```javascript
-const products = [
+```typescript
+interface Product {
+  name: string;
+  price: number;
+}
+
+const products: Product[] = [
   { name: 'Clavier', price: 89 },
   { name: 'Souris', price: 45 },
   { name: 'Ecran', price: 350 },
 ];
 
-const names = products.map(p => p.name);           // ['Clavier', 'Souris', 'Ecran']
-const cheap = products.filter(p => p.price < 100);  // [{Clavier}, {Souris}]
-const total = products.reduce((sum, p) => sum + p.price, 0); // 484
-const found = products.find(p => p.name === 'Souris');        // {Souris} ou undefined
-const hasExpensive = products.some(p => p.price > 300);       // true
-const allCheap = products.every(p => p.price < 100);          // false
+const names: string[] = products.map((p) => p.name);           // ['Clavier', 'Souris', 'Ecran']
+const cheap: Product[] = products.filter((p) => p.price < 100);  // [{Clavier}, {Souris}]
+const total: number = products.reduce((sum, p) => sum + p.price, 0); // 484
+const found: Product | undefined = products.find((p) => p.name === 'Souris'); // {Souris} ou undefined
+const hasExpensive: boolean = products.some((p) => p.price > 300);       // true
+const allCheap: boolean = products.every((p) => p.price < 100);          // false
 ```
 
 ### 5. Promises et async/await
 
-```javascript
+```typescript
 // Créer une Promise
-const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const wait = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Chaîner avec .then()
 fetch('/api/products')
-  .then(res => res.json())
-  .then(data => console.log(data));
+  .then((res) => res.json())
+  .then((data: Product[]) => console.log(data));
 
 // Avec async/await (préféré dans la formation)
-async function getProducts() {
-  const res = await fetch('/api/products');
-  const data = await res.json();
+async function getProducts(): Promise<Product[]> {
+  const res: Response = await fetch('/api/products');
+  const data: Product[] = await res.json();
   return data;
 }
 ```
 
 ### 6. try/catch avec fetch
 
-```javascript
-async function fetchProducts() {
+```typescript
+async function fetchProducts(): Promise<Product[]> {
   try {
-    const res = await fetch('/api/products');
+    const res: Response = await fetch('/api/products');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (error) {
-    console.error('Erreur:', error.message);
+    console.error('Erreur:', (error as Error).message);
     return []; // valeur par défaut en cas d'erreur
   }
 }
@@ -104,19 +109,22 @@ async function fetchProducts() {
 
 ### 7. Classes (constructor, méthodes, getters)
 
-```javascript
+```typescript
 class Money {
-  constructor(amount, currency) {
+  readonly amount: number;
+  readonly currency: string;
+
+  constructor(amount: number, currency: string) {
     this.amount = amount;
     this.currency = currency;
   }
 
-  add(other) {
+  add(other: Money): Money {
     if (this.currency !== other.currency) throw new Error('Currency mismatch');
     return new Money(this.amount + other.amount, this.currency);
   }
 
-  get formatted() {
+  get formatted(): string {
     return `${this.amount.toFixed(2)} ${this.currency}`;
   }
 }
@@ -127,19 +135,19 @@ price.formatted; // '10.00 EUR' — pas de parenthèses, c'est un getter
 
 ### 8. Modules (import/export, named vs default)
 
-```javascript
+```typescript
 // Named exports (préféré dans la formation)
-// math.js
-export const add = (a, b) => a + b;
-export const multiply = (a, b) => a * b;
+// math.ts
+export const add = (a: number, b: number): number => a + b;
+export const multiply = (a: number, b: number): number => a * b;
 // usage
-import { add, multiply } from './math.js';
+import { add, multiply } from './math';
 
 // Default export (un seul par fichier)
-// ProductService.js
+// ProductService.ts
 export default class ProductService { /* ... */ }
 // usage
-import ProductService from './ProductService.js';
+import ProductService from './ProductService';
 
 // Re-export (pattern "barrel" — index.ts)
 export { ProductService } from './product.service';
@@ -148,10 +156,10 @@ export { OrderService } from './order.service';
 
 ### 9. Closures et callbacks
 
-```javascript
+```typescript
 // Closure : une fonction qui "capture" des variables de son scope parent
-function createCounter(start = 0) {
-  let count = start;
+function createCounter(start: number = 0): { increment: () => number; getValue: () => number } {
+  let count: number = start;
   return {
     increment: () => ++count,
     getValue: () => count,
@@ -162,27 +170,27 @@ counter.increment(); // 11
 counter.getValue();  // 11
 
 // Callback : passer une fonction en argument
-function fetchThen(url, onSuccess, onError) {
-  fetch(url).then(res => res.json()).then(onSuccess).catch(onError);
+function fetchThen<T>(url: string, onSuccess: (data: T) => void, onError: (err: Error) => void): void {
+  fetch(url).then((res) => res.json()).then(onSuccess).catch(onError);
 }
 ```
 
 ### 10. Patterns d'immutabilité
 
-```javascript
+```typescript
 // Object.freeze — empêche la modification (shallow)
 const config = Object.freeze({ apiUrl: '/api', timeout: 5000 });
-config.timeout = 10000; // silencieusement ignoré (ou erreur en strict mode)
+// config.timeout = 10000; // Erreur TypeScript : Cannot assign to 'timeout' because it is a read-only property
 
 // Copie par spread pour "modifier" sans muter
-const original = { name: 'Clavier', price: 89 };
-const updated = { ...original, price: 99 }; // original inchangé
+const original: { name: string; price: number } = { name: 'Clavier', price: 89 };
+const updated: { name: string; price: number } = { ...original, price: 99 }; // original inchangé
 
 // Tableau : ajouter/supprimer sans muter
-const items = [1, 2, 3];
-const added = [...items, 4];               // [1, 2, 3, 4]
-const removed = items.filter(i => i !== 2); // [1, 3]
-const replaced = items.map(i => i === 2 ? 20 : i); // [1, 20, 3]
+const items: number[] = [1, 2, 3];
+const added: number[] = [...items, 4];               // [1, 2, 3, 4]
+const removed: number[] = items.filter((i) => i !== 2); // [1, 3]
+const replaced: number[] = items.map((i) => i === 2 ? 20 : i); // [1, 20, 3]
 ```
 
 ---

@@ -117,12 +117,14 @@ Pipeline :
 
 ### k6 smoke test (CI)
 
-```javascript
-// tests/load/smoke.js
+```typescript
+// tests/load/smoke.ts
 import http from 'k6/http';
 import { check, sleep } from 'k6';
+import type { Options } from 'k6/options';
+import type { RefinedResponse, ResponseType } from 'k6/http';
 
-export const options = {
+export const options: Options = {
   vus: 5,
   duration: '2m',
   thresholds: {
@@ -131,24 +133,24 @@ export const options = {
   },
 };
 
-export default function () {
+export default function (): void {
   // Scenario : lister les produits → voir un produit
-  const listRes = http.get(`${__ENV.BASE_URL}/api/products`);
+  const listRes: RefinedResponse<ResponseType> = http.get(`${__ENV.BASE_URL}/api/products`);
   check(listRes, {
     'list status 200': (r) => r.status === 200,
-    'list has items': (r) => JSON.parse(r.body)['hydra:totalItems'] > 0,
+    'list has items': (r) => JSON.parse(r.body as string)['hydra:totalItems'] > 0,
   });
 
   sleep(1);
 
-  const products = JSON.parse(listRes.body)['hydra:member'];
+  const products: Array<{ id: string }> = JSON.parse(listRes.body as string)['hydra:member'];
   if (products.length > 0) {
-    const detailRes = http.get(
+    const detailRes: RefinedResponse<ResponseType> = http.get(
       `${__ENV.BASE_URL}/api/products/${products[0].id}`,
     );
     check(detailRes, {
       'detail status 200': (r) => r.status === 200,
-      'detail has name': (r) => JSON.parse(r.body).name !== undefined,
+      'detail has name': (r) => JSON.parse(r.body as string).name !== undefined,
     });
   }
 
@@ -158,12 +160,14 @@ export default function () {
 
 ### k6 load test
 
-```javascript
-// tests/load/load.js
+```typescript
+// tests/load/load.ts
 import http from 'k6/http';
 import { check, sleep } from 'k6';
+import type { Options } from 'k6/options';
+import type { Params } from 'k6/http';
 
-export const options = {
+export const options: Options = {
   stages: [
     { duration: '2m', target: 50 },   // Ramp-up
     { duration: '10m', target: 50 },   // Plateau
@@ -177,8 +181,8 @@ export const options = {
   },
 };
 
-export default function () {
-  const params = {
+export default function (): void {
+  const params: Params = {
     headers: {
       Authorization: `Bearer ${__ENV.TEST_TOKEN}`,
       'X-Tenant-Id': 'load-test-tenant',
@@ -186,7 +190,7 @@ export default function () {
   };
 
   // Mix de requetes realiste
-  const rand = Math.random();
+  const rand: number = Math.random();
   if (rand < 0.5) {
     // 50% : listing produits (lecture)
     http.get(`${__ENV.BASE_URL}/api/products?page=1`, params);
@@ -208,9 +212,11 @@ export default function () {
 
 ### k6 stress test
 
-```javascript
-// tests/load/stress.js
-export const options = {
+```typescript
+// tests/load/stress.ts
+import type { Options } from 'k6/options';
+
+export const options: Options = {
   stages: [
     { duration: '2m', target: 100 },
     { duration: '5m', target: 200 },

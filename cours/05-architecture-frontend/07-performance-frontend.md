@@ -73,8 +73,10 @@ Les 3 metriques que Google utilise pour le ranking :
 
 ### 3. Code splitting — vendor chunks nommes
 
-```javascript
+```typescript
 // vite.config.ts
+import { defineConfig } from 'vite';
+
 export default defineConfig({
   build: {
     rollupOptions: {
@@ -222,9 +224,11 @@ export function useWebVitals() {
 
 ### Lighthouse CI config
 
-```javascript
-// lighthouserc.js
-module.exports = {
+```typescript
+// lighthouserc.ts
+import type { Config } from '@lhci/utils';
+
+const config: Config = {
   ci: {
     collect: {
       url: [
@@ -253,6 +257,8 @@ module.exports = {
     },
   },
 };
+
+export default config;
 ```
 
 ### Performance budget checker (CI)
