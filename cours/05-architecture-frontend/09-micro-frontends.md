@@ -131,11 +131,14 @@ Les `shared` dependencies (React, React-DOM) sont chargees une seule fois et par
 
 ### Module Federation config (Webpack 5)
 
-```javascript
-// shell/webpack.config.js (host)
-const { ModuleFederationPlugin } = require('webpack').container;
+```typescript
+// shell/webpack.config.ts (host)
+import type { Configuration } from 'webpack';
+import { container } from 'webpack';
 
-module.exports = {
+const { ModuleFederationPlugin } = container;
+
+const config: Configuration = {
   plugins: [
     new ModuleFederationPlugin({
       name: 'shell',
@@ -153,8 +156,10 @@ module.exports = {
   ],
 };
 
-// catalog/webpack.config.js (remote)
-module.exports = {
+export default config;
+
+// catalog/webpack.config.ts (remote)
+const catalogConfig: Configuration = {
   plugins: [
     new ModuleFederationPlugin({
       name: 'catalog',
@@ -170,6 +175,8 @@ module.exports = {
     }),
   ],
 };
+
+export { catalogConfig };
 ```
 
 ### Shell application avec lazy loading des remotes
