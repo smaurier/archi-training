@@ -33,8 +33,8 @@ Shared Kernel : @shoparch/shared-types (Money, UUID, DateRange)
 | Upstream | Downstream | Pattern | Justification |
 |---|---|---|---|
 | Identity | Catalog, Order, Payment | **Open Host Service** | Identity expose OIDC/JWKS — protocole standard |
-| Catalog | Order | **ACL** | Order traduit CatalogProduct → OrderLine (modèles tres différents) |
-| Order | Payment | **Customer/Supplier** | Payment s'adapte aux besoins d'Order (meme équipe) |
+| Catalog | Order | **ACL** | Order traduit CatalogProduct → OrderLine (modèles très différents) |
+| Order | Payment | **Customer/Supplier** | Payment s'adapte aux besoins d'Order (même équipe) |
 | Stripe (externe) | Payment | **Conformist** | On accepte le modèle Stripe tel quel (pas le choix) |
 | — | — | **Shared Kernel** | `@shoparch/shared-types` : Money, UUID |
 

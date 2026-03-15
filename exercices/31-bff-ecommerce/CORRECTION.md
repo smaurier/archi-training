@@ -254,7 +254,7 @@ CORRECT — cacher uniquement les donnees partagees (categories, promos)
          Les donnees utilisateur (panier, profil) sont toujours fresh
 ```
 
-### 5. Meme réponse pour tous les devices
+### 5. Même réponse pour tous les devices
 ```
 FAUX — mobile recoit 16 produits avec descriptions completes et 5 images chacun
 CORRECT — adapter la reponse au device : mobile = 8 produits, thumbnail only, pas de description

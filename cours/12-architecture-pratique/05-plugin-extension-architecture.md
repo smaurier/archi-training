@@ -9,7 +9,7 @@
 <details>
 <summary>1. Pourquoi le Big Bang rewrite échoué presque toujours ?</summary>
 
-Les specs sont incompletes (les edge cases sont decouverts trop tard), le risque est concentre en un seul moment (si ca échoué, tout échoué), et les équipes sous-estiment systematiquement la complexité. Le Strangler Fig migre feature par feature — chaque feature est testee et validee avant de passer a la suivante.
+Les specs sont incompletes (les edge cases sont decouverts trop tard), le risque est concentre en un seul moment (si ça échoué, tout échoué), et les équipes sous-estiment systematiquement la complexité. Le Strangler Fig migre feature par feature — chaque feature est testee et validee avant de passer à la suivante.
 </details>
 
 <details>
@@ -290,7 +290,7 @@ export class PluginHealthCheck {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Plugin manifest** (YAML) : déclaré les permissions, endpoints, events, egress hosts, routes, widgets, blocks — principe du moindre privilege
 2. **Route mount blocks** : le plugin s'inséré dans les pages CMS via des block types enregistres dans le manifest

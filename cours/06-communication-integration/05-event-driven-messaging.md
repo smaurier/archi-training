@@ -9,11 +9,11 @@
 <details>
 <summary>1. Pourquoi utiliser un Redis pub/sub adapter pour scaler les WebSockets ?</summary>
 
-Quand on deploie plusieurs instances du serveur WebSocket derriere un load balancer, un client connecte au serveur 1 ne recoit pas les messages publies par le serveur 2 — les rooms sont locales a chaque process. Le **Redis pub/sub adapter** fait que chaque serveur publie ses messages sur Redis et s'abonne aux channels. Redis redistribue les messages a toutes les instances, qui les diffusent a leurs clients locaux. Résultat : les rooms fonctionnent de manière transparente, quelle que soit l'instance.
+Quand on deploie plusieurs instances du serveur WebSocket derriere un load balancer, un client connecte au serveur 1 ne recoit pas les messages publies par le serveur 2 — les rooms sont locales à chaque process. Le **Redis pub/sub adapter** fait que chaque serveur publie ses messages sur Redis et s'abonne aux channels. Redis redistribue les messages a toutes les instances, qui les diffusent a leurs clients locaux. Résultat : les rooms fonctionnent de manière transparente, quelle que soit l'instance.
 </details>
 
 <details>
-<summary>2. Quelle est la différence entre WebSocket et SSE pour les notifications temps reel ?</summary>
+<summary>2. Quelle est la différence entre WebSocket et SSE pour les notifications temps réel ?</summary>
 
 **SSE** (Server-Sent Events) est unidirectionnel (serveur vers client), utilise HTTP standard, supporte la reconnexion automatique avec `Last-Event-ID`, et passe les proxies/CDN sans problème. **WebSocket** est bidirectionnel, nécessité un upgrade protocol, et la reconnexion est manuelle. Pour des notifications ou des flux d'events ou le client ne fait qu'écouter, SSE est plus simple et suffisant. WebSocket est nécessaire uniquement si le client doit aussi envoyer des messages (chat, collaboration).
 </details>
@@ -24,9 +24,9 @@ Quand on deploie plusieurs instances du serveur WebSocket derriere un load balan
 
 Imagine une entreprise qui doit informer ses partenaires de chaque événement important :
 
-- **Webhook = le recommande avec accuse de reception** : l'entreprise envoie un courrier signe (HMAC) a l'adresse du partenaire. Si le partenaire n'est pas la (erreur 500), le facteur revient le lendemain (retry 1), puis 2 jours apres (retry 2), puis 4 jours (retry 3). Apres 10 courriers non-recus, l'entreprise arrete d'envoyer et note "adresse invalide" (auto-disable).
-- **Message queue = le tri postal** : les courriers arrivent dans un centre de tri (Redis/Kafka). Meme si le facteur est occupe, les lettres attendent dans la file. Plusieurs facteurs (workers) peuvent traiter en parallele. Une lettre urgente (priority) passe avant les publicites.
-- **Event bus Kafka = le journal officiel** : chaque événement est publie dans un journal permanent que tous les abonnes peuvent lire a leur rythme. Le journal ne disparait pas apres lecture — il est conserve (retention) et chaque lecteur a son propre marque-page (consumer offset).
+- **Webhook = le recommande avec accuse de reception** : l'entreprise envoie un courrier signe (HMAC) a l'adresse du partenaire. Si le partenaire n'est pas la (erreur 500), le facteur revient le lendemain (retry 1), puis 2 jours après (retry 2), puis 4 jours (retry 3). Après 10 courriers non-recus, l'entreprise arrete d'envoyer et note "adresse invalide" (auto-disable).
+- **Message queue = le tri postal** : les courriers arrivent dans un centre de tri (Redis/Kafka). Même si le facteur est occupe, les lettres attendent dans la file. Plusieurs facteurs (workers) peuvent traiter en parallele. Une lettre urgente (priority) passe avant les publicites.
+- **Event bus Kafka = le journal officiel** : chaque événement est publie dans un journal permanent que tous les abonnes peuvent lire a leur rythme. Le journal ne disparait pas après lecture — il est conserve (retention) et chaque lecteur a son propre marque-page (consumer offset).
 
 ---
 
@@ -116,7 +116,7 @@ Si failures >= 10 consecutifs :
 
 ### 4. Vocabulaire standard des events
 
-| Event | Description | Payload cle |
+| Event | Description | Payload clé |
 |---|---|---|
 | `content.published` | Un article/page a ete publie | `contentId`, `contentType`, `locale` |
 | `content.unpublished` | Un contenu a ete depublie | `contentId`, `previousStatus` |
@@ -125,8 +125,8 @@ Si failures >= 10 consecutifs :
 | `media.uploaded` | Un media a ete uploade | `mediaId`, `mimeType`, `size` |
 | `media.deleted` | Un media a ete supprime | `mediaId` |
 | `form.submitted` | Un formulaire a ete soumis | `formId`, `submissionId` |
-| `user.created` | Un utilisateur a ete cree | `userId`, `role` |
-| `site.settings.updated` | Les parametres du site ont change | `siteId`, `changedKeys[]` |
+| `user.created` | Un utilisateur a ete créé | `userId`, `role` |
+| `site.settings.updated` | Les paramètres du site ont change | `siteId`, `changedKeys[]` |
 
 ### 5. Dispatch asynchrone avec BullMQ
 
@@ -183,7 +183,7 @@ Kafka Architecture
 | **Topic** | Un flux d'events nomme (`cms.events`, `cms.content.published`) |
 | **Partition** | Un topic est divise en partitions pour le parallelisme |
 | **Consumer Group** | Chaque groupe lit les messages independamment — les messages sont distribues entre les membres du groupe |
-| **Offset** | Position de lecture d'un consumer dans une partition — permet de reprendre apres un crash |
+| **Offset** | Position de lecture d'un consumer dans une partition — permet de reprendre après un crash |
 | **Retention** | Les messages sont conserves pendant une durée configurable (7 jours par defaut) |
 
 ### 7. n8n — middleware d'intégration
@@ -484,10 +484,10 @@ export class WebhookReceiverController {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Webhooks** avec signature HMAC-SHA256 (`X-Webhook-Signature`) garantissent l'authenticite — toujours utiliser `timingSafeEqual` pour comparer et signer le body RAW
-2. **Retry exponentiel** (60s, 300s, 3600s) avec auto-disable apres 10 echecs consecutifs — ne jamais perdre un event en silence, toujours logger et alerter
+2. **Retry exponentiel** (60s, 300s, 3600s) avec auto-disable après 10 echecs consecutifs — ne jamais perdre un event en silence, toujours logger et alerter
 3. **BullMQ** pour le dispatch asynchrone des webhooks — le service métier enqueue et repond 200 immédiatement, le worker envoie les webhooks en parallele
 4. **Kafka** pour l'event bus inter-services — topics partitionnes, consumer groups independants, retention pour replay, chaque service lit a son propre rythme
 5. **AsyncAPI** pour documenter les events asynchrones — l'équivalent d'OpenAPI pour les webhooks, Kafka topics, et les events WebSocket

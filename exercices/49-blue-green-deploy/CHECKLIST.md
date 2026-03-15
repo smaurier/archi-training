@@ -9,7 +9,7 @@
 - [ ] Migrations backward-compatible (add column safe)
 - [ ] Dual-write pour renommer une colonne
 - [ ] Pas de migration destructive en une étape
-- [ ] Cleanup de blue apres 1h
+- [ ] Cleanup de blue après 1h
 - [ ] Zero downtime pendant le deployment
 
 ## Bonus

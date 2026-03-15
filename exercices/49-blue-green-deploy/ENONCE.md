@@ -41,7 +41,7 @@ Implemente le switch de trafic :
 - Rollback : re-switcher vers blue si erreurs > seuil
 
 ### Étape 4 — Cleanup
-Apres un deployment réussi :
+Après un deployment réussi :
 - Garder blue en standby pendant 1h (rollback possible)
 - Mettre a jour blue avec la nouvelle version (pour le prochain deploy)
 - Supprimer les colonnes deprecated de la migration précédente

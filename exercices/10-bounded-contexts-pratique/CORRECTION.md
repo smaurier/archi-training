@@ -42,7 +42,7 @@
 - **Entités** : Payment, Refund
 - **Value Objects** : Money, PaymentMethod
 - **Glossaire** :
-  - **Payment** : une transaction financiere associee a une commande
+  - **Payment** : une transaction financiere associee à une commande
   - **Charge** : debiter le client
   - **Refund** : rembourser partiellement ou totalement
 
@@ -148,7 +148,7 @@ CORRECT — chaque context a son propre modele
   → Communication par events ou API
 ```
 
-### 2. Accéder a la DB d'un autre context
+### 2. Accéder à la DB d'un autre context
 
 ```
 FAUX — Order Service fait un JOIN sur la table products

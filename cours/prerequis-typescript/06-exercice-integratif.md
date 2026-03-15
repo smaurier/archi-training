@@ -1,9 +1,9 @@
 # Exercice integratif -- Construis ton premier domaine
 
-Tu as lu cinq lecons de theorie. Maintenant tu codes.
+Tu as lu cinq leçons de théorie. Maintenant tu codes.
 
 Cet exercice te guide pas a pas dans la construction de vrais objets metier -- exactement
-ceux de la formation. Chaque etape te dit quoi faire et pourquoi. A la fin, tu auras un
+ceux de la formation. Chaque étape te dit quoi faire et pourquoi. A la fin, tu auras un
 mini-domaine e-commerce fonctionnel avec des tests.
 
 ```bash
@@ -14,10 +14,10 @@ npx tsc --init   # assure-toi que "strict": true
 
 ---
 
-## Etape 1 : Le Value Object `Money`
+## Étape 1 : Le Value Object `Money`
 
 Un montant sans devise, c'est un nombre qui ne veut rien dire. Le `Money` colle les
-deux ensemble et garantit qu'on ne peut jamais en creer un invalide.
+deux ensemble et garantit qu'on ne peut jamais en créer un invalide.
 
 Cree `money.ts`.
 
@@ -29,7 +29,7 @@ Cree `money.ts`.
 - Devise en majuscules : `currency.toUpperCase()`.
 - Devise par defaut : `"EUR"`.
 
-**Tache 1.3 :** Methodes (chacune retourne un **nouveau** Money -- jamais de mutation) :
+**Tache 1.3 :** Méthodes (chacune retourne un **nouveau** Money -- jamais de mutation) :
 
 ```typescript
 add(other: Money): Money        // verifie meme devise
@@ -41,7 +41,7 @@ equals(other: Money): boolean
 toString(): string               // "19.99 EUR"
 ```
 
-Extrais la verification de devise dans `private assertSameCurrency(other: Money): void`.
+Extrais la vérification de devise dans `private assertSameCurrency(other: Money): void`.
 
 **Tache 1.4 :** Verifie l'immutabilite :
 
@@ -54,17 +54,17 @@ console.log(total.amount);  // 23.99
 
 ---
 
-## Etape 2 : Le Value Object `Email`
+## Étape 2 : Le Value Object `Email`
 
 Un email n'est pas une string quelconque. Le VO garantit qu'on ne transporte jamais une
-adresse invalide dans le systeme. Cree `email.ts`.
+adresse invalide dans le système. Cree `email.ts`.
 
 **Tache 2.1 :** Classe `Email` avec `readonly value: string`.
 
 **Tache 2.2 :** Validation : pas vide, contient `@`, au moins 5 caracteres.
 Normalise : `value.toLowerCase().trim()`.
 
-**Tache 2.3 :** Methodes :
+**Tache 2.3 :** Méthodes :
 
 ```typescript
 get domain(): string         // partie apres @
@@ -76,12 +76,12 @@ toString(): string
 
 ---
 
-## Etape 3 : Le `CartItem`
+## Étape 3 : Le `CartItem`
 
 Une ligne de panier : un produit avec une quantite. Cree `cart-item.ts`.
 
 **Tache 3.1 :** Classe avec `readonly productId`, `readonly productName`,
-`readonly unitPrice: Money`, `private _quantity: number`. Utilise un objet parametre :
+`readonly unitPrice: Money`, `private _quantity: number`. Utilise un objet paramètre :
 
 ```typescript
 constructor(params: {
@@ -92,7 +92,7 @@ constructor(params: {
 **Tache 3.2 :** Getter `quantity`, getter `total` qui retourne
 `this.unitPrice.multiply(this._quantity)`.
 
-**Tache 3.3 :** Methode `updateQuantity(newQuantity: number): void` -- valide > 0.
+**Tache 3.3 :** Méthode `updateQuantity(newQuantity: number): void` -- valide > 0.
 
 ```typescript
 const item = new CartItem({
@@ -104,10 +104,10 @@ console.log(item.total.toString());  // "179.98 EUR"
 
 ---
 
-## Etape 4 : L'entite `Cart`
+## Étape 4 : L'entite `Cart`
 
-Le `Cart` est un agregat qui protege ses invariants. Regle : un meme produit n'apparait
-qu'une fois -- ajouter un produit deja present incremente la quantite. Cree `cart.ts`.
+Le `Cart` est un agregat qui protege ses invariants. Regle : un même produit n'apparait
+qu'une fois -- ajouter un produit déjà present incremente la quantite. Cree `cart.ts`.
 
 **Tache 4.1 :** Classe avec `readonly id`, `readonly userId`, `private _items: CartItem[]`.
 Genere `id` avec `crypto.randomUUID()` si non fourni.
@@ -121,7 +121,7 @@ get itemCount(): number               // somme des quantites
 get total(): Money                    // somme des totaux
 ```
 
-**Tache 4.3 :** Methode `addItem(item: CartItem): void` -- gere le doublon :
+**Tache 4.3 :** Méthode `addItem(item: CartItem): void` -- géré le doublon :
 
 ```typescript
 const existing = this._items.find(i => i.productId === item.productId);
@@ -129,7 +129,7 @@ if (existing) existing.updateQuantity(existing.quantity + item.quantity);
 else this._items.push(item);
 ```
 
-**Tache 4.4 :** Methodes `removeItem(productId)`, `updateItemQuantity(productId, quantity)`
+**Tache 4.4 :** Méthodes `removeItem(productId)`, `updateItemQuantity(productId, quantity)`
 (erreur si absent), `clear()`.
 
 Teste le scenario complet :
@@ -146,7 +146,7 @@ console.log(cart.itemCount);         // 4 (2 claviers + 2 souris)
 
 ---
 
-## Etape 5 : Les tests avec vitest
+## Étape 5 : Les tests avec vitest
 
 Les tests protegent les invariants quand quelqu'un modifie le code plus tard.
 
@@ -169,8 +169,8 @@ describe("Money", () => {
 });
 ```
 
-**Tache 5.2 :** Cree `email.test.ts` -- creation valide, normalisation, rejet des
-invalides (vide, sans @, trop court), getter `domain`, methode `equals`.
+**Tache 5.2 :** Cree `email.test.ts` -- création valide, normalisation, rejet des
+invalides (vide, sans @, trop court), getter `domain`, méthode `equals`.
 
 **Tache 5.3 :** Cree `cart.test.ts` -- panier vide a total 0, ajout met a jour
 `itemCount` et `total`, doublon incremente la quantite, `removeItem`, `clear`.
@@ -181,22 +181,22 @@ npx vitest run
 
 ---
 
-## Etape 6 : Compare avec la reference
+## Étape 6 : Compare avec la référence
 
-Ouvre les fichiers de reference de la formation et compare :
+Ouvre les fichiers de référence de la formation et compare :
 
 - `src/domain/shared/money.ts` et `src/domain/shared/money.test.ts`
 - `src/domain/shared/email.ts`
 - `src/domain/shared/types.ts` (les branded types : UUID, CurrencyCode)
 - `src/domain/cart/cart-item.ts` et `src/domain/cart/cart.ts`
 
-Differences a observer : la reference utilise des **branded types** pour les identifiants,
-un defaut `"EUR"`, et un objet parametre dans les constructeurs. Ton code peut etre
-different -- l'important c'est que les invariants soient respectes.
+Differences à observer : la référence utilise des **branded types** pour les identifiants,
+un defaut `"EUR"`, et un objet paramètre dans les constructeurs. Ton code peut etre
+différent -- l'important c'est que les invariants soient respectes.
 
 **Tache bonus :** Remplace tes `string` par des branded types (`ProductId`, `UserId`)
 en suivant le pattern de `src/domain/shared/types.ts`. Observe les erreurs de compilation
--- chacune represente un endroit ou une confusion etait possible.
+-- chacune represente un endroit où une confusion etait possible.
 
 ---
 
@@ -204,13 +204,13 @@ en suivant le pattern de `src/domain/shared/types.ts`. Observe les erreurs de co
 
 - Un **Value Object** (Money, Email) encapsule une valeur avec sa validation. Immutable,
   compare par valeur.
-- Une **entite** (Cart) a une identite propre et protege ses **invariants**.
-- La **composition** (CartItem contient Money) reutilise les VO sans heritage.
+- Une **entite** (Cart) à une identite propre et protege ses **invariants**.
+- La **composition** (CartItem contient Money) reutilise les VO sans héritage.
 - Les **tests** documentent les invariants et empechent les regressions.
-- Les **branded types** empechent de confondre des valeurs de meme type sous-jacent.
+- Les **branded types** empechent de confondre des valeurs de même type sous-jacent.
 
 Si tous tes tests passent, tu es pret pour la formation.
 
 ---
 
-Prochaine etape : [Module 00 -- Qu'est-ce que l'architecture logicielle ?](../00-fondamentaux/01-quest-ce-que-architecture.md)
+Prochaine étape : [Module 00 -- Qu'est-ce que l'architecture logicielle ?](../00-fondamentaux/01-quest-ce-que-architecture.md)

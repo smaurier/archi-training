@@ -1,6 +1,6 @@
 # Cours 07 — Architecture en couches (Layered Architecture)
 
-**Objectif :** Comprendre comment organiser une application en couches distinctes, connaitre la différence entre couplage strict et relache, et etre capable d'implémenter ce patron avec NestJS.
+**Objectif :** Comprendre comment organiser une application en couches distinctes, connaître la différence entre couplage strict et relache, et etre capable d'implémenter ce patron avec NestJS.
 
 ---
 
@@ -22,7 +22,7 @@ Chaque module, classe ou fonction doit avoir une seule responsabilité bien déf
 <details>
 <summary>Réponse</summary>
 
-Un couplage fort signifie qu'un changement dans un module force des changements en cascade dans d'autres. Cela rend les tests difficiles (on ne peut pas tester un module seul), les refactorisations risquees, et le code difficile a comprendre car il faut lire plusieurs fichiers pour comprendre une seule feature.
+Un couplage fort signifie qu'un changement dans un module force des changements en cascade dans d'autres. Cela rend les tests difficiles (on ne peut pas tester un module seul), les refactorisations risquees, et le code difficile à comprendre car il faut lire plusieurs fichiers pour comprendre une seule feature.
 
 </details>
 
@@ -40,7 +40,7 @@ Imagine un immeuble de bureaux :
 **Regles fondamentales de l'immeuble :**
 - Un visiteur entre **toujours** par l'accueil, jamais directement au 2eme etage
 - Le sous-sol ne remonte **jamais** au rez-de-chaussee pour accueillir des visiteurs
-- Chaque etage a une **fonction unique et connue**
+- Chaque etage à une **fonction unique et connue**
 
 L'architecture en couches suit exactement cette logique.
 
@@ -87,7 +87,7 @@ L'architecture en couches suit exactement cette logique.
 
 | Critère | Strict (Strict Layering) | Relache (Relaxed Layering) |
 |---|---|---|
-| Définition | Chaque couche ne parle QU'a la couche directement en dessous | Une couche peut "sauter" des couches intermédiaires |
+| Définition | Chaque couche ne parle QU'à la couche directement en dessous | Une couche peut "sauter" des couches intermédiaires |
 | Couplage | Faible | Modere |
 | Nombre de classes | Plus élevé (passes-plats) | Moins élevé |
 | Facilite de debug | Excellente (flux clair) | Acceptable |
@@ -365,7 +365,7 @@ export class OrderRepository implements IOrderRepository {
 
 ---
 
-## Resume
+## Résumé
 
 - L'architecture en couches divise le code en **4 zones** : Presentation, Application, Domain, Infrastructure — chacune avec une responsabilité unique.
 - La **règle fondamentale** : les dépendances ne vont que vers le bas (Presentation -> Application -> Domain). Le Domain ne connait pas l'Infrastructure.

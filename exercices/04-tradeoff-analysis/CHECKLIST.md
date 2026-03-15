@@ -19,13 +19,13 @@
 
 - [ ] Le contexte explique clairement le besoin et les contraintes
 - [ ] Les 3 options sont decrites factuellement (pas de biais)
-- [ ] La decision est argumentee avec référence a la matrice
+- [ ] La decision est argumentee avec référence à la matrice
 - [ ] Les consequences negatives sont honnetes (pas juste les positives)
 - [ ] Un plan d'évolution est défini (trigger de migration)
 
 ## Qualité du raisonnement
 
-- [ ] Aucun "ca dépend" sans justification
+- [ ] Aucun "ça dépend" sans justification
 - [ ] Les estimations de performance sont plausibles
 - [ ] Le trade-off cout/complexité est explicite
 - [ ] La solution recommandee est cohérente avec les contraintes (équipe de 4, budget modere)

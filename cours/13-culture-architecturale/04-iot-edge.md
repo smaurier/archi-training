@@ -1,6 +1,6 @@
 # Cours 87 — IoT & Edge Architecture
 
-> **Objectif** : Comprendre l'architecture IoT (devices contraints, MQTT, edge processing), maîtriser les time-series databases, et connaitre les patterns de sécurité IoT (firmware updates, certificate rotation).
+> **Objectif** : Comprendre l'architecture IoT (devices contraints, MQTT, edge processing), maîtriser les time-series databases, et connaître les patterns de sécurité IoT (firmware updates, certificate rotation).
 
 ---
 
@@ -262,17 +262,17 @@ GROUP BY hour, device_id;
 
 ---
 
-## Resume
+## Résumé
 
 1. **Architecture IoT** : devices contraints → edge gateway (filtrage, aggregation) → cloud (stockage, ML, dashboards)
 2. **MQTT** : protocole pub/sub ultra-léger (2 bytes header), 3 niveaux QoS (fire-and-forget, at-least-once, exactly-once)
-3. **Edge processing** : réduire 99%+ du trafic réseau en agregeant localement, alertes en temps reel sans cloud
+3. **Edge processing** : réduire 99%+ du trafic réseau en agregeant localement, alertes en temps réel sans cloud
 4. **Time-series DB** (TimescaleDB, InfluxDB) : compression, retention automatique, downsampling — optimisees pour les données temporelles
 5. **Sécurité IoT** : OTA firmware updates, certificate rotation, DTLS pour devices contraints — les memes principes que le web, adaptes aux contraintes
 
 ---
 
-> **Prochain cours** : [Cours 88 — Collaboration temps reel (CRDT, OT)](./05-crdt-collaboration.md)
+> **Prochain cours** : [Cours 88 — Collaboration temps réel (CRDT, OT)](./05-crdt-collaboration.md)
 
 ---
 

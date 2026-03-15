@@ -30,7 +30,7 @@ Définir la sequence et les compensations :
 Implemente un orchestrateur qui :
 - Execute les étapes sequentiellement
 - En cas d'echec, exécuté les compensations dans l'ordre inverse
-- Persiste l'état de la saga (pour recovery apres crash)
+- Persiste l'état de la saga (pour recovery après crash)
 - Chaque étape est idempotente
 
 ### Étape 3 — Persistence de l'état
@@ -38,7 +38,7 @@ Stocke l'état de la saga en base :
 - Saga ID, type, étape courante, status
 - Données de chaque étape (input/output)
 - Timestamp de chaque transition
-- Permet de reprendre une saga apres un crash
+- Permet de reprendre une saga après un crash
 
 ### Étape 4 — Gestion des echecs
 Implemente les scénarios d'echec :
@@ -54,5 +54,5 @@ Implemente les scénarios d'echec :
 
 ## Contraintes
 - Chaque étape et compensation doit etre idempotente
-- L'état de la saga doit survivre a un crash
+- L'état de la saga doit survivre à un crash
 - Les compensations doivent TOUJOURS réussir (retry infini si nécessaire)

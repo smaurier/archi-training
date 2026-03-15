@@ -28,14 +28,14 @@ Cree un CRUD pour les webhook subscriptions :
 ### Étape 2 — Signature HMAC-SHA256
 Implemente la signature des payloads :
 - Header `X-Webhook-Signature` = HMAC-SHA256(secret, body)
-- Header `X-Webhook-Timestamp` pour prevenir les replay attacks
+- Header `X-Webhook-Timestamp` pour prévenir les replay attacks
 - Le payload inclut : event type, timestamp, data, delivery ID (UUID)
 
 ### Étape 3 — Envoi asynchrone avec retry
 Envoie les webhooks via une job queue (BullMQ) :
 - Retry avec backoff exponentiel (1s, 5s, 30s, 5min, 30min)
 - Max 5 tentatives
-- Dead letter queue apres echec final
+- Dead letter queue après echec final
 - Timeout de 10 secondes par requête
 
 ### Étape 4 — Dashboard et logs
@@ -46,8 +46,8 @@ Implemente un historique des deliveries :
 - Possibilite de re-envoyer manuellement
 
 ### Bonus
-- Ajouter un circuit breaker : désactiver le webhook apres 10 echecs consecutifs
-- Implémenter un webhook fan-out (meme event → N subscribers)
+- Ajouter un circuit breaker : désactiver le webhook après 10 echecs consecutifs
+- Implémenter un webhook fan-out (même event → N subscribers)
 - Ajouter un filtre par event type sur les subscriptions
 
 ## Contraintes

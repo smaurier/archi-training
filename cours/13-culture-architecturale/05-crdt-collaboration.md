@@ -1,6 +1,6 @@
-# Cours 88 — Collaboration temps reel (CRDT, OT)
+# Cours 88 — Collaboration temps réel (CRDT, OT)
 
-> **Objectif** : Comprendre le problème de la concurrence d'edition, différencier Operational Transform (OT) et CRDT, implémenter un CRDT simple, et connaitre les libraries de production (Yjs, Automerge).
+> **Objectif** : Comprendre le problème de la concurrence d'edition, différencier Operational Transform (OT) et CRDT, implémenter un CRDT simple, et connaître les libraries de production (Yjs, Automerge).
 
 ---
 
@@ -20,11 +20,11 @@ Au lieu d'envoyer chaque mesure brute au cloud (50 capteurs × 1/s = 4.3M messag
 
 ---
 
-## Analogie — Deux personnes sur le meme tableau blanc
+## Analogie — Deux personnes sur le même tableau blanc
 
-Deux personnes ecrivent sur le meme tableau blanc a distance :
-- **OT** (Operational Transform) : un arbitre central regarde les deux écritures et decide comment les combiner. "Alice a écrit 'Bonjour' a la position 0, Bob a inséré 'Hello' a la position 0 → je transforme l'opération de Bob en position 7."
-- **CRDT** (Conflict-free Replicated Data Types) : les stylos sont **magiques** — chaque modification est mathematiquement conçue pour converger vers le meme résultat, peu importe l'ordre. Pas besoin d'arbitre.
+Deux personnes ecrivent sur le même tableau blanc a distance :
+- **OT** (Operational Transform) : un arbitre central regarde les deux écritures et decide comment les combiner. "Alice a écrit 'Bonjour' à la position 0, Bob a inséré 'Hello' à la position 0 → je transforme l'opération de Bob en position 7."
+- **CRDT** (Conflict-free Replicated Data Types) : les stylos sont **magiques** — chaque modification est mathematiquement conçue pour converger vers le même résultat, peu importe l'ordre. Pas besoin d'arbitre.
 
 ---
 
@@ -111,7 +111,7 @@ Types de CRDT :
 | Offline | Difficile | Natif (sync quand reconnecte) |
 | Utilise par | Google Docs, Etherpad | Figma, Yjs, Automerge |
 
-### 5. Architecture temps reel avec WebSocket
+### 5. Architecture temps réel avec WebSocket
 
 ```
 Client A ←──WebSocket──→ Server ←──WebSocket──→ Client B
@@ -134,7 +134,7 @@ Awareness protocol :
 |---|---|---|---|
 | **Yjs** | CRDT | TypeScript | Editeur texte, formulaires, dessin |
 | **Automerge** | CRDT | Rust/JS | Documents structures, JSON |
-| **ShareDB** | OT | JavaScript | Collaboration temps reel |
+| **ShareDB** | OT | JavaScript | Collaboration temps réel |
 | **Liveblocks** | CRDT (hosted) | TypeScript | SaaS rapide, pas de serveur |
 
 ---
@@ -284,13 +284,13 @@ class LWWRegister<T> {
 
 ---
 
-## Resume
+## Résumé
 
-1. **Concurrence d'edition** : deux utilisateurs modifient le meme document → sans coordination, corruption
+1. **Concurrence d'edition** : deux utilisateurs modifient le même document → sans coordination, corruption
 2. **OT** (Google Docs) : serveur central transforme les opérations pour maintenir la cohérence — eprouve mais centralise
 3. **CRDT** (Figma, Yjs) : convergence mathematique garantie, pas besoin de serveur central, fonctionne offline — metadata overhead
 4. **Types de CRDT** : G-Counter (compteur), LWW-Register (valeur simple), OR-Set (ensemble), RGA (texte)
-5. **Architecture** : WebSocket pour la propagation temps reel + awareness protocol (presence, curseurs) + Yjs/Automerge comme library CRDT
+5. **Architecture** : WebSocket pour la propagation temps réel + awareness protocol (presence, curseurs) + Yjs/Automerge comme library CRDT
 
 ---
 

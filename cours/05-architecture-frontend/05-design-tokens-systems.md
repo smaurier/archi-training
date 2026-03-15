@@ -1,6 +1,6 @@
 # Cours 37 — Design Tokens & Design Systems
 
-> **Objectif** : Architecturer un pipeline de design tokens complet — de la source JSON a la génération CSS, avec palettes OKLCH, token layering, theming runtime, dark mode, et font management.
+> **Objectif** : Architecturer un pipeline de design tokens complet — de la source JSON à la génération CSS, avec palettes OKLCH, token layering, theming runtime, dark mode, et font management.
 
 ---
 
@@ -9,13 +9,13 @@
 <details>
 <summary>1. Qu'est-ce que le pattern Stale-While-Revalidate et quel est son avantage principal ?</summary>
 
-SWR sert les données en cache immédiatement (meme si potentiellement obsoletes), puis revalide en background. L'avantage : l'utilisateur voit les données en **0ms** au lieu d'attendre le serveur. Si les données ont change, l'UI se met a jour silencieusement.
+SWR sert les données en cache immédiatement (même si potentiellement obsoletes), puis revalide en background. L'avantage : l'utilisateur voit les données en **0ms** au lieu d'attendre le serveur. Si les données ont change, l'UI se met a jour silencieusement.
 </details>
 
 <details>
 <summary>2. Pourquoi ne faut-il jamais retrier les erreurs HTTP 4xx (sauf 429) ?</summary>
 
-Les erreurs 4xx sont des erreurs **client** : requête malformee (400), non authentifie (401), interdit (403), ressource introuvable (404), validation échouée (422). Retrier ne changera rien — la requête est la meme. Seul le 429 (rate limiting) merite un retry apres le delai `Retry-After`.
+Les erreurs 4xx sont des erreurs **client** : requête malformee (400), non authentifie (401), interdit (403), ressource introuvable (404), validation échouée (422). Retrier ne changera rien — la requête est la même. Seul le 429 (rate limiting) merite un retry après le delai `Retry-After`.
 </details>
 
 ---
@@ -26,7 +26,7 @@ Imagine une chaine comme IKEA :
 
 - **Design tokens** = le "brand book" central qui définit toutes les couleurs, typographies et espacements. Un seul document, source de vérité.
 - **Token layering** = le brand book a 3 niveaux : global (jaune IKEA = `#FFDA1A`), semantique (bouton primaire = jaune IKEA), composant (bouton large = padding 16px)
-- **OKLCH** = au lieu de définir 20 teintes de jaune a la main, on donne la teinte de base et un algorithme généré automatiquement les 10 nuances (50 a 950)
+- **OKLCH** = au lieu de définir 20 teintes de jaune à la main, on donne la teinte de base et un algorithme généré automatiquement les 10 nuances (50 a 950)
 - **Theme** = chaque magasin peut avoir une ambiance legèrement différente (Noel, ete, soldes) sans redecorer — il suffit de changer les associations semantiques
 - **CSS custom properties** = des etiquettes collees sur chaque élément. Changer l'etiquette change l'apparence sans toucher a l'élément
 
@@ -86,7 +86,7 @@ Niveau 3 — COMPONENT (specifique)
 
 ### 3. Génération de palettes OKLCH
 
-OKLCH (Oklch Lightness Chroma Hue) est un espace couleur **perceptuellement uniforme** — contrairement a HSL, les couleurs de meme lightness OKLCH ont la meme luminosite percue par l'oeil humain.
+OKLCH (Oklch Lightness Chroma Hue) est un espace couleur **perceptuellement uniforme** — contrairement a HSL, les couleurs de même lightness OKLCH ont la même luminosite percue par l'oeil humain.
 
 ```
 OKLCH : oklch(L% C H)
@@ -143,7 +143,7 @@ Chaque niveau surcharge le precedent via CSS cascade.
 }
 ```
 
-On change les tokens **semantiques**, pas les globaux. `--color-blue-500` reste le meme — c'est `--color-surface` qui pointe vers une nuance différente.
+On change les tokens **semantiques**, pas les globaux. `--color-blue-500` reste le même — c'est `--color-surface` qui pointe vers une nuance différente.
 
 ### 6. Font management
 
@@ -288,7 +288,7 @@ function useApplyTheme() {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Token layering** en 3 niveaux : global (valeurs) → semantique (intentions) → composant (spécifique)
 2. **OKLCH** généré des palettes perceptuellement uniformes depuis une seule couleur brand (50-950 shades)

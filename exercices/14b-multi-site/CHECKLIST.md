@@ -3,7 +3,7 @@
 ## Modèle
 
 - [ ] L'entité Site a : id, tenantId, slug, domain, defaultLocale, theme
-- [ ] Un site appartient a un tenant (relation Many-to-One)
+- [ ] Un site appartient à un tenant (relation Many-to-One)
 
 ## Extraction
 

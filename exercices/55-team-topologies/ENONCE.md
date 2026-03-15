@@ -23,7 +23,7 @@ ShopArch a 18 développeurs organises par specialite (équipe front, équipe bac
 Classifie les équipes de ShopArch selon les 4 types de Team Topologies :
 - **Stream-aligned** : livrent de la valeur utilisateur bout-en-bout
 - **Platform** : fournissent des outils/services aux stream-aligned
-- **Enabling** : aident les autres équipes a monter en competence
+- **Enabling** : aident les autres équipes a monter en compétence
 - **Complicated-subsystem** : gerent un sous-système complexe spécifique
 
 ### Étape 2 — Reorganiser les équipes
@@ -37,7 +37,7 @@ Propose une reorganisation des 18 développeurs en équipes stream-aligned :
 Definis les modes d'interaction entre équipes :
 - **Collaboration** : travail conjoint temporaire (ex: Platform aide Commerce a mettre en place le monitoring)
 - **X-as-a-Service** : une équipe fournit un service (ex: Platform fournit le CI/CD)
-- **Facilitating** : une équipe aide une autre a monter en competence
+- **Facilitating** : une équipe aide une autre a monter en compétence
 
 ### Étape 4 — Cognitive load
 Evalue la charge cognitive de chaque équipe :

@@ -2,7 +2,7 @@
 
 ## Objectif
 
-A la fin de ce cours, tu sauras **expliquer et appliquer les 5 principes SOLID**, identifier les violations courantes dans du code existant, et reconnaître les situations où appliquer SOLID serait de l'over-engineering.
+A la fin de ce cours, tu sauras **expliquer et appliquer les 5 principes SOLID**, identifier les violations courantes dans du code existant, et reconnaître les situations ou appliquer SOLID serait de l'over-engineering.
 
 ---
 
@@ -37,9 +37,9 @@ La ligne est floue et dépend du contexte : ce qui est "design" dans une grande 
 
 Imagine deux artisans :
 
-- **L'artisan amateur** part en deplacement avec un couteau suisse. Il a un tournevis, une lime, des ciseaux, et meme un cure-dents — tout dans un seul outil. Mais quand il doit vraiment visser quelque chose, le tournevis est trop court. Quand il doit couper du bois, les ciseaux ne sont pas adaptes. Et si la lime casse, il doit jeter tout l'outil.
+- **L'artisan amateur** part en déplacement avec un couteau suisse. Il à un tournevis, une lime, des ciseaux, et même un cure-dents — tout dans un seul outil. Mais quand il doit vraiment visser quelque chose, le tournevis est trop court. Quand il doit couper du bois, les ciseaux ne sont pas adaptes. Et si la lime casse, il doit jeter tout l'outil.
 
-- **L'artisan professionnel** a une caisse avec des outils specialises : un tournevis electrique, une scie circulaire, une ponceuse. Chaque outil fait une seule chose, mais il la fait parfaitement. Si la ponceuse tombe en panne, les autres outils continuent de fonctionner.
+- **L'artisan professionnel** à une caisse avec des outils specialises : un tournevis electrique, une scie circulaire, une ponceuse. Chaque outil fait une seule chose, mais il la fait parfaitement. Si la ponceuse tombe en panne, les autres outils continuent de fonctionner.
 
 Les principes SOLID, c'est la philosophie de l'artisan professionnel appliquee au code : **chaque classe fait une chose, elle la fait bien, et elle peut etre remplacee ou etendue sans tout casser**.
 
@@ -93,7 +93,7 @@ Respect SRP :
 
 ### O — Open/Closed Principle
 
-**"Une classe doit etre ouverte a l'extension, fermee a la modification."**
+**"Une classe doit etre ouverte a l'extension, fermee à la modification."**
 
 Analogie : une **prise electrique**. Tu n'ouvres pas la prise pour y ajouter un troisieme trou quand tu as un nouvel appareil. Tu branches une multiprise (extension) sans modifier l'existant.
 
@@ -128,7 +128,7 @@ Respect OCP — extension sans modification :
 
 **"Un sous-type doit pouvoir remplacer son type parent sans alterer le comportement du programme."**
 
-Analogie : un **remplacant sur le terrain**. Si le remplacant entre en jeu, l'équipe doit fonctionner de la meme facon. Si le remplacant change les règles du jeu (il refuse de tirer des penaltys, il joue avec les mains), ce n'est pas un vrai remplacant.
+Analogie : un **remplacant sur le terrain**. Si le remplacant entre en jeu, l'équipe doit fonctionner de la même façon. Si le remplacant change les règles du jeu (il refuse de tirer des penaltys, il joue avec les mains), ce n'est pas un vrai remplacant.
 
 ```
 Violation LSP — la sous-classe casse le contrat :
@@ -491,7 +491,7 @@ const testService = new ArticleService(testRepo);
 
 ---
 
-## Resume
+## Résumé
 
 - **SRP** (outil specialise) : une classe = une raison de changer. Si tu dois modifier une classe pour deux raisons différentes, elle fait trop de choses.
 - **OCP** (prise electrique) : etends le comportement par de nouvelles classes plutot qu'en modifiant l'existant. Protege le code valide contre les regressions.
@@ -513,4 +513,4 @@ const testService = new ArticleService(testRepo);
 
 [03 — Les design patterns essentiels](./03-design-patterns-essentiels.md)
 
-> Dans le prochain cours, nous verrons les patterns de conception les plus utiles en pratique : Creational (Factory, Builder, Singleton), Structural (Adapter, Facade, Proxy, Decorator) et Behavioral (Observer, Strategy, State Machine, Command). Chaque pattern sera presente avec le problème qu'il resout, un diagramme ASCII et du code TypeScript reel.
+> Dans le prochain cours, nous verrons les patterns de conception les plus utiles en pratique : Creational (Factory, Builder, Singleton), Structural (Adapter, Facade, Proxy, Decorator) et Behavioral (Observer, Strategy, State Machine, Command). Chaque pattern sera présenté avec le problème qu'il resout, un diagramme ASCII et du code TypeScript réel.

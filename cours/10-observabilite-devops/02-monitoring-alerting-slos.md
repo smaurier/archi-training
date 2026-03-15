@@ -15,17 +15,17 @@ Le JSON est **parsable par machine** — les outils comme Loki, Elasticsearch, D
 <details>
 <summary>2. Qu'est-ce qu'un correlation ID et a quoi sert-il ?</summary>
 
-Un `traceId` unique généré au point d'entree (API gateway) et **propage a travers tous les services** via un header HTTP (`X-Trace-Id`). Il permet de reconstituer le parcours complet d'une requête dans un système distribue — tous les logs avec le meme traceId correspondent a la meme action utilisateur.
+Un `traceId` unique généré au point d'entree (API gateway) et **propage a travers tous les services** via un header HTTP (`X-Trace-Id`). Il permet de reconstituer le parcours complet d'une requête dans un système distribue — tous les logs avec le même traceId correspondent à la même action utilisateur.
 </details>
 
 ---
 
 ## Analogie — Le tableau de bord d'un avion
 
-Un pilote ne regarde pas UN SEUL instrument — il a un tableau de bord complet :
-- **Altimetre** (metric) : valeur numérique a un instant T
+Un pilote ne regarde pas UN SEUL instrument — il à un tableau de bord complet :
+- **Altimetre** (metric) : valeur numérique à un instant T
 - **Boite noire** (trace) : enregistrement sequentiel de tout ce qui s'est passe
-- **Alarme** (alerte) : se déclenché quand une valeur depasse un seuil
+- **Alarme** (alerte) : se déclenché quand une valeur dépasse un seuil
 - **SLO** : "je m'engage a ne pas descendre en dessous de 30000ft pendant 99.9% du vol"
 
 Un SLO n'est pas un objectif de perfection — c'est une **promesse mesurable** avec un budget d'erreur acceptable.
@@ -258,12 +258,12 @@ groups:
 
 ---
 
-## Resume
+## Résumé
 
 1. **3 signaux OTel** : metrics (Prometheus) pour les tendances, traces (Tempo) pour le parcours requête, logs (Loki) pour le detail
 2. **SLOs formels** : API p95 ≤300ms, disponibilité ≥99.9%, Lighthouse ≥90 — promesses mesurables, pas des aspirations
 3. **Error budget** : 99.9% = 43 min/mois de downtime tolere — budget epuise → stop les features, focus fiabilité
-4. **Multi-window burn-rate** : 1h fenetre = page critique, 6h = warning, 3j = ticket — éviter les faux positifs
+4. **Multi-window burn-rate** : 1h fenêtre = page critique, 6h = warning, 3j = ticket — éviter les faux positifs
 5. **RUM** : `useWebVitals` collecte LCP/CLS/INP/TTFB sur les vrais utilisateurs → dashboards Grafana par tenant/page/geo
 
 ---

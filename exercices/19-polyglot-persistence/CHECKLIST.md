@@ -1,6 +1,6 @@
 # Checklist — Exercice 19 : Polyglot persistence
 
-- [ ] Chaque besoin a une technologie choisie et justifiee
+- [ ] Chaque besoin à une technologie choisie et justifiee
 - [ ] PostgreSQL est la base principale (catalogue, commandes, utilisateurs)
 - [ ] Redis est utilise pour cache et sessions (pas comme DB principale)
 - [ ] La recherche utilise PostgreSQL FTS ou Elasticsearch (justifie)

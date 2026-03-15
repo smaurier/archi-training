@@ -11,7 +11,7 @@ Définir et implémenter une stratégie de test complete pour ShopArch couvrant 
 
 ## Contexte
 
-ShopArch a 200 tests unitaires mais aucun test d'intégration, aucun test de contrat, et les tests E2E sont manuels. La couverture reelle des cas critiques (checkout, paiement) est faible.
+ShopArch a 200 tests unitaires mais aucun test d'intégration, aucun test de contrat, et les tests E2E sont manuels. La couverture réelle des cas critiques (checkout, paiement) est faible.
 
 ## Temps estime
 
@@ -22,7 +22,7 @@ ShopArch a 200 tests unitaires mais aucun test d'intégration, aucun test de con
 ### Étape 1 — Pyramide de tests
 Definis la pyramide de tests pour ShopArch :
 - **Unit** (70%) : logique métier pure (calcul prix, validation, FSM)
-- **Intégration** (20%) : endpoints API avec DB reelle, composants React avec store
+- **Intégration** (20%) : endpoints API avec DB réelle, composants React avec store
 - **Contract** (5%) : contrats API entre services (Pact)
 - **E2E** (5%) : parcours critiques (search → product → cart → checkout)
 

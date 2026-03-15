@@ -1,6 +1,6 @@
 # Cours 35 — Routing & Navigation
 
-> **Objectif** : Maîtriser le routing front-end avec code splitting, route guards ordonnees, RouteMeta typing pour RBAC, breadcrumbs depuis la hierarchie de routes, et gestion SEO des routes protégées.
+> **Objectif** : Maîtriser le routing front-end avec code splitting, route guards ordonnees, RouteMeta typing pour RBAC, breadcrumbs depuis la hiérarchie de routes, et gestion SEO des routes protégées.
 
 ---
 
@@ -9,20 +9,20 @@
 <details>
 <summary>1. Ou stocker les tokens d'authentification côté front-end et pourquoi ?</summary>
 
-Dans **SessionStorage** (ou mieux, dans un cookie httpOnly via un BFF). Jamais dans localStorage car une faille XSS permettrait de voler le token. SessionStorage est vide a l'ouverture d'un nouvel onglet, ce qui limite la surface d'attaque.
+Dans **SessionStorage** (où mieux, dans un cookie httpOnly via un BFF). Jamais dans localStorage car une faille XSS permettrait de voler le token. SessionStorage est vide a l'ouverture d'un nouvel onglet, ce qui limite la surface d'attaque.
 </details>
 
 <details>
 <summary>2. Comment fonctionne le BroadcastChannel pour la synchronisation cross-tab ?</summary>
 
-On cree un canal nomme (`new BroadcastChannel('app-sync')`). Quand un onglet envoie un message (`channel.postMessage({...})`), tous les autres onglets sur le meme domaine le recoivent via `channel.onmessage`. Utilise pour synchroniser le theme, la locale, et les événements de logout.
+On créé un canal nomme (`new BroadcastChannel('app-sync')`). Quand un onglet envoie un message (`channel.postMessage({...})`), tous les autres onglets sur le même domaine le recoivent via `channel.onmessage`. Utilise pour synchroniser le theme, la locale, et les événements de logout.
 </details>
 
 ---
 
 ## Analogie — Le plan d'un musee
 
-Un musee (l'application) a un plan (le router) :
+Un musee (l'application) à un plan (le router) :
 
 - **Salle publique** = route accessible a tous (`/products`, `/about`)
 - **Salle VIP** = route protégée par un billet (auth guard) → redirect vers la billetterie (login) si pas de billet
@@ -37,7 +37,7 @@ Un musee (l'application) a un plan (le router) :
 
 ### 1. Code splitting par route
 
-Chaque route charge son code a la demande — pas besoin de telecharger l'admin quand on visite le catalogue :
+Chaque route charge son code à la demandé — pas besoin de telecharger l'admin quand on visite le catalogue :
 
 ```
 Initial load : vendor.js (React, Router) + shell.js
@@ -81,7 +81,7 @@ Requete de navigation
 
 ### 3. RouteMeta typing
 
-Attacher des metadonnees typees a chaque route :
+Attacher des metadonnees typees à chaque route :
 
 ```typescript
 interface RouteMeta {
@@ -103,7 +103,7 @@ interface RouteMeta {
 | Admin (`/admin/*`) | Non indexee | `noindex, nofollow` | Non |
 | Preview (`/preview/:token`) | Non indexee | `noindex, nofollow` | Non |
 
-### 5. Breadcrumbs depuis la hierarchie de routes
+### 5. Breadcrumbs depuis la hiérarchie de routes
 
 Les breadcrumbs sont générés automatiquement depuis la structure des routes, **pas depuis les menus** (sinon ils changent quand le menu change) :
 
@@ -302,11 +302,11 @@ function PageHead() {
 
 ---
 
-## Resume
+## Résumé
 
-1. **Code splitting par route** (`lazy()` + `Suspense`) — chaque page est un chunk séparé, charge a la demande
+1. **Code splitting par route** (`lazy()` + `Suspense`) — chaque page est un chunk séparé, charge à la demandé
 2. **Guards ordonnees** : restore session → check auth → check RBAC → allow → update title
-3. **RouteMeta typee** : attacher `title`, `roles`, `noIndex`, `breadcrumb` a chaque route
+3. **RouteMeta typee** : attacher `title`, `roles`, `noIndex`, `breadcrumb` à chaque route
 4. **Routes protégées** : `noindex, nofollow` + exclusion du sitemap pour toutes les routes authentifiees/admin
 5. **Breadcrumbs depuis les routes** (pas les menus) — générés automatiquement via `useMatches()`
 

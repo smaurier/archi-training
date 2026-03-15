@@ -1,6 +1,6 @@
 # Cours 10 — Monolithe Modulaire & API-First
 
-**Objectif :** Comprendre pourquoi un monolithe modulaire peut etre le bon choix, maîtriser la séparation par modules a frontieres claires, et connaitre les principes API-First, headless, Contract-First et stateless.
+**Objectif :** Comprendre pourquoi un monolithe modulaire peut etre le bon choix, maîtriser la séparation par modules a frontieres claires, et connaître les principes API-First, headless, Contract-First et stateless.
 
 ---
 
@@ -13,7 +13,7 @@
 <details>
 <summary>Réponse</summary>
 
-Une Entity contient des règles métier qui appartiennent a l'entreprise entiere, independamment de cette application. Ex : "une facture impayee depuis 90 jours passe en contentieux" — cette règle existerait meme sans ce logiciel. Un Use Case contient des règles spécifiques a cette application : "lorsqu'un utilisateur clique sur Confirmer commande, orchestrer la vérification du stock, le paiement, et l'envoi de l'email". Cette logique n'existe que parce qu'il y a cette application.
+Une Entity contient des règles métier qui appartiennent a l'entreprise entière, independamment de cette application. Ex : "une facture impayee depuis 90 jours passe en contentieux" — cette règle existerait même sans ce logiciel. Un Use Case contient des règles spécifiques a cette application : "lorsqu'un utilisateur clique sur Confirmer commande, orchestrer la vérification du stock, le paiement, et l'envoi de l'email". Cette logique n'existe que parce qu'il y a cette application.
 
 </details>
 
@@ -32,13 +32,13 @@ Pour que le Use Case (cercle 2) reste independant du format de sortie (cercle 3)
 
 Un immeuble d'appartements est un seul batiment (un seul deployable), mais chaque appartement est **independant** :
 
-- Appartement 1A (module Facturation) : sa propre cuisine, sa propre serrure, ses propres cles
+- Appartement 1A (module Facturation) : sa propre cuisine, sa propre serrure, ses propres clés
 - Appartement 2B (module Catalogue) : il ne rentre pas dans l'appartement 1A sans permission
 - Appartement 3C (module Utilisateurs) : sa propre logique interne
 
 **L'immeuble partage** : le chauffage central, l'ascenseur, l'adresse postale — comme un monolithe partage un processus, une base de données, et un déploiement.
 
-**Mais chaque appartement a des frontieres claires** : tu ne traverses pas les murs. Si tu veux quelque chose chez le voisin, tu sonnes a la porte (API interne). C'est ca, le monolithe modulaire.
+**Mais chaque appartement a des frontieres claires** : tu ne traverses pas les murs. Si tu veux quelque chose chez le voisin, tu sonnes à la porte (API interne). C'est ça, le monolithe modulaire.
 
 A l'oppose : un seul grand loft sans murs = le "Big Ball of Mud" — tout le monde s'y croise, rien n'est prive.
 
@@ -122,7 +122,7 @@ modules/
 | Transactions | ACID nativement | Saga pattern requis (complexe) |
 | Déploiement | Simple, un seul artefact | Complexe, orchestration (K8s) |
 | Debug | Stack trace complete | Tracing distribue requis |
-| Refactoring de frontieres | Facile (refactor interne) | Tres couteux (changement de service) |
+| Refactoring de frontieres | Facile (refactor interne) | Très couteux (changement de service) |
 | Overhead operationnel | Faible | Eleve (N services, N bases, N configs) |
 
 **Conseil de Martin Fowler :** "Don't start with microservices. Start with a monolith designed with module boundaries that mirror potential service boundaries."
@@ -199,7 +199,7 @@ De ce fichier, on généré :
                +---------------------------+
 ```
 
-L'API ne sait pas si elle repond a un navigateur, une app mobile, ou un partenaire B2B. Elle expose des endpoints — n'importe quelle "tete" peut s'y connecter.
+L'API ne sait pas si elle repond à un navigateur, une app mobile, ou un partenaire B2B. Elle expose des endpoints — n'importe quelle "tete" peut s'y connecter.
 
 **Benefices :**
 - Changement de frontend sans toucher au backend
@@ -494,7 +494,7 @@ describe('CreateOrderUseCase', () => {
 
 ---
 
-## Resume
+## Résumé
 
 - Un **monolithe modulaire** est un seul deployable dont le code interne est organise en modules autonomes avec des frontieres strictes — combinant la simplicite operationnelle du monolithe et la clarte des microservices.
 - Chaque module expose une **API publique via un barrel file** (`index.ts`) ; tout le reste est prive. Les imports directs dans les internals d'un autre module sont des violations de frontiere.

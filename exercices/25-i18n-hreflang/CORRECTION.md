@@ -121,7 +121,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 }
 ```
 
-**Alternative manuelle** (si tu veux générer le XML toi-meme) :
+**Alternative manuelle** (si tu veux générer le XML toi-même) :
 
 ```typescript
 // app/sitemap.xml/route.ts — API route handler

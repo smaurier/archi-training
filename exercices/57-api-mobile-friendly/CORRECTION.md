@@ -213,7 +213,7 @@ async getChanges(
 
 ## Ce que tu aurais pu oublier
 
-### 1. Meme payload mobile et desktop
+### 1. Même payload mobile et desktop
 ```
 FAUX — envoyer 20 produits avec description complete + 5 images chacun au mobile
 CORRECT — field selection + pagination reduite + thumbnails

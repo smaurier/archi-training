@@ -22,7 +22,7 @@ Une interface `SearchProvider` permet de swapper le moteur de recherche (Elastic
 <details>
 <summary>Réponse</summary>
 
-Le full-text search (BM25) cherche des correspondances lexicales exactes — il compare les mots du query aux mots indexes (via `tsvector` en PostgreSQL ou l'index inverse en Elasticsearch). Le vector search encode le sens semantique dans un vecteur a N dimensions et cherche les vecteurs les plus proches (ANN — Approximate Nearest Neighbor). BM25 est precis pour les termes exacts, le vector search comprend les synonymes et le sens. La fusion (reciprocal rank fusion) combine les deux pour le meilleur des deux mondes.
+Le full-text search (BM25) cherche des correspondances lexicales exactes — il compare les mots du query aux mots indexes (via `tsvector` en PostgreSQL ou l'index inverse en Elasticsearch). Le vector search encode le sens semantique dans un vecteur a N dimensions et cherche les vecteurs les plus proches (ANN — Approximate Nearest Neighbor). BM25 est précis pour les termes exacts, le vector search comprend les synonymes et le sens. La fusion (reciprocal rank fusion) combine les deux pour le meilleur des deux mondes.
 
 </details>
 
@@ -32,7 +32,7 @@ Le full-text search (BM25) cherche des correspondances lexicales exactes — il 
 
 Imagine une boite de LEGO :
 
-- Chaque **piece** (brique 2x4, roue, fenetre) est un **composant** : autonome, standardisee, réutilisable
+- Chaque **piece** (brique 2x4, roue, fenêtre) est un **composant** : autonome, standardisee, réutilisable
 - Les **instructions** définissent comment assembler les pieces : c'est la **composition** de composants
 - Une piece ne sait pas dans quel modèle elle sera utilisee — elle expose des **connecteurs standardises** (les tenons)
 - Si une piece est defectueuse, tu la remplaces sans reconstruire tout le modèle — c'est l'**isolation**
@@ -46,7 +46,7 @@ En architecture front-end, chaque composant est une piece de LEGO : autonome, te
 
 ### 1. Headless Components — la logique sans le style
 
-Un composant **headless** encapsule la logique (état, interactions, accessibilite) sans imposer de rendu visuel. Le consommateur fournit le JSX/template.
+Un composant **headless** encapsule la logique (état, interactions, accessibilité) sans imposer de rendu visuel. Le consommateur fournit le JSX/template.
 
 ```
 +----------------------------------+
@@ -67,13 +67,13 @@ Un composant **headless** encapsule la logique (état, interactions, accessibili
 +----------------------------------+
 ```
 
-**Pourquoi ?** Un meme hook `useDropdown` peut produire un dropdown classique, un mega-menu, ou un select mobile — seul le rendu change.
+**Pourquoi ?** Un même hook `useDropdown` peut produire un dropdown classique, un mega-menu, ou un select mobile — seul le rendu change.
 
 ---
 
 ### 2. Atomic Design — les 5 niveaux
 
-Brad Frost a formalise une hierarchie en 5 niveaux :
+Brad Frost a formalise une hiérarchie en 5 niveaux :
 
 ```
 Atoms          →  Button, Input, Icon, Badge, Avatar
@@ -102,7 +102,7 @@ Pages          →  HomePage, ArticlePage, DashboardPage
 
 **Regle des 27 primitives** : dans un design system mature, on identifie ~27 atomes de base (Button, Input, Select, Checkbox, Radio, Toggle, Textarea, Badge, Avatar, Icon, Tooltip, Popover, Modal, Drawer, Tabs, Accordion, Breadcrumb, Pagination, Skeleton, Spinner, Alert, Toast, Card, Divider, Link, Heading, Text). Tout le reste est une composition.
 
-> **Default recommande pour ShopArch** : Atomic Design (5 niveaux). Cette hierarchie fournit un vocabulaire commun a toute l'equipe et scale naturellement d'un design system de 10 composants a 200+. Tu pourras changer plus tard si ton contexte l'exige.
+> **Default recommande pour ShopArch** : Atomic Design (5 niveaux). Cette hiérarchie fournit un vocabulaire commun a toute l'équipe et scale naturellement d'un design system de 10 composants a 200+. Tu pourras changer plus tard si ton contexte l'exige.
 
 ---
 
@@ -133,7 +133,7 @@ Dans un CMS, le contenu est structure en **blocks** (texte, image, hero, formula
 
 ### 4. Adapter Pattern — la frontiere avec les tiers
 
-Quand on intégré un editeur tiers (Unlayer, TinyMCE, CKEditor), on cree un **adapter** qui isole le composant tiers derriere une interface stable.
+Quand on intégré un editeur tiers (Unlayer, TinyMCE, CKEditor), on créé un **adapter** qui isole le composant tiers derriere une interface stable.
 
 ```
 +--------------------+     Interface stable     +--------------------+
@@ -465,13 +465,13 @@ export class UnlayerAdapter implements EditorAdapter {
 
 ---
 
-## Resume
+## Résumé
 
-- Les **composants headless** separent logique et rendu — un hook comme `useToggle` ou `useDropdown` encapsule l'état et l'accessibilite, le consommateur fournit le visuel.
+- Les **composants headless** separent logique et rendu — un hook comme `useToggle` ou `useDropdown` encapsule l'état et l'accessibilité, le consommateur fournit le visuel.
 - L'**atomic design** organise les composants en 5 niveaux (atoms → molecules → organisms → templates → pages) avec ~27 primitives de base qui couvrent 90% des besoins UI.
 - Le **component registry** mappe dynamiquement un `blockType` vers un composant React, respectant l'Open/Closed Principle — ajouter un block ne modifie jamais le moteur de rendu.
 - L'**Adapter Pattern** isole les SDK tiers (Unlayer, TinyMCE) derriere une interface stable — un changement de librairie ne touche qu'un seul fichier.
-- Les **Error Boundaries** capturent les erreurs de rendu par section — un crash dans un widget ne tue pas la page entiere, on affiche un fallback gracieux.
+- Les **Error Boundaries** capturent les erreurs de rendu par section — un crash dans un widget ne tue pas la page entière, on affiche un fallback gracieux.
 
 
 ---

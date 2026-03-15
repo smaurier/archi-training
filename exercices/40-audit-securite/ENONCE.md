@@ -38,7 +38,7 @@ Verifie les configurations de sécurité :
 Review manuelle du code pour :
 - SQL injection (recherche de concatenation SQL)
 - XSS (recherche de `innerHTML`, `dangerouslySetInnerHTML`, `v-html`)
-- Secrets hardcodes (regex sur les patterns de cles API)
+- Secrets hardcodes (regex sur les patterns de clés API)
 - Logs qui contiennent des données sensibles (PII, tokens)
 
 ### Étape 4 — Rapport d'audit

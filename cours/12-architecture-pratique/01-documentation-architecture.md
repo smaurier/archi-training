@@ -263,12 +263,12 @@ describe('Documentation freshness', () => {
 
 ---
 
-## Resume
+## Résumé
 
 1. **ADR** : documenter les decisions architecturales (contexte, decision, consequences, alternatives) — quand la decision est couteuse a reverser
 2. **C4** : 4 niveaux de zoom (Context → Container → Component → Code) — communiquer a différentes audiences
 3. **Documentation-as-product** : Markdown dans le repo, CI-validated, 3 audiences (AI agents, devs, non-tech)
-4. **Living contracts** : la doc evolue avec le code (meme PR), jamais de doc Word isolee sur un drive
+4. **Living contracts** : la doc evolue avec le code (même PR), jamais de doc Word isolee sur un drive
 5. **Fitness functions** : tests automatises pour vérifier la cohérence de la doc (status ADR valide, freshness)
 
 ---

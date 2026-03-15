@@ -17,12 +17,12 @@ Teste ta mémoire avant de continuer.
 
 **Fail Fast** : valider toutes les preconditions en debut de fonction (guard clauses) et lever une exception immédiate et explicite si quelque chose est invalide.
 
-**Fail Late** (le problème) : continuer avec des données potentiellement incorrectes jusqu'a ce que le code plante dans un endroit inattendu, souvent apres avoir effectue des opérations partielles (écritures en base, envois d'emails) qui ne peuvent pas etre annulees.
+**Fail Late** (le problème) : continuer avec des données potentiellement incorrectes jusqu'a ce que le code plante dans un endroit inattendu, souvent après avoir effectue des opérations partielles (écritures en base, envois d'emails) qui ne peuvent pas etre annulees.
 
 Fail Fast est préférable car l'erreur est claire, localisee, et aucune opération de "damage control" n'a eu lieu.
 </details>
 
-**Question 2 — Quelle est la différence entre DRY et YAGNI ? Donne un exemple de situation ou appliquer DRY trop tot est un problème.**
+**Question 2 — Quelle est la différence entre DRY et YAGNI ? Donne un exemple de situation où appliquer DRY trop tot est un problème.**
 
 <details>
 <summary>Réponse</summary>
@@ -30,7 +30,7 @@ Fail Fast est préférable car l'erreur est claire, localisee, et aucune opérat
 - **DRY** : ne duplique pas la connaissance métier. Concerne ce qui **existe** dans le code.
 - **YAGNI** : n'implémenté pas quelque chose que tu n'as pas besoin maintenant. Concerne ce qui n'existe **pas encore**.
 
-Exemple de DRY premature : deux boucles qui ressemblent a un tri sont abstracted dans une fonction générique `sortAnything<T>`, alors qu'elles trient des types différents pour des raisons différentes. Quand l'une doit changer, l'abstraction devient un obstacle. La règle : attendre trois occurrences similaires representant vraiment la meme connaissance avant d'abstraire.
+Exemple de DRY premature : deux boucles qui ressemblent à un tri sont abstracted dans une fonction générique `sortAnything<T>`, alors qu'elles trient des types différents pour des raisons différentes. Quand l'une doit changer, l'abstraction devient un obstacle. La règle : attendre trois occurrences similaires representant vraiment la même connaissance avant d'abstraire.
 </details>
 
 ---
@@ -81,7 +81,7 @@ class A {
 }
 ```
 
-Avec IoC, **le controle est inverse** : c'est un agent externe (le conteneur IoC, ou le code appelant) qui cree et fournit les dépendances :
+Avec IoC, **le controle est inverse** : c'est un agent externe (le conteneur IoC, ou le code appelant) qui créé et fournit les dépendances :
 ```
 class A {
   constructor(private b: B) {} // Quelqu'un d'autre controle la creation de B
@@ -219,7 +219,7 @@ FORMES DE PROVIDER :
 
 ### Anti-pattern : Service Locator
 
-Le Service Locator est l'opposee de l'injection par constructeur : au lieu de recevoir ses dépendances, un objet va les **chercher** lui-meme dans un registre global.
+Le Service Locator est l'opposee de l'injection par constructeur : au lieu de recevoir ses dépendances, un objet va les **chercher** lui-même dans un registre global.
 
 ```
 Service Locator — l'anti-pattern :
@@ -633,11 +633,11 @@ runTests().catch(console.error);
 
 ---
 
-## Resume
+## Résumé
 
-- **IoC** (inversion de controle) est le principe : ce n'est pas la classe qui cree ses dépendances, c'est un agent externe qui les fournit. **DI** (injection de dépendances) est la technique pour l'implémenter, et l'**injection par constructeur** est la forme la plus claire et la plus testable.
-- Les **trois scopes** ont des usages precis : **Singleton** pour les services stateless (config, logger) ; **Request-scoped** pour les services avec état par requête (contexte utilisateur, transaction) ; **Transient** pour les services légers avec état mutable. Mixer les scopes (singleton injectant un request-scoped) cree des "captive dependencies" dangereuses.
-- Le **Service Locator** est l'anti-pattern de DI : il cache les dépendances, rend les tests complexes, et couple le code a un registre global. L'injection par constructeur expose toutes les dépendances explicitement — c'est le contrat de la classe.
+- **IoC** (inversion de controle) est le principe : ce n'est pas la classe qui créé ses dépendances, c'est un agent externe qui les fournit. **DI** (injection de dépendances) est la technique pour l'implémenter, et l'**injection par constructeur** est la forme la plus claire et la plus testable.
+- Les **trois scopes** ont des usages précis : **Singleton** pour les services stateless (config, logger) ; **Request-scoped** pour les services avec état par requête (contexte utilisateur, transaction) ; **Transient** pour les services légers avec état mutable. Mixer les scopes (singleton injectant un request-scoped) créé des "captive dependencies" dangereuses.
+- Le **Service Locator** est l'anti-pattern de DI : il cache les dépendances, rend les tests complexes, et couple le code à un registre global. L'injection par constructeur expose toutes les dépendances explicitement — c'est le contrat de la classe.
 - **NestJS** implémenté DI via des decorateurs (`@Injectable`, `@Inject`) et des modules qui decrivent les providers (useClass, useValue, useFactory). La forme `useClass` permet de substituer une implémentation par une autre sans modifier le code client.
 - DI est la **condition nécessaire** des tests unitaires : avec une interface et l'injection par constructeur, tester n'importe quel service s'effectue en instanciant la classe avec des implémentations en mémoire — aucune base de données, aucun réseau, aucune infrastructure requise.
 

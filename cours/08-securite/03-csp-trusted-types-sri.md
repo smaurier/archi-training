@@ -9,7 +9,7 @@
 <details>
 <summary>1. Quelle est la différence fondamentale entre sécurité perimetrique et Zero Trust ?</summary>
 
-La sécurité perimetrique fait confiance a tout ce qui est **a l'interieur** du réseau (firewall = mur du chateau). Le Zero Trust ne fait confiance a **rien ni personne** par defaut — chaque requête est authentifiee, autorisee et chiffree, meme entre services internes. Le principe est "assume breach" : architecturer comme si l'attaquant etait déjà dans le réseau.
+La sécurité perimetrique fait confiance a tout ce qui est **a l'interieur** du réseau (firewall = mur du chateau). Le Zero Trust ne fait confiance a **rien ni personne** par defaut — chaque requête est authentifiee, autorisee et chiffree, même entre services internes. Le principe est "assume breach" : architecturer comme si l'attaquant etait déjà dans le réseau.
 </details>
 
 <details>
@@ -24,9 +24,9 @@ Le TLS classique authentifie uniquement le **serveur** (le client vérifié le c
 
 Les security headers fonctionnent comme un coffre-fort a combinaison :
 
-- **CSP** = la serrure a combinaison — elle définit exactement quelles cles (scripts, styles, images) sont autorisees a tourner
-- **Les hash SHA-256** = chaque cle a une empreinte unique — si quelqu'un change un seul bit du script, la cle ne rentre plus
-- **Trusted Types** = un detecteur de contrefacon — il vérifié que chaque "cle" a ete fabriquee par un atelier certifie (une policy), pas par n'importe qui
+- **CSP** = la serrure a combinaison — elle définit exactement quelles clés (scripts, styles, images) sont autorisees a tourner
+- **Les hash SHA-256** = chaque clé à une empreinte unique — si quelqu'un change un seul bit du script, la clé ne rentre plus
+- **Trusted Types** = un detecteur de contrefacon — il vérifié que chaque "clé" a ete fabriquee par un atelier certifie (une policy), pas par n'importe qui
 - **SRI** = le sceau d'intégrité sur une livraison externe — tu verifies que le colis du fournisseur n'a pas ete ouvert en transit
 - **Les autres headers** (HSTS, X-Frame-Options...) = les verrous supplementaires, l'alarme, le grillage — chaque couche ajoute un obstacle
 
@@ -103,7 +103,7 @@ Build Next.js (SSR) :
 └──────────────────┘
 ```
 
-### 4. Trusted Types — prevenir les injections DOM
+### 4. Trusted Types — prévenir les injections DOM
 
 Trusted Types est une API navigateur qui **interdit** l'assignation de strings brutes aux sinks dangereux (`innerHTML`, `document.write`, `eval`).
 
@@ -400,7 +400,7 @@ for (const asset of thirdPartyAssets) {
 
 ---
 
-## Resume
+## Résumé
 
 1. **CSP hash-only** : calculer le SHA-256 de chaque script inline au build et le déclarer dans le header CSP — zero `unsafe-inline`, zero `unsafe-eval`, chaque script est identifie par son empreinte
 2. **Trusted Types** : déployer d'abord en `report-only` pour détecter les sinks dangereux (`innerHTML`, `eval`), puis enforcer — force le passage par une policy de sanitization

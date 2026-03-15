@@ -253,7 +253,7 @@ export class SagaEntity {
 | Critère | Orchestration (orchestrateur central) | Choregraphie (events distribues) |
 |---|---|---|
 | Couplage | Central → connait toutes les étapes | Decouple → chaque service écoute des events |
-| Visibilite | Excellente (l'orchestrateur a la vue d'ensemble) | Faible (le flux est distribue, difficile a debugger) |
+| Visibilite | Excellente (l'orchestrateur à la vue d'ensemble) | Faible (le flux est distribue, difficile a debugger) |
 | Point de defaillance | L'orchestrateur est un SPOF | Pas de SPOF mais cascade d'events |
 | Complexite | Moderee (1 service orchestre) | Elevee (chaque service doit gérer ses transitions) |
 | Ajout d'étape | Modifier l'orchestrateur | Ajouter un listener sur l'event |
@@ -267,7 +267,7 @@ export class SagaEntity {
 |---|---|---|
 | Cohérence | Eventuelle (compensation si echec) | Forte (atomique) |
 | Performance | Bonne (pas de lock distribue) | Mauvaise (lock global pendant le commit) |
-| Disponibilite | Haute (chaque service independant) | Basse (si un participant est down, tout bloque) |
+| Disponibilité | Haute (chaque service independant) | Basse (si un participant est down, tout bloque) |
 | Complexite | Compensations a écrire pour chaque étape | Le coordinateur géré tout |
 | Cas d'usage | Microservices, processus longs | Transactions courtes, base monolithique |
 
@@ -279,7 +279,7 @@ export class SagaEntity {
 |---|---|---|
 | Résilience | Perdu si le process crash | Persiste sur Redis/disk |
 | Complexite | Simple (boucle retry) | Moderee (setup queue + worker) |
-| Observabilite | Logs seulement | Dashboard BullMQ, metriques |
+| Observabilité | Logs seulement | Dashboard BullMQ, metriques |
 | Backpressure | Non | Oui (concurrency, rate limiting) |
 
 **Verdict pour ShopArch** : retry en mémoire pour les étapes rapides (< 5s), queue persistante pour les étapes longues ou critiques (paiement, stock).

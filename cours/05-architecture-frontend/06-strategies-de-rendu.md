@@ -1,6 +1,6 @@
 # Cours 38 — Stratégies de rendu (SSR, SSG, ISR, Hybride)
 
-> **Objectif** : Comprendre les 4 stratégies de rendu (SSR, SSG, ISR, SPA), savoir les combiner dans une architecture hybride, maîtriser l'hydration et prevenir le FOUC.
+> **Objectif** : Comprendre les 4 stratégies de rendu (SSR, SSG, ISR, SPA), savoir les combiner dans une architecture hybride, maîtriser l'hydration et prévenir le FOUC.
 
 ---
 
@@ -19,7 +19,7 @@ Le CSS consomme les tokens composant, qui referent aux semantiques, qui referent
 <details>
 <summary>2. Pourquoi OKLCH plutot que HSL pour générer des palettes ?</summary>
 
-OKLCH est **perceptuellement uniforme** : deux couleurs avec la meme lightness OKLCH ont reellement la meme luminosite percue par l'oeil humain. En HSL, un jaune a 50% de lightness parait beaucoup plus clair qu'un bleu a 50%. OKLCH garantit des palettes cohérentes et accessibles.
+OKLCH est **perceptuellement uniforme** : deux couleurs avec la même lightness OKLCH ont réellement la même luminosite percue par l'oeil humain. En HSL, un jaune a 50% de lightness parait beaucoup plus clair qu'un bleu a 50%. OKLCH garantit des palettes cohérentes et accessibles.
 </details>
 
 ---
@@ -27,9 +27,9 @@ OKLCH est **perceptuellement uniforme** : deux couleurs avec la meme lightness O
 ## Analogie — Les medias
 
 - **SSG (Static Site Génération)** = le **journal imprime**. Redige et imprime une fois (build time). Ultra rapide a distribuer (CDN), mais pour mettre a jour il faut reimprimer toute l'edition.
-- **SSR (Server-Side Rendering)** = la **radio en direct**. Chaque auditeur (requête) recoit le contenu en temps reel. Toujours a jour, mais le studio (serveur) travaille en permanence.
-- **ISR (Incremental Static Regeneration)** = le **podcast**. Pre-enregistre, mais mis a jour periodiquement ou a la demande. Le meilleur des deux mondes.
-- **SPA (Single Page Application)** = le **streaming a la demande**. L'app se charge une fois, puis tout se passe côté client. Rapide apres le chargement initial, mais pas de contenu pour les moteurs de recherche.
+- **SSR (Server-Side Rendering)** = la **radio en direct**. Chaque auditeur (requête) recoit le contenu en temps réel. Toujours a jour, mais le studio (serveur) travaille en permanence.
+- **ISR (Incremental Static Regeneration)** = le **podcast**. Pre-enregistre, mais mis a jour periodiquement ou à la demandé. Le meilleur des deux mondes.
+- **SPA (Single Page Application)** = le **streaming à la demandé**. L'app se charge une fois, puis tout se passe côté client. Rapide après le chargement initial, mais pas de contenu pour les moteurs de recherche.
 
 ---
 
@@ -40,9 +40,9 @@ OKLCH est **perceptuellement uniforme** : deux couleurs avec la meme lightness O
 | Stratégie | Ou le rendu | Quand | SEO | TTFB | Données |
 |---|---|---|---|---|---|
 | **SSG** | Build server | Build time | Excellent | ~50ms (CDN) | Statique |
-| **SSR** | App server | Chaque requête | Excellent | ~200-600ms | Temps reel |
-| **ISR** | App server | On-demand/timer | Excellent | ~50ms (cache) | Quasi temps reel |
-| **SPA** | Client browser | Au chargement | Mauvais | ~50ms (CDN) | Temps reel |
+| **SSR** | App server | Chaque requête | Excellent | ~200-600ms | Temps réel |
+| **ISR** | App server | On-demand/timer | Excellent | ~50ms (cache) | Quasi temps réel |
+| **SPA** | Client browser | Au chargement | Mauvais | ~50ms (CDN) | Temps réel |
 
 ### 2. Architecture hybride — classification par type de route
 
@@ -279,7 +279,7 @@ function HydrateOnVisible({ children, fallback }: {
 
 ---
 
-## Resume
+## Résumé
 
 1. **SSG** pour les pages immuables (landing, legal), **SSR** pour les pages dynamiques avec SEO, **ISR** pour le meilleur des deux, **SPA** pour les zones privees
 2. **Architecture hybride** : classifier chaque route par son type → choisir la stratégie adaptee

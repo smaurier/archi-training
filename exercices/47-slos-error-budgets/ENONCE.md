@@ -21,7 +21,7 @@ ShopArch n'a pas de SLOs définis. L'équipe ne sait pas si le service est "asse
 
 ### Étape 1 — Définir les SLIs
 Identifie les SLIs (Service Level Indicators) pour chaque service :
-- Disponibilite : % de requêtes avec status 2xx ou 4xx (hors 5xx)
+- Disponibilité : % de requêtes avec status 2xx ou 4xx (hors 5xx)
 - Latence : % de requêtes completees en < X ms
 - Correctness : % de réponses avec les bonnes données (checkout amount correct)
 - Freshness : % du temps ou les données sont a jour (cache < 5 min de retard)
@@ -46,11 +46,11 @@ Définir les actions quand l'error budget est consomme :
 - 100% consomme : rollback automatique des deployments, post-mortem obligatoire
 
 ### Bonus
-- Implémenter un SLO dashboard en temps reel
+- Implémenter un SLO dashboard en temps réel
 - Calculer le composite SLO (SLO global de ShopArch)
 - Implémenter des burn rate alerts (alerte si consommation trop rapide)
 
 ## Contraintes
 - Chaque SLO doit etre mesurable automatiquement (pas de SLO subjectif)
 - Les SLIs doivent etre bases sur les metriques Prometheus de l'exercice précédent
-- L'error budget doit etre suivi sur une fenetre glissante de 30 jours
+- L'error budget doit etre suivi sur une fenêtre glissante de 30 jours

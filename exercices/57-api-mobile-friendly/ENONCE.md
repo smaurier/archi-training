@@ -35,7 +35,7 @@ Cree un endpoint batch pour regrouper plusieurs requêtes :
 
 ### Étape 3 — Optimistic UI support
 Adapte l'API pour supporter l'Optimistic UI :
-- Retourner l'entité complete apres chaque mutation (pour mettre a jour le cache client)
+- Retourner l'entité complete après chaque mutation (pour mettre a jour le cache client)
 - Supporter `If-Match` pour la résolution de conflits
 - Ajouter des timestamps de dernière modification pour la synchronisation
 
@@ -54,4 +54,4 @@ Gere la connectivite intermittente :
 ## Contraintes
 - La taille moyenne d'une réponse API mobile doit etre < 5 KB
 - Le batch endpoint ne doit pas depasser 50 KB de réponse totale
-- Les idempotency keys doivent expirer apres 24h
+- Les idempotency keys doivent expirer après 24h

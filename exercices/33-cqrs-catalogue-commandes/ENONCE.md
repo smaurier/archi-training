@@ -11,7 +11,7 @@ Implémenter le pattern CQRS (Command Query Responsibility Segregation) pour sé
 
 ## Contexte
 
-Le catalogue de ShopArch a 50 000 produits lus 10 000 fois/seconde mais modifies 10 fois/seconde. Les commandes sont ecrites fréquemment mais lues principalement par les admins. Les modèles de lecture et d'écriture ont des besoins tres différents.
+Le catalogue de ShopArch a 50 000 produits lus 10 000 fois/seconde mais modifies 10 fois/seconde. Les commandes sont ecrites fréquemment mais lues principalement par les admins. Les modèles de lecture et d'écriture ont des besoins très différents.
 
 ## Temps estime
 
@@ -51,4 +51,4 @@ Implemente la projection qui met a jour le read model quand le write model chang
 ## Contraintes
 - Les Commands ne retournent jamais de données (void ou ID de la ressource créée)
 - Les Queries ne modifient jamais l'état
-- Le read model doit etre reconstructible a partir des events
+- Le read model doit etre reconstructible à partir des events

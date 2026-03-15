@@ -260,7 +260,7 @@ Pact pour les contrats BFF ↔ API car le front-office (consumer) a des besoins 
 
 ## Ce que tu aurais pu oublier
 
-### 1. Tester contre le provider reel
+### 1. Tester contre le provider réel
 ```
 FAUX — le consumer test se connecte a l'API reelle (fragile, lent)
 CORRECT — le consumer teste contre le mock Pact (local, rapide, deterministe)

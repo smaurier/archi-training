@@ -11,7 +11,7 @@ Identifier et corriger des race conditions dans un e-commerce en utilisant optim
 
 ## Contexte
 
-ShopArch a un problème : deux clients achetent en meme temps le dernier exemplaire d'un produit. Le stock passe a -1. Il faut corriger ca.
+ShopArch à un problème : deux clients achetent en même temps le dernier exemplaire d'un produit. Le stock passe a -1. Il faut corriger ça.
 
 ## Temps estime
 
@@ -36,7 +36,7 @@ async purchaseProduct(productId: string, quantity: number): Promise<void> {
 }
 ```
 
-Scénario : deux requêtes arrivent en parallele pour le meme produit (stock = 1) :
+Scénario : deux requêtes arrivent en parallele pour le même produit (stock = 1) :
 - T0 : Requête A lit stock = 1
 - T1 : Requête B lit stock = 1
 - T2 : Requête A écrit stock = 0
@@ -54,7 +54,7 @@ Utilise le champ `version` pour détecter les modifications concurrentes :
 Utilise `SELECT ... FOR UPDATE` pour verrouiller la ligne pendant la transaction :
 - Commencer une transaction
 - `SELECT * FROM products WHERE id = :id FOR UPDATE`
-- Modifier et sauvegarder dans la meme transaction
+- Modifier et sauvegarder dans la même transaction
 
 ### Étape 4 — Comparer les deux approches
 

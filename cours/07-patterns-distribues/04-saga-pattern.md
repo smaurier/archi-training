@@ -15,7 +15,7 @@
 <details>
 <summary>2. Qu'est-ce que l'Outbox Pattern et quel problème resout-il ?</summary>
 
-L'Outbox Pattern resout le problème du **dual write** : quand on doit a la fois persister une modification ET publier un événement, un crash entre les deux opérations cause une inconsistance. La solution : insérer l'event dans une table `outbox` dans la **meme transaction** SQL que la modification métier. Un poller ou un CDC (Debezium) lit ensuite l'outbox et publie l'event. Garantie : at-least-once delivery.
+L'Outbox Pattern resout le problème du **dual write** : quand on doit à la fois persister une modification ET publier un événement, un crash entre les deux opérations cause une inconsistance. La solution : insérer l'event dans une table `outbox` dans la **même transaction** SQL que la modification métier. Un poller ou un CDC (Debezium) lit ensuite l'outbox et publie l'event. Garantie : at-least-once delivery.
 </details>
 
 ---
@@ -88,7 +88,7 @@ Echec au step 2 :
 |---|---|
 | **Transaction locale (Ti)** | Une opération dans un seul service (sa propre DB) |
 | **Compensation (Ci)** | L'opération inverse de Ti — annule semantiquement l'effet |
-| **Pivot transaction** | Le point de non-retour — apres cette étape, on ne compense plus |
+| **Pivot transaction** | Le point de non-retour — après cette étape, on ne compense plus |
 
 ### 3. Choreographie vs Orchestration
 
@@ -163,7 +163,7 @@ Regles :
 |---|---|---|
 | Reserve Stock (T1) | Release Stock (C1) | Remettre la quantité reservee |
 | Charge Payment (T2) | Refund Payment (C2) | Rembourser le montant |
-| Confirm Order (T3 - pivot) | — | Apres confirmation, on ne rollback plus |
+| Confirm Order (T3 - pivot) | — | Après confirmation, on ne rollback plus |
 | Ship Order (T4) | — | Pas de compensation (colis déjà parti) |
 
 ### 5. State machine saga
@@ -195,7 +195,7 @@ Regles :
 
 ### 6. Timeout handling
 
-Chaque étape du saga a un timeout. Sans timeout, un service lent bloque tout le saga :
+Chaque étape du saga à un timeout. Sans timeout, un service lent bloque tout le saga :
 
 | Étape | Timeout | Action si timeout |
 |---|---|---|
@@ -203,7 +203,7 @@ Chaque étape du saga a un timeout. Sans timeout, un service lent bloque tout le
 | Charge Payment | 10s | Vérifier l'état du paiement, puis decider |
 | Ship Order | 30s | Le paiement est déjà fait → retry, ne pas compenser |
 
-**Regle** : ne jamais compenser automatiquement apres un timeout sur la pivot transaction. Vérifier d'abord si l'opération a réussi (le service peut etre lent, pas en echec).
+**Regle** : ne jamais compenser automatiquement après un timeout sur la pivot transaction. Vérifier d'abord si l'opération a réussi (le service peut etre lent, pas en echec).
 
 ---
 
@@ -481,13 +481,13 @@ export class SagaRecovery {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Saga** = sequence de transactions locales + compensations — l'alternative pragmatique au 2PC pour les transactions distribuees
 2. **Choreographie** (events, decentralise) pour 2-3 services simples ; **Orchestration** (coordinateur central, state machine) pour > 3 services ou flux complexes
 3. **Compensating transactions** annulent semantiquement chaque étape — elles doivent etre idempotentes et toujours réussir (sinon → dead letter + alerte)
-4. **Pivot transaction** = point de non-retour — apres cette étape, on ne compense plus en arriere
-5. **Timeout + recovery** : chaque étape a un timeout, un cron détecté les sagas bloques, ne jamais compenser sur timeout sans vérifier l'état reel du service
+4. **Pivot transaction** = point de non-retour — après cette étape, on ne compense plus en arriere
+5. **Timeout + recovery** : chaque étape à un timeout, un cron détecté les sagas bloques, ne jamais compenser sur timeout sans vérifier l'état réel du service
 
 ---
 

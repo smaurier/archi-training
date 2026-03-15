@@ -15,7 +15,7 @@
 <details>
 <summary>2. Que signifie le header Vary et pourquoi ne jamais mettre `Vary: Cookie` sur un CDN ?</summary>
 
-Le header `Vary` indique aux caches intermédiaires (CDN, proxies) quels headers de requête influencent la réponse. Par exemple, `Vary: Accept-Language` signifie qu'il y a une version cachee par langue. `Vary: Cookie` signifie que chaque valeur de cookie produit une réponse différente — or chaque utilisateur a un cookie unique, donc le CDN ne peut jamais servir une réponse cachee a un autre utilisateur. Le taux de cache hit tombe a 0%.
+Le header `Vary` indique aux caches intermédiaires (CDN, proxies) quels headers de requête influencent la réponse. Par exemple, `Vary: Accept-Language` signifie qu'il y à une version cachee par langue. `Vary: Cookie` signifie que chaque valeur de cookie produit une réponse différente — or chaque utilisateur à un cookie unique, donc le CDN ne peut jamais servir une réponse cachee à un autre utilisateur. Le taux de cache hit tombe a 0%.
 </details>
 
 ---
@@ -24,8 +24,8 @@ Le header `Vary` indique aux caches intermédiaires (CDN, proxies) quels headers
 
 Trois facons de communiquer avec un fournisseur :
 
-- **REST = courrier postal** : tu envoies une lettre avec une demande precise ("envoyez-moi le catalogue produits page 3"). Le fournisseur repond avec exactement ce que la lettre demande, dans un format standardise. Simple, fiable, mais tu ne peux demander qu'une chose par lettre (un endpoint = une ressource). Si tu veux 5 informations différentes, tu envoies 5 lettres.
-- **GraphQL = liste de courses** : tu envoies UNE seule lettre avec une liste precise : "je veux le nom et le prix du produit 42, les 3 derniers avis, et l'adresse de l'entrepot le plus proche". Le fournisseur repond en un seul envoi, avec exactement ce que tu as demande — ni plus, ni moins. Puissant, mais le fournisseur doit lire et interpréter ta liste (cout CPU).
+- **REST = courrier postal** : tu envoies une lettre avec une demandé précisé ("envoyez-moi le catalogue produits page 3"). Le fournisseur repond avec exactement ce que la lettre demandé, dans un format standardise. Simple, fiable, mais tu ne peux demander qu'une chose par lettre (un endpoint = une ressource). Si tu veux 5 informations différentes, tu envoies 5 lettres.
+- **GraphQL = liste de courses** : tu envoies UNE seule lettre avec une liste précisé : "je veux le nom et le prix du produit 42, les 3 derniers avis, et l'adresse de l'entrepot le plus proche". Le fournisseur repond en un seul envoi, avec exactement ce que tu as demandé — ni plus, ni moins. Puissant, mais le fournisseur doit lire et interpréter ta liste (cout CPU).
 - **gRPC = talkie-walkie** : communication instantanee, en continu, binaire. Tu appuies sur le bouton, tu parles, l'autre repond immédiatement. Aucune fioriture — juste des données brutes, ultra-rapides. Ideal entre collegues (services internes), incomprehensible pour un passant (pas lisible par un humain).
 
 ---
@@ -108,9 +108,9 @@ Requete GraphQL :                    Sans DataLoader :
 | Concept | Description |
 |---|---|
 | **N+1** | 1 requête pour la collection + N requêtes pour chaque relation |
-| **DataLoader** | Collecte les IDs demandes dans un meme tick, puis fait 1 requête batchee |
+| **DataLoader** | Collecte les IDs demandes dans un même tick, puis fait 1 requête batchee |
 | **Batching** | Regrouper les appels individuels en un seul appel |
-| **Caching** | DataLoader cache aussi par ID dans la meme requête (pas cross-request) |
+| **Caching** | DataLoader cache aussi par ID dans la même requête (pas cross-request) |
 
 ### 3. Persisted queries
 
@@ -154,12 +154,12 @@ GraphQL est vulnerable aux requêtes malicieuses :
 }
 ```
 
-| Protection | Mecanisme | Valeur recommandee |
+| Protection | Mécanisme | Valeur recommandee |
 |---|---|---|
 | **Depth limiting** | Limiter la profondeur de la requête | Max 7 niveaux |
-| **Cost analysis** | Chaque champ a un cout, la requête totale est plafonnee | Max 1000 points |
+| **Cost analysis** | Chaque champ à un cout, la requête totale est plafonnee | Max 1000 points |
 | **Rate limiting** | Limiter le nombre de requêtes par IP/token | 100/min |
-| **Timeout** | Avorter la résolution apres un delai | 10s |
+| **Timeout** | Avorter la résolution après un delai | 10s |
 | **Persisted queries only** | En production, interdire les queries ad-hoc | Obligatoire en production |
 
 ```
@@ -260,7 +260,7 @@ message ImportResult {
 | **Format** | JSON (texte) | JSON (texte) | Protobuf (binaire) |
 | **Transport** | HTTP/1.1 ou 2 | HTTP/1.1 ou 2 | HTTP/2 obligatoire |
 | **Découverte** | OpenAPI/Swagger | Schema introspection | `.proto` file |
-| **Overhead** | Moyen | Moyen | Tres faible |
+| **Overhead** | Moyen | Moyen | Très faible |
 | **Browser support** | Natif | Natif | gRPC-Web (proxy) |
 | **Cas ideal** | API publique, CRUD | Front-end avec besoins varies | Inter-services, microservices |
 | **Streaming** | SSE / WebSocket (hors bande) | Subscriptions (WebSocket) | Natif (4 types) |
@@ -466,17 +466,17 @@ async publishArticle(id: string): Promise<Article> {
 
 ---
 
-## Resume
+## Résumé
 
 1. **GraphQL** permet au client de demander exactement les champs dont il a besoin en une seule requête — ideal pour les dashboards et les applications mobiles
-2. **DataLoader** resout le problème N+1 en batchant les resolutions de relations dans un meme tick — passer de N+1 requêtes a 2 requêtes
+2. **DataLoader** resout le problème N+1 en batchant les resolutions de relations dans un même tick — passer de N+1 requêtes a 2 requêtes
 3. **Sécurité GraphQL** obligatoire : depth limiting (max 7), cost analysis (max 1000 points), persisted queries en production, rate limiting par IP/token
 4. **gRPC** avec Protocol Buffers offre une serialisation binaire ultra-performante et 4 types de streaming natif — ideal pour la communication inter-services
-5. **Choix** : REST pour les API publiques/CRUD, GraphQL pour la flexibilité front-end, gRPC pour la performance inter-services — les trois peuvent coexister dans le meme système
+5. **Choix** : REST pour les API publiques/CRUD, GraphQL pour la flexibilité front-end, gRPC pour la performance inter-services — les trois peuvent coexister dans le même système
 
 ---
 
-> **Prochain cours** : [Cours 46 — WebSockets & Real-time](./04-websockets-realtime.md) — ou comment implémenter la communication temps reel avec WebSocket, Socket.IO, SSE, et scaler les connexions avec Redis pub/sub.
+> **Prochain cours** : [Cours 46 — WebSockets & Real-time](./04-websockets-realtime.md) — ou comment implémenter la communication temps réel avec WebSocket, Socket.IO, SSE, et scaler les connexions avec Redis pub/sub.
 
 ---
 

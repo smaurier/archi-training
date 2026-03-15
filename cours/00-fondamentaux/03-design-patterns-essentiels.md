@@ -10,12 +10,12 @@ A la fin de ce cours, tu sauras **identifier et appliquer les design patterns le
 
 Teste ta mémoire avant de continuer.
 
-**Question 1 — Que signifie le principe "Open/Closed" et quelle analogie du monde reel l'illustre ?**
+**Question 1 — Que signifie le principe "Open/Closed" et quelle analogie du monde réel l'illustre ?**
 
 <details>
 <summary>Réponse</summary>
 
-Le principe Open/Closed dit qu'une classe doit etre **ouverte a l'extension** (on peut lui ajouter des comportements) mais **fermee a la modification** (le code existant ne change pas). L'analogie est la **prise electrique** : tu n'ouvres pas la prise pour y ajouter un trou quand tu as un nouvel appareil, tu branches une multiprise (extension) sans modifier l'existant.
+Le principe Open/Closed dit qu'une classe doit etre **ouverte a l'extension** (on peut lui ajouter des comportements) mais **fermee à la modification** (le code existant ne change pas). L'analogie est la **prise electrique** : tu n'ouvres pas la prise pour y ajouter un trou quand tu as un nouvel appareil, tu branches une multiprise (extension) sans modifier l'existant.
 </details>
 
 **Question 2 — Quelle est la différence entre SRP et ISP ? Donne un exemple de violation pour chacun.**
@@ -26,7 +26,7 @@ Le principe Open/Closed dit qu'une classe doit etre **ouverte a l'extension** (o
 - **SRP** (Single Responsibility) : une **classe** ne doit avoir qu'une seule raison de changer. Violation : une classe `ArticleService` qui fait fetch + formatage HTML + envoi d'email.
 - **ISP** (Interface Segregation) : un **client** ne doit pas etre force d'implémenter des méthodes qu'il n'utilise pas. Violation : une interface `ContentManager` qui expose `manageUsers()` et `exportStatistics()` alors que le Redacteur n'en a pas besoin.
 
-SRP parle de la classe elle-meme. ISP parle du contrat expose aux clients de la classe.
+SRP parle de la classe elle-même. ISP parle du contrat expose aux clients de la classe.
 </details>
 
 ---
@@ -82,7 +82,7 @@ FAMILLES DE DESIGN PATTERNS
 
 #### Builder — Le configurateur de pizza
 
-**Problème résolu** : construire un objet complexe étape par étape, en evitant les constructeurs avec 10 parametres.
+**Problème résolu** : construire un objet complexe étape par étape, en evitant les constructeurs avec 10 paramètres.
 
 **Quand NE PAS utiliser** : quand l'objet a moins de 4-5 propriétés. Un simple objet literal TypeScript suffit.
 
@@ -105,9 +105,9 @@ new QueryBuilder()
 
 #### Singleton — L'instance unique (et ses abus)
 
-**Problème résolu** : garantir qu'une seule instance d'une classe existe (connexion a une base de données, configuration globale, logger).
+**Problème résolu** : garantir qu'une seule instance d'une classe existe (connexion à une base de données, configuration globale, logger).
 
-**Avertissement** : le Singleton est souvent un anti-pattern deguise. Il cree des **dépendances globales cachees** et rend les tests tres difficiles. Prefere l'injection de dépendances (cours 05) dans la grande majorite des cas.
+**Avertissement** : le Singleton est souvent un anti-pattern deguise. Il créé des **dépendances globales cachees** et rend les tests très difficiles. Prefere l'injection de dépendances (cours 05) dans la grande majorite des cas.
 
 ```
 Problemes du Singleton :
@@ -186,7 +186,7 @@ Analogie : le **tableau de bord d'une voiture**. Tu ne gérés pas directement l
 
 #### Proxy — Le gardien
 
-**Problème résolu** : controler l'accès a un objet (autorisation, cache, logging) sans modifier l'objet lui-meme.
+**Problème résolu** : controler l'accès à un objet (autorisation, cache, logging) sans modifier l'objet lui-même.
 
 ```
 CLIENT ──► PROXY ──► OBJET REEL
@@ -201,7 +201,7 @@ CLIENT ──► PROXY ──► OBJET REEL
 
 #### Decorator — Le personnage RPG avec équipements
 
-**Problème résolu** : ajouter des comportements a un objet dynamiquement, sans modifier la classe ni créer une explosion de sous-classes.
+**Problème résolu** : ajouter des comportements à un objet dynamiquement, sans modifier la classe ni créer une explosion de sous-classes.
 
 Analogie : dans un jeu de role, ton personnage de base peut etre **équipe** d'une armure, d'une epee, d'un chapeau. Chaque équipement ajoute des stats. Tu n'as pas une classe `GuerrieurAvecArmureEtEpee` — tu composes.
 
@@ -259,7 +259,7 @@ Analogie : un **service de newsletter**. Les abonnes ne savent pas quand le proc
 
 **Problème résolu** : définir une famille d'algorithmes, les encapsuler, et les rendre interchangeables a l'exécution.
 
-Analogie : un **GPS** qui te propose "le plus rapide", "le plus court" ou "éviter les peages". L'algorithme de calcul change — la destination reste la meme.
+Analogie : un **GPS** qui te propose "le plus rapide", "le plus court" ou "éviter les peages". L'algorithme de calcul change — la destination reste la même.
 
 ```
 ┌──────────────────────────────────┐
@@ -661,13 +661,13 @@ sendWelcomeEmail(adapter, 'user@example.com');
 
 ---
 
-## Resume
+## Résumé
 
 - Les **patterns creationnels** (Factory, Builder, Singleton) resolvent "comment créer des objets" : Factory centralise la création selon un type, Builder construit des objets complexes étape par étape, Singleton garantit une instance unique (mais attention aux abus).
 - Les **patterns structurels** (Adapter, Facade, Proxy, Decorator) resolvent "comment assembler des composants" : Adapter fait le pont entre deux interfaces incompatibles, Facade simplifie un sous-système complexe, Proxy controle l'accès, Decorator ajoute des comportements dynamiquement.
 - Les **patterns comportementaux** (Observer, Strategy, State Machine, Command) resolvent "comment les objets communiquent et changent" : Observer découplé emetteurs et recepteurs, Strategy rend les algorithmes interchangeables, State Machine géré les cycles de vie complexes avec des transitions explicites.
 - La **State Machine editoriale** (Draft → Published → Archived) est un pattern central dans les CMS : elle remplace des chaines de if/else fragiles par des transitions valides et verifiees.
-- Un pattern mal choisi est pire que pas de pattern du tout : utilise Factory quand le type est inconnu a la compilation, Observer quand il y a plusieurs consommateurs a découpler, Strategy quand l'algorithme change selon le contexte — mais pas juste pour montrer que tu connais les patterns.
+- Un pattern mal choisi est pire que pas de pattern du tout : utilise Factory quand le type est inconnu à la compilation, Observer quand il y a plusieurs consommateurs a découpler, Strategy quand l'algorithme change selon le contexte — mais pas juste pour montrer que tu connais les patterns.
 
 
 ---

@@ -2,7 +2,7 @@
 
 ## Partie A — Identification
 
-- [ ] Extrait 1 : identifie comme **Singleton** + mentionne le risque (état global, difficulte a tester)
+- [ ] Extrait 1 : identifie comme **Singleton** + mentionne le risque (état global, difficulte à tester)
 - [ ] Extrait 2 : identifie comme **Adapter** (traduit l'interface Stripe vers PaymentGateway)
 - [ ] Extrait 3 : identifie comme **Builder** (construction pas a pas avec validation au build)
 - [ ] Extrait 4 : identifie comme **Observer** (pub/sub avec EventBus)

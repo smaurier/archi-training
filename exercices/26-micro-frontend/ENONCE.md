@@ -25,7 +25,7 @@ Decompose ShopArch en micro-frontends :
 
 ### Étape 2 — Module Federation config
 
-Configure Webpack Module Federation (ou Vite plugin) pour exposer et consommer des composants React entre les micro-frontends.
+Configure Webpack Module Federation (où Vite plugin) pour exposer et consommer des composants React entre les micro-frontends.
 
 ### Étape 3 — Communication inter-apps
 

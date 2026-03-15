@@ -1,7 +1,7 @@
 # Generiques et Utility Types -- Le superpouvoir que tu ignores
 
-Tu as probablement deja vu `<T>` dans du code TypeScript et fait semblant de comprendre.
-Pas de honte -- les generiques ont l'air intimidants, mais le principe est simple :
+Tu as probablement déjà vu `<T>` dans du code TypeScript et fait semblant de comprendre.
+Pas de honte -- les génériques ont l'air intimidants, mais le principe est simple :
 c'est une variable, mais pour les types.
 
 On utilise des exemples e-commerce tout du long parce que c'est ce qu'on manipule
@@ -9,10 +9,10 @@ dans la formation.
 
 ---
 
-## Les generiques : un parametre de type
+## Les génériques : un paramètre de type
 
-Exactement comme une fonction prend des parametres de valeur, un generique prend un
-parametre de type :
+Exactement comme une fonction prend des paramètres de valeur, un générique prend un
+paramètre de type :
 
 ```typescript
 function first<T>(arr: T[]): T | undefined {
@@ -22,14 +22,14 @@ const name = first(["Alice", "Bob"]);   // type: string | undefined
 const price = first([19.99, 29.99]);    // type: number | undefined
 ```
 
-**Essaie :** Ecris une fonction generique `last<T>(arr: T[]): T | undefined` qui
-retourne le dernier element d'un tableau. Teste-la avec des strings et des numbers.
+**Essaie :** Ecris une fonction générique `last<T>(arr: T[]): T | undefined` qui
+retourne le dernier élément d'un tableau. Teste-la avec des strings et des numbers.
 
 ---
 
 ## Generiques avec des types metier
 
-Les generiques brillent pour modeliser des reponses d'API :
+Les génériques brillent pour modeliser des réponses d'API :
 
 ```typescript
 type ApiResponse<T> = { data: T; status: number; timestamp: string };
@@ -46,18 +46,18 @@ async function fetchProducts(): Promise<ApiResponse<Product[]>> {
 }
 ```
 
-Le meme conteneur `ApiResponse` s'adapte au contenu. Tu l'ecris une fois, tu le
+Le même conteneur `ApiResponse` s'adapte au contenu. Tu l'ecris une fois, tu le
 reutilises partout.
 
 **Essaie :** Cree un type `PaginatedResponse<T>` contenant `items: T[]`,
 `totalCount: number`, `page: number` et `pageSize: number`. Utilise-le pour typer
-une reponse paginee de `Product`.
+une réponse paginee de `Product`.
 
 ---
 
 ## Contraindre avec `extends`
 
-Parfois, tu veux accepter n'importe quel type... tant qu'il a certaines proprietes :
+Parfois, tu veux accepter n'importe quel type... tant qu'il a certaines propriétés :
 
 ```typescript
 type HasId = { id: string };
@@ -102,12 +102,12 @@ type CategoryCounts = Record<Category, number>;  // oblige les 3 cles
 type FrozenProduct = Readonly<Product>;
 ```
 
-**Essaie :** A partir de `Product`, cree un `ProductFormData` qui est un
-`Partial<Omit<Product, "id">>`. Puis cree un `ProductSummary` avec `Pick` qui ne
+**Essaie :** A partir de `Product`, créé un `ProductFormData` qui est un
+`Partial<Omit<Product, "id">>`. Puis créé un `ProductSummary` avec `Pick` qui ne
 garde que `name` et `price`.
 
 **Essaie :** Cree un `Record<"small" | "medium" | "large", number>` qui associe
-chaque taille a un prix. Que se passe-t-il si tu oublies une taille ?
+chaque taille à un prix. Que se passe-t-il si tu oublies une taille ?
 
 ---
 
@@ -128,9 +128,9 @@ L'operateur `&` (intersection) fusionne deux types.
 
 ---
 
-## Mapped types -- Transformer un type propriete par propriete
+## Mapped types -- Transformer un type propriété par propriété
 
-Les utility types comme `Partial` sont des **mapped types**. Tu peux ecrire les tiens :
+Les utility types comme `Partial` sont des **mapped types**. Tu peux écrire les tiens :
 
 ```typescript
 // Exactement comme ca que Partial est implemente :
@@ -142,10 +142,10 @@ type NullableProduct = Nullable<Product>;
 // { id: string | null; name: string | null; price: number | null; ... }
 ```
 
-`keyof T` donne l'union des cles. `[K in ...]` itere. `T[K]` donne le type de la valeur.
+`keyof T` donne l'union des clés. `[K in ...]` itere. `T[K]` donne le type de la valeur.
 
 **Essaie :** Ecris un mapped type `Stringify<T>` qui transforme tous les champs en
-`string`. Applique-le a `Product` et verifie que `price` est devenu `string`.
+`string`. Applique-le a `Product` et vérifié que `price` est devenu `string`.
 
 ---
 
@@ -167,12 +167,12 @@ type Clean = NonNullable<string | null | undefined>;      // string
 type ProductData = Extract<string | number, number>;      // number
 ```
 
-**Essaie :** Utilise `Exclude` pour creer `EditableFields` contenant toutes les cles
+**Essaie :** Utilise `Exclude` pour créer `EditableFields` contenant toutes les clés
 de `Product` sauf `"id"`. Combine avec `Pick` pour obtenir un objet sans `id`.
 
 ---
 
-## Exemple complet : un hook React generique
+## Exemple complet : un hook React générique
 
 Mettons tout ensemble -- un hook de fetch type :
 
@@ -202,13 +202,13 @@ Generiques + discriminated unions = typage parfait sans un seul `any`.
 
 ## Ce que tu retiens
 
-- Un generique `<T>` est un parametre de type -- pense "une fonction, mais pour les types".
+- Un générique `<T>` est un paramètre de type -- pense "une fonction, mais pour les types".
 - `extends` contraint ce que `T` peut etre -- comme un contrat minimum.
 - `Partial`, `Pick`, `Omit`, `Record`, `Readonly`, `Required` couvrent 90% des besoins.
 - Les utility types se composent : `Partial<Omit<Product, "id">>` est valide et courant.
-- Les mapped types te permettent de creer tes propres transformations quand les
+- Les mapped types te permettent de créer tes propres transformations quand les
   utilitaires integres ne suffisent pas.
 
 ---
 
-Lecon suivante : [Classes et immutabilite -- Pourquoi `readonly` va devenir ton meilleur ami](./03-classes-immutabilite.md)
+Leçon suivante : [Classes et immutabilite -- Pourquoi `readonly` va devenir ton meilleur ami](./03-classes-immutabilite.md)

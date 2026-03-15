@@ -24,12 +24,12 @@ Le custom CSS est exécuté dans le navigateur de l'utilisateur final — un CSS
 
 Un hopital ne stocke pas les dossiers patients n'importe comment :
 - **Minimisation** : seules les infos nécessaires au traitement sont collectees (pas la couleur préférée)
-- **Retention** : les dossiers sont detruits apres N annees (pas gardes "au cas ou")
+- **Retention** : les dossiers sont detruits après N annees (pas gardes "au cas où")
 - **Consentement** : le patient signe un formulaire AVANT tout examen
 - **Droit d'accès** : le patient peut demander son dossier a tout moment
 - **Droit a l'oubli** : le patient peut demander la destruction de ses données
 
-La GDPR transpose ces principes au numérique. Le **Privacy by Design** dit qu'on ne les ajoute pas apres coup — on les intégré des la conception.
+La GDPR transpose ces principes au numérique. Le **Privacy by Design** dit qu'on ne les ajoute pas après coup — on les intégré des la conception.
 
 ---
 
@@ -39,7 +39,7 @@ La GDPR transpose ces principes au numérique. Le **Privacy by Design** dit qu'o
 
 | # | Principe | Application technique |
 |---|---|---|
-| 1 | **Proactif, pas reactif** | Threat model STRIDE inclut les risques vie privee |
+| 1 | **Proactif, pas réactif** | Threat model STRIDE inclut les risques vie privee |
 | 2 | **Privacy par defaut** | Opt-in (pas opt-out), minimum de données collectees |
 | 3 | **Privacy intégrée au design** | Architecture pensee privacy-first, pas bolt-on |
 | 4 | **Fonctionnalite complete** | Privacy ET fonctionnalité — pas l'un au detriment de l'autre |
@@ -297,7 +297,7 @@ export class DataRetentionJob {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Privacy by Design** (7 principes Cavoukian) : intégrer la vie privee des la conception, pas en bolt-on
 2. **GDPR architecture** : data residency EU, retention 90j logs, pseudonymisation PII, droit a l'oubli technique (propager aux sous-traitants)
@@ -317,3 +317,15 @@ export class DataRetentionJob {
 > - Vérifie la conformité RGPD : droit à l'effacement, portabilité des données
 > - Exercice(s) associé(s) : `exercices/41-implementer-cmp/`
 > - Checkpoint : Module 08, critère 4
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [37-threat-model-stride](../../exercices/37-threat-model-stride/ENONCE)
+2. **Exercice** : [38-sécuriser-api](../../exercices/38-securiser-api/ENONCE)
+3. **Exercice** : [39-csp-hash-only](../../exercices/39-csp-hash-only/ENONCE)
+4. **Exercice** : [40-audit-sécurité](../../exercices/40-audit-securite/ENONCE)
+5. **Exercice** : [41-implementer-cmp](../../exercices/41-implementer-cmp/ENONCE)
+:::

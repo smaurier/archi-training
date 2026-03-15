@@ -34,7 +34,7 @@ Imagine un livre de 500 pages sans index ni table des matières :
 - **Avec un index thematique** (GIN) : tu trouves tous les chapitres qui mentionnent "full-text search" → recherche inversee
 - **Avec un index partiel** : l'index ne couvre que les chapitres "avances" — plus petit, plus rapide
 
-Chaque index supplementaire prend de la place (pages d'index) et ralentit l'écriture (mettre a jour l'index a chaque modification). L'art est de choisir les bons index.
+Chaque index supplementaire prend de la place (pages d'index) et ralentit l'écriture (mettre a jour l'index à chaque modification). L'art est de choisir les bons index.
 
 ---
 
@@ -272,7 +272,7 @@ export class ProductEntity {
 
 ---
 
-## Resume
+## Résumé
 
 1. **B-tree** pour egalite/plage (defaut), **GIN** pour full-text/JSONB, **BRIN** pour grandes tables ordonnees
 2. **`EXPLAIN ANALYZE`** est l'outil n°1 — un `Seq Scan` sur une grande table = index manquant

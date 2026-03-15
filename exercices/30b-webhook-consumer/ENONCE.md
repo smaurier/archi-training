@@ -22,8 +22,8 @@ ShopArch recoit des webhooks d'un provider de paiement (Stripe-like). Chaque web
 ### Étape 1 — Endpoint de reception
 Cree un endpoint `POST /webhooks/payment` qui :
 - Repond `200 OK` le plus vite possible (avant le traitement)
-- Queue le traitement reel dans une job queue
-- Retourne `200` meme si le traitement échoué (sinon le provider re-envoie)
+- Queue le traitement réel dans une job queue
+- Retourne `200` même si le traitement échoué (sinon le provider re-envoie)
 
 ### Étape 2 — Vérification de signature
 Verifie la signature HMAC-SHA256 :
@@ -52,5 +52,5 @@ Implemente un event handler type-safe :
 
 ## Contraintes
 - Le body brut doit etre preserve pour la vérification de signature (pas de middleware JSON auto)
-- Le traitement doit etre idempotent (meme webhook 2x = meme résultat)
+- Le traitement doit etre idempotent (même webhook 2x = même résultat)
 - Les erreurs de traitement ne doivent pas bloquer les futurs webhooks

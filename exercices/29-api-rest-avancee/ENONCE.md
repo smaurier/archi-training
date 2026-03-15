@@ -22,7 +22,7 @@ L'API produits de ShopArch sert 50 000 produits. La pagination par offset (`?pag
 ### Étape 1 — ETag et cache conditionnel
 Implemente le cache conditionnel HTTP :
 - Genere un ETag base sur le hash du contenu ou la version de l'entité
-- Reponds `304 Not Modified` si le client envoie `If-None-Match` avec le meme ETag
+- Reponds `304 Not Modified` si le client envoie `If-None-Match` avec le même ETag
 - Reponds `412 Precondition Failed` pour les PUT/PATCH avec `If-Match` incorrect
 
 ### Étape 2 — Pagination par curseur

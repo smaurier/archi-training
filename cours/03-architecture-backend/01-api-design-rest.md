@@ -32,7 +32,7 @@ Au lieu de créer une méthode par combinaison de critères (`findByStatusAndTag
 
 **Le menu du restaurant (l'API) vs la cuisine (l'implémentation).**
 
-Dans un restaurant, le menu est le contrat entre le client et le chef. Le client ne dit pas "faites-moi griller un filet de boeuf a 56 degres pendant 12 minutes" — il commande "entrecote, cuisson a point". Le menu définit ce qui est disponible, comment le commander (numéro de plat), et ce qu'on recevra en retour. Le client n'a pas besoin de connaitre la cuisine, les fournisseurs ou le nombre de casseroles.
+Dans un restaurant, le menu est le contrat entre le client et le chef. Le client ne dit pas "faites-moi griller un filet de boeuf a 56 degres pendant 12 minutes" — il commande "entrecote, cuisson a point". Le menu définit ce qui est disponible, comment le commander (numéro de plat), et ce qu'on recevra en retour. Le client n'a pas besoin de connaître la cuisine, les fournisseurs ou le nombre de casseroles.
 
 L'API REST est ce menu : elle expose des ressources (plats) via des URL stables, des verbes HTTP (commander, modifier, annuler), et des codes de réponse (plat servi, rupture de stock, commande invalide). La cuisine derriere peut changer — nouveau four, nouveau chef, nouvelle recette — sans que le menu change. Le client (front-end) ne subit aucune modification.
 
@@ -128,7 +128,7 @@ Au lieu de renvoyer des formats d'erreur varies et ad-hoc, RFC 7807 définit un 
 | Champ | Obligatoire | Description |
 |---|---|---|
 | `type` | Oui | URI identifiant le type de problème |
-| `title` | Oui | Resume lisible par un humain |
+| `title` | Oui | Résumé lisible par un humain |
 | `status` | Oui | Code HTTP |
 | `detail` | Non | Explication spécifique a cette occurrence |
 | `instance` | Non | URI de la ressource concernee |
@@ -168,7 +168,7 @@ FLUX PRESIGNED URL
     │ <──────────────────    │                        │
 ```
 
-**Avantages :** le serveur API n'est jamais surcharge par le transfer binaire, le client uploade directement vers le stockage avec un débit optimal, et le serveur valide apres confirmation.
+**Avantages :** le serveur API n'est jamais surcharge par le transfer binaire, le client uploade directement vers le stockage avec un débit optimal, et le serveur valide après confirmation.
 
 ### 6. Pagination serveur
 
@@ -490,7 +490,7 @@ export class ProblemDetailsFilter implements ExceptionFilter {
 
 ---
 
-## Resume
+## Résumé
 
 - **REST utilise les verbes HTTP** (GET, POST, PUT, PATCH, DELETE) sur des **noms au pluriel** (`/articles`), avec des codes de réponse semantiques (201 Created, 204 No Content, 412 Precondition Failed).
 - **ETag + If-Match** implementent le verrouillage optimiste côté HTTP : le serveur renvoie un ETag, le client le renvoie dans `If-Match` lors de la modification, et le serveur repond 412 si la ressource a change.

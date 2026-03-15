@@ -7,11 +7,11 @@
 
 ## Objectif
 
-Implémenter la gestion multi-site au sein d'un meme tenant : un client peut avoir plusieurs sites web, chacun avec sa propre configuration.
+Implémenter la gestion multi-site au sein d'un même tenant : un client peut avoir plusieurs sites web, chacun avec sa propre configuration.
 
 ## Contexte
 
-Chez ShopArch, un tenant (ex: "Acme Corp") peut avoir plusieurs sites (acme-fr.com, acme-de.com, acme-shop.com). Chaque site a ses propres parametres (theme, langue par defaut, domaine) mais partage les memes données produits.
+Chez ShopArch, un tenant (ex: "Acme Corp") peut avoir plusieurs sites (acme-fr.com, acme-de.com, acme-shop.com). Chaque site a ses propres paramètres (theme, langue par defaut, domaine) mais partage les memes données produits.
 
 ## Temps estime
 
@@ -63,6 +63,6 @@ Implemente un filtre automatique qui ajoute `WHERE site_id = :siteId` aux entit�
 
 ## Contraintes
 
-- Le site appartient TOUJOURS a un tenant (pas de site orphelin)
+- Le site appartient TOUJOURS à un tenant (pas de site orphelin)
 - L'isolation tenant reste active (un site d'un tenant A ne peut pas accéder aux données du tenant B)
 - Le siteId est ajoute au contexte comme le tenantId

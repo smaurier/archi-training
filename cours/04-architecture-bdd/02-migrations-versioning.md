@@ -7,7 +7,7 @@
 ## Rappel du cours précédent
 
 <details>
-<summary>1. Pourquoi utiliser des UUID v4 comme cles primaires plutot que des IDs sequentiels ?</summary>
+<summary>1. Pourquoi utiliser des UUID v4 comme clés primaires plutot que des IDs sequentiels ?</summary>
 
 Les IDs sequentiels exposent un risque **IDOR** (Insecure Direct Object Référence) : un attaquant peut deviner les IDs voisins (id=42 → id=43). Les UUID v4 sont aleatoires et non-devinables. Ils permettent aussi la génération côté client (pas besoin d'aller-retour DB).
 </details>
@@ -15,7 +15,7 @@ Les IDs sequentiels exposent un risque **IDOR** (Insecure Direct Object Référe
 <details>
 <summary>2. Qu'est-ce qu'un MultiLangField et comment est-il stocke ?</summary>
 
-Un champ JSON qui contient le meme contenu dans plusieurs langues : `{ "fr": "Bonjour", "en": "Hello", "nl": "Hallo" }`. Stocke dans une colonne `JSONB` PostgreSQL, il permet l'i18n au niveau du champ sans multiplier les tables ou les colonnes.
+Un champ JSON qui contient le même contenu dans plusieurs langues : `{ "fr": "Bonjour", "en": "Hello", "nl": "Hallo" }`. Stocke dans une colonne `JSONB` PostgreSQL, il permet l'i18n au niveau du champ sans multiplier les tables ou les colonnes.
 </details>
 
 ---
@@ -358,7 +358,7 @@ export class TenantMigrationRunner {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Migrations versionnees** : chaque changement de schema est un script up/down traçable
 2. **Zero-downtime** : utiliser Expand-Contract pour les changements incompatibles (renommage, suppression)

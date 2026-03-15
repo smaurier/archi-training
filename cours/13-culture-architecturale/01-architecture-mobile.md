@@ -244,7 +244,7 @@ class DeltaSyncService {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Cross-platform** (React Native, Flutter) : 1 équipe pour iOS + Android — trade-off performance vs vitesse de dev
 2. **Offline-first obligatoire** : mutation queue locale, sync quand le réseau revient, conflict résolution (LWW ou merge)

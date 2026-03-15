@@ -24,7 +24,7 @@ CREATE INDEX idx_products_cat_status_created
     WHERE status = 'active'; -- Partial index
 ```
 
-### Apres (avec index)
+### Après (avec index)
 ```
 Index Scan using idx_products_cat_status_created on products
   Index Cond: (category_id = 'cat-123')
@@ -112,7 +112,7 @@ SELECT * FROM order_lines
 WHERE order_id IN ('ord-1', 'ord-2', ..., 'ord-10');
 ```
 
-## Resume des index créés
+## Résumé des index créés
 
 ```sql
 -- Requete 1 : listing par categorie

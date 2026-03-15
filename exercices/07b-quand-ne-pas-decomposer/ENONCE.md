@@ -7,7 +7,7 @@
 
 ## Objectif
 
-Analyser des scénarios reels et déterminer quand les microservices sont un mauvais choix. Apprendre a dire "non" a la decomposition.
+Analyser des scénarios réels et déterminer quand les microservices sont un mauvais choix. Apprendre a dire "non" à la decomposition.
 
 ## Contexte
 

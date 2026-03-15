@@ -39,7 +39,7 @@ Une brique parfaitement posee au mauvais endroit est pire qu'une brique mal pose
 | | Code review | Architecture review |
 |---|---|---|
 | **Scope** | Un fichier, une PR | Un système, un module entier |
-| **Quand** | Chaque PR | Avant un projet, a chaque milestone |
+| **Quand** | Chaque PR | Avant un projet, à chaque milestone |
 | **Qui** | Tout dev de l'équipe | Tech lead, architecte |
 | **Duree** | 15-30 min | 1-4h |
 | **Quoi** | Style, bugs, performance locale | Trade-offs, couplage, scalabilité |
@@ -217,13 +217,13 @@ describe('Bundle size budget', () => {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Architecture review** : examiner le système entier (trade-offs, couplage, scalabilité) — pas juste la PR
-2. **ATAM** : presenter l'archi, identifier les quality attributes, analyser les scénarios critiques, documenter les trade-offs
+2. **ATAM** : présenter l'archi, identifier les quality attributes, analyser les scénarios critiques, documenter les trade-offs
 3. **Fitness functions** : tests automatises pour les invariants (pas de circular deps, bundle < 200KB, domaine isole de l'infra)
 4. **LADR en PR** : decision architecturale légère directement dans la pull request — context, decision, trade-off
-5. **Checklist** : SoC, scalability, résilience, security, observability, testability — a parcourir a chaque milestone
+5. **Checklist** : SoC, scalability, résilience, security, observability, testability — a parcourir à chaque milestone
 
 ---
 

@@ -6,7 +6,7 @@
 - [ ] Pagination réduite par defaut (10)
 - [ ] Batch endpoint (POST /api/batch, max 10 requêtes)
 - [ ] Timeout individuel par sous-requête dans le batch
-- [ ] Entité complete retournee apres mutation
+- [ ] Entité complete retournee après mutation
 - [ ] If-Match pour résolution de conflits
 - [ ] Health check léger (GET /ping → 204)
 - [ ] Idempotency keys pour les mutations

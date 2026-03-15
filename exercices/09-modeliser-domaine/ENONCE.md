@@ -12,13 +12,13 @@ Appliquer les concepts DDD (entités, value objects, agregats) pour modéliser l
 ## Contexte
 
 Tu construis ShopArch. Le Product Owner te donne les règles métier suivantes :
-- Un produit a un nom (multilingue), un prix HT, une categorie, et un stock
+- Un produit à un nom (multilingue), un prix HT, une categorie, et un stock
 - Le prix ne peut jamais etre negatif
 - Le stock ne peut jamais etre negatif
 - Une commande contient 1 a N lignes de commande
 - Chaque ligne référence un produit, une quantité et un prix unitaire (fige au moment de la commande)
 - Une adresse de livraison a : rue, code postal, ville, pays
-- Deux adresses identiques sont "egales" meme si ce sont des objets différents
+- Deux adresses identiques sont "egales" même si ce sont des objets différents
 
 ## Temps estime
 

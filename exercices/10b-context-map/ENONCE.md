@@ -35,7 +35,7 @@ Pour chaque paire, choisis UN pattern et justifie :
 | **Shared Kernel** | Code partage entre deux contextes | Types fondamentaux (Money, UUID) |
 | **Customer/Supplier** | L'upstream evolue en fonction des besoins du downstream | Equipes collaboratives |
 | **Conformist** | Le downstream accepte le modèle de l'upstream tel quel | L'upstream est externe ou impose |
-| **Anti-Corruption Layer** | Le downstream traduit le modèle de l'upstream | Modèles tres différents |
+| **Anti-Corruption Layer** | Le downstream traduit le modèle de l'upstream | Modèles très différents |
 | **Open Host Service** | L'upstream expose un protocole standard | API publique |
 | **Published Language** | Langage partage (JSON Schema, Protobuf) | Communication inter-services |
 
@@ -56,4 +56,4 @@ Liste les domain events echanges entre contexts :
 
 - Chaque relation doit etre nommee avec un pattern DDD
 - Pas de dépendance circulaire entre contexts
-- Les events sont immutables (pas de modification apres publication)
+- Les events sont immutables (pas de modification après publication)

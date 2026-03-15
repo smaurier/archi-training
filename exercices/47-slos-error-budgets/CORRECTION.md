@@ -192,7 +192,7 @@ CORRECT — SLI mesure en temps reel via Prometheus
          Si on ne mesure pas, on ne sait pas
 ```
 
-### 3. Meme SLO pour tous les services
+### 3. Même SLO pour tous les services
 ```
 FAUX — 99.99% pour tous les services (over-engineering pour la recherche)
 CORRECT — SLO adapte a la criticite business

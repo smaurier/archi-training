@@ -162,9 +162,9 @@ Architecture                    Equipes
 | Taille équipes | 6-7 personnes (OK) | 4-5 personnes (petites) |
 | Charge cognitive | 5 domaines chacune (limite) | 3-4 domaines chacune (confortable) |
 | Coordination | 2 équipes = faible overhead | 3 équipes = plus d'interfaces |
-| Cout | 18 personnes + Platform | 18 personnes + Platform (meme effectif, reparti) |
+| Cout | 18 personnes + Platform | 18 personnes + Platform (même effectif, reparti) |
 
-**Verdict pour ShopArch** : 2 stream-aligned pour l'instant (effectif de 18 personnes). Passer a 3 quand l'équipe depasse 25 personnes ou que la charge cognitive devient intenable.
+**Verdict pour ShopArch** : 2 stream-aligned pour l'instant (effectif de 18 personnes). Passer a 3 quand l'équipe dépasse 25 personnes ou que la charge cognitive devient intenable.
 
 ### Platform team interne vs PaaS externe
 

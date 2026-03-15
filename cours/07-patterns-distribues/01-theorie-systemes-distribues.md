@@ -1,6 +1,6 @@
 # Cours 49 — Théorie des systèmes distribues (CAP, PACELC)
 
-> **Objectif** : Comprendre le theoreme CAP et son extension PACELC, maîtriser les modèles de consistance (strong, eventual, causal, session), découvrir le consensus distribue (Raft), et connaitre les erreurs classiques de raisonnement sur les systèmes distribues.
+> **Objectif** : Comprendre le théorème CAP et son extension PACELC, maîtriser les modèles de consistance (strong, eventual, causal, session), découvrir le consensus distribue (Raft), et connaître les erreurs classiques de raisonnement sur les systèmes distribues.
 
 ---
 
@@ -9,7 +9,7 @@
 <details>
 <summary>1. Qu'est-ce que le pattern BFF (Backend for Frontend) et quel problème resout-il ?</summary>
 
-Le BFF est un backend dédié a un client spécifique (web, mobile, admin). Il agrege les appels a plusieurs microservices en une seule réponse adaptee au client, géré les tokens d'authentification côté serveur (évité de les exposer au navigateur), et isole la logique de presentation du backend. Chaque client a son propre BFF — on évité le "one API to rule them all" qui finit par convenir a personne.
+Le BFF est un backend dédié à un client spécifique (web, mobile, admin). Il agrege les appels a plusieurs microservices en une seule réponse adaptee au client, géré les tokens d'authentification côté serveur (évité de les exposer au navigateur), et isole la logique de présentation du backend. Chaque client a son propre BFF — on évité le "one API to rule them all" qui finit par convenir a personne.
 </details>
 
 <details>
@@ -35,7 +35,7 @@ C'est exactement le dilemme CAP : quand le réseau coupe entre deux noeuds, tu d
 
 ## Théorie
 
-### 1. Le theoreme CAP (Brewer, 2000)
+### 1. Le théorème CAP (Brewer, 2000)
 
 Un système distribue ne peut garantir simultanement que 2 des 3 propriétés suivantes :
 
@@ -61,15 +61,15 @@ Availability (A)    Partition Tolerance (P)
 |---|---|---|
 | **Consistency** | Tout read renvoie la dernière écriture | Solde bancaire identique sur tous les ATM |
 | **Availability** | Tout noeud non-crash repond | Le site e-commerce ne renvoie jamais 503 |
-| **Partition Tolerance** | Le système survit a une coupure réseau entre noeuds | Le datacenter Paris et Lyon sont deconnectes |
+| **Partition Tolerance** | Le système survit à une coupure réseau entre noeuds | Le datacenter Paris et Lyon sont deconnectes |
 
 **Pourquoi "pick 2" est trompeur** : en production, les partitions réseau **arrivent** (cables coupes, switches defaillants, timeout DNS). On ne "choisit" pas P — on le subit. Le vrai choix est : quand une partition survient, tu sacrifies **C** ou **A**.
 
 | Choix | Sigle | Comportement pendant partition | Exemples |
 |---|---|---|---|
 | Consistance + Partition | **CP** | Refuse les écritures si pas de quorum | PostgreSQL (single master), MongoDB (write concern majority), ZooKeeper |
-| Disponibilite + Partition | **AP** | Accepte les écritures, merge plus tard | Cassandra, DynamoDB, CouchDB, DNS |
-| Consistance + Disponibilite | **CA** | N'existe pas en distribue (pas de partition possible) | PostgreSQL single node (pas distribue) |
+| Disponibilité + Partition | **AP** | Accepte les écritures, merge plus tard | Cassandra, DynamoDB, CouchDB, DNS |
+| Consistance + Disponibilité | **CA** | N'existe pas en distribue (pas de partition possible) | PostgreSQL single node (pas distribue) |
 
 ### 2. PACELC — l'extension pragmatique
 
@@ -91,7 +91,7 @@ PACELC = PA/EL, PA/EC, PC/EL, PC/EC
 | Cosmos DB (strong) | PC (refuse) | EC (consistance forte) | PC/EC |
 | Cosmos DB (eventual) | PA (accepte) | EL (latence basse) | PA/EL |
 
-**Point cle** : la plupart du temps il n'y a pas de partition. Le choix Latency vs Consistency est le choix quotidien que tu fais a chaque requête.
+**Point clé** : la plupart du temps il n'y a pas de partition. Le choix Latency vs Consistency est le choix quotidien que tu fais à chaque requête.
 
 ### 3. Modèles de consistance
 
@@ -125,8 +125,8 @@ Du plus fort au plus faible :
 |---|---|---|---|
 | **Strong (Linearizable)** | Derniere écriture visible partout | Elevee (quorum) | Solde bancaire, stock critique |
 | **Causal** | Relations cause→effet respectees | Moyenne | Fils de commentaires, chat |
-| **Session** | Read-your-own-writes dans la session | Basse | Profil utilisateur apres edition |
-| **Eventual** | Convergence a terme (~ms a ~s) | Tres basse | Compteurs likes, analytics, CDN |
+| **Session** | Read-your-own-writes dans la session | Basse | Profil utilisateur après edition |
+| **Eventual** | Convergence a terme (~ms a ~s) | Très basse | Compteurs likes, analytics, CDN |
 
 ### 4. Le problème des deux généraux (Two Generals Problem)
 
@@ -148,7 +148,7 @@ General A ─────── territoire ennemi ─────── General 
   ... (boucle infinie d'acquittements)
 ```
 
-**Conclusion** : il est **impossible** de garantir un accord sur un canal de communication non fiable. C'est un theoreme (prouve mathematiquement), pas une limitation technique. En pratique : on utilise des timeouts, des retries et des idempotence keys pour s'en approcher.
+**Conclusion** : il est **impossible** de garantir un accord sur un canal de communication non fiable. C'est un théorème (prouve mathematiquement), pas une limitation technique. En pratique : on utilise des timeouts, des retries et des idempotence keys pour s'en approcher.
 
 ### 5. Consensus distribue — Raft (conceptuel)
 
@@ -177,7 +177,7 @@ Election :
 | Concept | Description |
 |---|---|
 | **Leader** | Seul a accepter les écritures, répliqué aux followers |
-| **Term** | Numero d'epoque, incremente a chaque election |
+| **Term** | Numero d'epoque, incremente à chaque election |
 | **Log réplication** | Le leader envoie chaque entree aux followers, commit quand majorite |
 | **Quorum** | Majorite stricte (3/5, 2/3) — empeche le split-brain |
 
@@ -189,12 +189,12 @@ Election :
 | 2 | La latence est nulle | 1ms local, 50ms cross-datacenter, 150ms cross-continent |
 | 3 | La bande passante est infinie | Saturation lors de pics, throttling cloud |
 | 4 | Le réseau est sécurisé | MITM, sniffing, DNS spoofing |
-| 5 | La topologie ne change pas | Auto-scaling, failover, deplacement de pods |
-| 6 | Il y a un seul admin | Multi-équipe, multi-cloud, SRE + devs |
+| 5 | La topologie ne change pas | Auto-scaling, failover, déplacement de pods |
+| 6 | Il y à un seul admin | Multi-équipe, multi-cloud, SRE + devs |
 | 7 | Le cout de transport est nul | Serialisation, TLS, load balancer overhead |
 | 8 | Le réseau est homogene | 10Gbps intra-DC, 100Mbps inter-DC, 4G mobile |
 
-**Regle pragmatique** : chaque appel réseau peut échouer, prendre 100x plus de temps que prevu, ou renvoyer des données obsoletes. Code defensivement.
+**Regle pragmatique** : chaque appel réseau peut échouer, prendre 100x plus de temps que prévu, ou renvoyer des données obsoletes. Code defensivement.
 
 ---
 
@@ -305,7 +305,7 @@ async function demo() {
 }
 ```
 
-### Classifier des systèmes reels (exercice type)
+### Classifier des systèmes réels (exercice type)
 
 ```typescript
 // cap-classifier.ts
@@ -376,9 +376,9 @@ systems.forEach(printClassification);
 
 ---
 
-## Resume
+## Résumé
 
-1. **CAP** : en cas de partition réseau (inevitable en distribue), tu choisis entre Consistance (CP) et Disponibilite (AP) — jamais les trois a la fois
+1. **CAP** : en cas de partition réseau (inevitable en distribue), tu choisis entre Consistance (CP) et Disponibilité (AP) — jamais les trois à la fois
 2. **PACELC** : sans partition, le choix quotidien est Latence vs Consistance — la plupart des systèmes choisissent EL (latence basse)
 3. **Modèles de consistance** : strong (linearizable) pour la finance, eventual pour les likes, session consistency (read-your-own-writes) pour les UX courantes
 4. **Two Generals Problem** : il est mathematiquement impossible de garantir un accord sur un canal non fiable — on s'en approche avec timeouts, retries et idempotence

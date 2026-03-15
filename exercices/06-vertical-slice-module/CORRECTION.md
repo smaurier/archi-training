@@ -218,7 +218,7 @@ describe('GetWishlist', () => {
 | Critère | Vertical Slice | Layered |
 |---|---|---|
 | Fichiers touches pour modifier "add" | 1-2 (handler + DTO) | 3+ (controller + service + repo + DTO) |
-| Merge conflicts | Rares (chaque dev sur sa feature) | Fréquents (tous dans le meme service) |
+| Merge conflicts | Rares (chaque dev sur sa feature) | Fréquents (tous dans le même service) |
 | Découverte | Structure = features métier | Structure = couches techniques |
 | Duplication | Legere (chaque handler est autonome) | Faible (service partage) |
 | Test | Isole par feature | Souvent un gros test du service |
@@ -231,11 +231,11 @@ En vertical slice, chaque handler EST le service. Pas besoin d'un intermédiaire
 
 ### 2. Oublier la vérification de doublon
 
-Sans verif, `add-to-wishlist` accepte le meme produit 2 fois → données incoherentes.
+Sans verif, `add-to-wishlist` accepte le même produit 2 fois → données incoherentes.
 
 ### 3. Ne pas trier dans get-wishlist
 
-Sans tri explicite, l'ordre dépend de la DB (non deterministe). Toujours trier explicitement.
+Sans tri explicite, l'ordre dépend de la DB (non déterministe). Toujours trier explicitement.
 
 ### 4. Confondre vertical slice et "un controller par fichier"
 

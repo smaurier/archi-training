@@ -9,7 +9,7 @@
 
 Pour chaque piege :
 - Le **titre entre guillemets** est la phrase exacte qu'on entend dans les reunions.
-- **Ce qui se passe** explique le mecanisme du desastre.
+- **Ce qui se passe** explique le mécanisme du desastre.
 - **Ce qu'on fait plutot** donne la sortie de secours.
 - **Le code** montre la différence concrète.
 - **Cours associes** pointent vers la théorie complete.
@@ -20,12 +20,12 @@ Pour chaque piege :
 
 > *"Notre CTO a dit qu'on devait faire des microservices. On a coupe notre appli en 12 services. Maintenant chaque feature touche 5 repos et déployer prend 3 heures."*
 
-**Ce qui se passe :** Vous avez cree un **monolithe distribue**. Les services se parlent en synchrone (HTTP), partagent la meme base de données (ou pire, ont des bases qui se requetent mutuellement), et un changement de schema nécessité de déployer 6 services en ordre precis. Vous avez tous les inconvenients des microservices (complexité réseau, observabilité, transactions distribuees) sans aucun de leurs avantages (scalabilité independante, isolation des pannes).
+**Ce qui se passe :** Vous avez créé un **monolithe distribue**. Les services se parlent en synchrone (HTTP), partagent la même base de données (où pire, ont des bases qui se requetent mutuellement), et un changement de schema nécessité de déployer 6 services en ordre précis. Vous avez tous les inconvenients des microservices (complexité réseau, observabilité, transactions distribuees) sans aucun de leurs avantages (scalabilité independante, isolation des pannes).
 
 **Ce qu'on fait plutot :**
 1. Commencer par un **monolithe module** (un seul deployable, mais avec des modules internes bien separes)
 2. Identifier les vrais points de stress (scaling, équipes, disponibilité differenciee)
-3. N'extraire en service que ce qui a un besoin **prouve** d'autonomie
+3. N'extraire en service que ce qui à un besoin **prouve** d'autonomie
 
 ```
 MONOLITHE DISTRIBUE (piege)          MONOLITHE MODULE (correct d'abord)
@@ -50,9 +50,9 @@ MONOLITHE DISTRIBUE (piege)          MONOLITHE MODULE (correct d'abord)
 
 > *"J'ai applique SOLID rigoureusement. Maintenant pour afficher une liste d'articles il faut traverser 14 classes et 7 interfaces."*
 
-**Ce qui se passe :** **Over-engineering**. SOLID est un guide, pas une religion. Extraire une interface pour une seule implémentation concrete, créer un Factory pour un objet qui ne change jamais, injecter une Strategy quand il n'y a qu'un seul cas — tout ca ajoute de l'indirection sans valeur. Le code devient plus difficile a lire qu'un script procedural.
+**Ce qui se passe :** **Over-engineering**. SOLID est un guide, pas une religion. Extraire une interface pour une seule implémentation concrete, créer un Factory pour un objet qui ne change jamais, injecter une Strategy quand il n'y a qu'un seul cas — tout ça ajoute de l'indirection sans valeur. Le code devient plus difficile a lire qu'un script procedural.
 
-**Ce qu'on fait plutot :** Appliquer SOLID uniquement quand la variabilite est **reelle et previsible**. Ne pas anticiper des extensions hypothetiques. Le principe YAGNI (You Ain't Gonna Need It) est l'antidote.
+**Ce qu'on fait plutot :** Appliquer SOLID uniquement quand la variabilite est **réelle et previsible**. Ne pas anticiper des extensions hypothetiques. Le principe YAGNI (You Ain't Gonna Need It) est l'antidote.
 
 ```typescript
 // MAUVAIS — interface pour une seule implementation
@@ -85,7 +85,7 @@ class MockPaymentGateway implements PaymentGateway { /* tests */ }
 
 > *"On a mis du cache sur toutes les endpoints. Maintenant les utilisateurs voient des données perimees depuis 3 jours et on ne sait plus quoi invalider."*
 
-**Ce qui se passe :** L'invalidation de cache est l'un des deux problèmes les plus difficiles en informatique (avec le nommage). Sans stratégie d'invalidation rigoureuse, le cache devient un mirroir menteur. Mettre du cache sans définir sa politique d'invalidation cree des bugs de cohérence tres difficiles a reproduire.
+**Ce qui se passe :** L'invalidation de cache est l'un des deux problèmes les plus difficiles en informatique (avec le nommage). Sans stratégie d'invalidation rigoureuse, le cache devient un mirroir menteur. Mettre du cache sans définir sa politique d'invalidation créé des bugs de cohérence très difficiles a reproduire.
 
 **Ce qu'on fait plutot :** Pour chaque cache, documenter explicitement : quand est-il perime ? qui l'invalide ? que se passe-t-il si l'invalidation échoué ?
 
@@ -136,7 +136,7 @@ Order -> Queue       Commande critique :  Notification email :
 
 ## 5. "Un store global"
 
-> *"On a tout mis dans Redux. Maintenant le store a 200 cles, chaque composant re-render quand n'importe quoi change, et personne ne sait ce que contient le store."*
+> *"On a tout mis dans Redux. Maintenant le store a 200 clés, chaque composant re-render quand n'importe quoi change, et personne ne sait ce que contient le store."*
 
 **Ce qui se passe :** **God Store** — un store global qui contient l'état de toute l'application. Le moindre changement d'état déclenché des re-renders en cascade. Les selectors sont lents. Les mutations deviennent impossibles a tracer. Le store devient un second backend non documente.
 
@@ -173,11 +173,11 @@ const articleStore = useArticleStore();  // charge les articles de la vue couran
 
 ## 6. "CSP unsafe-inline"
 
-> *"Le CSP bloquait nos scripts inline, alors on a ajoute unsafe-inline. Maintenant on est 'CSP-compliant' techniquement, mais sans protection reelle."*
+> *"Le CSP bloquait nos scripts inline, alors on a ajoute unsafe-inline. Maintenant on est 'CSP-compliant' techniquement, mais sans protection réelle."*
 
 **Ce qui se passe :** `unsafe-inline` **annule** l'intérêt du Content Security Policy. Une CSP existe pour empecher l'injection de scripts malveillants (XSS). Autoriser `unsafe-inline` revient a dire "tous les scripts inline sont OK" — y compris ceux injectes par un attaquant.
 
-**Ce qu'on fait plutot :** Externaliser les scripts inline dans des fichiers `.js`, ou utiliser des **nonces** (valeur aleatoire par requête) pour autoriser des scripts spécifiques de facon selective.
+**Ce qu'on fait plutot :** Externaliser les scripts inline dans des fichiers `.js`, ou utiliser des **nonces** (valeur aleatoire par requête) pour autoriser des scripts spécifiques de façon selective.
 
 ```
 # MAUVAIS — CSP inutile
@@ -200,7 +200,7 @@ Content-Security-Policy: script-src 'self' 'nonce-{random-per-request}'
 
 > *"Le code legacy est vraiment mauvais. On a decide de tout réécrire from scratch. 8 mois plus tard, le projet est annule, l'équipe est epuisee, et le nouveau code a les memes problèmes."*
 
-**Ce qui se passe :** Le **Big Bang Rewrite**. Joel Spolsky appelait ca "la pire decision stratégique qu'une societe puisse prendre". Le code legacy, aussi laid soit-il, contient des annees de corrections de bugs, de cas limites, de règles métier implicites. Tout réécrire, c'est aussi tout perdre et tout re-apprendre.
+**Ce qui se passe :** Le **Big Bang Rewrite**. Joel Spolsky appelait ça "la pire decision stratégique qu'une societe puisse prendre". Le code legacy, aussi laid soit-il, contient des annees de corrections de bugs, de cas limites, de règles métier implicites. Tout réécrire, c'est aussi tout perdre et tout re-apprendre.
 
 **Ce qu'on fait plutot :** **Strangler Fig Pattern** — etrangler l'ancienne appli progressivement, feature par feature, sans jamais arreter de livrer.
 
@@ -222,11 +222,11 @@ STRANGLER FIG PATTERN (bon)
 
 ## 8. "Les tests ralentissent le développement"
 
-> *"On n'a pas le temps d'écrire des tests. On livrera les tests apres. Ca fait 2 ans, pas de tests, et chaque deploy est une russian roulette."*
+> *"On n'a pas le temps d'écrire des tests. On livrera les tests après. Ça fait 2 ans, pas de tests, et chaque deploy est une russian roulette."*
 
 **Ce qui se passe :** **Dette technique exponentielle**. Sans tests, chaque correction de bug peut en introduire trois nouveaux invisibles. La regression détection dépend des utilisateurs en production. La vitesse initiale (pas de tests = livraison rapide) s'inverse : sans filet, les développeurs deviennent paralytiques, les PRs prennent des heures de review manuelle, les deploys sont bloques.
 
-**Ce qu'on fait plutot :** Tests unitaires du domaine (rapides, pas de BDD), tests d'intégration pour les cas critiques. Commencer petit — meme 30% de coverage sur le code métier change radicalement la confiance.
+**Ce qu'on fait plutot :** Tests unitaires du domaine (rapides, pas de BDD), tests d'intégration pour les cas critiques. Commencer petit — même 30% de coverage sur le code métier change radicalement la confiance.
 
 ```typescript
 // SANS TEST — un deploy = stress
@@ -256,11 +256,11 @@ describe('Article.publish()', () => {
 
 ## 9. "DDD partout"
 
-> *"On fait du DDD. J'ai cree des Agregats, des Value Objects, des Domain Events... pour sauvegarder un formulaire de contact (nom, email, message)."*
+> *"On fait du DDD. J'ai créé des Agregats, des Value Objects, des Domain Events... pour sauvegarder un formulaire de contact (nom, email, message)."*
 
 **Ce qui se passe :** **Over-modeling CRUD**. Le DDD est couteux (Event Storming, modélisation profonde, ceremonies d'équipe). Pour un CRUD basique, il ajoute une complexité enorme sans valeur. Un formulaire de contact est un `INSERT INTO contact_forms`. Pas besoin d'un Agregat `ContactRequest` avec un `ContactSubmitted` Domain Event.
 
-**Ce qu'on fait plutot :** Appliquer le DDD uniquement au Core Domain (la ou la complexité métier est reelle). Pour les supporting et generic subdomains : CRUD simple, DTO direct, pas de ceremonie.
+**Ce qu'on fait plutot :** Appliquer le DDD uniquement au Core Domain (la ou la complexité métier est réelle). Pour les supporting et generic subdomains : CRUD simple, DTO direct, pas de ceremonie.
 
 ```typescript
 // OVER-ENGINEERING — formulaire de contact avec DDD
@@ -290,11 +290,11 @@ async function submitContact(dto: { name: string; email: string; message: string
 
 ## 10. "Pas de schema pour NoSQL"
 
-> *"On utilise MongoDB parce que c'est flexible, pas besoin de schema. Maintenant on a des documents avec des champs différents dans la meme collection et on ne sait plus ce qu'on peut truster."*
+> *"On utilise MongoDB parce que c'est flexible, pas besoin de schema. Maintenant on a des documents avec des champs différents dans la même collection et on ne sait plus ce qu'on peut truster."*
 
 **Ce qui se passe :** **Schema implicite**. L'absence de schema ne signifie pas l'absence de structure : cela signifie que la structure est dans votre tete et dans le code epars. Chaque service suppose des champs différents, les migrations deviennent impossibles, et un bug de serialisation corrompt silencieusement des milliers de documents.
 
-**Ce qu'on fait plutot :** Définir un schema explicite meme avec NoSQL (Mongoose schemas, JSON Schema validation, Zod au niveau applicatif). Versionner les schemas comme du code.
+**Ce qu'on fait plutot :** Définir un schema explicite même avec NoSQL (Mongoose schemas, JSON Schema validation, Zod au niveau applicatif). Versionner les schemas comme du code.
 
 ```typescript
 // MAUVAIS — schema implicite
@@ -331,7 +331,7 @@ await db.collection('articles').insertOne(parsed);
 
 **Ce qui se passe :** **Spaghetti frontend**. Sans architecture, la logique métier se retrouve dans les composants, les appels API dans les handlers, l'état duplique entre composants. Le frontend devient aussi difficile a maintenir qu'un backend sans couches.
 
-**Ce qu'on fait plutot :** Separer presentation (composants), logique (hooks/stores/use-cases), et accès aux données (services/repositories). Les composants ne font que render et dispatcher des actions.
+**Ce qu'on fait plutot :** Separer présentation (composants), logique (hooks/stores/use-cases), et accès aux données (services/repositories). Les composants ne font que render et dispatcher des actions.
 
 ```typescript
 // MAUVAIS — logique dans le composant
@@ -369,11 +369,11 @@ function useArticleActions(articleId: string) {
 
 ## 12. "J'ai fait mon propre framework"
 
-> *"Les frameworks existants ne nous convenaient pas exactement. On a cree le notre. 3 ans plus tard, on maintient un framework et un produit, avec une équipe de 4 personnes."*
+> *"Les frameworks existants ne nous convenaient pas exactement. On a créé le notre. 3 ans plus tard, on maintient un framework et un produit, avec une équipe de 4 personnes."*
 
 **Ce qui se passe :** **NIH Syndrome (Not Invented Here)**. Créer un framework maison signifie : zero documentation publique, zero communauté, zero recrutement facile, chaque bug est le votre a résoudre, chaque sécurité patch est le votre a implémenter. Le cout de maintenance est phenomenal.
 
-**Ce qu'on fait plutot :** Utiliser les frameworks etablis. Contribuer a l'open source si les manques sont reels. Ne créer une abstraction maison que pour coller plusieurs librairies etablies ensemble — jamais pour remplacer un framework mature.
+**Ce qu'on fait plutot :** Utiliser les frameworks etablis. Contribuer a l'open source si les manques sont réels. Ne créer une abstraction maison que pour coller plusieurs librairies etablies ensemble — jamais pour remplacer un framework mature.
 
 ```
 COÛT COMPARATIF
@@ -389,13 +389,13 @@ Upgrade :          CHANGELOG           Vous ecrivez le CHANGELOG
 
 ---
 
-## 13. "Ca marche en local"
+## 13. "Ça marche en local"
 
-> *"En local ca marche parfaitement. En prod ca crashe toutes les heures. On n'a pas de staging."*
+> *"En local ça marche parfaitement. En prod ça crashe toutes les heures. On n'a pas de staging."*
 
-**Ce qui se passe :** L'environnement local est un mensonge confortable. Pas de latence réseau reelle, pas de charge, pas de vraies credentials, pas de certificats TLS, version de Node différente de prod, variables d'environnement hardcodees. Sans staging, chaque deploy est un test en production.
+**Ce qui se passe :** L'environnement local est un mensonge confortable. Pas de latence réseau réelle, pas de charge, pas de vraies credentials, pas de certificats TLS, version de Node différente de prod, variables d'environnement hardcodees. Sans staging, chaque deploy est un test en production.
 
-**Ce qu'on fait plutot :** Staging = miroir de production. Memes services, meme infrastructure-as-code, meme pipeline CI. Tester le deploy en staging avant prod. Feature flags pour le rollout progressif.
+**Ce qu'on fait plutot :** Staging = miroir de production. Memes services, même infrastructure-as-code, même pipeline CI. Tester le deploy en staging avant prod. Feature flags pour le rollout progressif.
 
 ```
 ENVIRONNEMENTS REQUIS
@@ -416,7 +416,7 @@ ENVIRONNEMENTS REQUIS
 
 > *"On stocke les JWT dans localStorage parce que c'est simple. Un audit de sécurité a trouve qu'un script tiers injecte dans la page peut lire tous les tokens."*
 
-**Ce qui se passe :** **XSS token theft**. LocalStorage est accessible depuis n'importe quel script JavaScript s'executant sur la page, y compris les scripts injectes par une attaque XSS ou un package npm compromis. Un attaquant peut exfiltrer le token et usurper l'identité indefiniment.
+**Ce qui se passe :** **XSS token theft**. LocalStorage est accessible depuis n'importe quel script JavaScript s'exécutant sur la page, y compris les scripts injectes par une attaque XSS ou un package npm compromis. Un attaquant peut exfiltrer le token et usurper l'identité indefiniment.
 
 **Ce qu'on fait plutot :** Stocker les tokens dans des cookies `HttpOnly; Secure; SameSite=Strict`. Ces cookies ne sont pas accessibles en JavaScript. Couple avec un bon CSP, le risque d'exfiltration est quasi nul.
 
@@ -439,11 +439,11 @@ res.cookie('auth_token', jwt, {
 
 ---
 
-## 15. "La sécurité, on verra apres"
+## 15. "La sécurité, on verra après"
 
 > *"On finit les features d'abord, la sécurité c'est pour la v2. La v2 est sortie. La v3 aussi. Pas de sécurité."*
 
-**Ce qui se passe :** **Security bolt-on**. La sécurité ajoutee apres coup coute 10 a 100 fois plus cher qu'intégrée des le debut. Les vecteurs d'attaque sont entrelaces avec la logique métier, les corrections necessitent des refactorisations profondes, et entre la v1 non sécurisée et la correction, il y a une fenetre de vulnérabilité.
+**Ce qui se passe :** **Security bolt-on**. La sécurité ajoutee après coup coute 10 a 100 fois plus cher qu'intégrée des le debut. Les vecteurs d'attaque sont entrelaces avec la logique métier, les corrections necessitent des refactorisations profondes, et entre la v1 non sécurisée et la correction, il y à une fenêtre de vulnérabilité.
 
 **Ce qu'on fait plutot :** **Shift left security** — intégrer la sécurité des le design. Threat modeling en conception, SAST dans la CI, revues de code avec checklist sécurité, penetration testing avant chaque release majeure.
 
@@ -463,7 +463,7 @@ COUT DE CORRECTION SELON LA PHASE
 
 ## 16. "HTTP 200 avec une erreur dans le body"
 
-> *"Notre API retourne toujours 200. Si c'est une erreur, il y a un champ 'error' dans le JSON. Nos clients doivent lire le body pour savoir si ca a marche."*
+> *"Notre API retourne toujours 200. Si c'est une erreur, il y à un champ 'error' dans le JSON. Nos clients doivent lire le body pour savoir si ça a marche."*
 
 **Ce qui se passe :** **Anti-pattern API**. Les codes HTTP existent precisement pour signaler le succes ou l'echec sans lire le body. Les proxies, les load balancers, les outils de monitoring, les retry policies — tous utilisent le code HTTP. Un 200 avec erreur dans le body trompe toute l'infrastructure et force chaque client a implémenter sa propre logique de détection d'erreur.
 
@@ -504,9 +504,9 @@ app.post('/articles', (req, res) => {
 
 > *"Le rate limiting c'est pour les APIs publiques. En interne, les services se font confiance. Un script bugge, il fait 50 000 requêtes en 1 minute et notre BDD est a genoux."*
 
-**Ce qui se passe :** **Lateral movement** et **self-DDOS**. Sans rate limiting interne, un service bugge (boucle infinie, retry storm) ou compromis peut saturer toute l'infrastructure. Le perimetre de confiance "interne = sur" est une illusion : une injection de code, un secret exfiltre, ou un simple bug peut provoquer la meme chose qu'une attaque externe.
+**Ce qui se passe :** **Lateral movement** et **self-DDOS**. Sans rate limiting interne, un service bugge (boucle infinie, retry storm) ou compromis peut saturer toute l'infrastructure. Le perimetre de confiance "interne = sur" est une illusion : une injection de code, un secret exfiltre, ou un simple bug peut provoquer la même chose qu'une attaque externe.
 
-**Ce qu'on fait plutot :** Rate limiting sur chaque service, meme interne. Circuit breaker pour les appels inter-services. Quotas par tenant dans une appli multi-tenant.
+**Ce qu'on fait plutot :** Rate limiting sur chaque service, même interne. Circuit breaker pour les appels inter-services. Quotas par tenant dans une appli multi-tenant.
 
 ```typescript
 // Rate limiting par tenant avec Redis (token bucket)
@@ -540,9 +540,9 @@ await rateLimiter.checkLimit(tenantId, 'publish_article', 100, 3600000);
 
 ## 18. "On va juste scaler verticalement"
 
-> *"Nos serveurs sont a 80% CPU. On passe de 8 a 32 cores. Ca a coute 5x plus cher et dans 6 mois on sera de nouveau a 80%."*
+> *"Nos serveurs sont a 80% CPU. On passe de 8 a 32 cores. Ça a coute 5x plus cher et dans 6 mois on sera de nouveau a 80%."*
 
-**Ce qui se passe :** Le **scaling vertical** (machines plus puissantes) a un plafond physique et un cout exponentiel. A partir d'un certain point, doubler les ressources coute 4x et ne double pas les performances (contention, Amdahl's law). Et si la machine tombe, tout tombe.
+**Ce qui se passe :** Le **scaling vertical** (machines plus puissantes) à un plafond physique et un cout exponentiel. A partir d'un certain point, doubler les ressources coute 4x et ne double pas les performances (contention, Amdahl's law). Et si la machine tombe, tout tombe.
 
 **Ce qu'on fait plutot :** Identifier ce qui peut etre scale horizontalement (sans état) et ce qui ne peut pas (avec état). Stateless services -> scale horizontal trivial. Base de données -> read replicas, sharding, caching. Concevoir stateless des le debut.
 
@@ -624,23 +624,23 @@ CONWAY INVOLONTAIRE (piege)      INVERSE CONWAY (solution)
 
 ## Tableau de bord rapide
 
-| # | Piege | Signal d'alarme | Solution cle |
+| # | Piege | Signal d'alarme | Solution clé |
 |---|---|---|---|
 | 1 | Monolithe distribue | "5 services pour 1 feature" | Monolithe module d'abord |
-| 2 | Over-engineering SOLID | "14 classes pour 1 liste" | YAGNI, interface = variabilite reelle |
+| 2 | Over-engineering SOLID | "14 classes pour 1 liste" | YAGNI, interface = variabilite réelle |
 | 3 | Cache sans invalidation | "Données perimees depuis 3j" | Invalidation sur mutation explicite |
 | 4 | Eventual consistency forcee | "Doublons de stock" | Forte consistance pour ops critiques |
-| 5 | God Store | "200 cles dans Redux" | État au bon niveau, slices independants |
+| 5 | God Store | "200 clés dans Redux" | État au bon niveau, slices independants |
 | 6 | CSP unsafe-inline | "XSS possible" | Nonces, scripts externes |
-| 7 | Big Bang Rewrite | "Projet annule apres 8 mois" | Strangler Fig, migration incrementale |
+| 7 | Big Bang Rewrite | "Projet annule après 8 mois" | Strangler Fig, migration incrementale |
 | 8 | Pas de tests | "Deploy = roulette russe" | Tests domaine purs, rapides |
 | 9 | DDD sur CRUD | "VO pour formulaire de contact" | DDD = Core Domain uniquement |
 | 10 | NoSQL sans schema | "Champs inconsistants" | Schema explicite + validation |
-| 11 | Frontend spaghetti | "Logique dans onClick" | Séparation presentation/logique/données |
+| 11 | Frontend spaghetti | "Logique dans onClick" | Séparation présentation/logique/données |
 | 12 | Framework maison | "On maintient un framework ET un produit" | Standards etablis, contribuer |
 | 13 | "Marche en local" | "Pas de staging" | Staging = miroir prod |
 | 14 | JWT localStorage | "XSS vole les tokens" | Cookie HttpOnly + SameSite |
-| 15 | Sécurité apres | "La sécurité c'est pour la v2" | Shift left, threat modeling |
+| 15 | Sécurité après | "La sécurité c'est pour la v2" | Shift left, threat modeling |
 | 16 | 200 + erreur body | "Clients lisent un champ 'error'" | Codes HTTP semantiques |
 | 17 | Pas de rate limiting interne | "Script bugge = BDD a terre" | Rate limit partout, circuit breaker |
 | 18 | Scale vertical only | "Plafond physique atteint" | Stateless + scale horizontal |

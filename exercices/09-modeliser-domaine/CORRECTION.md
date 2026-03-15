@@ -13,7 +13,7 @@ Un domaine riche avec des value objects immutables, des entités avec méthodes 
 | Address | Value Object | Défini par ses champs, egalite par valeur |
 | Email | Value Object | Validation + egalite par valeur |
 | Order | Entité + Agregat Root | Identité propre, contient les OrderLines |
-| OrderLine | Value Object (dans l'agregat) | Immutable une fois cree, défini par ses valeurs |
+| OrderLine | Value Object (dans l'agregat) | Immutable une fois créé, défini par ses valeurs |
 | Category | Entité | Identité propre, nom modifiable |
 
 ## Value Objects

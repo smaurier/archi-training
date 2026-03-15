@@ -15,7 +15,7 @@
 </details>
 
 <details>
-<summary>2. Pourquoi tester l'accessibilite avec axe-core + Playwright ?</summary>
+<summary>2. Pourquoi tester l'accessibilité avec axe-core + Playwright ?</summary>
 
 axe-core détecte automatiquement les violations WCAG (images sans alt, contraste insuffisant, ARIA invalide). Playwright permet de tester la navigation clavier (skip links, focus trap dans les modales, tab order). Les deux combinés couvrent les aspects automatisables de l'accessibilité WCAG 2.1 AA.
 </details>

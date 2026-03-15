@@ -31,7 +31,7 @@ Une architecture microservices avec 5 services bien decoupes, des communications
 
 | Service | Modules inclus | Justification |
 |---|---|---|
-| **Catalog Service** | catalog, search | Meme domaine, forte cohesion, lecture intensive |
+| **Catalog Service** | catalog, search | Même domaine, forte cohesion, lecture intensive |
 | **Cart Service** | cart | Ephemere, cycle de vie différent, session-bound |
 | **Order Service** | order | Workflow complexe (FSM), audit trail, coeur métier |
 | **Payment Service** | payment, refund | Reglementaire, isolation de sécurité, PCI-DSS |

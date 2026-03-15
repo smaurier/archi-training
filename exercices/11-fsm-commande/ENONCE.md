@@ -63,7 +63,7 @@ A chaque transition, des actions doivent se déclencher :
 
 ### Bonus
 
-- Ajouter un état `refunded` apres `cancelled` (si le paiement avait ete fait)
+- Ajouter un état `refunded` après `cancelled` (si le paiement avait ete fait)
 - Implémenter la FSM de manière générique (réutilisable pour d'autres workflows)
 
 ## Contraintes

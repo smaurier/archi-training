@@ -22,7 +22,7 @@ Un Port Primaire (driving) est une interface d'entree que le coeur expose aux cl
 <details>
 <summary>Réponse</summary>
 
-Parce qu'il permet de tester le coeur applicatif complet (Domain + Use Cases) sans aucune infrastructure reelle : pas de base de données, pas de réseau, pas de fichiers. Les tests s'executent en quelques millisecondes et sont parfaitement deterministiques. C'est rendu possible uniquement parce que le coeur ne dépend que d'interfaces — on peut brancher n'importe quel adapter implementant ces interfaces.
+Parce qu'il permet de tester le coeur applicatif complet (Domain + Use Cases) sans aucune infrastructure réelle : pas de base de données, pas de réseau, pas de fichiers. Les tests s'executent en quelques millisecondes et sont parfaitement deterministiques. C'est rendu possible uniquement parce que le coeur ne dépend que d'interfaces — on peut brancher n'importe quel adapter implementant ces interfaces.
 
 </details>
 
@@ -30,7 +30,7 @@ Parce qu'il permet de tester le coeur applicatif complet (Domain + Use Cases) sa
 
 ## Analogie — L'oignon
 
-Coupe un oignon en deux. Tu vois des cercles concentriques. La Clean Architecture ressemble a ca :
+Coupe un oignon en deux. Tu vois des cercles concentriques. La Clean Architecture ressemble a ça :
 
 - **Le coeur (la première pellicule)** : pur, essentiel, ne dépend de rien d'autre
 - **Les couches intermédiaires** : chaque couche enveloppe et protégé la suivante
@@ -82,7 +82,7 @@ Fleches de dependance : toujours vers l'interieur -->
 ```
 
 #### Cercle 1 — Entities (Enterprise Business Rules)
-Les règles métier qui existeraient meme sans ce logiciel. Ex : "une facture non payee depuis 90 jours passe en contentieux". Ces règles valent pour l'entreprise entiere, pas juste pour cette application.
+Les règles métier qui existeraient même sans ce logiciel. Ex : "une facture non payee depuis 90 jours passe en contentieux". Ces règles valent pour l'entreprise entière, pas juste pour cette application.
 
 #### Cercle 2 — Use Cases (Application Business Rules)
 L'orchestration spécifique a cette application. Ex : "créer une commande en ligne" — ce flux n'existe que parce qu'il y a cette application. Les Use Cases orchestrent les Entities.
@@ -124,8 +124,8 @@ Via l'inversion de dépendance : le coeur définit une interface (IRepository), 
 | Distinction Use Case / Entity | Implicite | **Explicite et fondamentale** |
 | Presenters | Non spécifiques | Specifiques (Output Boundaries) |
 | Complexite | Moderee | Elevee |
-| Documentation | Legere | Tres detaillee (livre complet) |
-| Adoption | Tres repandue | Repandue dans les grandes équipes |
+| Documentation | Legere | Très detaillee (livre complet) |
+| Adoption | Très repandue | Repandue dans les grandes équipes |
 
 **Conclusion :** La Clean Architecture est une hexagonale plus detaillee avec des cercles supplementaires. Elle est particulierement utile quand tu dois distinguer "logique d'entreprise" (Entities) de "logique d'application" (Use Cases).
 
@@ -165,7 +165,7 @@ Le Use Case ne retourne PAS directement un résultat au Controller. Il appelle u
 | Situation | Clean Architecture | Alternative |
 |---|---|---|
 | CRUD simple (blog, admin) | Surdimensionne | Architecture en couches |
-| Prototype / MVP | Trop lent a demarrer | Flat ou MVC |
+| Prototype / MVP | Trop lent a démarrer | Flat ou MVC |
 | Équipe < 3 personnes | Overhead organisationnel | Hexagonale simplifiee |
 | Domaine métier complexe | Parfaitement adapte | Garder Clean Architecture |
 | Multiples clients (REST + CLI + gRPC) | Adapte | Hexagonale ou Clean |
@@ -414,12 +414,12 @@ describe('FlagOverdueInvoicesInteractor', () => {
 
 ---
 
-## Resume
+## Résumé
 
 - La Clean Architecture organise le code en **4 cercles concentriques** : Entities (règles d'entreprise), Use Cases (logique d'application), Interface Adapters (traduction), Frameworks & Drivers (details techniques).
 - La **Dependency Rule** est absolue : les dépendances du code source ne pointent **que vers l'interieur** — les frameworks ne connaissent pas les Use Cases, les Use Cases ne connaissent pas les Controllers.
-- La distinction **Entity vs Use Case** est fondamentale : les Entities contiennent des règles valables pour l'entreprise entiere, les Use Cases contiennent des règles spécifiques a cette application.
-- Les **Presenters et Output Boundaries** permettent aux Use Cases de communiquer des résultats sans connaitre le format de sortie (HTTP, email, CLI) — plus isoles que dans l'hexagonale de base.
+- La distinction **Entity vs Use Case** est fondamentale : les Entities contiennent des règles valables pour l'entreprise entière, les Use Cases contiennent des règles spécifiques a cette application.
+- Les **Presenters et Output Boundaries** permettent aux Use Cases de communiquer des résultats sans connaître le format de sortie (HTTP, email, CLI) — plus isoles que dans l'hexagonale de base.
 - La Clean Architecture vaut le cout pour les **grands domaines complexes** avec des règles métier riches ; elle est disproportionnee pour un CRUD simple ou un prototype.
 
 

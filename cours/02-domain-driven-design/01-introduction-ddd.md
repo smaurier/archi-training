@@ -1,6 +1,6 @@
 # Cours 14 — Introduction au Domain-Driven Design (DDD)
 
-**Objectif :** Comprendre ce qu'est le DDD, distinguer la conception stratégique de la conception tactique, maîtriser la notion de Langage Ubiquitaire, et savoir reconnaitre les situations ou le DDD est pertinent (ou superflu).
+**Objectif :** Comprendre ce qu'est le DDD, distinguer la conception stratégique de la conception tactique, maîtriser la notion de Langage Ubiquitaire, et savoir reconnaitre les situations ou le DDD est pertinent (où superflu).
 
 ---
 
@@ -15,7 +15,7 @@
 
 Exemples parmi les douze facteurs :
 
-- **III. Config** : la configuration (URLs de BDD, cles API) doit etre dans des variables d'environnement, jamais dans le code source. Cela permet de déployer le meme binaire dans plusieurs environnements.
+- **III. Config** : la configuration (URLs de BDD, clés API) doit etre dans des variables d'environnement, jamais dans le code source. Cela permet de déployer le même binaire dans plusieurs environnements.
 - **VI. Processes** : l'application doit etre sans état (stateless) ; l'état est externalise (Redis, BDD). Cela rend le scale horizontal trivial.
 - **XI. Logs** : les logs sont des flux d'événements ecrits sur stdout ; l'infrastructure s'occupe de les collecter et stocker. L'application ne sait pas ou vont ses logs.
 
@@ -40,7 +40,7 @@ Imaginez que vous partez travailler au Japon. Vous pouvez vous debrouiller avec 
 
 Maintenant imaginez que vous apprenez le japonais : vous adoptez les concepts locaux, vous pensez dans la langue du pays, vous comprenez les sous-entendus. Les echanges sont fluides, rapides, sans friction de traduction.
 
-Le DDD, c'est exactement ca : **parler la meme langue que les experts métier**. Sans DDD, les développeurs traduisent en permanence entre le vocabulaire métier et le vocabulaire technique. Avec le DDD, un concept métier ("commande annulee") a le meme nom dans la bouche du DBA, du Product Owner, du développeur et dans le code source.
+Le DDD, c'est exactement ça : **parler la même langue que les experts métier**. Sans DDD, les développeurs traduisent en permanence entre le vocabulaire métier et le vocabulaire technique. Avec le DDD, un concept métier ("commande annulee") a le même nom dans la bouche du DBA, du Product Owner, du développeur et dans le code source.
 
 ---
 
@@ -50,7 +50,7 @@ Le DDD, c'est exactement ca : **parler la meme langue que les experts métier**.
 
 Le Domain-Driven Design est une approche de conception logicielle formulee par Eric Evans en 2003. Son idee centrale : **la structure et le langage du code doivent refléter le domaine métier**, pas l'inverse.
 
-Le DDD repond a une constatation simple : dans les projets complexes, le plus grand cout n'est pas technique — c'est la **friction de communication** entre les experts du domaine (comptables, juristes, logisticiens) et les développeurs.
+Le DDD repond à une constatation simple : dans les projets complexes, le plus grand cout n'est pas technique — c'est la **friction de communication** entre les experts du domaine (comptables, juristes, logisticiens) et les développeurs.
 
 ```
 SANS DDD                              AVEC DDD
@@ -70,7 +70,7 @@ DB : UPDATE orders SET status='HOLD'  DB : UPDATE orders SET status='SUSPENDED'
 
 ### 2. Langage Ubiquitaire (Ubiquitous Language)
 
-Le Langage Ubiquitaire est un **vocabulaire partage**, rigoureusement défini, utilise par tous : experts métier, développeurs, testers, managers. Il doit apparaitre :
+Le Langage Ubiquitaire est un **vocabulaire partage**, rigoureusement défini, utilise par tous : experts métier, développeurs, testers, managers. Il doit apparaître :
 
 - Dans les conversations (reunions, emails)
 - Dans la documentation
@@ -80,14 +80,14 @@ Le Langage Ubiquitaire est un **vocabulaire partage**, rigoureusement défini, u
 
 **Exemple — E-commerce :**
 
-| Terme ambigu | Terme ubiquitaire | Définition precise |
+| Terme ambigu | Terme ubiquitaire | Définition précisé |
 |---|---|---|
 | "user" | `Customer` | Personne ayant passe au moins une commande |
 | "user" | `Visitor` | Personne naviguant sans compte |
 | "item" | `OrderLine` | Une ligne d'une commande (produit + quantité + prix au moment de l'achat) |
 | "cancel" | `abandonCart` | Panier non finalisé dans les 24h |
 | "cancel" | `cancelOrder` | Commande annulee avant expedition |
-| "cancel" | `requestRefund` | Commande déjà expediee, retour demande |
+| "cancel" | `requestRefund` | Commande déjà expediee, retour demandé |
 
 Notez comment "cancel" cache en realite trois opérations métier totalement différentes. Sans Langage Ubiquitaire, chaque développeur invente sa propre interprétation.
 
@@ -134,11 +134,11 @@ DDD
 
 ### 4. Sous-domaines : Core, Supporting, Generic
 
-Pas tout le code n'a la meme valeur stratégique. Distinguer :
+Pas tout le code n'à la même valeur stratégique. Distinguer :
 
 | Type | Définition | Exemple e-commerce | Approche |
 |---|---|---|---|
-| **Core Domain** | Avantage concurrentiel reel, ce qui vous differencie | Algorithme de recommandation personalise | Fait maison, DDD complet, meilleurs devs |
+| **Core Domain** | Avantage concurrentiel réel, ce qui vous differencie | Algorithme de recommandation personalise | Fait maison, DDD complet, meilleurs devs |
 | **Supporting Domain** | Nécessaire mais pas differenciateur | Gestion des retours, catalogue produits | Peut etre sous-traite, DDD léger |
 | **Generic Domain** | Problème universel résolu par l'industrie | Envoi d'emails, paiement Stripe, auth OAuth | Achetez une solution du marche |
 
@@ -158,7 +158,7 @@ INVESTISSEMENT DDD
 
 ### 5. Quand le DDD est-il pertinent ?
 
-Le DDD a un cout : montee en competences, ceremonies de modélisation (Event Storming), overhead initial. Il n'est justifie que si la complexité métier le merite.
+Le DDD à un cout : montee en compétences, ceremonies de modélisation (Event Storming), overhead initial. Il n'est justifie que si la complexité métier le merite.
 
 | Critère | DDD recommande | DDD inutile |
 |---|---|---|
@@ -171,7 +171,7 @@ Le DDD a un cout : montee en competences, ceremonies de modélisation (Event Sto
 **Regles rapides :**
 - Si votre logique métier tient dans un seul `if`, pas besoin de DDD.
 - Si vous passez plus de temps a debattre des noms que des algorithmes, c'est que le DDD manque.
-- Si les experts métier ne peuvent pas lire votre code (meme sans connaitre TypeScript), quelque chose cloche.
+- Si les experts métier ne peuvent pas lire votre code (même sans connaître TypeScript), quelque chose cloche.
 
 ### 6. Processus de modélisation : Event Storming
 
@@ -327,10 +327,10 @@ const cmsSubdomains = {
 
 ---
 
-## Resume
+## Résumé
 
 - Le **DDD centre le code sur le domaine métier**, en alignant le vocabulaire des développeurs sur celui des experts.
-- Le **Langage Ubiquitaire** elimine la friction de traduction : un meme terme a le meme sens dans les reunions, le code, la BDD et les tests.
+- Le **Langage Ubiquitaire** elimine la friction de traduction : un même terme a le même sens dans les reunions, le code, la BDD et les tests.
 - Le **DDD Stratégique** (Bounded Contexts, Core/Supporting/Generic) repond a "quoi construire et ou investir" ; le **DDD Tactique** (Entités, VO, Agregats) repond a "comment le modéliser".
 - Le DDD n'est **pas universel** : pour un CRUD simple, il ajoute de la complexité sans valeur ; il brille sur les domaines complexes et les projets long-terme.
 - L'**Event Storming** est l'atelier de modélisation DDD le plus efficace pour aligner toute l'équipe sur le domaine en quelques heures.

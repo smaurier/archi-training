@@ -9,7 +9,7 @@
 <details>
 <summary>1. Qu'est-ce que le "read-your-own-writes problem" avec les read replicas ?</summary>
 
-Quand l'application écrit sur le master puis lit immédiatement depuis un replica, le replica peut ne pas encore avoir recu la modification (réplication lag ~100ms). L'utilisateur ne voit pas son propre changement. Solution : pour les opérations sensibles (juste apres un write), lire depuis le master.
+Quand l'application écrit sur le master puis lit immédiatement depuis un replica, le replica peut ne pas encore avoir recu la modification (réplication lag ~100ms). L'utilisateur ne voit pas son propre changement. Solution : pour les opérations sensibles (juste après un write), lire depuis le master.
 </details>
 
 <details>
@@ -24,8 +24,8 @@ Quand l'application écrit sur le master puis lit immédiatement depuis un repli
 
 Un menuisier n'utilise pas un marteau pour tout :
 
-- **Tournevis** (Key-Value / Redis) : accès direct a un élément par sa cle. Ultra rapide, zero complexité
-- **Classeur a dossiers** (Document / MongoDB) : chaque dossier contient un document structure, pas besoin que tous les dossiers aient la meme structure
+- **Tournevis** (Key-Value / Redis) : accès direct à un élément par sa clé. Ultra rapide, zero complexité
+- **Classeur a dossiers** (Document / MongoDB) : chaque dossier contient un document structure, pas besoin que tous les dossiers aient la même structure
 - **Tableur geant** (Column-family / Cassandra) : des milliards de lignes, distribuees sur des dizaines de serveurs, mais requêtes limitees
 - **Carte avec des fils** (Graph / Neo4j) : les relations ENTRE les entités sont aussi importantes que les entités elles-memes
 - **Chronometre** (Time-series / TimescaleDB) : un flux continu de mesures dans le temps, avec agregation rapide
@@ -61,7 +61,7 @@ Le **polyglot persistence**, c'est choisir le bon outil pour chaque vis — pas 
 └────────────────────────────────────────────────────────────┘
 ```
 
-### 2. Tableau comparatif detaille
+### 2. Tableau comparatif détaillé
 
 | Famille | Modèle | Forces | Faiblesses | Quand utiliser |
 |---|---|---|---|---|
@@ -69,17 +69,17 @@ Le **polyglot persistence**, c'est choisir le bon outil pour chaque vis — pas 
 | **Document** | `key → JSON document` | Schema flexible, requêtes riches | Pas de JOIN, denormalisation | Catalogue, CMS, config |
 | **Column-Family** | `row key → colonnes` | Écriture massive, distribution | Requetes limitees, pas d'agregats complexes | IoT, logs, analytics |
 | **Graph** | `nodes + edges` | Traversals performants | Scaling horizontal difficile | Social network, recommandations, fraud détection |
-| **Time-Series** | `timestamp → mesures` | Agregation temporelle ultra rapide | Pas de transactions complexes | Monitoring, metriques, analytics temps reel |
+| **Time-Series** | `timestamp → mesures` | Agregation temporelle ultra rapide | Pas de transactions complexes | Monitoring, metriques, analytics temps réel |
 
 ### 3. Quand NE PAS utiliser NoSQL
 
 | Situation | Pourquoi rester en relationnel |
 |---|---|
-| Relations complexes (JOIN) | Le SQL est concu pour ca — MongoDB ne sait pas faire de JOIN |
+| Relations complexes (JOIN) | Le SQL est concu pour ça — MongoDB ne sait pas faire de JOIN |
 | Transactions ACID multi-tables | PostgreSQL garantit l'atomicite — MongoDB a des transactions limitees |
 | Schema stable et bien connu | La normalisation évité la duplication |
 | Équipe petite (< 5 devs) | Ajouter une DB = plus de complexité ops |
-| Données < 10M rows | PostgreSQL géré ca sans problème |
+| Données < 10M rows | PostgreSQL géré ça sans problème |
 
 **Regle d'or** : PostgreSQL est la bonne réponse par defaut. Introduire du NoSQL seulement quand un besoin spécifique le justifie et que PostgreSQL ne le couvre pas bien.
 
@@ -235,10 +235,10 @@ const productDocument = {
 
 ---
 
-## Resume
+## Résumé
 
 1. **5 familles NoSQL** : Key-Value, Document, Column-Family, Graph, Time-Series — chacune a son cas d'usage
-2. **PostgreSQL est le defaut** — ne pas ajouter du NoSQL "au cas ou", seulement quand un besoin spécifique le justifie
+2. **PostgreSQL est le defaut** — ne pas ajouter du NoSQL "au cas où", seulement quand un besoin spécifique le justifie
 3. **Polyglot persistence** = chaque problème utilise le store le plus adapte (PG + Redis + S3 + Elasticsearch)
 4. **Cout du polyglot** : chaque base supplementaire = monitoring, backup, expertise — une équipe de 4 ne peut pas gérer 5 bases
 5. **Redis pour les données ephemeres** (sessions, panier, cache), **PostgreSQL pour les données métier** (produits, commandes, utilisateurs)
@@ -251,7 +251,7 @@ const productDocument = {
 
 > **Lien fil rouge — ShopArch**
 >
-> - Identifie où ShopArch bénéficierait de polyglot persistence (Redis pour le cache, ES pour la recherche)
+> - Identifie ou ShopArch bénéficierait de polyglot persistence (Redis pour le cache, ES pour la recherche)
 > - Documente la stratégie de persistance par Bounded Context
 > - Exercice(s) associé(s) : `exercices/19-polyglot-persistence/`
 > - Checkpoint : Module 04, critère 3

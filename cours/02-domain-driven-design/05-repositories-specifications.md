@@ -17,7 +17,7 @@ Un Domain Service porte de la logique métier pure qui implique plusieurs agrega
 
 </details>
 
-**Question 2 — Expliquez le principe du pattern FSM (machine a états finis) applique a un workflow de publication.**
+**Question 2 — Expliquez le principe du pattern FSM (machine a états finis) applique à un workflow de publication.**
 
 <details>
 <summary>Réponse</summary>
@@ -32,9 +32,9 @@ Une FSM définit explicitement tous les états possibles (Draft, Scheduled, Publ
 
 **Le bibliothecaire.**
 
-Dans une grande bibliotheque, vous ne deamboulez pas dans les reserves pour chercher vous-meme un livre parmi des milliers. Vous allez voir le bibliothecaire et lui dites : "Je cherche un roman policier paru apres 2020, disponible en rayon, de préférence en francais." Le bibliothecaire connait l'organisation des reserves, les systèmes de stockage, les index. Vous, vous recevez juste le livre.
+Dans une grande bibliotheque, vous ne deamboulez pas dans les reserves pour chercher vous-même un livre parmi des milliers. Vous allez voir le bibliothecaire et lui dites : "Je cherche un roman policier paru après 2020, disponible en rayon, de préférence en français." Le bibliothecaire connait l'organisation des reserves, les systèmes de stockage, les index. Vous, vous recevez juste le livre.
 
-Le **Repository** est ce bibliothecaire : il connait la base de données, les jointures, les index, le cache. Votre domaine ne sait pas si les articles sont dans PostgreSQL, MongoDB ou un fichier JSON. Il demande : "Donne-moi les articles publies du tenant X" — le Repository s'occupe du reste.
+Le **Repository** est ce bibliothecaire : il connait la base de données, les jointures, les index, le cache. Votre domaine ne sait pas si les articles sont dans PostgreSQL, MongoDB ou un fichier JSON. Il demandé : "Donne-moi les articles publies du tenant X" — le Repository s'occupe du reste.
 
 Le **Spécification pattern** est la fiche de recherche que vous remplissez : chaque critère est une spécification independante, et vous les combinez avec `AND`, `OR`, `NOT`. Le bibliothecaire applique ces critères sans que vous ayez besoin de savoir comment les livres sont catalogues.
 
@@ -44,12 +44,12 @@ Le **Spécification pattern** est la fiche de recherche que vous remplissez : ch
 
 ### 1. Repository vs DAO vs Active Record
 
-Ces trois patterns repondent tous a la question "comment accéder aux données", mais avec des philosophies différentes.
+Ces trois patterns repondent tous à la question "comment accéder aux données", mais avec des philosophies différentes.
 
 | Aspect | Repository | DAO | Active Record |
 |---|---|---|---|
 | Unite gérée | Agregat complet | Table/vue SQL | Ligne de table |
-| Interface | Orientee domaine (`findPublishedByTenant`) | Orientee CRUD SQL (`findByColumn`) | Méthodes sur l'objet lui-meme (`article.save()`) |
+| Interface | Orientee domaine (`findPublishedByTenant`) | Orientee CRUD SQL (`findByColumn`) | Méthodes sur l'objet lui-même (`article.save()`) |
 | Couplage | Faible (interface dans le domaine) | Moyen (l'app connait les colonnes) | Fort (modèle = table) |
 | Testabilite | Excellente (mock de l'interface) | Moyenne | Difficile (BDD requise) |
 | Utilise avec | DDD | Scripts simples, legacy | Ruby on Rails, Eloquent |
@@ -547,13 +547,13 @@ describe('PublishArticleUseCase — Integration avec InMemory', () => {
 
 ---
 
-## Resume
+## Résumé
 
 - Le **Repository** abstrait l'accès aux Agregats derriere une interface définie dans le domaine ; l'infrastructure (TypeORM, Prisma, InMemory) implémenté cette interface sans que le domaine en sache quoi que ce soit.
-- Contrairement au **DAO** (oriente SQL/colonnes) et a l'**Active Record** (la ligne sait se sauvegarder elle-meme), le Repository pense en termes d'Agregats métier et respecte la règle de dépendance.
+- Contrairement au **DAO** (oriente SQL/colonnes) et a l'**Active Record** (la ligne sait se sauvegarder elle-même), le Repository pense en termes d'Agregats métier et respecte la règle de dépendance.
 - Le **Mapper** traduit entre le modèle de domaine et l'entité de persistence : ni le domaine ni TypeORM ne se connaissent mutuellement — le Mapper est le seul traducteur.
 - Le **Spécification pattern** transforme chaque critère de recherche en objet composable (`and`, `or`, `not`), eliminant l'explosion combinatoire des méthodes `findByXAndYAndZ` et rendant les critères réutilisables.
-- L'**InMemory Repository** est le tresor de la testabilité : zero BDD, zero réseau, tests qui s'executent en millisecondes — il permet de tester les Application Services de facon isolee et deterministeite.
+- L'**InMemory Repository** est le tresor de la testabilité : zero BDD, zero réseau, tests qui s'executent en millisecondes — il permet de tester les Application Services de façon isolee et deterministeite.
 
 
 ---
@@ -561,10 +561,21 @@ describe('PublishArticleUseCase — Integration avec InMemory', () => {
 > **Lien fil rouge — ShopArch**
 >
 > - Définis l'interface `ProductRepository` (port) avec les méthodes CRUD + findByCategory
-> - Implémente une specification `ProductInStockSpec` pour filtrer les produits disponibles
+> - Implémente une spécification `ProductInStockSpec` pour filtrer les produits disponibles
 > - Exercice(s) associé(s) : `exercices/09-modeliser-domaine/`
 > - Checkpoint : Module 02, critère 1
 
 ## Prochain cours
 
 [Cours 19 — REST & API Design (Module 03 — Architecture Backend)](../03-architecture-backend/01-rest-api-design.md)
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [09-modeliser-domaine](../../exercices/09-modeliser-domaine/ENONCE)
+2. **Exercice** : [10-bounded-contexts-pratique](../../exercices/10-bounded-contexts-pratique/ENONCE)
+3. **Renforcement** : [10b-context-map](../../exercices/10b-context-map/ENONCE)
+4. **Exercice** : [11-fsm-commande](../../exercices/11-fsm-commande/ENONCE)
+:::

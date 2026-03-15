@@ -17,7 +17,7 @@
 
 - [ ] `SELECT ... FOR UPDATE` dans une transaction
 - [ ] La transaction englobe le read + write
-- [ ] Le verrou est relache a la fin de la transaction
+- [ ] Le verrou est relache à la fin de la transaction
 
 ## Comparaison
 

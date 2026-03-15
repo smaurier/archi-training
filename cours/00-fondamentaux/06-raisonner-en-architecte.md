@@ -16,7 +16,7 @@ Teste ta mémoire avant de continuer.
 <summary>Réponse</summary>
 
 - **Singleton** : une seule instance pour toute la durée de vie de l'application. Partage entre toutes les requêtes. Usage : services stateless (config, logger, pool de connexions).
-- **Request-scoped** : une instance par requête HTTP. Detruite a la fin de la requête. Usage : services avec état par requête (contexte utilisateur, transaction DB).
+- **Request-scoped** : une instance par requête HTTP. Detruite à la fin de la requête. Usage : services avec état par requête (contexte utilisateur, transaction DB).
 
 Risque de melange — "Captive dependency" : si un Singleton injecte un Request-scoped, le Request-scoped est capture pour toute la vie du Singleton. Il devient de facto un Singleton, et les données d'un utilisateur peuvent fuiter vers un autre — faille de sécurité grave.
 </details>
@@ -26,7 +26,7 @@ Risque de melange — "Captive dependency" : si un Singleton injecte un Request-
 <details>
 <summary>Réponse</summary>
 
-- **Service Locator** : les dépendances sont cachees a l'interieur de la classe. Pour tester, il faut configurer un registre global avant chaque test, et le nettoyer apres (risque d'interference entre tests). On ne peut pas voir de l'exterieur ce dont la classe a besoin.
+- **Service Locator** : les dépendances sont cachees a l'interieur de la classe. Pour tester, il faut configurer un registre global avant chaque test, et le nettoyer après (risque d'interference entre tests). On ne peut pas voir de l'exterieur ce dont la classe a besoin.
 
 - **Injection par constructeur** : toutes les dépendances sont declarees publiquement dans la signature du constructeur. Pour tester, on instancie simplement la classe en passant des mocks : `new ArticleService(mockRepo, mockBus, mockLogger)`. Pas de configuration globale, pas de nettoyage, pas d'effets de bord.
 </details>
@@ -53,10 +53,10 @@ Tout chef de projet connait le triangle magique : **qualité, cout, delai — ch
    COUT                DELAI
 ```
 
-Un architecte raisonne exactement de la meme facon, mais avec des **caractéristiques d'architecture** :
-- Veux-tu de la scalabilité ? Ca coutera en complexité operationnelle.
-- Veux-tu de la cohérence forte ? Ca coutera en disponibilité.
-- Veux-tu de la simplicite ? Ca coutera en flexibilité future.
+Un architecte raisonne exactement de la même façon, mais avec des **caractéristiques d'architecture** :
+- Veux-tu de la scalabilité ? Ça coutera en complexité operationnelle.
+- Veux-tu de la cohérence forte ? Ça coutera en disponibilité.
+- Veux-tu de la simplicite ? Ça coutera en flexibilité future.
 
 **Il n'existe pas de bonne architecture — il existe des architectures dont les compromis sont bien compris et explicitement choisis.**
 
@@ -66,7 +66,7 @@ Un architecte raisonne exactement de la meme facon, mais avec des **caractérist
 
 ### Les caractéristiques d'architecture — les "-ilities"
 
-Les caractéristiques d'architecture (ou "quality attributes") sont les propriétés non-fonctionnelles d'un système. On les appelle les "-ilities" parce que beaucoup se terminent en "-ite" ou "-ibilite" en francais.
+Les caractéristiques d'architecture (où "quality attributes") sont les propriétés non-fonctionnelles d'un système. On les appelle les "-ilities" parce que beaucoup se terminent en "-ite" ou "-ibilite" en français.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -92,7 +92,7 @@ Les caractéristiques d'architecture (ou "quality attributes") sont les proprié
 ```
 
 **Regles importantes** :
-1. On ne peut pas tout optimiser a la fois — choisir, c'est renoncer.
+1. On ne peut pas tout optimiser à la fois — choisir, c'est renoncer.
 2. Environ 3 a 7 caractéristiques sont critiques pour un système donne.
 3. Les caractéristiques non-selectionnees doivent rester "acceptables", pas nulles.
 
@@ -102,7 +102,7 @@ Les caractéristiques d'architecture (ou "quality attributes") sont les proprié
 
 Un trade-off est un compromis conscient : pour gagner X, on accepte de perdre Y.
 
-**Exemple celebre : le theoreme CAP**
+**Exemple celebre : le théorème CAP**
 
 ```
                  CONSISTENCY
@@ -128,7 +128,7 @@ Un trade-off est un compromis conscient : pour gagner X, on accepte de perdre Y.
   PostgreSQL : CA (coherent + disponible, mais pas partition-tolerant par defaut)
 ```
 
-**Autre trade-off fondamental : Cohérence vs Disponibilite dans les microservices**
+**Autre trade-off fondamental : Cohérence vs Disponibilité dans les microservices**
 
 ```
 APPROCHE                COHERENCE   DISPONIBILITE   COMPLEXITE
@@ -182,7 +182,7 @@ EXEMPLES CONCRETS (CMS multi-tenant) :
 
 ### Les fitness functions — mesurer l'architecture
 
-Une fitness function est un **test automatise qui vérifié qu'une caractéristique d'architecture reste respectee** dans le temps. C'est le concept cle du livre "Building Evolutionary Architectures" (Ford, Parsons, Kua).
+Une fitness function est un **test automatise qui vérifié qu'une caractéristique d'architecture reste respectee** dans le temps. C'est le concept clé du livre "Building Evolutionary Architectures" (Ford, Parsons, Kua).
 
 ```
 CARACTERISTIQUE        FITNESS FUNCTION
@@ -234,7 +234,7 @@ Alternatives considerees (optionnel) : pourquoi on ne les a pas choisies
 
 ---
 
-### Les pieges classiques de l'architecte debutant
+### Les pieges classiques de l'architecte débutant
 
 ```
 PIEGE                    SYMPTOME                  REMEDE
@@ -550,12 +550,12 @@ for (const [pattern, chars] of Object.entries(architectureCharacteristicsMap)) {
 
 ---
 
-## Resume
+## Résumé
 
 - L'architecte raisonne en termes de **caractéristiques d'architecture** (-ilities) : performance, scalabilité, maintenabilité, sécurité, testabilité... Environ 3 a 7 sont vraiment critiques pour un système — les autres doivent rester "acceptables".
-- Toute decision d'architecture est un **trade-off** conscient : gagner en scalabilité coute en complexité, gagner en cohérence forte coute en disponibilité (theoreme CAP). Il n'existe pas de bonne architecture sans compromis — il existe des compromis bien documentes.
-- La **matrice impact/effort** permet de prioriser les decisions : faire en premier ce qui a un impact élevé pour un effort faible, planifier soigneusement les investissements majeurs, et éviter ce qui a un faible impact pour un effort élevé.
-- Les **fitness functions** transforment des caractéristiques qualitatives en assertions automatisables : tests de performance, d'architecture (couches), de couverture, de sécurité. Elles s'executent en CI et alertent quand l'architecture derive.
+- Toute decision d'architecture est un **trade-off** conscient : gagner en scalabilité coute en complexité, gagner en cohérence forte coute en disponibilité (théorème CAP). Il n'existe pas de bonne architecture sans compromis — il existe des compromis bien documentes.
+- La **matrice impact/effort** permet de prioriser les decisions : faire en premier ce qui à un impact élevé pour un effort faible, planifier soigneusement les investissements majeurs, et éviter ce qui à un faible impact pour un effort élevé.
+- Les **fitness functions** transforment des caractéristiques qualitatives en assertions automatisables : tests de performance, d'architecture (couches), de couverture, de sécurité. Elles s'executent en CI et alertent quand l'architecture dérivé.
 - Les **ADR** (Architecture Decision Records) documentent chaque decision importante avec son contexte, la decision prise, ses consequences positives et negatives, et les alternatives rejetees. C'est la mémoire collective de l'équipe et la protection contre les debats repetes.
 
 
@@ -573,3 +573,14 @@ for (const [pattern, chars] of Object.entries(architectureCharacteristicsMap)) {
 [Module 01 — Cours 01 : Architecture en couches](../01-patterns-architecturaux/01-architecture-en-couches.md)
 
 > Tu as maintenant les fondamentaux théoriques. Dans le module 01, nous allons etudier les patterns architecturaux classiques en commençant par l'architecture en couches (Layered Architecture) — le pattern le plus repandu, celui que tu utilises probablement sans le savoir.
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [01-refactoring-solid](../../exercices/01-refactoring-solid/ENONCE)
+2. **Exercice** : [02-identifier-patterns](../../exercices/02-identifier-patterns/ENONCE)
+3. **Exercice** : [03-injection-dépendances](../../exercices/03-injection-dependances/ENONCE)
+4. **Exercice** : [04-tradeoff-analysis](../../exercices/04-tradeoff-analysis/ENONCE)
+:::

@@ -15,7 +15,7 @@ Les UUIDs empechent la **devination** (122 bits d'entropie vs IDs sequentiels), 
 <details>
 <summary>2. Qu'est-ce que STRIDE et a quoi sert chaque lettre ?</summary>
 
-STRIDE est un modèle de threat modeling de Microsoft. Chaque lettre identifie une categorie de menace : **S**poofing (usurpation d'identité), **T**ampering (modification de données), **R**epudiation (deni d'action), **I**nformation Disclosure (fuite de données), **D**enial of Service (saturation), **E**levation of Privilege (escalade de droits). On l'applique a chaque traversee de trust boundary dans un Data Flow Diagram.
+STRIDE est un modèle de threat modeling de Microsoft. Chaque lettre identifie une categorie de menace : **S**poofing (usurpation d'identité), **T**ampering (modification de données), **R**epudiation (deni d'action), **I**nformation Disclosure (fuite de données), **D**enial of Service (saturation), **E**levation of Privilege (escalade de droits). On l'applique à chaque traversee de trust boundary dans un Data Flow Diagram.
 </details>
 
 ---
@@ -29,7 +29,7 @@ Un aeroport illustre parfaitement le Zero Trust — chaque zone a son propre con
 - **Le controle de sécurité** = l'inspection des requêtes (WAF, validation)
 - **Le controle aux portes d'embarquement** = la re-vérification avant chaque accès (mTLS entre services)
 - **Le passeport vérifié a CHAQUE étape** = identity-based access (pas "tu es dans le bon batiment, donc tu es fiable")
-- **Les zones reservees (piste, tour de controle)** = microsegmentation (meme le personnel n'accede qu'a SA zone)
+- **Les zones reservees (piste, tour de controle)** = microsegmentation (même le personnel n'accede qu'a SA zone)
 - **Le badge du personnel** = le certificat mTLS (prouve l'identité de la machine, pas juste de l'humain)
 
 Dans un aeroport, personne ne dit "il est passe le premier controle, donc il est fiable partout". C'est exactement le principe du Zero Trust.
@@ -78,7 +78,7 @@ MODELE ZERO TRUST :
 
 | Pilier | Principe | Implémentation |
 |---|---|---|
-| **Never trust** | Aucun réseau, device ou user n'est fiable par defaut | Tout trafic est chiffre, meme interne |
+| **Never trust** | Aucun réseau, device ou user n'est fiable par defaut | Tout trafic est chiffre, même interne |
 | **Always verify** | Chaque requête est authentifiee et autorisee | JWT valide par chaque service |
 | **Least privilege** | Accorder le minimum de droits nécessaires | Roles granulaires, pas de "super-admin" |
 | **Assume breach** | Architecturer comme si l'attaquant etait déjà dedans | Microsegmentation, blast radius minimal |
@@ -257,7 +257,7 @@ spec:
           protocol: UDP
 ```
 
-### Guard NestJS — vérification JWT a chaque requête
+### Guard NestJS — vérification JWT à chaque requête
 
 ```typescript
 // src/auth/jwt-auth.guard.ts
@@ -371,9 +371,9 @@ export class ArticlesController {
 
 ---
 
-## Resume
+## Résumé
 
-1. **Zero Trust** = "never trust, always verify" — aucun réseau, device ou service n'est fiable par defaut, meme en interne
+1. **Zero Trust** = "never trust, always verify" — aucun réseau, device ou service n'est fiable par defaut, même en interne
 2. **Microsegmentation** : chaque service dans son namespace Kubernetes avec des NetworkPolicies default-deny — si un service est compromis, le blast radius est minimal
 3. **mTLS** : authentification mutuelle entre services — les deux parties prouvent leur identité via certificats, géré par un service mesh (Istio/Linkerd)
 4. **Least privilege** : chaque role n'a que les permissions strictement nécessaires — utiliser des permissions granulaires (`resource:action`) plutot que des roles larges

@@ -34,14 +34,14 @@ Implemente les schemas JSON-LD :
 
 ### Étape 3 — Hook useSeo
 
-Cree un hook `useSeo()` (ou une fonction `generateMetadata`) qui généré automatiquement tous les meta tags depuis les données de la page.
+Cree un hook `useSeo()` (où une fonction `generateMetadata`) qui généré automatiquement tous les meta tags depuis les données de la page.
 
 ### Bonus
-- Ajouter un breadcrumb généré depuis la hierarchie de routes
+- Ajouter un breadcrumb généré depuis la hiérarchie de routes
 - Valider les structured data avec le Rich Results Test
 
 ## Contraintes
 
-- Chaque page a un canonical unique
+- Chaque page à un canonical unique
 - Open Graph et Twitter Cards sur toutes les pages publiques
 - noindex sur les pages privees (/account, /cart, /checkout)

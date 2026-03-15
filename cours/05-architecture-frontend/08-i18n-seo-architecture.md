@@ -11,22 +11,22 @@
 
 - **LCP** (Largest Contentful Paint) : < 2.5s — temps de rendu du plus grand élément visible
 - **CLS** (Cumulative Layout Shift) : < 0.1 — stabilité visuelle (pas de decalages de layout)
-- **INP** (Interaction to Next Paint) : < 200ms — reactivite aux interactions utilisateur
+- **INP** (Interaction to Next Paint) : < 200ms — réactivité aux interactions utilisateur
 </details>
 
 <details>
 <summary>2. Pourquoi séparer les vendor chunks par nom (react, router, i18n) plutot qu'un seul vendor.js ?</summary>
 
-Quand le code applicatif change (fréquent), seul le chunk app change. Les chunks vendor (dépendances stables) restent inchanges et en cache navigateur. Avec un seul vendor.js, tout le cache est invalide a chaque build meme si les dépendances n'ont pas change.
+Quand le code applicatif change (fréquent), seul le chunk app change. Les chunks vendor (dépendances stables) restent inchanges et en cache navigateur. Avec un seul vendor.js, tout le cache est invalide à chaque build même si les dépendances n'ont pas change.
 </details>
 
 ---
 
 ## Analogie — L'ambassade
 
-Chaque ambassade d'un pays represente le **meme pays** (contenu), mais :
+Chaque ambassade d'un pays represente le **même pays** (contenu), mais :
 - Elle parle la **langue locale** (UI locale) et adapte ses documents (content locale)
-- Elle a une **adresse différente** dans chaque ville (`/{locale}/...`)
+- Elle à une **adresse différente** dans chaque ville (`/{locale}/...`)
 - Elle est **reconnue officiellement** par les autorites locales (Google indexe chaque version avec `hreflang`)
 - Son **passeport** (URL canonique) indique quelle est la version de référence
 
@@ -39,9 +39,9 @@ Chaque ambassade d'un pays represente le **meme pays** (contenu), mais :
 | Concept | Ce que c'est | Exemple |
 |---|---|---|
 | **UI locale** | Langue de l'interface (boutons, menus, labels) | "Ajouter au panier" vs "Add to cart" |
-| **Content locale** | Langue du contenu métier (articles, produits) | Fiche produit en francais vs en anglais |
+| **Content locale** | Langue du contenu métier (articles, produits) | Fiche produit en français vs en anglais |
 
-Les deux sont **independants** : un editeur francophone peut vouloir l'interface en francais mais editer un contenu en anglais.
+Les deux sont **independants** : un editeur francophone peut vouloir l'interface en français mais editer un contenu en anglais.
 
 ### 2. MultiLangField — i18n au niveau du champ
 
@@ -100,7 +100,7 @@ Alternatives (NON recommandees pour SEO) :
 
 ### 6. Redirect chain collapsing
 
-Quand un slug change (le produit est renomme), on cree un redirect 301 :
+Quand un slug change (le produit est renomme), on créé un redirect 301 :
 
 ```
 /fr/produits/t-shirt → 301 → /fr/produits/t-shirt-bio → 301 → /fr/produits/t-shirt-bio-v2
@@ -108,7 +108,7 @@ Quand un slug change (le produit est renomme), on cree un redirect 301 :
 
 **Problème** : chaque redirect ajoute un round-trip. Google penalise les chaines > 2.
 
-**Solution** : collapse automatique. Quand un nouveau redirect est cree, mettre a jour tous les anciens redirects pour pointer directement vers la destination finale :
+**Solution** : collapse automatique. Quand un nouveau redirect est créé, mettre a jour tous les anciens redirects pour pointer directement vers la destination finale :
 
 ```
 /fr/produits/t-shirt     → 301 → /fr/produits/t-shirt-bio-v2
@@ -308,7 +308,7 @@ ${sitemaps}
 
 ---
 
-## Resume
+## Résumé
 
 1. **Deux i18n** : UI locale (interface) et content locale (contenu métier) — independants
 2. **URL prefix** (`/{locale}/...`) avec per-locale slugs et transliteration fallback

@@ -30,7 +30,7 @@ Quand tu prends l'avion, tu passes en mode avion — plus de réseau. Pourtant, 
 - **Savoir si tu as du réseau** → **navigator.onLine** (détection)
 - **Ne pas perdre tes brouillons** si deux appareils modifient → **Conflict résolution**
 
-Une PWA offline-first suit le meme principe : tout doit marcher sans réseau, et se synchroniser quand le réseau revient.
+Une PWA offline-first suit le même principe : tout doit marcher sans réseau, et se synchroniser quand le réseau revient.
 
 ---
 
@@ -83,7 +83,7 @@ Le Service Worker **intercepte** chaque requête réseau. Il peut :
 
 ### 4. IndexedDB pour les données locales
 
-| Storage | Capacite | Persistence | Requetes | Cas d'usage |
+| Storage | Capacité | Persistence | Requetes | Cas d'usage |
 |---|---|---|---|---|
 | localStorage | 5 MB | Oui | Cle/valeur seulement | Préférences, flags |
 | SessionStorage | 5 MB | Session | Cle/valeur seulement | Tokens, état formulaire |
@@ -120,7 +120,7 @@ Replay la queue :
 
 ### 6. Conflict résolution
 
-Quand deux appareils modifient la meme donnée offline :
+Quand deux appareils modifient la même donnée offline :
 
 | Stratégie | Description | Cas d'usage |
 |---|---|---|
@@ -341,7 +341,7 @@ window.addEventListener('online', () => {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Service Worker** intercepte les requêtes réseau — proxy programmable entre l'app et le serveur
 2. **3 stratégies de cache** : Cache First (assets), Network First (API), SWR (pages) — choisir par type de contenu
@@ -361,3 +361,18 @@ window.addEventListener('online', () => {
 > - Ajoute le manifest.json et l'installabilité PWA
 > - Exercice(s) associé(s) : `exercices/27-pwa-offline/`
 > - Checkpoint : Module 05, critère 4
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [21-component-tree](../../exercices/21-component-tree/ENONCE)
+2. **Exercice** : [22-design-tokens-theme](../../exercices/22-design-tokens-theme/ENONCE)
+3. **Exercice** : [23-ssr-isr-hybrid](../../exercices/23-ssr-isr-hybrid/ENONCE)
+4. **Exercice** : [24-performance-audit](../../exercices/24-performance-audit/ENONCE)
+5. **Exercice** : [25-i18n-hreflang](../../exercices/25-i18n-hreflang/ENONCE)
+6. **Renforcement** : [25b-seo-audit](../../exercices/25b-seo-audit/ENONCE)
+7. **Exercice** : [26-micro-frontend](../../exercices/26-micro-frontend/ENONCE)
+8. **Exercice** : [27-pwa-offline](../../exercices/27-pwa-offline/ENONCE)
+:::

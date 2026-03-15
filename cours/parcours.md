@@ -1,6 +1,6 @@
 # Parcours — Architecture Logicielle (Front, Back, Globale)
 
-> **De debutant a architecte expert**
+> **De débutant a architecte expert**
 > Stack de référence : React · NestJS · PostgreSQL
 > Approche agnostique — les patterns sont universels, les exemples concrets.
 
@@ -17,10 +17,10 @@ Ce parcours applique des principes de neuroscience pour maximiser la retention :
 | **Récupération active** | Tente AVANT de voir la solution | L'effort de rappel ancre la mémoire |
 | **Rappel espace** | Revise a J+1, J+7, J+30 | Courbe d'Ebbinghaus — espacer pour retenir |
 | **Entrelacement** | Exercices de renforcement (variantes `b`) | Revoir un concept sous un angle différent |
-| **Analogies** | Chaque concept = une analogie concrete | Ancrer l'abstrait dans le reel |
+| **Analogies** | Chaque concept = une analogie concrete | Ancrer l'abstrait dans le réel |
 | **Contextes varies** | Front, back, infra, organisationnel | Transferer les patterns d'un domaine a l'autre |
 
-### Revision espacee — comment faire
+### Révision espacee — comment faire
 
 - **J+1** : Relis les sections pratiques, refais 1-2 exercices de mémoire
 - **J+7** : Explique chaque concept a voix haute en 30 secondes depuis le résumé
@@ -30,13 +30,13 @@ Ce parcours applique des principes de neuroscience pour maximiser la retention :
 
 Chaque fichier de cours suit ce schema :
 
-1. **Titre + objectif** — ce que tu sauras faire a la fin
+1. **Titre + objectif** — ce que tu sauras faire à la fin
 2. **Rappel du cours précédent** — 2 questions avec réponses masquees (`<details>`)
-3. **Analogie** — ancrer le concept dans le reel
-4. **Rappel prerequis** — rappel JS/TS/réseau si nécessaire
+3. **Analogie** — ancrer le concept dans le réel
+4. **Rappel prérequis** — rappel JS/TS/réseau si nécessaire
 5. **Théorie** — explications, schemas ASCII, tableaux comparatifs
 6. **Pratique** — exemples de code commentes (le "pourquoi", pas juste le "quoi")
-7. **Resume** — les points cles en 5 bullet points
+7. **Résumé** — les points clés en 5 bullet points
 8. **Lien vers le cours suivant**
 
 ### Structure de chaque exercice
@@ -67,13 +67,13 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 | 07 | Patterns distribues | 7 | 5 | ~11h |
 | 08 | Sécurité | 6 | 5 | ~10h |
 | 09 | Performance & Scalabilite | 6 | 4 | ~9h |
-| 10 | Observabilite & DevOps | 5 | 4 | ~8h |
+| 10 | Observabilité & DevOps | 5 | 4 | ~8h |
 | 11 | Testing Architecture | 4 | 4 | ~7h |
 | 12 | Architecture dans la vraie vie | 7 | 4 | ~10h |
 | 13 | Culture architecturale elargie | 6 | 3 | ~8h |
 | | **Total** | **89** | **66** | **~138h** |
 
-**Duree recommandee** : ~4-5 mois a raison d'1 cours/jour (5 jours/semaine)
+**Duree recommandee** : ~4-5 mois à raison d'1 cours/jour (5 jours/semaine)
 
 ---
 
@@ -90,19 +90,19 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 | 3 | "J'ai mis du cache partout" — cache invalidation hell, stale data | 50, 51 |
 | 4 | "Eventual consistency alors que le métier exige strong" — mauvais trade-off | 45, 46 |
 | 5 | "Un store global pour tout" — God Store, couplage implicite | 28 |
-| 6 | "CSP en mode unsafe-inline parce que ca marche pas" — sécurité sacrifiee | 48 |
+| 6 | "CSP en mode unsafe-inline parce que ça marche pas" — sécurité sacrifiee | 48 |
 | 7 | "On refactorise tout d'un coup" — Big Bang rewrite | 72, 43 |
 | 8 | "Les tests ralentissent le projet" — dette exponentielle | 64 |
 | 9 | "Je fais du DDD partout" — over-modeling pour un CRUD simple | 10, 12 |
 | 10 | "Pas besoin de schema, on est en NoSQL" — schema implicite = dette | 26 |
 | 11 | "Le front n'a pas besoin d'architecture" — spaghetti components | 27, 28 |
 | 12 | "Je vais faire mon propre framework" — NIH syndrome | 4, 73 |
-| 13 | "Ca marche en local" — pas d'environnement de staging | 62, 63 |
+| 13 | "Ça marche en local" — pas d'environnement de staging | 62, 63 |
 | 14 | "JWT dans localStorage, c'est bon" — XSS → vol de session | 17, 48 |
 | 15 | "On verra la sécurité plus tard" — bolt-on security | 44, 49 |
 | 16 | "Mon API retourne 200 avec un body d'erreur" — API design anti-pattern | 15, 20 |
 | 17 | "Pas besoin de rate limiting, on est en interne" — lateral movement | 49, 18 |
-| 18 | "On scale verticalement, ca suffira" — scaling ceiling | 55 |
+| 18 | "On scale verticalement, ça suffira" — scaling ceiling | 55 |
 | 19 | "L'archi est figee, on ne touche plus" — architecture fossile | 73, 74 |
 | 20 | "Conway's Law ne s'applique pas a nous" — spoiler : si | 75 |
 
@@ -131,14 +131,14 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 
 **Cours 5** : IoC container, constructor injection, token-based injection, scope (singleton, request, transient). NestJS providers, Symfony services. Analogie : la prise electrique (interface) vs l'appareil (implémentation).
 
-**Cours 6** : Architecture characteristics (-ilities : scalability, maintainability, testability, deployability, security...). Trade-off analysis : chaque decision a un cout. Matrice impact/effort. Fitness functions (tests automatises pour invariants architecturaux). Analogie : le triangle qualité/cout/delai.
+**Cours 6** : Architecture characteristics (-ilities : scalability, maintainability, testability, deployability, security...). Trade-off analysis : chaque decision à un cout. Matrice impact/effort. Fitness functions (tests automatises pour invariants architecturaux). Analogie : le triangle qualité/cout/delai.
 
 | Exercice | Fichier | Temps |
 |---|---|---|
 | 01 — Refactoring SOLID | `exercices/01-refactoring-solid/` | 1h |
 | 02 — Identifier les design patterns | `exercices/02-identifier-patterns/` | 45 min |
 | 03 — Injection de dépendances | `exercices/03-injection-dependances/` | 45 min |
-| 04 — Trade-off analysis d'un cas reel | `exercices/04-tradeoff-analysis/` | 1h |
+| 04 — Trade-off analysis d'un cas réel | `exercices/04-tradeoff-analysis/` | 1h |
 
 ---
 
@@ -289,9 +289,9 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 
 **Cours 33** : Headless components (logique sans style), atom design (27 primitives UI typées), component registry (blockType → component), block/plugin component system, composants fonctionnels + hooks React, Adapter pattern (Unlayer adapter boundary : découpler un éditeur tiers sans ralentir la livraison). Error Boundaries & graceful degradation.
 
-**Cours 34** : Store patterns (Zustand/Redux Toolkit/Jotai), reactive state via `useState`/`useMemo`, ETag tracking par entité (`Map<string, string>`), error handling par code HTTP (412→refresh, 422→violations, 401→logout), BroadcastChannel pour synchronisation cross-tab (theme, dark mode), `localStorage` vs `SessionStorage` stratégies. SpeedDial context-aware pattern.
+**Cours 34** : Store patterns (Zustand/Redux Toolkit/Jotai), réactive state via `useState`/`useMemo`, ETag tracking par entité (`Map<string, string>`), error handling par code HTTP (412→refresh, 422→violations, 401→logout), BroadcastChannel pour synchronisation cross-tab (theme, dark mode), `localStorage` vs `SessionStorage` stratégies. SpeedDial context-aware pattern.
 
-**Cours 35** : Route-level code splitting (`import()` dynamique), route guards ordonnees (auth → RBAC → title), `RouteMeta` typing pour RBAC, protected routes (`noindex, nofollow` + exclusion sitemap), breadcrumbs depuis la hierarchie de routes (pas depuis les menus), canonical URLs per-page.
+**Cours 35** : Route-level code splitting (`import()` dynamique), route guards ordonnees (auth → RBAC → title), `RouteMeta` typing pour RBAC, protected routes (`noindex, nofollow` + exclusion sitemap), breadcrumbs depuis la hiérarchie de routes (pas depuis les menus), canonical URLs per-page.
 
 **Cours 36** : AbortController (cancel on unmount/route change), debounce patterns (300ms search, 800ms BO), Stale-While-Revalidate (servir le cache stale pendant revalidation), request priority system (critical/high/normal/low + timeouts adaptatifs SSR 2s vs client 10s), retry avec exponential backoff (1s→2s→5s, max 2), `ApiResponse<T>` wrapper, `HydraCollection<T>` envelope.
 
@@ -335,11 +335,11 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 
 **Cours 43 (NOUVEAU)** : HTTP/1.1 (head-of-line blocking) vs HTTP/2 (multiplexing, server push, HPACK) vs HTTP/3 (QUIC, 0-RTT, UDP). TLS 1.3 handshake (1-RTT vs 0-RTT), certificate pinning, mTLS inter-services. DNS résolution, TTL, failover DNS. TCP connection pooling, keep-alive. WebSocket upgrade handshake. SSE vs long polling (le "pourquoi" réseau). Analogie : HTTP/1.1 = une autoroute a 1 voie, HTTP/2 = 6 voies, HTTP/3 = un helicoptere.
 
-**Cours 44** : HATEOAS, URL versioning (`/v1/`), deprecation headers. ETag conditionnel (`If-Match`, `If-None-Match`). Pagination cursor vs offset (cap serveur). `Vary` header stratégies. Content negotiation (JSON-LD, Hydra). API governance (style guides, changelog, backward compatibility). Analogie : le menu avec versions saisonnieres.
+**Cours 44** : HATEOAS, URL versioning (`/v1/`), déprécation headers. ETag conditionnel (`If-Match`, `If-None-Match`). Pagination cursor vs offset (cap serveur). `Vary` header stratégies. Content negotiation (JSON-LD, Hydra). API governance (style guides, changelog, backward compatibility). Analogie : le menu avec versions saisonnieres.
 
 **Cours 45** : GraphQL (schema, resolvers, N+1 DataLoader, subscriptions, persisted queries, security : depth limiting, cost analysis). gRPC (Protocol Buffers, unary/streaming, code génération, HTTP/2 obligatoire, quand gRPC vs REST vs GraphQL). Analogie : REST = courrier postal, GraphQL = liste de courses, gRPC = talkie-walkie.
 
-**Cours 47** : Architecture webhook complete : HMAC-SHA256 signature (`X-Webhook-Signature`), exponential backoff retry (3 tentatives), auto-disable apres 10 echecs consecutifs, vocabulaire standard (`content.published`, `media.uploaded`, `form.submitted`). Symfony Messenger / BullMQ pour dispatch async. Kafka event bus. n8n intégration middleware (éviter le connector sprawl). AsyncAPI spécification.
+**Cours 47** : Architecture webhook complete : HMAC-SHA256 signature (`X-Webhook-Signature`), exponential backoff retry (3 tentatives), auto-disable après 10 echecs consecutifs, vocabulaire standard (`content.published`, `media.uploaded`, `form.submitted`). Symfony Messenger / BullMQ pour dispatch async. Kafka event bus. n8n intégration middleware (éviter le connector sprawl). AsyncAPI spécification.
 
 **Cours 48** : BFF pour tokens d'authentification (garder les tokens côté serveur). API Gateway patterns (routing, auth, rate limiting, response aggregation). Délégation OIDC vers un espace prive. Service mesh (Istio/Linkerd) — mTLS transparent, observabilité via sidecar.
 
@@ -356,6 +356,8 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 ## Module 07 — Patterns distribues (~11h)
 
 > Les systèmes distribues, c'est comme gérer une chaine de restaurants : chaque site est autonome, mais il faut que les recettes et les stocks restent cohérents.
+>
+> **Chevauchement avec 11-Distributed Systems** : les cours CQRS, saga et circuit breaker sont aussi traites dans le cours 11. Ici l'angle est architectural (quand les utiliser, patterns de conception). Dans le cours 11, l'angle est implementation distribuee (CAP, consensus, CRDTs). Les deux se completent.
 
 | # | Cours | Fichier | Temps |
 |---|---|---|---|
@@ -369,9 +371,9 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 
 **Cours 49 (NOUVEAU)** : CAP theorem (Consistency, Availability, Partition tolerance — pick 2). PACELC (extension : en cas de Partition, choix A/C ; sinon, choix Latency/Consistency). Modèles de consistance : strong (linearizable), eventual, causal, session consistency. Consensus algorithms (Raft — conceptuel). Two Generals Problem. Fallacies of distributed computing. Analogie : les horloges dans les gares — comment synchroniser 100 gares sans telephone fiable.
 
-**Cours 50** : Séparation Command (écriture) / Query (lecture). Surrogate-key cache invalidation (tag-based purge CDN). Modèles de read store (meme DB denormalisee, read replica, projection Elasticsearch). Quand CQRS est overkill (spoiler : pour la plupart des CRUDs).
+**Cours 50** : Séparation Command (écriture) / Query (lecture). Surrogate-key cache invalidation (tag-based purge CDN). Modèles de read store (même DB denormalisee, read replica, projection Elasticsearch). Quand CQRS est overkill (spoiler : pour la plupart des CRUDs).
 
-**Cours 51** : Event Sourcing (stocker les events, pas l'état). Event store, snapshots, replay, projection. **Outbox Pattern** : transactional outbox pour event publishing fiable (INSERT event dans la meme transaction que la modification). Change Data Capture (CDC) avec Debezium. Quand Event Sourcing fait plus de mal que de bien.
+**Cours 51** : Event Sourcing (stocker les events, pas l'état). Event store, snapshots, replay, projection. **Outbox Pattern** : transactional outbox pour event publishing fiable (INSERT event dans la même transaction que la modification). Change Data Capture (CDC) avec Debezium. Quand Event Sourcing fait plus de mal que de bien.
 
 **Cours 53 (ENRICHI)** : Circuit Breaker (states: closed → open → half-open). Bulkhead pattern. Timeout cascading. Retry avec backoff + jitter. **Chaos Engineering** : principes Netflix, fault injection, game days, Litmus/Gremlin. **Disaster Recovery** : RPO (Recovery Point Objective), RTO (Recovery Time Objective), failover automatique, backup stratégies, runbooks. Circuit breaker sur endpoints externes (JWKS, webhooks). Analogie : le disjoncteur electrique — il coupe le courant AVANT que la maison brule.
 
@@ -379,7 +381,7 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 
 | Exercice | Fichier | Temps |
 |---|---|---|
-| 32 — CAP : classifier des systèmes reels | `exercices/32-cap-classifier/` | 45 min |
+| 32 — CAP : classifier des systèmes réels | `exercices/32-cap-classifier/` | 45 min |
 | 33 — CQRS catalogue/commandes | `exercices/33-cqrs-catalogue-commandes/` | 1h |
 | 34 — Saga de commande e-commerce | `exercices/34-saga-commande/` | 1h15 |
 | 35 — Outbox pattern implémentation | `exercices/35-outbox-pattern/` | 1h |
@@ -435,7 +437,7 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 | 66 | Sharding & Réplication | `09-performance-scalabilite/05-sharding-replication.md` | 1h |
 | 67 | Serverless Architecture | `09-performance-scalabilite/06-serverless.md` | 1h |
 
-**Cours 62** : 3 layers (Nitro/Redis server + in-memory Map + localStorage 5MB). Tag-aware Redis cache pools (TTL par type). Surrogate-key invalidation (purge CDN selective). ETag / `If-None-Match` a chaque couche. Stale-While-Revalidate fallback. Cache par route (public CDN / private browser / none). Redis namespace convention (`{app}:{feature}:{key}`). Analogie : les 3 mémoires humaines (registres CPU = mémoire de travail, RAM = mémoire court terme, disque = mémoire long terme).
+**Cours 62** : 3 layers (Nitro/Redis server + in-memory Map + localStorage 5MB). Tag-aware Redis cache pools (TTL par type). Surrogate-key invalidation (purge CDN selective). ETag / `If-None-Match` à chaque couche. Stale-While-Revalidate fallback. Cache par route (public CDN / private browser / none). Redis namespace convention (`{app}:{feature}:{key}`). Analogie : les 3 mémoires humaines (registres CPU = mémoire de travail, RAM = mémoire court terme, disque = mémoire long terme).
 
 **Cours 63** : Edge-first delivery (cache-first SSR, sub-600ms TTFB EU). Surrogate-key response headers. CDN cache purge on publish. Image optimization pipeline : WebP/AVIF conversion automatique, `srcset` responsive, lazy loading par defaut, on-the-fly resizing (imgproxy/Thumbor, `?w=800&h=600&fit=cover`), focal-point cropping metadata (`object-position` CSS), SHA256 deduplication, S3 presigned URLs. `<link rel="preconnect">` hints.
 
@@ -443,7 +445,7 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 
 **Cours 65 (ENRICHI)** : Horizontal vs vertical. Stateless containers (pas d'état in-process, tout dans services externes : PG, Redis, S3). Horizontal pod autoscaling Kubernetes (CPU, memory, custom metrics). Per-tenant observability pour scaling decisions. **Capacity planning** : Little's Law (L = lambda * W), throughput, backpressure. **Cloud-Native patterns** : Sidecar, Ambassador, Init Container. **Multi-region** : geo-distribution, data sovereignty, latency-based routing.
 
-**Cours 67 (NOUVEAU)** : Lambda / Cloud Functions, cold starts, provisioned concurrency. Event-driven compute (S3 triggers, queue triggers, HTTP triggers). FaaS vs CaaS (containers). Quand serverless vs containers (decision framework). Edge Functions (Cloudflare Workers, Vercel Edge). Cout : pay-per-invocation vs reserved. Analogie : le taxi (serverless — tu paies la course) vs la voiture de fonction (container — tu paies le parking meme quand tu roules pas).
+**Cours 67 (NOUVEAU)** : Lambda / Cloud Functions, cold starts, provisioned concurrency. Event-driven compute (S3 triggers, queue triggers, HTTP triggers). FaaS vs CaaS (containers). Quand serverless vs containers (decision framework). Edge Functions (Cloudflare Workers, Vercel Edge). Cout : pay-per-invocation vs reserved. Analogie : le taxi (serverless — tu paies la course) vs la voiture de fonction (container — tu paies le parking même quand tu roules pas).
 
 | Exercice | Fichier | Temps |
 |---|---|---|
@@ -454,7 +456,7 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 
 ---
 
-## Module 10 — Observabilite & DevOps (~8h)
+## Module 10 — Observabilité & DevOps (~8h)
 
 > L'observabilité, c'est le tableau de bord d'un avion : sans instruments, tu voles a l'aveugle.
 
@@ -491,7 +493,7 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 
 | # | Cours | Fichier | Temps |
 |---|---|---|---|
-| 73 | Pyramide de tests & Accessibilite | `11-testing-architecture/01-pyramide-tests-a11y.md` | 1h15 |
+| 73 | Pyramide de tests & Accessibilité | `11-testing-architecture/01-pyramide-tests-a11y.md` | 1h15 |
 | 74 | Test doubles & patterns | `11-testing-architecture/02-test-doubles-patterns.md` | 1h15 |
 | 75 | Contract Testing | `11-testing-architecture/03-contract-testing.md` | 1h |
 | 76 | Load Testing & Testing in Production | `11-testing-architecture/04-load-testing-production.md` | 1h |
@@ -537,9 +539,9 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 
 **Cours 81** : Plugin manifest schema (YAML declaratif : routes, widgets, rbacScopes, endpoints, events emits/listens, egress hosts). Route mount blocks (nested routes dans une page CMS). Block variant system (`variantResolver(blockType, template, structure) → component`). Widget registry endpoint. Challenge-based health check. Adapter boundary pattern (Unlayer — limiter le cout d'un futur remplacement). Search abstraction layer (`SearchProvider` interface).
 
-**Cours 82 (NOUVEAU)** : Conway's Law — "les organisations conçoivent des systèmes qui sont des copies de leurs structures de communication". Inverse Conway Maneuver. **Team Topologies** : 4 types d'équipe (stream-aligned, platform, enabling, complicated-subsystem). 3 modes d'interaction (collaboration, X-as-a-Service, facilitation). Impact sur l'architecture (si 4 équipes → 4 services). Architecture Communication : presenter au CTO ≠ aux devs ≠ au PO. Pitcher un ADR, defendre un trade-off, vulgariser une decision technique.
+**Cours 82 (NOUVEAU)** : Conway's Law — "les organisations conçoivent des systèmes qui sont des copies de leurs structures de communication". Inverse Conway Maneuver. **Team Topologies** : 4 types d'équipe (stream-aligned, platform, enabling, complicated-subsystem). 3 modes d'interaction (collaboration, X-as-a-Service, facilitation). Impact sur l'architecture (si 4 équipes → 4 services). Architecture Communication : présenter au CTO ≠ aux devs ≠ au PO. Pitcher un ADR, defendre un trade-off, vulgariser une decision technique.
 
-**Cours 83 (NOUVEAU)** : **Evolutionary Architecture** : architecture qui evolue avec le produit. Fitness functions (tests automatises pour invariants : "le bundle JS ne depasse jamais 200KB", "aucune dépendance cyclique entre modules"). Guided vs unguided change. Incremental change. **FinOps** : cost architecture, right-sizing, reserved vs spot, cost per request, build vs buy decision framework. **Wardley Mapping** : chaine de valeur, évolution (genesis → custom → product → commodity), strategic plays (build, buy, outsource). Analogie : la carte geographique vs le plan de bataille.
+**Cours 83 (NOUVEAU)** : **Evolutionary Architecture** : architecture qui evolue avec le produit. Fitness functions (tests automatises pour invariants : "le bundle JS ne dépasse jamais 200KB", "aucune dépendance cyclique entre modules"). Guided vs unguided change. Incremental change. **FinOps** : cost architecture, right-sizing, reserved vs spot, cost per request, build vs buy decision framework. **Wardley Mapping** : chaine de valeur, évolution (genesis → custom → product → commodity), strategic plays (build, buy, outsource). Analogie : la carte geographique vs le plan de bataille.
 
 | Exercice | Fichier | Temps |
 |---|---|---|
@@ -560,7 +562,7 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 | 85 | MLOps & AI Systems Architecture | `13-culture-architecturale/02-mlops-ai-systems.md` | 1h15 |
 | 86 | Blockchain & Consensus distribue | `13-culture-architecturale/03-blockchain-consensus.md` | 1h15 |
 | 87 | IoT & Edge Architecture | `13-culture-architecturale/04-iot-edge.md` | 1h |
-| 88 | Collaboration temps reel (CRDT, OT) | `13-culture-architecturale/05-crdt-collaboration.md` | 1h15 |
+| 88 | Collaboration temps réel (CRDT, OT) | `13-culture-architecturale/05-crdt-collaboration.md` | 1h15 |
 | 89 | Modernisation Legacy & Anti-Corruption Layer | `13-culture-architecturale/06-modernisation-legacy.md` | 1h |
 
 **Cours 84** : Architecture mobile : native vs cross-platform (React Native, Flutter). Offline-first mandatory (réseau intermittent). Sync bidirectionnel (conflict résolution, queue de mutations). Bridge vs FFI. Impact sur le design d'API (pagination stable, delta sync, compression). App Store constraints (review, updates, rollback impossible). Analogie : l'application mobile = l'ambassade — elle represente le pays mais opere en territoire etranger avec ses propres règles.
@@ -571,7 +573,7 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 
 **Cours 87** : IoT architecture : devices contraints (mémoire, CPU, batterie). MQTT (pub/sub lightweight, QoS levels). Edge processing (filtrer/agreger avant d'envoyer au cloud). Time-series databases. Digital twins. Sécurité IoT (firmware updates, certificate rotation, constrained DTLS). Les memes patterns que le web, pousses a l'extreme (résilience, async, offline). Analogie : le réseau de capteurs dans un vignoble — chaque capteur est autonome, mais l'ensemble donne une vue globale.
 
-**Cours 88** : Collaboration temps reel : le problème de la concurrence d'edition. Operational Transform (OT) — l'approche Google Docs (transformations sequentielles, serveur central). CRDT (Conflict-free Replicated Data Types) — l'approche Figma/Yjs (convergence mathematique, pas besoin de serveur central). Types de CRDT (G-Counter, LWW-Register, OR-Set). Quand OT vs CRDT. Libraries (Yjs, Automerge). Impact sur l'architecture (WebSocket obligatoire, awareness protocol, undo/redo distribue). Analogie : deux personnes qui ecrivent sur le meme tableau blanc — OT = un arbitre decide de l'ordre, CRDT = les stylos sont magiques et se resolvent tout seuls.
+**Cours 88** : Collaboration temps réel : le problème de la concurrence d'edition. Operational Transform (OT) — l'approche Google Docs (transformations sequentielles, serveur central). CRDT (Conflict-free Replicated Data Types) — l'approche Figma/Yjs (convergence mathematique, pas besoin de serveur central). Types de CRDT (G-Counter, LWW-Register, OR-Set). Quand OT vs CRDT. Libraries (Yjs, Automerge). Impact sur l'architecture (WebSocket obligatoire, awareness protocol, undo/redo distribue). Analogie : deux personnes qui ecrivent sur le même tableau blanc — OT = un arbitre decide de l'ordre, CRDT = les stylos sont magiques et se resolvent tout seuls.
 
 **Cours 89** : Legacy systems : mainframe, COBOL, monolithes vieillissants. Anti-Corruption Layer (DDD) : facade qui traduit entre le legacy et le nouveau système. Strangler Fig applique au legacy. Intégration patterns : fichiers batch, MQ (IBM MQ, RabbitMQ), API wrapper, database-level intégration (a éviter). Migration incrementale vs Big Bang (le Big Bang échoué presque toujours). Cohabitation longue durée. Analogie : renover un immeuble habite — tu ne peux pas demander a tout le monde de demenager pendant les travaux.
 
@@ -621,7 +623,7 @@ Voir : `projet-fil-rouge/README.md`
 
 ## Index des patterns CMS theorises
 
-> Référence croisee : chaque pattern reel du CMS Givexpert et le cours ou il est enseigne.
+> Référence croisee : chaque pattern réel du CMS Givexpert et le cours ou il est enseigne.
 
 ### Multi-tenancy & isolation
 | Pattern | Cours |
@@ -653,7 +655,7 @@ Voir : `projet-fil-rouge/README.md`
 | Presigned URL upload flow (S3 direct upload) | 19, 23 |
 | JSON-LD / Hydra envelope (`HydraCollection<T>`) | 44 |
 | Pagination serveur cap 20-24 items | 19 |
-| URL versioning (`/v1/`) + deprecation headers | 44 |
+| URL versioning (`/v1/`) + déprécation headers | 44 |
 | API governance (style guides, changelog) | 44 |
 
 ### Data Model
@@ -746,7 +748,7 @@ Voir : `projet-fil-rouge/README.md`
 | Pattern | Cours |
 |---|---|
 | Webhook HMAC-SHA256 (`X-Webhook-Signature`) | 47 |
-| Auto-disable webhooks apres 10 echecs | 47, 60 |
+| Auto-disable webhooks après 10 echecs | 47, 60 |
 | Event vocabulary standard (`content.published`, etc.) | 47 |
 | Symfony Messenger / BullMQ async dispatch | 47 |
 | Kafka event bus | 47 |
@@ -796,7 +798,7 @@ Voir : `projet-fil-rouge/README.md`
 | FinOps metering hooks (storage, bandwidth, AI) | 61, 83 |
 | EU AI Act risk register | 61 |
 
-### Observabilite & DevOps
+### Observabilité & DevOps
 | Pattern | Cours |
 |---|---|
 | OpenTelemetry 3 signaux (metrics, traces, logs) | 68, 69, 70 |
@@ -840,9 +842,9 @@ Voir : `projet-fil-rouge/README.md`
 
 ---
 
-## Tableau de revision espacee
+## Tableau de révision espacee
 
-> Coche chaque case apres revision. J+1 = lendemain, J+7 = une semaine apres, J+30 = un mois apres.
+> Coche chaque case après révision. J+1 = lendemain, J+7 = une semaine après, J+30 = un mois après.
 
 ### Module 00 — Fondamentaux du design
 | # | Cours | J+1 | J+7 | J+30 |
@@ -951,7 +953,7 @@ Voir : `projet-fil-rouge/README.md`
 | 66 | Sharding & Réplication | [ ] | [ ] | [ ] |
 | 67 | Serverless Architecture | [ ] | [ ] | [ ] |
 
-### Module 10 — Observabilite & DevOps
+### Module 10 — Observabilité & DevOps
 | # | Cours | J+1 | J+7 | J+30 |
 |---|---|---|---|---|
 | 68 | Logging structure | [ ] | [ ] | [ ] |
@@ -963,7 +965,7 @@ Voir : `projet-fil-rouge/README.md`
 ### Module 11 — Testing Architecture
 | # | Cours | J+1 | J+7 | J+30 |
 |---|---|---|---|---|
-| 73 | Pyramide de tests & Accessibilite | [ ] | [ ] | [ ] |
+| 73 | Pyramide de tests & Accessibilité | [ ] | [ ] | [ ] |
 | 74 | Test doubles & patterns | [ ] | [ ] | [ ] |
 | 75 | Contract Testing | [ ] | [ ] | [ ] |
 | 76 | Load Testing & Production | [ ] | [ ] | [ ] |
@@ -986,5 +988,5 @@ Voir : `projet-fil-rouge/README.md`
 | 85 | MLOps & AI Systems | [ ] | [ ] | [ ] |
 | 86 | Blockchain & Consensus | [ ] | [ ] | [ ] |
 | 87 | IoT & Edge | [ ] | [ ] | [ ] |
-| 88 | Collaboration temps reel (CRDT) | [ ] | [ ] | [ ] |
+| 88 | Collaboration temps réel (CRDT) | [ ] | [ ] | [ ] |
 | 89 | Modernisation Legacy | [ ] | [ ] | [ ] |

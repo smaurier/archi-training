@@ -12,7 +12,7 @@
 | RelatedProducts | Conteneur | Fetch les produits lies |
 | ProductCard | Presentationnel | Recoit product, affiche une carte |
 
-## Composants cles
+## Composants clés
 
 ### ProductPrice
 

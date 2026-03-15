@@ -3,7 +3,7 @@
 ## Diagramme
 
 - [ ] J'ai dessine les 4+ contexts avec leurs frontieres
-- [ ] Chaque relation a un pattern DDD nomme
+- [ ] Chaque relation à un pattern DDD nomme
 - [ ] Les fleches montrent la direction upstream → downstream
 - [ ] Pas de dépendance circulaire
 
@@ -17,7 +17,7 @@
 ## Events
 
 - [ ] J'ai liste au moins 4 domain events
-- [ ] Chaque event a un emetteur et un ou plusieurs consommateurs
+- [ ] Chaque event à un emetteur et un ou plusieurs consommateurs
 - [ ] Les events portent les données nécessaires (pas trop, pas trop peu)
 - [ ] Les events sont nommes au passe (`order.created`, pas `create.order`)
 

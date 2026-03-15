@@ -1,6 +1,6 @@
 # Checklist — Exercice 43 : CDN & image pipeline
 
-- [ ] Upload avec validation MIME reelle
+- [ ] Upload avec validation MIME réelle
 - [ ] Variantes générées : thumbnail, medium, large
 - [ ] Conversion WebP et AVIF
 - [ ] Stockage S3 avec structure tenant-aware

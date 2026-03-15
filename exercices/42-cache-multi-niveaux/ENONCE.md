@@ -11,7 +11,7 @@ Implémenter une stratégie de cache a 3 niveaux (navigateur, CDN, Redis) pour l
 
 ## Contexte
 
-La page produit est la plus visitee de ShopArch (80% du trafic). Elle est actuellement servie a chaque requête depuis PostgreSQL. L'objectif est de servir 95% des requêtes depuis le cache.
+La page produit est la plus visitee de ShopArch (80% du trafic). Elle est actuellement servie à chaque requête depuis PostgreSQL. L'objectif est de servir 95% des requêtes depuis le cache.
 
 ## Temps estime
 
@@ -53,4 +53,4 @@ Implemente l'invalidation a travers les 3 niveaux :
 ## Contraintes
 - Les données sensibles (panier, profil) ne doivent JAMAIS etre cachees dans le CDN
 - Le cache doit etre tenant-aware (pas de leak entre tenants)
-- L'invalidation doit etre < 10 secondes apres une modification
+- L'invalidation doit etre < 10 secondes après une modification

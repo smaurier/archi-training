@@ -8,7 +8,7 @@
 
 > Cours 19 — API Design REST.
 
-**Question 1 — Comment fonctionne le mecanisme ETag/If-Match pour le verrouillage optimiste ?**
+**Question 1 — Comment fonctionne le mécanisme ETag/If-Match pour le verrouillage optimiste ?**
 
 <details>
 <summary>Réponse</summary>
@@ -22,7 +22,7 @@ Le serveur inclut un header `ETag` dans la réponse GET (par exemple `"v3"` base
 <details>
 <summary>Réponse</summary>
 
-Le flux comporte 3 étapes : (1) le client appelle `POST /media/upload` avec les metadonnees du fichier (nom, mime, taille), (2) le serveur généré une URL presignee S3, cree un enregistrement media en BDD avec statut "pending" et renvoie l'URL + le mediaId, (3) le client uploade directement vers S3 via l'URL presignee sans passer par le serveur API, puis appelle `POST /media/:id/confirm` pour que le serveur vérifié l'existence du fichier sur S3 et mette a jour le statut. Le serveur ne recoit jamais le fichier binaire.
+Le flux comporte 3 étapes : (1) le client appelle `POST /media/upload` avec les metadonnees du fichier (nom, mime, taille), (2) le serveur généré une URL presignee S3, créé un enregistrement media en BDD avec statut "pending" et renvoie l'URL + le mediaId, (3) le client uploade directement vers S3 via l'URL presignee sans passer par le serveur API, puis appelle `POST /media/:id/confirm` pour que le serveur vérifié l'existence du fichier sur S3 et mette a jour le statut. Le serveur ne recoit jamais le fichier binaire.
 
 </details>
 
@@ -32,7 +32,7 @@ Le flux comporte 3 étapes : (1) le client appelle `POST /media/upload` avec les
 
 **La chaine de montage automobile.**
 
-Dans une usine automobile, la carrosserie passe par une serie de stations : controle qualité de la tole, soudure, peinture, assemblage des pieces interieures, test electrique, controle final. Chaque station a une responsabilité unique. Si une station détecté un defaut, elle peut rejeter la piece (erreur) sans que les stations suivantes soient sollicitees. L'ordre des stations est fixe et chaque station ne connait que la précédente et la suivante.
+Dans une usine automobile, la carrosserie passe par une serie de stations : controle qualité de la tole, soudure, peinture, assemblage des pieces interieures, test electrique, controle final. Chaque station à une responsabilité unique. Si une station détecté un defaut, elle peut rejeter la piece (erreur) sans que les stations suivantes soient sollicitees. L'ordre des stations est fixe et chaque station ne connait que la précédente et la suivante.
 
 Le pipeline NestJS fonctionne exactement ainsi : la requête HTTP est la carrosserie, et chaque étape (middleware, guard, interceptor, pipe, handler) est une station. Chaque station peut laisser passer, transformer, ou rejeter la requête. Si un guard rejette (403), le pipe de validation n'est jamais atteint. Si le pipe rejette (422), le handler n'est jamais appele.
 
@@ -148,7 +148,7 @@ PORTEE DES COMPOSANTS
 | CORS, compression | Middleware | Configuration Express standard |
 | Vérifier l'authentification | Guard | Retourne true/false, accès au contexte |
 | Vérifier les roles RBAC | Guard | Lit les metadata du decorateur @Roles |
-| Valider les parametres | Pipe | Transforme et valide avant le handler |
+| Valider les paramètres | Pipe | Transforme et valide avant le handler |
 | Mesurer le temps de réponse | Interceptor | Wrappe le handler (before + after) |
 | Transformer la réponse | Interceptor | Modifie la valeur de retour |
 | Gérer les erreurs | ExceptionFilter | Attrape et formate les exceptions |
@@ -437,13 +437,13 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
 ---
 
-## Resume
+## Résumé
 
 - Le pipeline NestJS suit un ordre strict : **Middleware -> Guards -> Interceptors (before) -> Pipes -> Handler -> Interceptors (after) -> Exception Filters** ; chaque étape peut court-circuiter les suivantes.
 - Les **Middleware** (compatibles Express) agissent avant le routing NestJS pour le logging, CORS, compression — ils ne connaissent pas les decorateurs NestJS.
 - Les **Guards** prennent des decisions binaires (oui/non) basees sur l'authentification et les roles, avec accès aux metadata des decorateurs (`@Roles`, `@Public`).
-- Les **Interceptors** wrappent le handler via RxJS Observable, ce qui leur permet d'agir avant ET apres l'exécution (mesure de temps, transformation de réponse, cache).
-- Les **Pipes** transforment et valident les parametres d'entree (DTO) avant que le handler ne soit appele, et les **Exception Filters** interceptent toute erreur pour la formater en RFC 7807.
+- Les **Interceptors** wrappent le handler via RxJS Observable, ce qui leur permet d'agir avant ET après l'exécution (mesure de temps, transformation de réponse, cache).
+- Les **Pipes** transforment et valident les paramètres d'entree (DTO) avant que le handler ne soit appele, et les **Exception Filters** interceptent toute erreur pour la formater en RFC 7807.
 
 
 ---

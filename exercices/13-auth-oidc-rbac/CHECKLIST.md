@@ -4,15 +4,15 @@
 
 - [ ] Le guard extrait le Bearer token du header Authorization
 - [ ] Le JWT est valide avec RS256 (pas HS256)
-- [ ] La cle publique vient du JWKS endpoint de Keycloak
+- [ ] La clé publique vient du JWKS endpoint de Keycloak
 - [ ] Le JWKS est cache dans Redis (TTL 1h)
 - [ ] Si la validation échoué, force refresh du JWKS avant de rejeter
 
 ## RBAC
 
-- [ ] La hierarchie est définie : superadmin > admin > editor > viewer
+- [ ] La hiérarchie est définie : superadmin > admin > editor > viewer
 - [ ] Un decorateur `@Roles('editor')` protégé les endpoints
-- [ ] La hierarchie est respectee (admin a les droits d'editor)
+- [ ] La hiérarchie est respectee (admin a les droits d'editor)
 - [ ] 403 Forbidden si le role est insuffisant
 
 ## Endpoints protégés
@@ -27,7 +27,7 @@
 - [ ] Interface commune pour OIDC et Mock
 - [ ] Le switch se fait via `AUTH_MODE` env var
 - [ ] En mode mock, pas besoin de Keycloak running
-- [ ] En mode OIDC, validation reelle du JWT
+- [ ] En mode OIDC, validation réelle du JWT
 
 ## Bonus
 

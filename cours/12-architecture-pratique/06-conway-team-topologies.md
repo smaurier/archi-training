@@ -24,7 +24,7 @@ On place une **interface** (port) entre l'application et un service tiers (Unlay
 
 L'organisation d'une armee déterminé sa stratégie :
 - Si 3 divisions ne communiquent pas entre elles → 3 stratégies independantes (pas de coordination)
-- Si elles partagent le meme canal radio → une stratégie coordonnee
+- Si elles partagent le même canal radio → une stratégie coordonnee
 
 **Conway's Law** : la structure de communication de l'organisation se retrouve dans la structure du système. Si 4 équipes travaillent sur un compilateur, tu obtiens un compilateur en 4 modules.
 
@@ -75,7 +75,7 @@ APRES (equipes par domaine) :
 |---|---|---|
 | **Stream-aligned** | Delivrer de la valeur business | Équipe Catalog, équipe Checkout |
 | **Platform** | Fournir des outils aux stream-aligned | Équipe DevOps, équipe Design System |
-| **Enabling** | Aider les autres a monter en competence | Équipe Architecture, équipe QA |
+| **Enabling** | Aider les autres a monter en compétence | Équipe Architecture, équipe QA |
 | **Complicated-subsystem** | Gérer un sous-système technique complexe | Équipe Search/ML, équipe Security |
 
 ### 4. 3 modes d'interaction
@@ -117,9 +117,9 @@ Team APIs :
 | Audience | Ce qu'elle veut savoir | Format |
 |---|---|---|
 | **CTO** | Impact business, risques, cout, timeline | 1 slide, ROI chiffre |
-| **Devs** | Comment ca marche, qu'est-ce qui change, migration | ADR + diagramme C4 |
+| **Devs** | Comment ça marche, qu'est-ce qui change, migration | ADR + diagramme C4 |
 | **PO** | Impact utilisateur, features impactees, delais | Demo, user stories |
-| **Client** | Ca marche, c'est fiable, c'est rapide | SLA, uptime, metriques |
+| **Client** | Ça marche, c'est fiable, c'est rapide | SLA, uptime, metriques |
 
 ```
 Pitcher un ADR :
@@ -222,12 +222,12 @@ function analyzeConway(
 
 ---
 
-## Resume
+## Résumé
 
 1. **Conway's Law** : la structure de l'organisation se retrouve dans la structure du système — c'est une LOI, pas une suggestion
 2. **Inverse Conway** : définir l'architecture cible PUIS reorganiser les équipes pour correspondre
 3. **Team Topologies** : stream-aligned (valeur business), platform (outils), enabling (coaching), complicated-subsystem (expertise technique)
-4. **3 interactions** : collaboration (temporaire), X-as-a-Service (stable), facilitation (montee en competence)
+4. **3 interactions** : collaboration (temporaire), X-as-a-Service (stable), facilitation (montee en compétence)
 5. **Communication** : adapter le message a l'audience — CTO (ROI), devs (ADR), PO (impact utilisateur)
 
 ---

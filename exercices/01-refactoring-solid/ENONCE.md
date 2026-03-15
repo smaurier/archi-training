@@ -21,7 +21,7 @@ Tu travailles sur le back-end d'une application e-commerce. L'équipe précéden
 
 ### Étape 1 — Analyser le code
 
-Lis le code ci-dessous. Pour chaque principe SOLID, identifie quelle violation est presente.
+Lis le code ci-dessous. Pour chaque principe SOLID, identifie quelle violation est présenté.
 
 ```typescript
 // order-processor.ts — Le code a refactorer

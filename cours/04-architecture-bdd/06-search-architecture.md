@@ -25,7 +25,7 @@ PostgreSQL suffit pour 90% des cas : relations complexes, transactions ACID, don
 - **PostgreSQL ILIKE** = chercher un livre en parcourant chaque etagere. Simple, mais lent quand la bibliotheque grandit.
 - **PostgreSQL FTS (tsvector)** = la bibliothecaire avec son index alphabetique. Rapide, comprend les synonymes (stemming), sait classer par pertinence. Limitee aux mots exacts.
 - **Elasticsearch** = un système de classement professionnel avec fiches thematiques, tolerant aux fautes de frappe, capable de filtrer par auteur/date/genre simultanement.
-- **Vector search** = un GPS semantique qui comprend le SENS de ta recherche. Tu cherches "vetement chaud pour l'hiver" et il trouve "doudoune" meme si le mot n'apparait pas.
+- **Vector search** = un GPS semantique qui comprend le SENS de ta recherche. Tu cherches "vetement chaud pour l'hiver" et il trouve "doudoune" même si le mot n'apparait pas.
 
 ---
 
@@ -36,9 +36,9 @@ PostgreSQL suffit pour 90% des cas : relations complexes, transactions ACID, don
 | Niveau | Technologie | Pertinence | Complexite | Cas d'usage |
 |---|---|---|---|---|
 | **Basique** | `ILIKE '%query%'` | Aucun ranking | Zero | Prototype, < 10K rows |
-| **Intermediaire** | PostgreSQL FTS | Stemming, ranking (`ts_rank`) | Faible (natif PG) | 10K-500K rows, équipe petite |
+| **Intermédiaire** | PostgreSQL FTS | Stemming, ranking (`ts_rank`) | Faible (natif PG) | 10K-500K rows, équipe petite |
 | **Avance** | Elasticsearch | BM25, fuzzy, facettes, suggestions | Elevee (cluster dédié) | > 500K rows, UX riche |
-| **Semantique** | Vector search | Comprend le sens, pas les mots | Tres élevée | Recherche "intelligente", RAG |
+| **Semantique** | Vector search | Comprend le sens, pas les mots | Très élevée | Recherche "intelligente", RAG |
 
 ### 2. PostgreSQL Full-Text Search en detail
 
@@ -171,7 +171,7 @@ avec k = 60 (constante de lissage)
 
 | Pattern | Valeur | Pourquoi |
 |---|---|---|
-| **Debounce** | 300ms | Ne pas envoyer une requête a chaque frappe clavier |
+| **Debounce** | 300ms | Ne pas envoyer une requête à chaque frappe clavier |
 | **Cache Redis** | TTL 5 min | Les memes recherches reviennent souvent |
 | **Minimum chars** | 2-3 caracteres | Éviter les recherches trop larges |
 | **AbortController** | Cancel previous | Annuler la requête précédente si l'utilisateur tape encore |
@@ -381,7 +381,7 @@ function useProductSearch() {
 
 ---
 
-## Resume
+## Résumé
 
 1. **PostgreSQL FTS** (tsvector + GIN) suffit pour 50K-500K produits — zero infra supplementaire, bon ranking
 2. **Elasticsearch** pour les besoins avances : fuzzy, facettes, suggestions, boosting — mais cout ops non negligeable
@@ -401,3 +401,15 @@ function useProductSearch() {
 > - Définis le port `SearchProvider` pour pouvoir migrer vers Elasticsearch plus tard
 > - Exercice(s) associé(s) : `exercices/18b-fulltext-search/`, `exercices/20-search-abstraction/`
 > - Checkpoint : Module 04, critère 3
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [17-schema-ecommerce](../../exercices/17-schema-ecommerce/ENONCE)
+2. **Exercice** : [18-optimisation-requêtes](../../exercices/18-optimisation-requetes/ENONCE)
+3. **Renforcement** : [18b-fulltext-search](../../exercices/18b-fulltext-search/ENONCE)
+4. **Exercice** : [19-polyglot-persistence](../../exercices/19-polyglot-persistence/ENONCE)
+5. **Exercice** : [20-search-abstraction](../../exercices/20-search-abstraction/ENONCE)
+:::

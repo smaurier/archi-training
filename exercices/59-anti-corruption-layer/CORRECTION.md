@@ -299,7 +299,7 @@ CORRECT — le domaine ne connait QUE ses propres types (Product.category, Order
          L'ACL traduit entre les deux mondes
 ```
 
-### 2. Pas de validation apres traduction
+### 2. Pas de validation après traduction
 ```
 FAUX — faire confiance aux donnees de l'ERP (prix negatif, date invalide)
 CORRECT — valider APRES traduction, avant de passer au domaine

@@ -9,7 +9,7 @@
 <details>
 <summary>1. Qu'est-ce que le consumer-driven contract testing avec Pact ?</summary>
 
-Le **consumer** (front) écrit un test qui définit les réponses attendues de l'API. Ce test généré un **pact file** (JSON). Le **provider** (API) exécuté ce pact file contre sa vraie API avec des state handlers pour les fixtures. Si la réponse reelle ne matche pas le contrat → le test échoué. Cela détecté les breaking changes avant le merge.
+Le **consumer** (front) écrit un test qui définit les réponses attendues de l'API. Ce test généré un **pact file** (JSON). Le **provider** (API) exécuté ce pact file contre sa vraie API avec des state handlers pour les fixtures. Si la réponse réelle ne matche pas le contrat → le test échoué. Cela détecté les breaking changes avant le merge.
 </details>
 
 <details>
@@ -253,11 +253,11 @@ export const options: Options = {
 
 ---
 
-## Resume
+## Résumé
 
 1. **5 profiles k6** : smoke (CI, 2min), load (trafic normal), stress (point de rupture), spike (pic soudain), soak (fuites mémoire)
 2. **Metriques** : p95 < 300ms, error rate < 1%, throughput stable, CPU < 70%, mémoire stable
-3. **Synthetic monitoring** : scénarios reels executes toutes les 5min — détecté les pannes AVANT les utilisateurs
+3. **Synthetic monitoring** : scénarios réels executes toutes les 5min — détecté les pannes AVANT les utilisateurs
 4. **Testing in production** : canary 5% + observability → comparer metriques canary vs baseline → promote ou rollback
 5. **CI intégration** : smoke test k6 sur chaque MR (2min), load test complet en nightly
 
@@ -273,3 +273,14 @@ export const options: Options = {
 > - Valide les SLOs sous charge : p95 < 300ms avec 100 VUs
 > - Exercice(s) associé(s) : `exercices/52-load-test-k6/`
 > - Checkpoint : Module 11, critère 4
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [50-stratégie-test-ecommerce](../../exercices/50-strategie-test-ecommerce/ENONCE)
+2. **Exercice** : [51-contract-tests-pact](../../exercices/51-contract-tests-pact/ENONCE)
+3. **Renforcement** : [51b-msw-mock-layer](../../exercices/51b-msw-mock-layer/ENONCE)
+4. **Exercice** : [52-load-test-k6](../../exercices/52-load-test-k6/ENONCE)
+:::

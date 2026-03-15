@@ -9,17 +9,17 @@
 <details>
 <summary>1. Quels sont les 3 niveaux de read store en CQRS ?</summary>
 
-1. **Meme DB avec vues materialisees** — le plus simple, consistance forte, suffisant pour la plupart des cas
+1. **Même DB avec vues materialisees** — le plus simple, consistance forte, suffisant pour la plupart des cas
 2. **Read replica séparée** — scalabilité horizontale des lectures, eventual consistency (~100ms lag)
-3. **Store specialise** (Elasticsearch, Redis) — latence tres basse, ideal pour search et dashboards, mais consistance eventual (~secondes)
+3. **Store specialise** (Elasticsearch, Redis) — latence très basse, ideal pour search et dashboards, mais consistance eventual (~secondes)
 
 On commence toujours par le niveau 1 et on monte quand c'est mesure.
 </details>
 
 <details>
-<summary>2. Qu'est-ce que la surrogate-key cache invalidation et pourquoi est-ce superieur a un TTL ?</summary>
+<summary>2. Qu'est-ce que la surrogate-key cache invalidation et pourquoi est-ce superieur à un TTL ?</summary>
 
-Chaque réponse CDN est taguee avec des surrogate keys (`product:123`, `category:shoes`). Quand un produit change, on purge uniquement les réponses portant ce tag — pas tout le cache. Un TTL invalide le cache apres un delai fixe (meme si rien n'a change), alors que la surrogate-key invalide immédiatement et seulement ce qui est concerne.
+Chaque réponse CDN est taguee avec des surrogate keys (`product:123`, `category:shoes`). Quand un produit change, on purge uniquement les réponses portant ce tag — pas tout le cache. Un TTL invalide le cache après un delai fixe (même si rien n'a change), alors que la surrogate-key invalide immédiatement et seulement ce qui est concerne.
 </details>
 
 ---
@@ -113,9 +113,9 @@ Avec snapshot (tous les 100 events) :
 
 | Stratégie snapshot | Declenchement | Avantage |
 |---|---|---|
-| Tous les N events | Apres 100 events | Simple, previsible |
+| Tous les N events | Après 100 events | Simple, previsible |
 | Periodique | Toutes les heures | Bon pour les agregats fréquents |
-| A la demande | Quand la reconstruction > seuil | Optimise, mais plus complexe |
+| A la demandé | Quand la reconstruction > seuil | Optimise, mais plus complexe |
 
 ### 4. Projections — construire des vues de lecture
 
@@ -144,7 +144,7 @@ Event Store                           Projections (Read Models)
 
 ### 5. Outbox Pattern — publication fiable des événements
 
-Le problème : comment garantir qu'un event est a la fois sauvegarde ET publie ?
+Le problème : comment garantir qu'un event est à la fois sauvegarde ET publie ?
 
 ```
 DANGER — dual write :
@@ -192,7 +192,7 @@ SOLUTION — Outbox Pattern :
 
 ### 6. CDC avec Debezium
 
-Le poller a un inconvenient : il introduit un delai (polling interval). Debezium lit directement le WAL (Write-Ahead Log) de PostgreSQL :
+Le poller à un inconvenient : il introduit un delai (polling interval). Debezium lit directement le WAL (Write-Ahead Log) de PostgreSQL :
 
 ```
 PostgreSQL WAL ──────> Debezium ──────> Kafka
@@ -529,13 +529,13 @@ export class OrderListingProjection {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Event Sourcing** stocke les événements (faits immuables), pas l'état — l'état se reconstruit en rejouant les events depuis le debut
 2. **Snapshots** evitent de tout rejouer : photo de l'état tous les N events, puis replay uniquement depuis le dernier snapshot
 3. **Projections** transforment le flux d'events en modèles de lecture optimises (vues denormalisees, Elasticsearch, dashboards)
-4. **Outbox Pattern** : insérer l'event dans la meme transaction SQL que la modification métier, puis un poller ou CDC (Debezium) le publie — garantie at-least-once sans dual write
-5. **Event Sourcing est overkill** pour les CRUDs simples — ne l'utiliser que quand l'audit trail complet ou le replay temporel sont des besoins reels
+4. **Outbox Pattern** : insérer l'event dans la même transaction SQL que la modification métier, puis un poller ou CDC (Debezium) le publie — garantie at-least-once sans dual write
+5. **Event Sourcing est overkill** pour les CRUDs simples — ne l'utiliser que quand l'audit trail complet ou le replay temporel sont des besoins réels
 
 ---
 

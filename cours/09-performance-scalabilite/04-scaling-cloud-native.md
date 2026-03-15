@@ -17,7 +17,7 @@
 
 1. **Liveness** : le process est-il vivant ? (Si non → restart le pod)
 2. **Readiness** : peut-il servir du trafic ? (Si non → retire du load balancer)
-3. **Startup** : a-t-il fini de demarrer ? (Empeche liveness/readiness de tuer un container qui demarre lentement)
+3. **Startup** : a-t-il fini de démarrer ? (Empeche liveness/readiness de tuer un container qui demarre lentement)
 </details>
 
 ---
@@ -256,7 +256,7 @@ spec:
 
 ---
 
-## Resume
+## Résumé
 
 1. **Horizontal > vertical** : pas de plafond, résilience, cout lineaire — mais stateless obligatoire
 2. **Stateless containers** : tout l'état dans des services externes (Redis, S3, PG) — le pod est jetable

@@ -15,7 +15,7 @@ Un audit complet des 12 facteurs avec les corrections appliquees au code.
 | V | Build/Release/Run | **NON** | `git pull && npm install && build` sur le serveur | Docker image immutable, CI/CD |
 | VI | Processes | **NON** | Fichiers sur `/var/www/uploads` | S3 + presigned URLs |
 | VII | Port Binding | Oui | — | NestJS bind sur `PORT` (ok) |
-| VIII | Concurrency | **NON** | Cron dans le meme process | Worker process séparé |
+| VIII | Concurrency | **NON** | Cron dans le même process | Worker process séparé |
 | IX | Disposability | **NON** | Graceful shutdown non configure | `app.enableShutdownHooks()` |
 | X | Dev/Prod Parity | A vérifier | Probable divergence | Docker compose identique |
 | XI | Logs | **NON** | Logs dans un fichier | stdout JSON |
@@ -206,7 +206,7 @@ CORRECT — Stateless = tout l'etat est dans des backing services
   → Cache dans Redis (pas dans une Map locale)
 ```
 
-### 4. Oublier la validation des env vars au demarrage
+### 4. Oublier la validation des env vars au démarrage
 
 ```typescript
 // FAUX — l'app demarre sans DATABASE_URL et crash a la premiere requete

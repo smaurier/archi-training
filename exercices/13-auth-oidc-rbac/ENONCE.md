@@ -23,13 +23,13 @@ ShopArch utilise Keycloak comme Identity Provider. L'API doit valider les JWT, e
 
 Implemente un guard NestJS qui :
 1. Extrait le token du header `Authorization: Bearer <token>`
-2. Valide le JWT avec la cle publique JWKS de Keycloak
-3. Cache la cle JWKS dans Redis (TTL 1h, force refresh on failure)
+2. Valide le JWT avec la clé publique JWKS de Keycloak
+3. Cache la clé JWKS dans Redis (TTL 1h, force refresh on failure)
 4. Extrait le `tenantId` et les `roles` du payload
 
 ### Étape 2 — Role hierarchy
 
-Implemente une hierarchie de roles :
+Implemente une hiérarchie de roles :
 ```
 superadmin > admin > editor > viewer
 ```
@@ -49,7 +49,7 @@ superadmin > admin > editor > viewer
 ### Étape 4 — Auth adapter pattern
 
 Cree un adapter qui permet de switcher entre :
-- **Production** : validation OIDC reelle (Keycloak JWKS)
+- **Production** : validation OIDC réelle (Keycloak JWKS)
 - **Development** : mock auth (token généré localement, pas besoin de Keycloak)
 
 Le switch se fait via une variable d'environnement `AUTH_MODE=oidc|mock`.

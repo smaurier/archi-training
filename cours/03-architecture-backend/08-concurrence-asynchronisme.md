@@ -9,21 +9,21 @@
 <details>
 <summary>1. Pourquoi un background job doit-il etre idempotent ?</summary>
 
-Un job peut etre exécuté plusieurs fois (retry apres echec, redemarrage du worker). S'il n'est pas idempotent, il produira des effets de bord (double débit, double email). L'idempotence garantit que le résultat est le meme qu'il soit exécuté 1 ou 10 fois.
+Un job peut etre exécuté plusieurs fois (retry après echec, redemarrage du worker). S'il n'est pas idempotent, il produira des effets de bord (double débit, double email). L'idempotence garantit que le résultat est le même qu'il soit exécuté 1 ou 10 fois.
 </details>
 
 <details>
 <summary>2. Qu'est-ce qu'une Dead Letter Queue et pourquoi ne faut-il pas l'ignorer ?</summary>
 
-C'est la file ou atterrissent les jobs qui ont échoué apres le nombre maximal de retries. Chaque job en DLQ represente soit un bug dans le code, soit un système externe en panne. Ignorer la DLQ = ignorer des erreurs silencieuses en production.
+C'est la file ou atterrissent les jobs qui ont échoué après le nombre maximal de retries. Chaque job en DLQ represente soit un bug dans le code, soit un système externe en panne. Ignorer la DLQ = ignorer des erreurs silencieuses en production.
 </details>
 
 ---
 
 ## Analogie — La cuisine du restaurant
 
-- **1 chef, 1 cuisine** (Single-thread event loop — Node.js) : le chef ne fait qu'une chose a la fois, mais il est tres organise. Pendant que l'eau bout (I/O async), il prepare la salade. Il ne bloque jamais — il délégué les taches longues et enchaine.
-- **10 chefs, 1 cuisine** (Multi-thread — Java, .NET) : plusieurs chefs travaillent en parallele, mais ils doivent se coordonner pour ne pas utiliser le meme couteau en meme temps (lock).
+- **1 chef, 1 cuisine** (Single-thread event loop — Node.js) : le chef ne fait qu'une chose à la fois, mais il est très organise. Pendant que l'eau bout (I/O async), il prepare la salade. Il ne bloque jamais — il délégué les taches longues et enchaine.
+- **10 chefs, 1 cuisine** (Multi-thread — Java, .NET) : plusieurs chefs travaillent en parallele, mais ils doivent se coordonner pour ne pas utiliser le même couteau en même temps (lock).
 - **10 cuisines** (Multi-process — PHP-FPM, Gunicorn) : chaque requête a sa propre cuisine. Pas de conflit entre chefs, mais plus de ressources consommees.
 - **10 restaurants** (Multi-node — Kubernetes) : scaling horizontal. Chaque noeud est independant, mais le stock (DB) est partage — la coordination devient critique.
 
@@ -59,13 +59,13 @@ C'est la file ou atterrissent les jobs qui ont échoué apres le nombre maximal 
 | Modèle | Technologie | Avantage | Inconvenient |
 |---|---|---|---|
 | **Event loop** | Node.js, Deno | Leger, performant pour I/O | Un calcul CPU bloque tout |
-| **Thread pool** | Java, .NET | Parallelisme reel (CPU) | Gestion des locks complexe |
+| **Thread pool** | Java, .NET | Parallelisme réel (CPU) | Gestion des locks complexe |
 | **Process pool** | PHP-FPM, Gunicorn | Isolation totale | Mémoire x N, pas de partage |
 | **Cluster** | Node.js cluster, PM2 | Utilise tous les cores | État non partage entre processes |
 
 ### 2. Les 3 problèmes de concurrence
 
-**Race condition** : deux opérations lisent et ecrivent en meme temps → résultat incoherent.
+**Race condition** : deux opérations lisent et ecrivent en même temps → résultat incoherent.
 
 ```
 Thread A: READ stock = 10
@@ -105,7 +105,7 @@ WHERE id = 'abc' AND version = 5;
 | Propriété | Optimistic | Pessimistic |
 |---|---|---|
 | **Quand** | La plupart des requêtes n'ont pas de conflit | Conflits fréquents |
-| **Mecanisme** | Version field vérifié au UPDATE | Lock physique sur la row |
+| **Mécanisme** | Version field vérifié au UPDATE | Lock physique sur la row |
 | **Performance** | Excellente (pas de lock) | Degradee (attente du lock) |
 | **Scalabilite** | Excellente | Limitee (locks = goulot) |
 | **Retry** | Nécessaire (relire + reessayer) | Pas nécessaire |
@@ -331,7 +331,7 @@ export class ImportService {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Event loop Node.js** : un seul thread non-bloquant, I/O async via libuv — ne jamais bloquer avec du CPU lourd
 2. **Optimistic locking** (version field) pour 95% des cas web — performant, scalable, retry-friendly
@@ -351,3 +351,16 @@ export class ImportService {
 > - Gère la concurrence sur le stock avec optimistic locking (If-Match / ETag)
 > - Exercice(s) associé(s) : `exercices/16-race-condition-locking/`
 > - Checkpoint : Module 03, critère 3-4
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [12-api-rest-nestjs](../../exercices/12-api-rest-nestjs/ENONCE)
+2. **Exercice** : [13-auth-oidc-rbac](../../exercices/13-auth-oidc-rbac/ENONCE)
+3. **Exercice** : [14-multi-tenant-isolation](../../exercices/14-multi-tenant-isolation/ENONCE)
+4. **Renforcement** : [14b-multi-site](../../exercices/14b-multi-site/ENONCE)
+5. **Exercice** : [15-job-queue-bullmq](../../exercices/15-job-queue-bullmq/ENONCE)
+6. **Exercice** : [16-race-condition-locking](../../exercices/16-race-condition-locking/ENONCE)
+:::

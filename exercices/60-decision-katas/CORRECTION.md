@@ -6,16 +6,16 @@
 
 ### Analyse du contexte
 
-Avant de choisir une option, identifions les signaux cles :
+Avant de choisir une option, identifions les signaux clés :
 
 | Signal | Valeur | Interpretation |
 |---|---|---|
-| Taille equipe | 8 (3 back) | Trop petite pour operer des microservices (regle : 1 equipe par service) |
-| Charge | 500 req/s | Un monolithe bien optimise gere facilement 10x plus |
-| Disponibilite | 99.2% | Correct, pas de probleme flagrant |
+| Taille équipe | 8 (3 back) | Trop petite pour operer des microservices (regle : 1 équipe par service) |
+| Charge | 500 req/s | Un monolithe bien optimise géré facilement 10x plus |
+| Disponibilité | 99.2% | Correct, pas de problème flagrant |
 | Temps de deploy | 8 min | Acceptable pour un monolithe |
 | Experience microservices | Zero | Risque majeur d'apprentissage en production |
-| Probleme a resoudre | Aucun identifie | Le CTO reagit a une tendance, pas a un probleme concret |
+| Problème a résoudre | Aucun identifie | Le CTO reagit à une tendance, pas à un problème concret |
 
 ### Decision recommandee : Option B — Monolithe modulaire
 
@@ -89,11 +89,11 @@ Migrer vers des microservices SI et SEULEMENT SI :
 
 ### Alternatives et arbitrages
 
-**Pourquoi pas D (ne rien changer) ?** Meme si le monolithe fonctionne, structurer en modules est un investissement a faible cout qui ameliore la maintenabilite immediatement (chaque developpeur comprend mieux les frontieres) et facilite une migration future. C'est un "free lunch" architectural.
+**Pourquoi pas D (ne rien changer) ?** Même si le monolithe fonctionne, structurer en modules est un investissement a faible cout qui ameliore la maintenabilité immediatement (chaque développeur comprend mieux les frontieres) et facilite une migration future. C'est un "free lunch" architectural.
 
-**Pourquoi pas C (Strangler Fig) immediatement ?** Parce que l'equipe n'a jamais opere de microservices. Extraire un service sans maturite ops, c'est introduire de la complexite distribuee (reseau, timeouts, retries, circuit breakers, monitoring distribue) sans en tirer de benefice. Mieux vaut d'abord modulariser proprement, puis extraire quand le besoin est reel.
+**Pourquoi pas C (Strangler Fig) immediatement ?** Parce que l'équipe n'a jamais opere de microservices. Extraire un service sans maturite ops, c'est introduire de la complexite distribuee (réseau, timeouts, retries, circuit breakers, monitoring distribue) sans en tirer de benefice. Mieux vaut d'abord modulariser proprement, puis extraire quand le besoin est réel.
 
-**Le piege classique** : confondre "le code est mal organise" avec "il faut des microservices". Les microservices ne resolvent pas le mauvais code — ils le distribuent sur le reseau, ce qui le rend plus difficile a debugger.
+**Le piege classique** : confondre "le code est mal organise" avec "il faut des microservices". Les microservices ne resolvent pas le mauvais code — ils le distribuent sur le réseau, ce qui le rend plus difficile a debugger.
 
 ---
 
@@ -103,11 +103,11 @@ Migrer vers des microservices SI et SEULEMENT SI :
 
 | Signal | Valeur | Interpretation |
 |---|---|---|
-| Version actuelle | MySQL 5.7 (EOL) | Urgence securite — il FAUT agir |
+| Version actuelle | MySQL 5.7 (EOL) | Urgence sécurité — il FAUT agir |
 | Volume | 2 To, 150 tables | Migration non triviale |
 | Requetes a adapter | 800 | Cout de migration significatif |
-| Equipe | 6 devs | Capacite limitee pour operer du polyglotte |
-| Frustrations | JSON lent, FTS basique, pas de DDL transactionnel | Problemes reels et quotidiens |
+| Équipe | 6 devs | Capacité limitee pour operer du polyglotte |
+| Frustrations | JSON lent, FTS basique, pas de DDL transactionnel | Problemes réels et quotidiens |
 
 ### Decision recommandee : Option B — Migrer vers PostgreSQL 16
 
@@ -198,11 +198,11 @@ MySQL 8 + Elasticsearch + MongoDB.
 
 ### Alternatives et arbitrages
 
-**Pourquoi pas A (MySQL 8.0) ?** C'est le chemin de moindre resistance, mais il ne resout pas les frustrations quotidiennes de l'equipe. Le FTS MySQL 8 reste basique compare a PostgreSQL tsvector. Le JSON est meilleur en MySQL 8, mais toujours inferieur a jsonb+GIN. Et surtout, dans 3 ans on se reposera la meme question. Autant investir maintenant.
+**Pourquoi pas A (MySQL 8.0) ?** C'est le chemin de moindre resistance, mais il ne resout pas les frustrations quotidiennes de l'équipe. Le FTS MySQL 8 reste basique compare a PostgreSQL tsvector. Le JSON est meilleur en MySQL 8, mais toujours inferieur a jsonb+GIN. Et surtout, dans 3 ans on se reposera la même question. Autant investir maintenant.
 
-**Pourquoi pas C (polyglotte) ?** Trois bases de donnees pour 6 developpeurs, c'est la garantie de nuits blanches en astreinte. Chaque base a besoin de monitoring, backup, upgrades, et une expertise specifique. L'equipe passerait plus de temps a maintenir l'infra qu'a developper des features.
+**Pourquoi pas C (polyglotte) ?** Trois bases de donnees pour 6 développeurs, c'est la garantie de nuits blanches en astreinte. Chaque base a besoin de monitoring, backup, upgrades, et une expertise spécifique. L'équipe passerait plus de temps a maintenir l'infra qu'a développer des features.
 
-**Le critere decisif** : MySQL 5.7 est EOL. Il faut migrer de toute facon. La question n'est pas "migrer ou pas" mais "vers quoi". Et si on fait l'effort de migrer, autant aller vers la meilleure option a long terme.
+**Le critere decisif** : MySQL 5.7 est EOL. Il faut migrer de toute façon. La question n'est pas "migrer ou pas" mais "vers quoi". Et si on fait l'effort de migrer, autant aller vers la meilleure option a long terme.
 
 ---
 
@@ -215,8 +215,8 @@ MySQL 8 + Elasticsearch + MongoDB.
 | Volume produits | 50K → 200K en 1 an | Modere, tous les moteurs gerent ce volume |
 | Besoins | Typo-tolerance, facettes, suggestions | Features avancees, pas un simple LIKE |
 | Latence cible | < 100ms p95 | Exigeant mais atteignable |
-| Equipe | 3 back + 1 DevOps | Capacite ops limitee |
-| Budget | Non precise | A evaluer cout total (dev + infra + maintenance) |
+| Équipe | 3 back + 1 DevOps | Capacité ops limitee |
+| Budget | Non précisé | A évaluer cout total (dev + infra + maintenance) |
 
 ### Decision recommandee : Option D — Meilisearch Cloud
 
@@ -311,41 +311,41 @@ Moteur de recherche manage, open-source, avec typo-tolerance native.
 
 ### Alternatives et arbitrages
 
-**Pourquoi pas A (PostgreSQL FTS) ?** Pour une recherche basique (nom + description), PostgreSQL FTS est excellent et gratuit. Mais les besoins exprimes (typo-tolerance, facettes, auto-suggestions) vont au-dela de ce que PostgreSQL fait nativement. Implementer tout ca en custom prendrait 2-3 mois de dev et serait fragile a maintenir. Le cout total (temps dev + maintenance) depasse largement le cout d'un SaaS.
+**Pourquoi pas A (PostgreSQL FTS) ?** Pour une recherche basique (nom + description), PostgreSQL FTS est excellent et gratuit. Mais les besoins exprimes (typo-tolerance, facettes, auto-suggestions) vont au-dela de ce que PostgreSQL fait nativement. Implementer tout ça en custom prendrait 2-3 mois de dev et serait fragile a maintenir. Le cout total (temps dev + maintenance) dépasse largement le cout d'un SaaS.
 
-**Pourquoi pas B (Algolia) ?** Algolia est la reference en qualite de recherche SaaS. Mais le modele de pricing (par operation de recherche) scale mal : a 200K produits avec du search-as-you-type (chaque frappe = 1 operation), la facture grimpe vite. Meilisearch Cloud offre un modele par nombre de documents, plus previsible.
+**Pourquoi pas B (Algolia) ?** Algolia est la référence en qualite de recherche SaaS. Mais le modèle de pricing (par operation de recherche) scale mal : a 200K produits avec du search-as-you-type (chaque frappe = 1 operation), la facture grimpe vite. Meilisearch Cloud offre un modèle par nombre de documents, plus previsible.
 
 **Pourquoi pas C (Elasticsearch self-hosted) ?** Elasticsearch est le moteur le plus puissant et le plus flexible. Mais la charge operationnelle d'un cluster ES (3 noeuds, JVM tuning, shard management, rolling upgrades) est disproportionnee pour 1 DevOps et 200K documents. C'est l'artillerie lourde pour un besoin modere. A reserver si les triggers sont atteints (volume > 1M, besoin de vector search, budget ops disponible).
 
-**Le critere decisif** : le ratio temps-de-dev / qualite-de-resultat. Meilisearch Cloud donne 90% de la qualite d'Algolia et 80% de la flexibilite d'Elasticsearch pour 20% de l'effort total. C'est le "sweet spot" pour une equipe de cette taille avec ce volume.
+**Le critere decisif** : le ratio temps-de-dev / qualite-de-résultat. Meilisearch Cloud donne 90% de la qualite d'Algolia et 80% de la flexibilite d'Elasticsearch pour 20% de l'effort total. C'est le "sweet spot" pour une équipe de cette taille avec ce volume.
 
 ---
 
-## Grille d'evaluation commune aux 3 katas
+## Grille d'évaluation commune aux 3 katas
 
-Pour chaque ADR que tu as redige, verifie ces criteres :
+Pour chaque ADR que tu as redige, vérifié ces criteres :
 
 | Critere | Valide ? |
 |---|---|
-| Le contexte est resume (pas de copier-coller de l'enonce) | |
+| Le contexte est résumé (pas de copier-coller de l'enonce) | |
 | Toutes les options sont evaluees (pas de "j'ai choisi X sans regarder les autres") | |
 | Les rejets sont justifies (pas juste "trop complexe") | |
 | La decision est explicite et sans ambiguite | |
 | Les consequences negatives sont admises (pas de solution parfaite) | |
-| Les triggers de migration/changement sont mesurables (pas "quand ca ira mal") | |
+| Les triggers de migration/changement sont mesurables (pas "quand ça ira mal") | |
 | Le plan d'action est concret (phases, durees, livrables) | |
 | Le ton est factuel, pas dogmatique ("nous recommandons X parce que Y", pas "X est la seule bonne option") | |
 
 ## Ce que tu aurais pu oublier
 
 ### 1. Confondre complexite accidentelle et complexite essentielle
-Les microservices ajoutent de la complexite accidentelle (reseau, serialisation, distributed transactions) a un probleme qui n'a pas de complexite essentielle de distribution. Avant de distribuer, se demander : "quel probleme concret cette distribution resout-elle ?"
+Les microservices ajoutent de la complexite accidentelle (réseau, serialisation, distributed transactions) à un problème qui n'a pas de complexite essentielle de distribution. Avant de distribuer, se demander : "quel problème concret cette distribution resout-elle ?"
 
 ### 2. Ignorer le cout d'opportunite
 3-4 mois de migration de base de donnees = 3-4 mois sans nouvelles features. Pour une startup, c'est potentiellement fatal. Toujours peser le benefice technique contre l'impact business.
 
-### 3. Ne pas definir de fallback
+### 3. Ne pas définir de fallback
 Chaque decision architecturale devrait avoir un plan de degradation gracieuse. Meilisearch down ? Fallback sur PG FTS. ERP inaccessible ? Queue et retry. Pas de fallback = single point of failure.
 
-### 4. Le biais du "resume de conference"
-Le CTO du Kata 1 veut des microservices parce qu'il a vu une presentation. Les decisions architecturales doivent etre motivees par des problemes concrets et mesurables, pas par des tendances technologiques.
+### 4. Le biais du "résumé de conference"
+Le CTO du Kata 1 veut des microservices parce qu'il a vu une présentation. Les decisions architecturales doivent etre motivees par des problèmes concrets et mesurables, pas par des tendances technologiques.

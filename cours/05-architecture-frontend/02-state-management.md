@@ -9,13 +9,13 @@
 <details>
 <summary>1. Quelle est la différence entre un headless component et un composant UI classique ?</summary>
 
-Un **headless component** (ou custom hook) encapsule la logique (toggle, formulaire, pagination) sans aucun rendu visuel. Il expose l'état et les actions via un hook (`useToggle`, `useForm`). Le composant UI consomme ce hook et decide du rendu. Avantage : la meme logique peut etre réutilisée avec n'importe quel design.
+Un **headless component** (où custom hook) encapsule la logique (toggle, formulaire, pagination) sans aucun rendu visuel. Il expose l'état et les actions via un hook (`useToggle`, `useForm`). Le composant UI consomme ce hook et decide du rendu. Avantage : la même logique peut etre réutilisée avec n'importe quel design.
 </details>
 
 <details>
 <summary>2. Qu'est-ce qu'un Error Boundary et pourquoi est-ce important ?</summary>
 
-Un Error Boundary est un composant qui capture les erreurs dans son sous-arbre de composants et affiche un fallback (message d'erreur, bouton retry) au lieu de faire crasher toute l'application. C'est la "graceful degradation" côté front-end — une erreur dans un widget ne casse pas la page entiere.
+Un Error Boundary est un composant qui capture les erreurs dans son sous-arbre de composants et affiche un fallback (message d'erreur, bouton retry) au lieu de faire crasher toute l'application. C'est la "graceful degradation" côté front-end — une erreur dans un widget ne casse pas la page entière.
 </details>
 
 ---
@@ -26,7 +26,7 @@ Imagine un bureau de poste (le store) dans une ville (l'application) :
 
 - **State global** (store) = le bureau de poste central. Tous les quartiers (composants) y deposent et recuperent leur courrier (données). Un seul endroit centralise.
 - **State local** (`useState`) = la boite aux lettres de la maison. Le courrier ne concerne que cette maison.
-- **Derived state** (`computed`/`selector`) = le facteur qui trie le courrier par quartier. Il ne stocke rien, il calcule a partir du courrier existant.
+- **Derived state** (`computed`/`selector`) = le facteur qui trie le courrier par quartier. Il ne stocke rien, il calcule à partir du courrier existant.
 - **BroadcastChannel** = le telephone entre les bureaux de poste de villes voisines (onglets du navigateur). Quand le theme change dans un onglet, les autres sont notifies.
 
 **Regle** : ne pas tout mettre au bureau de poste. La boite aux lettres locale suffit pour 80% des cas.
@@ -59,7 +59,7 @@ Imagine un bureau de poste (le store) dans une ville (l'application) :
 | TypeScript | Excellent | Excellent | Excellent |
 | Learning curve | Faible | Moyenne | Faible |
 
-> **Default recommande pour ShopArch** : Zustand pour l'etat global (panier, auth, theme) et React Query pour l'etat serveur (produits, commandes). Zustand offre le meilleur ratio simplicite/puissance avec ~1KB de bundle, et React Query gere automatiquement le cache, la revalidation et le loading state des donnees API. Tu pourras changer plus tard si ton contexte l'exige.
+> **Default recommande pour ShopArch** : Zustand pour l'état global (panier, auth, theme) et React Query pour l'état serveur (produits, commandes). Zustand offre le meilleur ratio simplicite/puissance avec ~1KB de bundle, et React Query géré automatiquement le cache, la revalidation et le loading state des donnees API. Tu pourras changer plus tard si ton contexte l'exige.
 
 ### 3. ETag tracking per entity
 
@@ -303,7 +303,7 @@ localStorage.setItem('onboarding_done', 'true');
 
 ---
 
-## Resume
+## Résumé
 
 1. **Scope minimal** : `useState` local > store global. Ne globaliser que ce qui doit etre partage (auth, panier, theme)
 2. **ETag tracking** dans le store pour l'optimistic locking — chaque entité a son ETag, envoye via `If-Match`

@@ -7,7 +7,7 @@
 | Stock / Inventaire | **CP** | Vendre un produit en rupture = perte financiere + client mecontent. La cohérence est non-negociable. |
 | Commandes | **CP** | Une commande doit etre atomique (paiement + stock + création). Pas de commande "partielle". |
 | Panier | **AP** | Un panier temporairement incoherent est acceptable. L'utilisateur peut toujours ajouter/retirer. |
-| Catalogue produits | **AP** | Afficher un prix stale de quelques secondes est préférable a une page d'erreur. |
+| Catalogue produits | **AP** | Afficher un prix stale de quelques secondes est préférable à une page d'erreur. |
 | Recherche (ES) | **AP** | Un produit manquant dans la recherche pendant 30s est tolerable. |
 | Sessions (Redis) | **AP** | Si Redis est partitionne, mieux vaut créer une nouvelle session que bloquer l'accès. |
 
@@ -164,9 +164,9 @@ async checkout(userId: string, orderId: string): Promise<CheckoutResult> {
 | Performance sous charge | Degrade (lock wait) | Meilleure (pas de lock) |
 | Risque de sur-vente | Zero | Zero (retry jusqu'a succes) |
 | Complexite | Simple | Nécessité une logique de retry |
-| Cas d'usage ideal | Peu de concurrence sur le meme produit | Forte concurrence (flash sale) |
+| Cas d'usage ideal | Peu de concurrence sur le même produit | Forte concurrence (flash sale) |
 
-**Verdict pour ShopArch** : pessimiste pour le cas général (simple, suffisant). Pour les flash sales avec 1000 users sur le meme produit, passer en optimiste avec retry.
+**Verdict pour ShopArch** : pessimiste pour le cas général (simple, suffisant). Pour les flash sales avec 1000 users sur le même produit, passer en optimiste avec retry.
 
 ### Panier : LWW-merge vs event sourcing
 
@@ -183,10 +183,10 @@ async checkout(userId: string, orderId: string): Promise<CheckoutResult> {
 
 | Critère | TTL fixe (30s) | Invalidation par event |
 |---|---|---|
-| Fraicheur | Jusqu'a 30s de retard | Quasi temps-reel |
+| Fraicheur | Jusqu'a 30s de retard | Quasi temps-réel |
 | Complexite | Triviale | Nécessité un event bus |
 | Risque de stale | Oui (pendant le TTL) | Non (invalide immédiatement) |
-| Charge sur la DB | Constante (re-fetch apres TTL) | Minimale (fetch uniquement apres invalidation) |
+| Charge sur la DB | Constante (re-fetch après TTL) | Minimale (fetch uniquement après invalidation) |
 
 **Verdict pour ShopArch** : TTL fixe pour commencer (simple). Migrer vers invalidation événementielle quand le volume justifie un event bus (Redis Pub/Sub ou RabbitMQ).
 

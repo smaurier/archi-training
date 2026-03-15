@@ -9,11 +9,11 @@
 <details>
 <summary>1. Qu'est-ce que le Personalization Shell Pattern et quel problème resout-il ?</summary>
 
-Le shell pattern sert une page HTML **publique et CDN-cacheable** avec des skeletons a la place du contenu personnalise. Apres hydration, le client fetch les données privees (panier, user menu). Cela évité le header `Vary: Cookie` qui empeche le CDN de cacher la page.
+Le shell pattern sert une page HTML **publique et CDN-cacheable** avec des skeletons à la place du contenu personnalise. Après hydration, le client fetch les données privees (panier, user menu). Cela évité le header `Vary: Cookie` qui empeche le CDN de cacher la page.
 </details>
 
 <details>
-<summary>2. Comment prevenir le FOUC (Flash Of Unstyled Content) en SSR ?</summary>
+<summary>2. Comment prévenir le FOUC (Flash Of Unstyled Content) en SSR ?</summary>
 
 En injectant les design tokens CSS (custom properties) directement dans le `<head>` du HTML côté serveur, **avant le premier paint**. Ainsi le navigateur dispose des styles des le rendu initial, sans attendre le chargement du JavaScript.
 </details>
@@ -24,7 +24,7 @@ En injectant les design tokens CSS (custom properties) directement dans le `<hea
 
 Un journal est plie en deux dans le kiosque. Le lecteur voit d'abord le haut de la page (above the fold) — les gros titres, la photo principale. Le reste (below the fold) est invisible tant qu'il n'a pas deplie le journal.
 
-**La performance front-end suit le meme principe** :
+**La performance front-end suit le même principe** :
 - **Above the fold** = ce que l'utilisateur voit sans scroller → doit charger en premier (critical CSS, LCP image eager, preconnect)
 - **Below the fold** = le reste → peut charger en differe (lazy loading, on-idle hydration)
 - **Performance budget** = le poids maximal du journal — au-dela, il est trop lourd a transporter
@@ -102,7 +102,7 @@ export default defineConfig({
 |---|---|---|
 | **WebP/AVIF** | -30 a -50% taille | `<picture>` avec fallback JPG |
 | **srcset responsive** | Image adaptee a l'ecran | `srcset` + `sizes` |
-| **Lazy loading** | Charge a la demande | `loading="lazy"` (defaut) |
+| **Lazy loading** | Charge à la demandé | `loading="lazy"` (defaut) |
 | **Eager pour LCP** | LCP image chargee en priorité | `loading="eager"` + `fetchpriority="high"` |
 | **Blurhash placeholder** | Placeholder colore pendant le chargement | Canvas 4x3 pixels → base64 |
 | **Focal-point cropping** | Cadrage intelligent | `object-position` + metadata |
@@ -316,7 +316,7 @@ checkBudgets('./dist');
 
 ---
 
-## Resume
+## Résumé
 
 1. **Performance budgets** : JS ≤200KB gzip, CSS ≤50KB, TTFB ≤600ms — vérifier en CI
 2. **Core Web Vitals** : LCP <2.5s, CLS <0.1, INP <200ms — les 3 metriques Google pour le ranking

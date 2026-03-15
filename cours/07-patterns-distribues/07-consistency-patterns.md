@@ -25,7 +25,7 @@ On envoie les requêtes aux **deux systèmes** en parallele (legacy + nouveau). 
 Avant les satellites GPS, synchroniser les horloges de 100 gares etait un defi :
 - **Horloge centrale** (lock centralise) : une seule horloge fait référence. Simple, mais si elle tombe en panne, plus personne n'a l'heure.
 - **Horloge par gare** (horloge logique) : chaque gare a sa propre horloge et echange l'heure avec ses voisines. Pas de synchronisation parfaite, mais un **ordre relatif** (si A envoie un message a B, B sait que A etait "avant").
-- **Conflit** : deux gares changent l'horaire du meme train en meme temps. Qui gagne ? Il faut une règle de résolution.
+- **Conflit** : deux gares changent l'horaire du même train en même temps. Qui gagne ? Il faut une règle de résolution.
 
 ---
 
@@ -33,9 +33,9 @@ Avant les satellites GPS, synchroniser les horloges de 100 gares etait un defi :
 
 ### 1. Distributed locking
 
-Quand plusieurs instances d'un service accedent a la meme ressource :
+Quand plusieurs instances d'un service accedent à la même ressource :
 
-| Mecanisme | Technologie | Cas d'usage | Limitation |
+| Mécanisme | Technologie | Cas d'usage | Limitation |
 |---|---|---|---|
 | **Optimistic lock** | Version field en DB | Updates concurrents | Retry nécessaire |
 | **Pessimistic lock** | `SELECT FOR UPDATE` | Opérations critiques | 1 seul noeud DB |
@@ -105,7 +105,7 @@ function mergeCart(local: CartItem[], remote: CartItem[]): CartItem[] {
 
 ### 5. Idempotent consumers
 
-Un consumer DOIT etre idempotent — traiter le meme message 2 fois ne doit pas changer le résultat :
+Un consumer DOIT etre idempotent — traiter le même message 2 fois ne doit pas changer le résultat :
 
 ```typescript
 async function handleOrderCreated(event: OrderCreatedEvent): Promise<void> {
@@ -274,7 +274,7 @@ export class LeaderElection {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Distributed lock** (Redis SETNX + TTL + Lua release) pour opérations exclusives multi-noeud — toujours avec un TTL
 2. **Leader election** : un seul noeud exécuté les taches cron/batch — lease renouvelable avec TTL
@@ -294,3 +294,15 @@ export class LeaderElection {
 > - Définis la stratégie de résolution de conflits pour le panier (last-write-wins)
 > - Exercice(s) associé(s) : `exercices/32-cap-classifier/`
 > - Checkpoint : Module 07, critère 4
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [32-cap-classifier](../../exercices/32-cap-classifier/ENONCE)
+2. **Exercice** : [33-cqrs-catalogue-commandes](../../exercices/33-cqrs-catalogue-commandes/ENONCE)
+3. **Exercice** : [34-saga-commande](../../exercices/34-saga-commande/ENONCE)
+4. **Exercice** : [35-outbox-pattern](../../exercices/35-outbox-pattern/ENONCE)
+5. **Exercice** : [36-game-day-panne](../../exercices/36-game-day-panne/ENONCE)
+:::

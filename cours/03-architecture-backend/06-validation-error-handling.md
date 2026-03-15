@@ -9,14 +9,14 @@
 <details>
 <summary>1. Quelle est la différence entre Active Record et Data Mapper ?</summary>
 
-- **Active Record** : l'entité hérité d'un modèle de base et sait se persister (`product.save()`). L'entité est couplee a la DB.
-- **Data Mapper** : l'entité est un objet pur sans référence a la DB. Un mapper séparé traduit entre l'entité et la persistence. L'entité est découplé — testable et portable.
+- **Active Record** : l'entité hérité d'un modèle de base et sait se persister (`product.save()`). L'entité est couplee à la DB.
+- **Data Mapper** : l'entité est un objet pur sans référence à la DB. Un mapper séparé traduit entre l'entité et la persistence. L'entité est découplé — testable et portable.
 </details>
 
 <details>
 <summary>2. Pourquoi le rollback en content versioning est-il "non destructif" ?</summary>
 
-On ne supprime jamais une version existante. "Revenir a la v3" = créer une **nouvelle version** (v11, v12...) dont le contenu est identique a l'ancienne v3. L'historique complet reste intact, ce qui garantit l'auditabilite et permet de "rollback le rollback".
+On ne supprime jamais une version existante. "Revenir à la v3" = créer une **nouvelle version** (v11, v12...) dont le contenu est identique a l'ancienne v3. L'historique complet reste intact, ce qui garantit l'auditabilite et permet de "rollback le rollback".
 </details>
 
 ---
@@ -29,7 +29,7 @@ Les données qui entrent dans ton application sont comme un passager a l'aeropor
 2. **Controle de sécurité** (Domain validation) — le passager a-t-il le droit de voyager ? Son billet est-il cohérent ? → vérifié les règles métier
 3. **Embarquement** (Persistence validation) — la place est-elle disponible ? Le vol n'est-il pas complet ? → vérifié les contraintes techniques (unique, FK, check)
 
-Si le passager échoué a une étape, il recoit un message **clair et spécifique** expliquant pourquoi et comment corriger.
+Si le passager échoué à une étape, il recoit un message **clair et spécifique** expliquant pourquoi et comment corriger.
 
 ---
 
@@ -106,7 +106,7 @@ Le standard RFC 7807 définit un format uniforme pour les erreurs API :
 
 | Code | Signification | Action client | Exemple |
 |---|---|---|---|
-| **400** | Bad Request | Corriger la requête | JSON malformed, parametre manquant |
+| **400** | Bad Request | Corriger la requête | JSON malformed, paramètre manquant |
 | **401** | Unauthorized | Rediriger vers login | Token expire ou absent |
 | **403** | Forbidden | Afficher "accès refuse" | Pas le bon role RBAC |
 | **404** | Not Found | Afficher "non trouve" | Ressource inexistante |
@@ -116,7 +116,7 @@ Le standard RFC 7807 définit un format uniforme pour les erreurs API :
 | **429** | Too Many Requests | Attendre `Retry-After` | Rate limiting |
 | **500** | Internal Server Error | Afficher erreur générique | Bug serveur |
 
-**Cote front-end, chaque code a un handler dédié** :
+**Cote front-end, chaque code à un handler dédié** :
 
 ```typescript
 // Pas de switch/case infini — une map de strategies
@@ -372,12 +372,12 @@ export function handleApiError(error: ApiError, context: ErrorContext): void {
 
 ---
 
-## Resume
+## Résumé
 
-1. **3 couches de validation** : DTO (format), Domain (règles métier), Persistence (contraintes DB) — fail fast a chaque couche
+1. **3 couches de validation** : DTO (format), Domain (règles métier), Persistence (contraintes DB) — fail fast à chaque couche
 2. **RFC 7807 Problem Details** donne un format standard (`type`, `title`, `status`, `detail`, `violations`) pour toutes les erreurs API
-3. **Chaque code HTTP a une semantique precise** — 412 = ETag mismatch, 422 = validation, 429 = rate limit
-4. **Le front-end a un handler par code HTTP** — pas de `if (error) alert(error)` générique
+3. **Chaque code HTTP à une semantique précisé** — 412 = ETag mismatch, 422 = validation, 429 = rate limit
+4. **Le front-end à un handler par code HTTP** — pas de `if (error) alert(error)` générique
 5. **Ne jamais leaker les details internes** en production — les 500 retournent un message générique
 
 ---

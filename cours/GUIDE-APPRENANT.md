@@ -17,12 +17,12 @@ Ce n'est pas un test — c'est une boussole pour savoir par où commencer.
 
 ### JavaScript — es-tu prêt ?
 Coche ce que tu sais faire SANS chercher sur Google :
-- [ ] Ecrire une Promise et la chaîner avec `.then()` / `async await`
+- [ ] Écrire une Promise et la chaîner avec `.then()` / `async await`
 - [ ] Utiliser `map`, `filter`, `reduce` sur un tableau
 - [ ] Expliquer la différence entre `const obj = {}` et l'immutabilité
 - [ ] Destructurer un objet et un tableau
 - [ ] Comprendre le spread operator (`...`)
-- [ ] Ecrire un `try/catch` avec un `fetch`
+- [ ] Écrire un `try/catch` avec un `fetch`
 
 **6/6** -> Tu es prêt, passe aux prérequis TypeScript.
 **4-5/6** -> Révise les points manquants (MDN suffit), puis prérequis TypeScript.
@@ -89,7 +89,7 @@ A ce stade tu seras un dev différent de celui qui a commencé.
 2. **Tente l'exercice SANS regarder la correction** (même si c'est nul)
 3. **Compare avec la correction** — l'écart entre ta tentative et la correction, c'est là que tu apprends
 4. **Coche le checkpoint** dans `projet-fil-rouge/README.md`
-5. **Si tu peux l'expliquer à voix haute à quelqu'un** (ou à toi-même), tu as compris
+5. **Si tu peux l'expliquer à voix haute à quelqu'un** (où à toi-même), tu as compris
 
 ### Niveaux de difficulté des exercices
 
@@ -215,7 +215,7 @@ A ce stade tu seras un dev différent de celui qui a commencé.
 | | `exercices/26-micro-frontend/` | 1h | 🟡 Évaluer le besoin |
 | | `exercices/27-pwa-offline/` | 1h30 | 🔵 Service Worker |
 
-**🏆 Checkpoint Ère 3** : Le front ShopArch a un design system, le catalogue est SSR, le panier est SPA, le theme switcher marche sans FOUC. Lighthouse ≥ 90.
+**🏆 Checkpoint Ère 3** : Le front ShopArch à un design system, le catalogue est SSR, le panier est SPA, le theme switcher marche sans FOUC. Lighthouse ≥ 90.
 
 ---
 
@@ -335,7 +335,7 @@ Après chaque ère, auto-évalue-toi honnêtement :
 **Ère 2** : "Pourquoi l'Order est un agrégat et le Money un Value Object ?"
 → Si tu réponds instantanément avec la notion d'identité vs valeur, c'est bon.
 
-**Ère 3** : "Le product page a un LCP de 4 secondes. Par où tu commences ?"
+**Ère 3** : "Le product page à un LCP de 4 secondes. Par où tu commences ?"
 → Si tu penses SSR/ISR, image optimization, code splitting — c'est bon.
 
 **Ère 4** : "Un dev back veut stocker les sessions en mémoire du serveur. Qu'est-ce que tu lui dis ?"

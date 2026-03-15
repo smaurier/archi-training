@@ -11,7 +11,7 @@ Realiser un exercice de capacity planning pour ShopArch en prevision du Black Fr
 
 ## Contexte
 
-ShopArch traite normalement 100 requêtes/seconde. Pour le Black Friday, on prevoit un pic de 1000 req/s pendant 4 heures. L'infrastructure actuelle est : 2 serveurs API, 1 PostgreSQL, 1 Redis, 1 Elasticsearch.
+ShopArch traite normalement 100 requêtes/seconde. Pour le Black Friday, on prévoit un pic de 1000 req/s pendant 4 heures. L'infrastructure actuelle est : 2 serveurs API, 1 PostgreSQL, 1 Redis, 1 Elasticsearch.
 
 ## Temps estime
 
@@ -50,7 +50,7 @@ Ecris le plan de scaling :
 ### Bonus
 - Calculer le cout AWS/GCP estime pour le Black Friday
 - Implémenter un load test avec k6 pour valider les estimations
-- Définir un plan de degradation graceful si le pic depasse les previsions
+- Définir un plan de degradation graceful si le pic dépasse les previsions
 
 ## Contraintes
 - Les calculs doivent etre documentes (pas de "on ajoute des serveurs")

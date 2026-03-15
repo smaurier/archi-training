@@ -17,7 +17,7 @@ Conway's Law dit que l'architecture d'un système reflété la structure de comm
 
 1. **Stream-aligned** : delivre de la valeur business (équipe Catalog, équipe Checkout)
 2. **Platform** : fournit des outils aux stream-aligned (CI/CD, monitoring)
-3. **Enabling** : aide les autres a monter en competence (coaching, pas de code en prod)
+3. **Enabling** : aide les autres a monter en compétence (coaching, pas de code en prod)
 4. **Complicated-subsystem** : géré un sous-système technique complexe (ML, sécurité)
 </details>
 
@@ -30,7 +30,7 @@ Un général ne planifie pas une bataille sur un plan d'architecte — il utilis
 - **Fitness functions** : des eclaireurs qui rapportent "le pont tient toujours" ou "l'ennemi a bouge" — surveillance continue des invariants
 - **FinOps** : le budget militaire — combien coute chaque bataillon, ou investir, ou economiser
 
-L'architecture évolutive dit : "le plan de bataille change a chaque nouvelle information — il faut une architecture qui ACCUEILLE le changement."
+L'architecture évolutive dit : "le plan de bataille change à chaque nouvelle information — il faut une architecture qui ACCUEILLE le changement."
 
 ---
 
@@ -302,7 +302,7 @@ async trackApiCall(req: Request, next: NextFunction): Promise<void> {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Evolutionary Architecture** : construire → mesurer (fitness functions) → adapter — le changement est la norme, pas l'exception
 2. **Fitness functions** : tests automatises pour les invariants architecturaux — bundle size, circular deps, domain isolation, latence
@@ -322,3 +322,14 @@ async trackApiCall(req: Request, next: NextFunction): Promise<void> {
 > - Identifie les composants à acheter (auth, search) vs ceux à construire (domain logic)
 > - Exercice(s) associé(s) : `exercices/56-wardley-map/`
 > - Checkpoint : Module 12, critère 4
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [53-adr-c4-fil-rouge](../../exercices/53-adr-c4-fil-rouge/ENONCE)
+2. **Exercice** : [54-fitness-functions](../../exercices/54-fitness-functions/ENONCE)
+3. **Exercice** : [55-team-topologies](../../exercices/55-team-topologies/ENONCE)
+4. **Exercice** : [56-wardley-map](../../exercices/56-wardley-map/ENONCE)
+:::

@@ -218,13 +218,13 @@ describe('Module coupling', () => {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Quadrant de Fowler** : dette deliberee+prudente est acceptable, dette accidentelle+imprudente est dangereuse
-2. **Mesurer** : cyclomatic complexity, duplication, coupling, coverage, time to change — si ca ne se mesure pas, ca ne se géré pas
+2. **Mesurer** : cyclomatic complexity, duplication, coupling, coverage, time to change — si ça ne se mesure pas, ça ne se géré pas
 3. **Matrice impact/effort** : Quick Wins d'abord, Strategic ensuite, ignorer les Fill, éviter les Money Pits
 4. **Tactique vs Stratégique** : Boy Scout Rule dans chaque PR (tactique) + sprints dédiés pour les gros refactorings (stratégique)
-5. **Ne PAS rembourser** si le module sera supprime, si le cout du refactoring depasse le cout de la dette, ou si le code n'est jamais touche
+5. **Ne PAS rembourser** si le module sera supprime, si le cout du refactoring dépasse le cout de la dette, ou si le code n'est jamais touche
 
 ---
 

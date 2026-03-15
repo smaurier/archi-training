@@ -1,15 +1,15 @@
 # Types avances -- Le niveau qui impressionne en code review
 
-Tu sais typer une variable, ecrire un generique, utiliser `Pick` et `Omit`. Mais en code
+Tu sais typer une variable, écrire un générique, utiliser `Pick` et `Omit`. Mais en code
 review, tu as vu des types qui ressemblent a de la magie noire -- `Brand<string, "UUID">`,
-des `is` dans des signatures, des `satisfies` au bout d'un objet. Cette lecon demystifie
+des `is` dans des signatures, des `satisfies` au bout d'un objet. Cette leçon demystifie
 les types avances que tu vas croiser partout dans la formation.
 
 ---
 
 ## Branded types -- Quand `string` ne suffit plus
 
-Un `userId` et un `productId` sont tous les deux des strings. Le probleme :
+Un `userId` et un `productId` sont tous les deux des strings. Le problème :
 
 ```typescript
 function getOrder(userId: string, productId: string): Order { /* ... */ }
@@ -44,7 +44,7 @@ qui valide la presence de `@`. Passe une `string` brute la ou un `Email` est att
 
 ---
 
-## Discriminated unions -- Modeliser des evenements metier
+## Discriminated unions -- Modeliser des événements metier
 
 ```typescript
 type OrderEvent =
@@ -101,7 +101,7 @@ function hasMessage(value: unknown): value is { message: string } {
 }
 ```
 
-Le `animal is Cat` dit a TypeScript : "si `true`, considere le parametre comme `Cat`".
+Le `animal is Cat` dit a TypeScript : "si `true`, considere le paramètre comme `Cat`".
 
 **Essaie :** Ecris un type guard `isNonNullable<T>(value: T): value is NonNullable<T>`.
 Utilise-le pour filtrer : `[1, null, 3, undefined, 5].filter(isNonNullable)`.
@@ -123,7 +123,7 @@ const ok: EventName = "order.created";       // OK
 const nope: EventName = "order.archived";    // Erreur
 ```
 
-Mapping automatique avec remappage de cles :
+Mapping automatique avec remappage de clés :
 
 ```typescript
 type Getters<T> = {
@@ -140,7 +140,7 @@ type ProductGetters = Getters<{ name: string; price: number }>;
 
 ## `satisfies` -- Valider sans elargir
 
-`satisfies` (TS 4.9+) verifie la conformite sans perdre l'inference precise :
+`satisfies` (TS 4.9+) vérifié la conformite sans perdre l'inference précisé :
 
 ```typescript
 type Route = { path: string; auth: boolean };
@@ -159,7 +159,7 @@ Si tu oublies une route, `satisfies` te le signale. Avec une annotation de type 
 `routes.dashboard.auth` serait de type `boolean` -- trop large.
 
 **Essaie :** Cree un `ThemeColors = Record<"primary" | "secondary" | "background", string>`.
-Definis un objet avec `satisfies`. Verifie l'inference precise et essaie d'oublier une cle.
+Definis un objet avec `satisfies`. Verifie l'inference précisé et essaie d'oublier une clé.
 
 ---
 
@@ -179,7 +179,7 @@ type ElementOf<T> = T extends (infer E)[] ? E : never;
 type D = ElementOf<Product[]>;   // Product
 ```
 
-TypeScript fournit deja `ReturnType<T>` et `Parameters<T>` qui utilisent `infer` sous le
+TypeScript fournit déjà `ReturnType<T>` et `Parameters<T>` qui utilisent `infer` sous le
 capot. Tu n'ecriras pas souvent des `infer` complexes, mais tu dois savoir les lire.
 
 **Essaie :** Cree un type `UnwrapResult<T>` qui, pour un `Result<T, E>`, extrait `T`.
@@ -189,15 +189,15 @@ Teste avec `UnwrapResult<Result<User, Error>>` -- tu devrais obtenir `User`.
 
 ## Ce que tu retiens
 
-- Les branded types empechent de confondre des valeurs de meme type sous-jacent --
+- Les branded types empechent de confondre des valeurs de même type sous-jacent --
   un `UserId` n'est pas un `ProductId`.
 - Les discriminated unions avec exhaustive check (`never`) garantissent la gestion de tous
   les cas.
 - Les type guards `is` etendent le narrowing au-dela de `typeof` et `instanceof`.
-- `satisfies` verifie la conformite sans elargir les types -- ideal pour les configs.
+- `satisfies` vérifié la conformite sans elargir les types -- ideal pour les configs.
 - `infer` capture un sous-type dans un conditional type -- essentiel pour lire les
   types utilitaires avances.
 
 ---
 
-Lecon suivante : [Exercice integratif -- Construis ton premier domaine](./06-exercice-integratif.md)
+Leçon suivante : [Exercice integratif -- Construis ton premier domaine](./06-exercice-integratif.md)

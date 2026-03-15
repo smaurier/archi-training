@@ -26,11 +26,11 @@ Un format standard pour les réponses d'erreur API avec les champs `type` (URI d
 
 ## Analogie — La file d'attente au restaurant
 
-Quand un restaurant recoit trop de commandes en meme temps :
+Quand un restaurant recoit trop de commandes en même temps :
 
 - **Sans queue** : le chef essaie de tout faire en parallele → chaos, plats brules, service degrade
-- **Avec queue** : les commandes arrivent dans une file, le chef les traite une par une (ou par lot), les VIP passent en priorité, et si un plat rate, on le refait (retry)
-- **Dead letter** : apres 3 tentatives ratees, la commande est mise de côté pour investigation manuelle — on ne bloque pas la file
+- **Avec queue** : les commandes arrivent dans une file, le chef les traite une par une (où par lot), les VIP passent en priorité, et si un plat rate, on le refait (retry)
+- **Dead letter** : après 3 tentatives ratees, la commande est mise de côté pour investigation manuelle — on ne bloque pas la file
 
 C'est exactement ce que fait BullMQ avec Redis.
 
@@ -83,14 +83,14 @@ Certaines opérations ne doivent **pas** bloquer la réponse HTTP :
 | Type | Description | Exemple |
 |---|---|---|
 | **Immediate** | Execute des qu'un worker est disponible | Envoyer un email |
-| **Delayed** | Execute apres un delai | Rappel "panier abandonne" (30 min) |
-| **Scheduled** | Execute a une date precise | Publier un article le 15 mars a 9h |
+| **Delayed** | Execute après un delai | Rappel "panier abandonne" (30 min) |
+| **Scheduled** | Execute à une date précisé | Publier un article le 15 mars a 9h |
 | **Recurring** | Execute periodiquement (cron) | Nettoyer les sessions expirees chaque nuit |
 | **Priority** | Passe devant les autres | Notification de paiement (priorité haute) |
 
 ### 4. Idempotence des jobs
 
-Un job DOIT etre idempotent — s'il est exécuté 2 fois, le résultat est le meme :
+Un job DOIT etre idempotent — s'il est exécuté 2 fois, le résultat est le même :
 
 ```typescript
 // NON IDEMPOTENT — danger si retry
@@ -111,7 +111,7 @@ async processPayment(orderId: string, idempotencyKey: string) {
 
 ### 5. Dead Letter Queue (DLQ)
 
-Apres N retries echoues, le job est deplace dans une DLQ pour investigation :
+Après N retries echoues, le job est deplace dans une DLQ pour investigation :
 
 ```
 Job echoue → Retry 1 (delai 1s) → Retry 2 (delai 5s) → Retry 3 (delai 30s)
@@ -130,7 +130,7 @@ Job echoue → Retry 1 (delai 1s) → Retry 2 (delai 5s) → Retry 3 (delai 30s)
 |---|---|---|
 | **Fixed** | 5s, 5s, 5s | Service qui redemarrage rapidement |
 | **Exponential** | 1s, 2s, 4s, 8s | Service externe temporairement down |
-| **Exponential + jitter** | 1s±0.5, 2s±1, 4s±2 | Éviter le "thundering herd" (tous retryent en meme temps) |
+| **Exponential + jitter** | 1s±0.5, 2s±1, 4s±2 | Éviter le "thundering herd" (tous retryent en même temps) |
 
 ---
 
@@ -332,7 +332,7 @@ export class EmailQueueEvents extends QueueEventsHost {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Background jobs** pour tout ce qui n'a pas besoin d'une réponse synchrone — emails, PDF, images, indexation
 2. **BullMQ + Redis** : queues nommees, workers dédiés, retry avec backoff exponentiel

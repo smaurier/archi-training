@@ -30,7 +30,7 @@ Ecris un scénario k6 qui simule un parcours utilisateur :
 
 ### Étape 2 — Profil de charge
 Configure les profils de charge :
-- Smoke test : 1 VU, 30s (vérifier que ca fonctionne)
+- Smoke test : 1 VU, 30s (vérifier que ça fonctionne)
 - Load test : 100 VU, 5 min (charge normale)
 - Stress test : rampe 0→500 VU en 5 min, maintien 5 min, descente 5 min
 - Spike test : 10 VU → 500 VU instantane → retour 10 VU
@@ -52,7 +52,7 @@ Analyse les résultats et identifie :
 ### Bonus
 - Exporter les résultats vers Grafana (k6 Cloud ou InfluxDB)
 - Ajouter des custom metrics (temps de checkout, taux de conversion)
-- Comparer les résultats avant/apres une optimisation
+- Comparer les résultats avant/après une optimisation
 
 ## Contraintes
 - Le scénario doit etre realiste (pas 100% de checkouts, distribution realiste)
