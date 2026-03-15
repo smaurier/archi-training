@@ -1,6 +1,6 @@
 # Cours 13 — 12-Factor App & Idempotence
 
-**Objectif :** Maîtriser les 12 facteurs qui rendent une application cloud-native, comprendre l'importance vitale de l'idempotence, implémenter des cles d'idempotence et des retries surs, et éviter les doubles débits dans les systèmes de paiement.
+**Objectif :** Maîtriser les 12 facteurs qui rendent une application cloud-native, comprendre l'importance vitale de l'idempotence, implémenter des clés d'idempotence et des retries surs, et éviter les doubles débits dans les systèmes de paiement.
 
 ---
 
@@ -13,7 +13,7 @@
 <details>
 <summary>Réponse</summary>
 
-Parce que les Queries ont pour unique but de lire des données pour les afficher — elles n'appliquent aucune règle métier. Passer par les Entities Domain (reconstitution, mapping, validation) n'ajoute que de la latence et de la complexité sans valeur. Les Entities existent pour protéger les invariants métier lors des modifications. Pour une simple lecture, un SQL optimise retournant exactement le shape nécessaire au front est a la fois plus performant et plus simple. C'est le principe CQRS-lite : les chemins d'écriture et de lecture peuvent etre radicalement différents.
+Parce que les Queries ont pour unique but de lire des données pour les afficher — elles n'appliquent aucune règle métier. Passer par les Entities Domain (reconstitution, mapping, validation) n'ajoute que de la latence et de la complexité sans valeur. Les Entities existent pour protéger les invariants métier lors des modifications. Pour une simple lecture, un SQL optimise retournant exactement le shape nécessaire au front est à la fois plus performant et plus simple. C'est le principe CQRS-lite : les chemins d'écriture et de lecture peuvent etre radicalement différents.
 
 </details>
 
@@ -176,7 +176,7 @@ console.log(JSON.stringify({
 
 ### 3. Idempotence — Définition et propriété mathematique
 
-> Une opération est **idempotente** si l'appliquer une ou plusieurs fois produit le meme résultat que l'appliquer une seule fois.
+> Une opération est **idempotente** si l'appliquer une ou plusieurs fois produit le même résultat que l'appliquer une seule fois.
 
 ```
 IDEMPOTENT :
@@ -195,9 +195,9 @@ NON-IDEMPOTENTS par defaut :
 
 ---
 
-### 4. Les cles d'idempotence (Idempotency Keys)
+### 4. Les clés d'idempotence (Idempotency Keys)
 
-Une **cle d'idempotence** est un identifiant unique généré par le CLIENT avant d'envoyer la requête. Le serveur l'utilise pour reconnaitre une requête déjà traitee.
+Une **clé d'idempotence** est un identifiant unique généré par le CLIENT avant d'envoyer la requête. Le serveur l'utilise pour reconnaitre une requête déjà traitee.
 
 ```
 CLIENT                              SERVEUR
@@ -698,13 +698,13 @@ describe('ProcessPaymentUseCase — idempotence', () => {
 
 ---
 
-## Resume
+## Résumé
 
 - Les **12 facteurs** définissent une application cloud-native : config dans l'environnement (Facteur III), processes stateless (VI), shutdown gracieux (IX), et logs comme streams (XI) sont les plus critiques a maîtriser.
-- Une opération est **idempotente** si la répéter N fois produit le meme résultat que la faire une seule fois — propriété essentielle dans tout système distribue ou les timeouts et retries sont inevitables.
-- Les **cles d'idempotence** sont générées par le client (UUID v4) avant l'appel et envoyees dans un header `Idempotency-Key`. Le serveur stocke le résultat associe a cette cle dans Redis pour retourner la meme réponse aux retries.
-- Le pattern **tryAcquire + markCompleted** avec Redis `SET NX` garantit l'atomicite : un seul process peut acquerir le verrou, les suivants trouvent la cle déjà presente et retournent le résultat cache.
-- Le principe **Exactly-Once** s'obtient en combinant At-Least-Once (retries) avec l'idempotence côté serveur — c'est la seule facon realiste de garantir qu'un paiement n'est jamais debite deux fois.
+- Une opération est **idempotente** si la répéter N fois produit le même résultat que la faire une seule fois — propriété essentielle dans tout système distribue ou les timeouts et retries sont inevitables.
+- Les **clés d'idempotence** sont générées par le client (UUID v4) avant l'appel et envoyees dans un header `Idempotency-Key`. Le serveur stocke le résultat associe a cette clé dans Redis pour retourner la même réponse aux retries.
+- Le pattern **tryAcquire + markCompleted** avec Redis `SET NX` garantit l'atomicite : un seul process peut acquerir le verrou, les suivants trouvent la clé déjà présenté et retournent le résultat cache.
+- Le principe **Exactly-Once** s'obtient en combinant At-Least-Once (retries) avec l'idempotence côté serveur — c'est la seule façon realiste de garantir qu'un paiement n'est jamais debite deux fois.
 
 ---
 
@@ -732,3 +732,15 @@ Tu as maintenant couvert l'ensemble des patterns architecturaux fondamentaux :
 > - Implémente l'idempotency key sur `POST /orders` pour éviter les doubles commandes
 > - Exercice(s) associé(s) : `exercices/08-twelve-factor-checklist/`
 > - Checkpoint : Module 01, critère 4
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [05-layered-to-hexagonal](../../exercices/05-layered-to-hexagonal/ENONCE)
+2. **Exercice** : [06-vertical-slice-module](../../exercices/06-vertical-slice-module/ENONCE)
+3. **Exercice** : [07-decomposer-monolithe](../../exercices/07-decomposer-monolithe/ENONCE)
+4. **Renforcement** : [07b-quand-ne-pas-decomposer](../../exercices/07b-quand-ne-pas-decomposer/ENONCE)
+5. **Exercice** : [08-twelve-factor-checklist](../../exercices/08-twelve-factor-checklist/ENONCE)
+:::

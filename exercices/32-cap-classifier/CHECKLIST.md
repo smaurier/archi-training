@@ -7,7 +7,7 @@
 - [ ] Panier : AP avec stratégie de merge
 - [ ] Stratégie de compensation au checkout (vérification stock)
 - [ ] Saga de compensation si paiement accepte + stock insuffisant
-- [ ] Tableau recapitulatif des classifications
+- [ ] Tableau récapitulatif des classifications
 
 ## Bonus
 - [ ] Read-Your-Writes guarantee

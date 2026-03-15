@@ -237,7 +237,7 @@ CORRECT — diagrammes as code (Mermaid, Structurizr DSL) versiones dans git
          Le diagramme evolue avec le code
 ```
 
-### 4. C4 trop detaille ou trop vague
+### 4. C4 trop détaillé ou trop vague
 ```
 FAUX — Level 1 qui montre les tables de la DB (trop detaille)
 CORRECT — chaque niveau a un public et un niveau de detail specifique

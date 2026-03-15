@@ -13,16 +13,16 @@
 <details>
 <summary>Réponse</summary>
 
-Le flux Implicit expose le token dans le fragment de l'URL (`#access_token=...`), ce qui le rend visible dans l'historique du navigateur, les logs des proxys, et les headers Referer. Il ne supporte pas les refresh tokens, ce qui force une re-authentification a chaque expiration. Le flux Authorization Code + PKCE echange le code d'autorisation via un POST (jamais dans l'URL), prouve l'identité du client avec un `code_verifier` (protection contre l'interception du code), et supporte les refresh tokens. Le flux Implicit est officiellement deprecie dans OAuth 2.1.
+Le flux Implicit expose le token dans le fragment de l'URL (`#access_token=...`), ce qui le rend visible dans l'historique du navigateur, les logs des proxys, et les headers Referer. Il ne supporte pas les refresh tokens, ce qui force une re-authentification à chaque expiration. Le flux Authorization Code + PKCE echange le code d'autorisation via un POST (jamais dans l'URL), prouve l'identité du client avec un `code_verifier` (protection contre l'interception du code), et supporte les refresh tokens. Le flux Implicit est officiellement deprecie dans OAuth 2.1.
 
 </details>
 
-**Question 2 — Comment le cache JWKS géré-t-il la rotation de cle ?**
+**Question 2 — Comment le cache JWKS géré-t-il la rotation de clé ?**
 
 <details>
 <summary>Réponse</summary>
 
-Le cache JWKS stocke les cles publiques de Keycloak dans Redis avec un TTL d'1 heure. Quand un JWT arrive avec un `kid` inconnu ou que la validation de signature échoué, le service force un refresh du cache (ignore le TTL) et retelecharge les cles depuis le JWKS endpoint de Keycloak. Si la nouvelle cle fonctionne, c'est une rotation de cle réussie. Si elle échoué aussi, le token est rejete. Cela garantit zero downtime lors des rotations de cle.
+Le cache JWKS stocke les clés publiques de Keycloak dans Redis avec un TTL d'1 heure. Quand un JWT arrive avec un `kid` inconnu ou que la validation de signature échoué, le service force un refresh du cache (ignore le TTL) et retelecharge les clés depuis le JWKS endpoint de Keycloak. Si la nouvelle clé fonctionne, c'est une rotation de clé réussie. Si elle échoué aussi, le token est rejete. Cela garantit zero downtime lors des rotations de clé.
 
 </details>
 
@@ -32,7 +32,7 @@ Le cache JWKS stocke les cles publiques de Keycloak dans Redis avec un TTL d'1 h
 
 **L'immeuble de bureaux — chaque etage est un tenant, chaque bureau est un site.**
 
-Imaginez un immeuble de bureaux partage par plusieurs entreprises. Chaque entreprise occupe un etage entier : elle a ses propres bureaux, sa propre decoration, son propre réseau Wi-Fi, et ses propres armoires de stockage. L'entreprise du 3eme etage ne peut jamais accéder aux dossiers du 5eme etage, meme si les deux utilisent la meme cage d'escalier et le meme ascenseur.
+Imaginez un immeuble de bureaux partage par plusieurs entreprises. Chaque entreprise occupe un etage entier : elle a ses propres bureaux, sa propre decoration, son propre réseau Wi-Fi, et ses propres armoires de stockage. L'entreprise du 3eme etage ne peut jamais accéder aux dossiers du 5eme etage, même si les deux utilisent la même cage d'escalier et le même ascenseur.
 
 C'est le **multi-tenancy** : un seul immeuble (une seule application), mais chaque etage (tenant) est complètement isole. Le gardien dans le hall (le middleware tenant) vérifié votre badge et vous dirige vers le bon etage.
 
@@ -508,12 +508,12 @@ export class TypeOrmArticleRepository
 
 ---
 
-## Resume
+## Résumé
 
 - Le **schema-per-tenant** (PostgreSQL `SET search_path`) offre une isolation forte au niveau des tables, avec la possibilité de backup/restauration granulaire par tenant via `pg_dump -n`.
 - L'**isolation en 3 couches** (schema BDD + filtre SQL automatique + prefix S3) fournit une defense en profondeur : si une couche est contournee, les autres maintiennent l'isolation des données.
 - L'extraction du tenant suit une priorité : claim JWT d'abord, puis header `X-Tenant-Id` en fallback, avec vérification d'existence et d'activite dans un registre cache.
-- Le **multi-site** (`X-Site-Id`) permet a un tenant de gérer plusieurs sites independants au sein du meme schema, avec des ressources partagees (media, users) et des contenus isoles (articles par site).
+- Le **multi-site** (`X-Site-Id`) permet à un tenant de gérer plusieurs sites independants au sein du même schema, avec des ressources partagees (media, users) et des contenus isoles (articles par site).
 - L'**observabilité par tenant** (logs, metriques, traces tagges avec `tenant_id`) permet le diagnostic cible, la facturation par usage, et l'identification des tenants gourmands (noisy neighbors).
 
 

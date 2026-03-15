@@ -1,6 +1,6 @@
 # Cours 21 — Architecture d'authentification (OIDC, JWT, RBAC)
 
-**Objectif :** Maîtriser le flux OAuth 2.0 / OIDC avec Authorization Code + PKCE, comprendre la validation JWT via RS256 et le caching JWKS, implémenter une hierarchie de roles RBAC avec des voters custom, concevoir un auth adapter (production OIDC vs mock dev), et sécuriser le stockage des tokens côté client.
+**Objectif :** Maîtriser le flux OAuth 2.0 / OIDC avec Authorization Code + PKCE, comprendre la validation JWT via RS256 et le caching JWKS, implémenter une hiérarchie de roles RBAC avec des voters custom, concevoir un auth adapter (production OIDC vs mock dev), et sécuriser le stockage des tokens côté client.
 
 ---
 
@@ -13,7 +13,7 @@
 <details>
 <summary>Réponse</summary>
 
-L'ordre est : Middleware (Express) -> Guards (authentification/autorisation) -> Interceptors avant (transformation requête, timer) -> Pipes (validation/transformation parametres) -> Handler (méthode du controller) -> Interceptors apres (transformation réponse) -> Exception Filters (si erreur). Chaque étape peut court-circuiter les suivantes. Par exemple, si un Guard retourne `false`, les Pipes et le Handler ne sont jamais executes.
+L'ordre est : Middleware (Express) -> Guards (authentification/autorisation) -> Interceptors avant (transformation requête, timer) -> Pipes (validation/transformation paramètres) -> Handler (méthode du controller) -> Interceptors après (transformation réponse) -> Exception Filters (si erreur). Chaque étape peut court-circuiter les suivantes. Par exemple, si un Guard retourne `false`, les Pipes et le Handler ne sont jamais executes.
 
 </details>
 
@@ -22,7 +22,7 @@ L'ordre est : Middleware (Express) -> Guards (authentification/autorisation) -> 
 <details>
 <summary>Réponse</summary>
 
-Un Guard prend une decision binaire (oui/non) : il retourne `true` pour autoriser l'accès ou leve une exception (403/401). Il a accès au `ExecutionContext` et aux metadata des decorateurs (`@Roles`). Un Interceptor wrappe le handler via un Observable RxJS, ce qui lui permet d'agir avant ET apres l'exécution du handler (mesurer le temps, transformer la réponse, ajouter du cache). Un Guard ne peut pas transformer la réponse ; un Interceptor ne devrait pas prendre de decision d'autorisation.
+Un Guard prend une decision binaire (oui/non) : il retourne `true` pour autoriser l'accès ou leve une exception (403/401). Il a accès au `ExecutionContext` et aux metadata des decorateurs (`@Roles`). Un Interceptor wrappe le handler via un Observable RxJS, ce qui lui permet d'agir avant ET après l'exécution du handler (mesurer le temps, transformer la réponse, ajouter du cache). Un Guard ne peut pas transformer la réponse ; un Interceptor ne devrait pas prendre de decision d'autorisation.
 
 </details>
 
@@ -40,7 +40,7 @@ Pour entrer dans un immeuble de bureaux moderne, vous passez par plusieurs contr
 4. **Les etages** (les roles RBAC) sont accessibles selon votre niveau de badge : badge "visiteur" pour le hall, "employe" pour les bureaux, "admin" pour la salle serveur.
 5. Si votre badge expire, vous retournez a l'accueil pour en obtenir un nouveau (**refresh token**).
 
-Vous ne montrez jamais votre mot de passe au portique — le badge suffit. Et l'immeuble n'appelle pas l'accueil a chaque passage de portique : il fait confiance a la signature.
+Vous ne montrez jamais votre mot de passe au portique — le badge suffit. Et l'immeuble n'appelle pas l'accueil à chaque passage de portique : il fait confiance à la signature.
 
 ---
 
@@ -102,7 +102,7 @@ FLUX AUTHORIZATION CODE + PKCE
 |---|---|---|
 | Token dans l'URL | Oui (fragment #) — visible dans les logs | Non — echange via POST |
 | Refresh token | Impossible | Possible |
-| Sécurité | Vulnerable au vol via l'historique navigateur | code_verifier prouve l'identité du client |
+| Sécurité | Vulnerable au vol via l'historique navigateur | code_vérifier prouve l'identité du client |
 | Standard actuel | Deprecie (OAuth 2.1) | Recommande pour SPA et mobile |
 
 ### 2. JWT — Structure et validation RS256
@@ -131,14 +131,14 @@ STRUCTURE JWT
 
 | Aspect | HS256 (symetrique) | RS256 (asymetrique) |
 |---|---|---|
-| Cle | Une seule cle partagee | Cle privee (IdP) + cle publique (API) |
-| Risque | Si l'API a la cle, elle peut forger des tokens | L'API ne peut QUE vérifier, pas forger |
-| Multi-service | Chaque service doit avoir le secret | Chaque service telecharge la cle publique |
+| Cle | Une seule clé partagee | Cle privee (IdP) + clé publique (API) |
+| Risque | Si l'API à la clé, elle peut forger des tokens | L'API ne peut QUE vérifier, pas forger |
+| Multi-service | Chaque service doit avoir le secret | Chaque service telecharge la clé publique |
 | Production | Deconseille | Standard |
 
 ### 3. JWKS Endpoint — Caching avec Redis
 
-Le JWKS (JSON Web Key Set) endpoint de Keycloak fournit les cles publiques pour vérifier les signatures JWT.
+Le JWKS (JSON Web Key Set) endpoint de Keycloak fournit les clés publiques pour vérifier les signatures JWT.
 
 ```
 STRATEGIE DE CACHE JWKS
@@ -168,7 +168,7 @@ STRATEGIE DE CACHE JWKS
       │                 │  (rotation de cle?)    │
 ```
 
-### 4. Hierarchie de roles RBAC
+### 4. Hiérarchie de roles RBAC
 
 ```
 HIERARCHIE DES ROLES
@@ -193,7 +193,7 @@ REGLE : un role herite de tous les droits de ses enfants.
 
 ### 5. Auth Adapter Pattern
 
-En production, l'auth passe par Keycloak OIDC. En développement, on utilise un mock qui évité de demarrer Keycloak.
+En production, l'auth passe par Keycloak OIDC. En développement, on utilise un mock qui évité de démarrer Keycloak.
 
 ```
 AUTH ADAPTER PATTERN
@@ -385,7 +385,7 @@ interface JwtPayload {
 }
 ```
 
-### Guard RBAC avec hierarchie de roles
+### Guard RBAC avec hiérarchie de roles
 
 ```typescript
 // infrastructure/guards/rbac.guard.ts
@@ -580,13 +580,13 @@ export class AuthModule {}
 
 ---
 
-## Resume
+## Résumé
 
-- **OAuth 2.0 Authorization Code + PKCE** est le flux recommande pour les SPA : le code_verifier prouve l'identité du client sans secret stocke dans le navigateur, et le token n'apparait jamais dans l'URL.
-- **RS256** (asymetrique) est obligatoire en production : l'API ne peut que vérifier les tokens avec la cle publique, jamais en forger — contrairement a HS256 ou la cle partagee permet les deux.
-- Le **cache JWKS** avec Redis (TTL 1h) évité d'appeler Keycloak a chaque requête, avec un force-refresh en cas d'echec de validation pour gérer les rotations de cle.
-- Le **RBAC avec hierarchie** simplifie la gestion des permissions : un `admin` hérité automatiquement de tous les droits `editor` et `contributor`, sans duplication explicite.
-- L'**auth adapter pattern** (interface + 2 implémentations) permet de développer et tester sans Keycloak reel, tout en garantissant le meme contrat d'authentification en production.
+- **OAuth 2.0 Authorization Code + PKCE** est le flux recommande pour les SPA : le code_vérifier prouve l'identité du client sans secret stocke dans le navigateur, et le token n'apparait jamais dans l'URL.
+- **RS256** (asymetrique) est obligatoire en production : l'API ne peut que vérifier les tokens avec la clé publique, jamais en forger — contrairement a HS256 ou la clé partagee permet les deux.
+- Le **cache JWKS** avec Redis (TTL 1h) évité d'appeler Keycloak à chaque requête, avec un force-refresh en cas d'echec de validation pour gérer les rotations de clé.
+- Le **RBAC avec hiérarchie** simplifie la gestion des permissions : un `admin` hérité automatiquement de tous les droits `editor` et `contributor`, sans duplication explicite.
+- L'**auth adapter pattern** (interface + 2 implémentations) permet de développer et tester sans Keycloak réel, tout en garantissant le même contrat d'authentification en production.
 
 
 ---

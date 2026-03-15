@@ -345,11 +345,11 @@ export class SearchProductsHandler {
 
 ### Projection synchrone vs asynchrone
 
-| Critère | Synchrone (meme transaction) | Asynchrone (event bus) |
+| Critère | Synchrone (même transaction) | Asynchrone (event bus) |
 |---|---|---|
 | Cohérence | Forte (immédiate) | Eventuelle (delai) |
 | Latence d'écriture | Plus lente (update 2 tables) | Rapide (1 table + publish event) |
-| Résilience | Si la projection échoué, l'écriture échoué aussi | L'écriture reussit meme si la projection est en retard |
+| Résilience | Si la projection échoué, l'écriture échoué aussi | L'écriture reussit même si la projection est en retard |
 | Complexite | Simple | Nécessité event bus + replay |
 
 **Verdict pour ShopArch** : commencer en synchrone (plus simple), migrer vers asynchrone quand la latence d'écriture devient un problème (> 50ms).
@@ -361,7 +361,7 @@ export class SearchProductsHandler {
 | Complexite | Standard | Elevee |
 | Historique | Perdu (sauf audit log manuel) | Complet (replay possible) |
 | Storage | Compact | Croissant (tous les events) |
-| Debug | Difficile (quel etait l'état avant ?) | Facile (replay jusqu'a un point) |
+| Debug | Difficile (quel etait l'état avant ?) | Facile (replay jusqu'à un point) |
 | Quand l'utiliser | 90% des cas | Audit strict, finance, undo/redo |
 
 **Verdict pour ShopArch** : state-based + CQRS est suffisant. Event sourcing uniquement si un besoin d'audit strict emerge (ex: conformite financiere).

@@ -52,7 +52,7 @@ Ecris la CSP complete pour ShopArch :
 
 ### Bonus
 - Implémenter un nonce-based CSP comme alternative (généré côté serveur par requête)
-- Ajouter `require-trusted-types-for 'script'` pour prevenir les injections DOM
+- Ajouter `require-trusted-types-for 'script'` pour prévenir les injections DOM
 - Comparer hash-based vs nonce-based en termes de sécurité et performance
 
 ## Contraintes

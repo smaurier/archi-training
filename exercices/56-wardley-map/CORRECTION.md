@@ -137,7 +137,7 @@ Valeur utilisateur (visible)
 | Critère | Prometheus + Grafana (self-hosted) | Datadog (SaaS) | Grafana Cloud |
 |---|---|---|---|
 | Cout | Infra + 10% temps ingenieur | ~$15/host/mois (escale vite) | Free tier genereux + pay-as-you-go |
-| Setup | Complexe (Prometheus, AlertManager, Grafana) | Tres simple (agent unique) | Simple (agent + cloud) |
+| Setup | Complexe (Prometheus, AlertManager, Grafana) | Très simple (agent unique) | Simple (agent + cloud) |
 | Dashboards | A construire | Pre-faits + custom | Pre-faits + custom |
 | Retention | A gérer (stockage, compaction) | Illimitee | Configurable |
 | Lock-in | Non | Oui (metriques custom, APM) | Modere |

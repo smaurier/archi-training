@@ -52,4 +52,4 @@ Configure MSW pour le développement local :
 ## Contraintes
 - Le code applicatif ne doit PAS etre modifie pour utiliser MSW
 - Les handlers doivent etre type-safe (TypeScript)
-- Les mocks doivent etre realistes (structure identique a l'API reelle)
+- Les mocks doivent etre realistes (structure identique a l'API réelle)

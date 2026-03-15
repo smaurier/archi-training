@@ -4,7 +4,7 @@
 - [ ] Validation des types pour NoSQL
 - [ ] IDOR : vérification proprietaire de la ressource
 - [ ] Mass assignment : DTOs explicites
-- [ ] Permissions verifiees a chaque endpoint
+- [ ] Permissions verifiees à chaque endpoint
 - [ ] HSTS header
 - [ ] X-Content-Type-Options: nosniff
 - [ ] X-Frame-Options: DENY

@@ -1,34 +1,34 @@
 # Cours 56 — OWASP Top 10 & Threat Modeling (STRIDE)
 
-> **Objectif** : Connaitre les 10 vulnérabilités web les plus critiques (OWASP 2021), savoir les prevenir dans une stack React + NestJS + PostgreSQL, et appliquer le modèle STRIDE pour identifier systematiquement les menaces d'une architecture.
+> **Objectif** : Connaître les 10 vulnérabilités web les plus critiques (OWASP 2021), savoir les prévenir dans une stack React + NestJS + PostgreSQL, et appliquer le modèle STRIDE pour identifier systematiquement les menaces d'une architecture.
 
 ---
 
 ## Rappel du cours précédent
 
 <details>
-<summary>1. Qu'est-ce que le distributed locking et pourquoi Redis SETNX est-il préféré a un lock applicatif ?</summary>
+<summary>1. Qu'est-ce que le distributed locking et pourquoi Redis SETNX est-il préféré à un lock applicatif ?</summary>
 
-Le distributed locking empeche deux instances d'un service de modifier la meme ressource en parallele. `SETNX` (SET if Not eXists) est atomique et distribue — il fonctionne meme si les instances sont sur des machines différentes. Un lock applicatif (mutex, semaphore) ne protégé qu'un seul processus. Le TTL sur la cle Redis garantit qu'un lock orphelin (crash) est automatiquement libéré.
+Le distributed locking empeche deux instances d'un service de modifier la même ressource en parallele. `SETNX` (SET if Not eXists) est atomique et distribue — il fonctionne même si les instances sont sur des machines différentes. Un lock applicatif (mutex, semaphore) ne protégé qu'un seul processus. Le TTL sur la clé Redis garantit qu'un lock orphelin (crash) est automatiquement libéré.
 </details>
 
 <details>
 <summary>2. Pourquoi "exactly-once delivery" est un mythe dans les systèmes distribues ?</summary>
 
-Le réseau peut perdre des paquets ou dupliquer des ACK. On ne peut garantir que **at-most-once** (fire-and-forget) ou **at-least-once** (retry + ACK). Pour simuler exactly-once, on combine at-least-once delivery avec un **idempotent consumer** (cle d'idempotence stockee, deduplication côté recepteur). C'est exactly-once *processing*, pas exactly-once *delivery*.
+Le réseau peut perdre des paquets ou dupliquer des ACK. On ne peut garantir que **at-most-once** (fire-and-forget) ou **at-least-once** (retry + ACK). Pour simuler exactly-once, on combine at-least-once delivery avec un **idempotent consumer** (clé d'idempotence stockee, deduplication côté recepteur). C'est exactly-once *processing*, pas exactly-once *delivery*.
 </details>
 
 ---
 
 ## Analogie — Le système immunitaire
 
-Le corps humain a un système immunitaire en couches, exactement comme la sécurité applicative :
+Le corps humain à un système immunitaire en couches, exactement comme la sécurité applicative :
 
 - **La peau** = la validation d'entree — elle bloque la majorite des menaces avant qu'elles n'entrent
 - **Les globules blancs** = la sanitization — ils identifient et neutralisent ce qui est passe
 - **Les anticorps spécifiques** = les règles de sécurité par endpoint — chaque menace connue a sa parade
 - **La fievre** = le rate limiting — ralentir tout le système pour empecher une attaque de se propager
-- **La mémoire immunitaire** = le threat modeling — apres chaque incident, le système "se souvient" et reagit plus vite
+- **La mémoire immunitaire** = le threat modeling — après chaque incident, le système "se souvient" et reagit plus vite
 - **L'auto-immunite** = le faux positif — quand la sécurité attaque les utilisateurs legitimes (trop de restrictions)
 
 Un bon architecte, comme un bon immunologue, dose la réponse : trop faible = vulnérabilité, trop forte = application inutilisable.
@@ -123,7 +123,7 @@ Trois types de XSS :
 |---|---|---|
 | **Serveur (écriture)** | DOMPurify / sanitize-html | Supprime les balises dangereuses AVANT stockage |
 | **Client (lecture)** | React JSX (auto-escape) | Echappe `<`, `>`, `"`, `'` dans le rendu |
-| **CSP (navigateur)** | `script-src 'self'` | Bloque les scripts inline meme si XSS passe |
+| **CSP (navigateur)** | `script-src 'self'` | Bloque les scripts inline même si XSS passe |
 
 ### 5. CSRF — Cross-Site Request Forgery (A01)
 
@@ -338,13 +338,13 @@ export class CsrfService {
 
 ---
 
-## Resume
+## Résumé
 
 1. **IDOR** : utiliser des UUIDs v4 au lieu d'IDs sequentiels ET vérifier l'ownership côté serveur — l'UUID empeche la devination, le check empeche l'accès non autorise
 2. **Injection SQL** : toujours utiliser des requêtes parametrees (`$1`, `$2`) — ne jamais concatener des valeurs dans une requête SQL
-3. **XSS** : double sanitization — DOMPurify côté serveur a l'écriture, echappement React côté client a la lecture, CSP comme filet de sécurité
+3. **XSS** : double sanitization — DOMPurify côté serveur a l'écriture, echappement React côté client à la lecture, CSP comme filet de sécurité
 4. **CSRF** : token généré par `crypto.getRandomValues()` + comparaison en temps constant + `SameSite=Lax` sur les cookies
-5. **STRIDE** : modèle systematique pour identifier les menaces (Spoofing, Tampering, Repudiation, Information Disclosure, DoS, Elevation) — appliquer a chaque traversee de trust boundary
+5. **STRIDE** : modèle systematique pour identifier les menaces (Spoofing, Tampering, Repudiation, Information Disclosure, DoS, Elevation) — appliquer à chaque traversee de trust boundary
 
 ---
 

@@ -210,7 +210,7 @@ export function ProductImage({
 }
 ```
 
-## Validation MIME reelle
+## Validation MIME réelle
 
 ```typescript
 // mime-validator.ts

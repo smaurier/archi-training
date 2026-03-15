@@ -9,20 +9,20 @@
 <details>
 <summary>1. Comment sécuriser un webhook avec HMAC-SHA256 ?</summary>
 
-Le serveur généré une signature `HMAC-SHA256(secret, body)` et l'envoie dans le header `X-Webhook-Signature`. Le recepteur recalcule la signature avec le meme secret et compare. Si les signatures correspondent, le message est authentique et n'a pas ete altere. Utiliser `crypto.timingSafeEqual()` pour la comparaison (éviter les timing attacks).
+Le serveur généré une signature `HMAC-SHA256(secret, body)` et l'envoie dans le header `X-Webhook-Signature`. Le recepteur recalcule la signature avec le même secret et compare. Si les signatures correspondent, le message est authentique et n'a pas ete altere. Utiliser `crypto.timingSafeEqual()` pour la comparaison (éviter les timing attacks).
 </details>
 
 <details>
-<summary>2. Pourquoi auto-désactiver un webhook apres 10 echecs consecutifs ?</summary>
+<summary>2. Pourquoi auto-désactiver un webhook après 10 echecs consecutifs ?</summary>
 
-Pour éviter de surcharger le système avec des retries inutiles vers un endpoint mort. Apres 10 echecs, le webhook est désactivé et l'administrateur est notifie. Il pourra le reactiver manuellement apres avoir corrige le problème côté recepteur.
+Pour éviter de surcharger le système avec des retries inutiles vers un endpoint mort. Après 10 echecs, le webhook est désactivé et l'administrateur est notifie. Il pourra le reactiver manuellement après avoir corrige le problème côté recepteur.
 </details>
 
 ---
 
 ## Analogie — Le concierge d'hotel vs l'agent de voyage personnel
 
-- **API Gateway** = le concierge de l'hotel. Il est a l'entree, oriente chaque visiteur vers le bon service (routing), vérifié les cartes d'accès (auth), et limite le nombre de visiteurs par heure (rate limiting). Il ne fait pas le travail lui-meme — il délégué.
+- **API Gateway** = le concierge de l'hotel. Il est a l'entree, oriente chaque visiteur vers le bon service (routing), vérifié les cartes d'accès (auth), et limite le nombre de visiteurs par heure (rate limiting). Il ne fait pas le travail lui-même — il délégué.
 - **BFF** = l'agent de voyage personnel. Il connait les besoins spécifiques de SON client (le front-end). Il prepare des "packages" adaptes : pour le mobile, il agrege les données en une seule requête ; pour le web, il garde les tokens d'auth côté serveur. Chaque type de client a son propre agent.
 
 ---
@@ -134,7 +134,7 @@ Pour la communication inter-services dans un cluster Kubernetes :
 Le **sidecar proxy** (Envoy) géré automatiquement :
 - **mTLS** entre services (encryption transparente)
 - **Retry + circuit breaker** (résilience)
-- **Observabilite** (metriques, traces, logs)
+- **Observabilité** (metriques, traces, logs)
 - **Traffic management** (canary, blue/green)
 
 Technologies : **Istio**, **Linkerd**, **Consul Connect**.
@@ -265,7 +265,7 @@ export async function GET() {
 
 ---
 
-## Resume
+## Résumé
 
 1. **API Gateway** : point d'entree unique pour routing, auth, rate limiting, caching — pas de logique métier
 2. **BFF** : un backend par type de client — garde les tokens server-side, agrege les réponses, fait le SSR
@@ -275,7 +275,7 @@ export async function GET() {
 
 ---
 
-> **Prochain cours** : [Cours 49 — Théorie des systèmes distribues](../07-patterns-distribues/01-théorie-systèmes-distribues.md) — ou comment comprendre le theoreme CAP, PACELC et les modèles de consistance.
+> **Prochain cours** : [Cours 49 — Théorie des systèmes distribues](../07-patterns-distribues/01-théorie-systèmes-distribues.md) — ou comment comprendre le théorème CAP, PACELC et les modèles de consistance.
 
 ---
 
@@ -285,3 +285,15 @@ export async function GET() {
 > - Le BFF gère les auth tokens côté serveur (pas de token dans le localStorage)
 > - Exercice(s) associé(s) : `exercices/31-bff-ecommerce/`
 > - Checkpoint : Module 06, critère 3
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [28-http2-benchmark](../../exercices/28-http2-benchmark/ENONCE)
+2. **Exercice** : [29-api-rest-avancee](../../exercices/29-api-rest-avancee/ENONCE)
+3. **Exercice** : [30-webhook-hmac](../../exercices/30-webhook-hmac/ENONCE)
+4. **Renforcement** : [30b-webhook-consumer](../../exercices/30b-webhook-consumer/ENONCE)
+5. **Exercice** : [31-bff-ecommerce](../../exercices/31-bff-ecommerce/ENONCE)
+:::

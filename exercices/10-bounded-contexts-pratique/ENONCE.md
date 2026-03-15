@@ -21,7 +21,7 @@ ShopArch grandit. L'équipe utilise les memes termes pour des concepts différen
 
 ### Étape 1 — Analyser le langage ubiquitaire
 
-Voici comment différentes équipes parlent du meme "produit" :
+Voici comment différentes équipes parlent du même "produit" :
 
 | Équipe | Terme | Attributs utilises |
 |---|---|---|
@@ -54,5 +54,5 @@ Pour chaque paire de contexts qui communiquent :
 ## Contraintes
 
 - Chaque context a son propre modèle de "Product" (pas de modèle unique partage)
-- Les contexts communiquent par events ou API, pas par accès direct a la DB
+- Les contexts communiquent par events ou API, pas par accès direct à la DB
 - Le glossaire de chaque context doit etre non-ambigu

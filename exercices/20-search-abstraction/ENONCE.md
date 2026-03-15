@@ -64,5 +64,5 @@ Le provider est choisi via la variable `SEARCH_PROVIDER=postgres|elasticsearch`.
 ## Contraintes
 
 - Le code métier (controller, service) ne connait PAS l'implémentation
-- Les deux providers doivent retourner le meme format
+- Les deux providers doivent retourner le même format
 - Le switch se fait sans changer le code métier

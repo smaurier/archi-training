@@ -7,25 +7,25 @@
 ## Rappel du cours précédent
 
 <details>
-<summary>1. Qu'est-ce que le theoreme CAP et quel est le vrai choix en production ?</summary>
+<summary>1. Qu'est-ce que le théorème CAP et quel est le vrai choix en production ?</summary>
 
-Le theoreme CAP stipule qu'un système distribue ne peut garantir simultanement Consistency, Availability et Partition Tolerance. En production, les partitions sont inevitables — on ne "choisit" pas P, on le subit. Le vrai choix pendant une partition est : sacrifier la **consistance** (AP — accepter les écritures, merger plus tard) ou la **disponibilité** (CP — refuser les écritures tant que le quorum n'est pas atteint).
+Le théorème CAP stipule qu'un système distribue ne peut garantir simultanement Consistency, Availability et Partition Tolerance. En production, les partitions sont inevitables — on ne "choisit" pas P, on le subit. Le vrai choix pendant une partition est : sacrifier la **consistance** (AP — accepter les écritures, merger plus tard) ou la **disponibilité** (CP — refuser les écritures tant que le quorum n'est pas atteint).
 </details>
 
 <details>
 <summary>2. Quelle est la différence entre strong consistency et eventual consistency ?</summary>
 
 **Strong consistency** (linearizable) : chaque read voit la dernière écriture, globalement. Requiert un quorum, latence élevée. Usage : soldes bancaires, stock critique.
-**Eventual consistency** : tous les replicas convergent a terme (quelques ms a quelques secondes). Latence tres basse. Usage : compteurs de likes, analytics, CDN. Entre les deux, la **session consistency** garantit le read-your-own-writes dans une session.
+**Eventual consistency** : tous les replicas convergent a terme (quelques ms a quelques secondes). Latence très basse. Usage : compteurs de likes, analytics, CDN. Entre les deux, la **session consistency** garantit le read-your-own-writes dans une session.
 </details>
 
 ---
 
 ## Analogie — Le restaurant avec une cuisine et un comptoir de vente a emporter
 
-Dans un restaurant classique, le meme chef prepare les plats a la carte (commandes individuelles) ET les plateaux-repas du comptoir (formats standardises). Ca ne scale pas.
+Dans un restaurant classique, le même chef prepare les plats à la carte (commandes individuelles) ET les plateaux-repas du comptoir (formats standardises). Ça ne scale pas.
 
-- **Le chef (write side)** prepare chaque plat a la commande — un a la fois, qualité maximale
+- **Le chef (write side)** prepare chaque plat à la commande — un à la fois, qualité maximale
 - **Le comptoir (read side)** a des plateaux pre-prepares, mis a jour quand la cuisine change le menu
 - **L'ardoise** (event/notification) previent le comptoir quand un plat est epuise
 - **La salle a manger** (client) n'a aucune idee qu'il y a deux systèmes différents derriere
@@ -38,7 +38,7 @@ CQRS, c'est séparer la cuisine (écriture) du comptoir (lecture) pour optimiser
 
 ### 1. Le problème : un seul modèle pour tout
 
-Dans un CRUD classique, le meme modèle sert a lire et a écrire :
+Dans un CRUD classique, le même modèle sert a lire et a écrire :
 
 ```
 ┌──────────┐     ┌──────────────┐     ┌──────────────┐
@@ -50,7 +50,7 @@ Dans un CRUD classique, le meme modèle sert a lire et a écrire :
 **Problemes** :
 - Le modèle d'écriture est normalise (3NF) → lectures lentes (JOINs)
 - Le modèle de lecture a besoin de denormalisation → écritures complexes
-- Le cache est invalide a chaque écriture → invalidation naive
+- Le cache est invalide à chaque écriture → invalidation naive
 - Les queries complexes (search, dashboard) polluent le modèle d'écriture
 
 ### 2. CQRS — séparer Command et Query
@@ -89,7 +89,7 @@ Dans un CRUD classique, le meme modèle sert a lire et a écrire :
 | Aspect | Command (Write) | Query (Read) |
 |---|---|---|
 | Verbe HTTP | POST, PUT, PATCH, DELETE | GET |
-| Retour | void ou ID cree | DTO complet (denormalise) |
+| Retour | void ou ID créé | DTO complet (denormalise) |
 | Modèle | Normalise, valide, invariants | Denormalise, optimise lecture |
 | Scaling | Vertical (1 master) | Horizontal (N replicas) |
 | Cache | Pas de cache (écriture) | Cache agressif (CDN, Redis) |
@@ -127,9 +127,9 @@ Niveau 3 : Store specialise (Elasticsearch, Redis)
 
 | Niveau | Complexite | Latence lecture | Consistance | Quand l'utiliser |
 |---|---|---|---|---|
-| 1 — Meme DB | Basse | Moyenne (~10ms) | Forte (meme DB) | MVP, équipe petite, trafic modere |
+| 1 — Même DB | Basse | Moyenne (~10ms) | Forte (même DB) | MVP, équipe petite, trafic modere |
 | 2 — Read replica | Moyenne | Basse (~5ms) | Eventual (~100ms lag) | Trafic lecture élevé |
-| 3 — Store specialise | Elevee | Tres basse (~1ms) | Eventual (~seconds) | Search, dashboard, analytics |
+| 3 — Store specialise | Elevee | Très basse (~1ms) | Eventual (~seconds) | Search, dashboard, analytics |
 
 ### 4. Surrogate-key cache invalidation (tag-based CDN purge)
 
@@ -169,7 +169,7 @@ Hierarchie de tags (du plus specifique au plus large) :
 
 ### 5. Quand CQRS est overkill
 
-CQRS ajoute de la complexité. Ne l'utilise que quand le benefice est reel :
+CQRS ajoute de la complexité. Ne l'utilise que quand le benefice est réel :
 
 | Situation | CQRS ? | Pourquoi |
 |---|---|---|
@@ -413,12 +413,12 @@ async listProducts(
 
 ---
 
-## Resume
+## Résumé
 
 1. **CQRS** séparé les chemins d'écriture (Command) et de lecture (Query) — chaque côté a son propre modèle optimise
-2. **3 niveaux de read store** : meme DB avec vues materialisees (simple), read replica (scalable), store specialise comme Elasticsearch (puissant)
-3. **Surrogate-key invalidation** : taguer chaque réponse CDN avec des cles (`product:123`, `category:shoes`) et purger par tag — plus fin que purger tout le cache
-4. **Projection** : les données du write model sont transformees (denormalisees) vers le read model, de manière synchrone (meme DB) ou asynchrone (event-driven)
+2. **3 niveaux de read store** : même DB avec vues materialisees (simple), read replica (scalable), store specialise comme Elasticsearch (puissant)
+3. **Surrogate-key invalidation** : taguer chaque réponse CDN avec des clés (`product:123`, `category:shoes`) et purger par tag — plus fin que purger tout le cache
+4. **Projection** : les données du write model sont transformees (denormalisees) vers le read model, de manière synchrone (même DB) ou asynchrone (event-driven)
 5. **CQRS est overkill** pour les CRUDs simples et les petites équipes — commencer sans, ajouter quand les lectures deviennent un bottleneck mesure
 
 ---

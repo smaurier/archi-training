@@ -22,7 +22,7 @@ Les images produit de ShopArch representent 70% du poids des pages. Les utilisat
 ### Étape 1 — Upload et processing
 Implemente le pipeline d'upload :
 - Accepter les images (JPEG, PNG, WebP) jusqu'a 20 MB
-- Valider le type MIME reel (pas juste l'extension)
+- Valider le type MIME réel (pas juste l'extension)
 - Générer des variantes : thumbnail (150px), medium (600px), large (1200px), original
 - Convertir en WebP et AVIF (en plus du format original)
 

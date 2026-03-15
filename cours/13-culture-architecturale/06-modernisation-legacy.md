@@ -15,7 +15,7 @@
 <details>
 <summary>2. Qu'est-ce qu'un G-Counter CRDT ?</summary>
 
-Un G-Counter (Grow-only Counter) est le CRDT le plus simple : chaque noeud maintient son propre compteur, le total est la somme de tous. Le merge prend le max de chaque noeud — peu importe l'ordre des merges, le résultat converge vers la meme valeur. Il ne permet que l'incrementation (pas la decrementation).
+Un G-Counter (Grow-only Counter) est le CRDT le plus simple : chaque noeud maintient son propre compteur, le total est la somme de tous. Le merge prend le max de chaque noeud — peu importe l'ordre des merges, le résultat converge vers la même valeur. Il ne permet que l'incrementation (pas la decrementation).
 </details>
 
 ---
@@ -23,7 +23,7 @@ Un G-Counter (Grow-only Counter) est le CRDT le plus simple : chaque noeud maint
 ## Analogie — Renover un immeuble habite
 
 Tu herites d'un immeuble des annees 60. Les locataires y vivent. Tu ne peux pas :
-- Demolir et reconstruire (Big Bang) → les locataires sont a la rue
+- Demolir et reconstruire (Big Bang) → les locataires sont à la rue
 - Tout laisser en l'état → le batiment se degrade
 
 Tu DOIS :
@@ -298,7 +298,7 @@ const migrationDashboard: MigrationStatus[] = [
 
 ---
 
-## Resume
+## Résumé
 
 1. **Anti-Corruption Layer** : facade de traduction entre le nouveau et le legacy — le nouveau code NE DOIT PAS utiliser les concepts du legacy
 2. **Intégration patterns** : API Wrapper (préféré) > Message Queue > File-based > Database (éviter) > Screen scraping (dernier recours)
@@ -308,7 +308,7 @@ const migrationDashboard: MigrationStatus[] = [
 
 ---
 
-> **Fin du parcours** — Tu as parcouru 89 cours et explore l'architecture logicielle de bout en bout. L'architecture n'est pas une destination, c'est un voyage continu. Continue a apprendre, experimenter, et surtout : construire.
+> **Fin du parcours** — Tu as parcouru 89 cours et explore l'architecture logicielle de bout en bout. L'architecture n'est pas une destination, c'est un voyage continu. Continue à apprendre, experimenter, et surtout : construire.
 
 ---
 
@@ -318,3 +318,25 @@ const migrationDashboard: MigrationStatus[] = [
 > - L'ACL traduit les formats ERP (XML SOAP) en domain objects ShopArch
 > - Exercice(s) associé(s) : `exercices/59-anti-corruption-layer/`
 > - Checkpoint : Module 13, critère 3
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [57-api-mobile-friendly](../../exercices/57-api-mobile-friendly/ENONCE)
+2. **Exercice** : [58-crdt-editeur](../../exercices/58-crdt-editeur/ENONCE)
+3. **Exercice** : [59-anti-corruption-layer](../../exercices/59-anti-corruption-layer/ENONCE)
+4. **Projet fil rouge** : [README](../../projet-fil-rouge/README)
+:::
+
+---
+
+<!-- navigation-inter-cours -->
+
+::: info Cours suivant
+Bravo, tu as termine le cours **Architecture** ! 
+Le prochain cours du curriculum est **Systèmes Distribues**.
+
+[Commencer Systèmes Distribues →](../../../11-distributed-systems/modules/00-prerequis-et-introduction.md)
+:::

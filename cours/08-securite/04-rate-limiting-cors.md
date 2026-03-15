@@ -1,6 +1,6 @@
 # Cours 59 — Rate Limiting & CORS
 
-> **Objectif** : Implémenter un rate limiting en sliding window avec Redis (INCR + EXPIRE), gérer les compteurs par tenant avec des cles GDPR-safe, configurer CORS correctement (preflight, headers), et comprendre la sécurité de la supply chain (SBOM, lockfile, Sigstore).
+> **Objectif** : Implémenter un rate limiting en sliding window avec Redis (INCR + EXPIRE), gérer les compteurs par tenant avec des clés GDPR-safe, configurer CORS correctement (preflight, headers), et comprendre la sécurité de la supply chain (SBOM, lockfile, Sigstore).
 
 ---
 
@@ -25,10 +25,10 @@ En **report-only** (`Content-Security-Policy-Report-Only`), les violations sont 
 Le rate limiting fonctionne comme un peage autoroutier et CORS comme la douane :
 
 - **Le peage** = le rate limiter — il laisse passer un nombre limite de vehicules par minute, peu importe leur vitesse
-- **La fenetre glissante** = la barriere qui compte les vehicules des 60 dernières secondes, pas "par tranche fixe de 60s"
+- **La fenêtre glissante** = la barriere qui compte les vehicules des 60 dernières secondes, pas "par tranche fixe de 60s"
 - **Le ticket de peage** = le header `X-Rate-Limit-Remaining` — il te dit combien de passages il te reste
 - **Les voies de peage par categorie** = les compteurs per-tenant — chaque client a son propre quota
-- **Le hash de la plaque** = la cle GDPR-safe — on identifie le vehicule sans stocker la plaque en clair
+- **Le hash de la plaque** = la clé GDPR-safe — on identifie le vehicule sans stocker la plaque en clair
 - **La douane** = CORS — elle vérifié que tu viens d'un pays autorise (`Access-Control-Allow-Origin`) avant de te laisser passer
 - **Le pre-controle** = la preflight request (`OPTIONS`) — la douane vérifié tes papiers AVANT que tu traverses
 
@@ -72,11 +72,11 @@ SLIDING WINDOW :
 
 | Algorithme | Precision | Mémoire | Complexite |
 |---|---|---|---|
-| Fixed window | Faible (burst) | O(1) par cle | Simple |
-| **Sliding window log** | Exacte | O(n) par cle | Couteux |
-| **Sliding window counter** | Bonne approximation | O(1) par cle | **Optimal** |
-| Token bucket | Bonne | O(1) par cle | Moyen |
-| Leaky bucket | Lissage | O(1) par cle | Moyen |
+| Fixed window | Faible (burst) | O(1) par clé | Simple |
+| **Sliding window log** | Exacte | O(n) par clé | Couteux |
+| **Sliding window counter** | Bonne approximation | O(1) par clé | **Optimal** |
+| Token bucket | Bonne | O(1) par clé | Moyen |
+| Leaky bucket | Lissage | O(1) par clé | Moyen |
 
 ### 3. Redis INCR + EXPIRE — implémentation sliding window counter
 
@@ -438,9 +438,9 @@ verifyLockfileIntegrity();
 
 ---
 
-## Resume
+## Résumé
 
-1. **Sliding window counter** : interpolation entre fenetre courante et précédente via Redis INCR + EXPIRE — pas de burst au bord de fenetre, O(1) mémoire par cle
+1. **Sliding window counter** : interpolation entre fenêtre courante et précédente via Redis INCR + EXPIRE — pas de burst au bord de fenêtre, O(1) mémoire par clé
 2. **Cles GDPR-safe** : `SHA-256(IP + pepper)` au lieu d'IP en clair — le pepper est un secret serveur rotate mensuellement, le hash est irreversible
 3. **Headers X-Rate-Limit-*** : toujours envoyer `Limit`, `Remaining`, `Reset` — le client peut adapter son comportement sans deviner (et `Retry-After` sur les 429)
 4. **CORS** : whitelist explicite des origines, jamais `*` avec credentials, `Access-Control-Max-Age` pour éviter les preflight repetitifs, `exposedHeaders` pour rendre les rate-limit headers lisibles par le JS

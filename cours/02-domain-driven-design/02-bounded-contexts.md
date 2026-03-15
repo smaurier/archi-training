@@ -22,7 +22,7 @@ Le DDD Stratégique repond a "quoi construire" : il définit les Bounded Context
 <details>
 <summary>Réponse</summary>
 
-"User" est polysemique : selon le contexte, il peut designer un visiteur anonyme, un client ayant passe commande, un administrateur, un vendeur partenaire, un support agent... Regrouper tous ces roles dans une seule entité `User` avec des dizaines de champs optionnels conduit a un modèle impossible a maintenir. Le Langage Ubiquitaire impose de donner a chaque concept un nom precis dans son contexte : `Customer`, `Administrator`, `Vendor`, `SupportAgent`.
+"User" est polysemique : selon le contexte, il peut designer un visiteur anonyme, un client ayant passe commande, un administrateur, un vendeur partenaire, un support agent... Regrouper tous ces roles dans une seule entité `User` avec des dizaines de champs optionnels conduit à un modèle impossible a maintenir. Le Langage Ubiquitaire impose de donner à chaque concept un nom précis dans son contexte : `Customer`, `Administrator`, `Vendor`, `SupportAgent`.
 
 </details>
 
@@ -32,7 +32,7 @@ Le DDD Stratégique repond a "quoi construire" : il définit les Bounded Context
 
 **Les pays avec leurs frontieres.**
 
-La France et l'Allemagne ont toutes les deux un concept de "carte d'identité". Mais la carte d'identité francaise et le Personalausweis allemand sont des documents tres différents : formats, champs, validite, usages. Si vous essayez de créer une "carte d'identité universelle europeenne" qui satisfait les deux pays, vous obtenez un document si complexe qu'il ne satisfait parfaitement aucun des deux.
+La France et l'Allemagne ont toutes les deux un concept de "carte d'identité". Mais la carte d'identité francaise et le Personalausweis allemand sont des documents très différents : formats, champs, validite, usages. Si vous essayez de créer une "carte d'identité universelle europeenne" qui satisfait les deux pays, vous obtenez un document si complexe qu'il ne satisfait parfaitement aucun des deux.
 
 La solution : chaque pays garde son propre document, et on définit une **interface de traduction** aux frontieres (accords de reconnaissance mutuelle).
 
@@ -44,7 +44,7 @@ Un **Bounded Context**, c'est un pays : il a son propre modèle, son propre voca
 
 ### 1. Qu'est-ce qu'un Bounded Context ?
 
-Un Bounded Context est une **frontiere explicite** a l'interieur de laquelle un modèle de domaine a un sens precis et cohérent. En dehors de cette frontiere, le meme terme peut avoir un sens différent.
+Un Bounded Context est une **frontiere explicite** a l'interieur de laquelle un modèle de domaine à un sens précis et cohérent. En dehors de cette frontiere, le même terme peut avoir un sens différent.
 
 ```
 EXEMPLE E-COMMERCE : LE MOT "PRODUIT"
@@ -435,9 +435,9 @@ describe('Bounded Context Isolation', () => {
 
 ---
 
-## Resume
+## Résumé
 
-- Un **Bounded Context** est une frontiere explicite ou un modèle métier a un sens cohérent ; le meme mot peut avoir des définitions différentes dans deux contextes différents.
+- Un **Bounded Context** est une frontiere explicite ou un modèle métier à un sens cohérent ; le même mot peut avoir des définitions différentes dans deux contextes différents.
 - La **Context Map** cartographie les six types de relations : Shared Kernel, ACL, Customer/Supplier, Conformist, Open Host Service, Published Language — chaque type implique un niveau de couplage et de coordination différent.
 - **Bounded Context != Microservice** : commencer par un monolithe bien module (1 BC = 1 module), et n'extraire en service independant que si le besoin est prouve.
 - L'**Anti-Corruption Layer** protégé votre domaine des modèles chaotiques externes : Stripe, DHL, un legacy ne doivent pas polluer votre vocabulaire interne.

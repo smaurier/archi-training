@@ -42,7 +42,7 @@ Implemente des tests de sécurité automatises :
 
 ### Étape 4 — Intégration CI
 Integre les fitness functions dans le pipeline CI :
-- Executees a chaque PR
+- Executees à chaque PR
 - Bloquent le merge si un invariant est viole
 - Rapport lisible avec le detail de chaque violation
 

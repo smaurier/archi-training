@@ -14,4 +14,4 @@
 ## Bonus
 - [ ] Export vers Grafana
 - [ ] Custom metrics (temps checkout)
-- [ ] Comparaison avant/apres
+- [ ] Comparaison avant/après

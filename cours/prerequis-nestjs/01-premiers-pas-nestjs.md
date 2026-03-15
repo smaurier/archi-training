@@ -12,7 +12,7 @@
 
 **En une phrase** : NestJS, c'est Express sous stéroïdes avec de la structure imposée.
 
-Tu connais Express ? Tu fais `app.get('/products', (req, res) => ...)` et tu organises ton code comme tu veux (ou pas). NestJS prend Express (ou Fastify) en dessous, et t'impose une structure claire inspirée d'Angular : modules, controllers, services.
+Tu connais Express ? Tu fais `app.get('/products', (req, res) => ...)` et tu organises ton code comme tu veux (où pas). NestJS prend Express (où Fastify) en dessous, et t'impose une structure claire inspirée d'Angular : modules, controllers, services.
 
 **Pourquoi c'est utilisé dans cette formation ?**
 Parce que NestJS implémente nativement les patterns d'architecture qu'on va étudier : injection de dépendances, séparation des responsabilités, décorateurs. C'est un cadre idéal pour apprendre l'architecture backend.
@@ -74,7 +74,7 @@ On va construire une API avec deux routes :
 - `GET /products` -> retourne la liste des produits
 - `POST /products` -> crée un produit
 
-### Etape 1 — Le Service (le cuisinier)
+### Étape 1 — Le Service (le cuisinier)
 
 ```typescript
 // product.service.ts
@@ -111,7 +111,7 @@ export class ProductService {
 
 **Ce qu'il faut retenir** : le Service contient la logique. Ici c'est un tableau en mémoire, en vrai ce serait une base de données. Le `@Injectable()` est obligatoire pour que NestJS sache qu'il peut gérer cette classe.
 
-### Etape 2 — Le Controller (le serveur)
+### Étape 2 — Le Controller (le serveur)
 
 ```typescript
 // product.controller.ts
@@ -141,7 +141,7 @@ export class ProductController {
 - `constructor(private readonly productService: ProductService)` = NestJS va automatiquement créer et fournir une instance de `ProductService`. C'est l'injection de dépendances. Tu ne fais jamais `new ProductService()` toi-même.
 - `@Body()` extrait le JSON envoyé dans la requête POST.
 
-### Etape 3 — Le Module (le restaurant)
+### Étape 3 — Le Module (le restaurant)
 
 ```typescript
 // product.module.ts
@@ -156,9 +156,9 @@ import { ProductService } from './product.service';
 export class ProductModule {}
 ```
 
-**Ce qu'il faut retenir** : Le Module déclare "voici mes controllers et mes services". NestJS utilise ça pour savoir quoi injecter où. Si tu oublies de déclarer un service dans `providers`, NestJS ne pourra pas l'injecter et tu auras une erreur.
+**Ce qu'il faut retenir** : Le Module déclare "voici mes controllers et mes services". NestJS utilise ça pour savoir quoi injecter ou. Si tu oublies de déclarer un service dans `providers`, NestJS ne pourra pas l'injecter et tu auras une erreur.
 
-### Etape 4 — Brancher au module racine
+### Étape 4 — Brancher au module racine
 
 ```typescript
 // app.module.ts
@@ -222,7 +222,7 @@ Quand tu arriveras à l'architecture hexagonale (Ere 2), tu apprendras que l'app
 
 NestJS, c'est la couche "adapter" — l'interface entre le monde extérieur (requêtes HTTP) et ta logique métier. Il reçoit les requêtes, les traduit en appels vers ton domaine, et renvoie les réponses.
 
-C'est pour ça qu'on sépare Controller et Service : le Controller est un adapter HTTP, le Service contient (ou appelle) la logique métier.
+C'est pour ça qu'on sépare Controller et Service : le Controller est un adapter HTTP, le Service contient (où appelle) la logique métier.
 
 ---
 
@@ -241,8 +241,8 @@ Tout ce qui suit sera couvert dans le Module 03. Ne t'en préoccupe pas :
 
 ## Exercice rapide (15 min)
 
-Pour vérifier que tu as compris, essaie de créer mentalement (ou sur papier) un module `User` avec :
-- Un `UserService` qui a une méthode `findById(id: number)` retournant `{ id, name, email }`
+Pour vérifier que tu as compris, essaie de créer mentalement (où sur papier) un module `User` avec :
+- Un `UserService` qui à une méthode `findById(id: number)` retournant `{ id, name, email }`
 - Un `UserController` avec une route `GET /users/:id` qui utilise le service
 - Un `UserModule` qui regroupe les deux
 

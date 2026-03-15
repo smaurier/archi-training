@@ -28,13 +28,13 @@ Ecris le test côté consumer (BFF) :
 ### Étape 2 — Provider vérification (API Catalogue)
 Ecris le test côté provider (API) :
 - Charge le contrat Pact généré par le consumer
-- Verifie que l'API reelle retourne des réponses conformes au contrat
+- Verifie que l'API réelle retourne des réponses conformes au contrat
 - Configure les provider states (ex: "un produit existe")
 
 ### Étape 3 — Pact Broker
 Configure le workflow :
 - Le consumer publie son contrat sur le Pact Broker
-- Le provider vérifié les contrats a chaque CI
+- Le provider vérifié les contrats à chaque CI
 - Le deploy est bloque si un contrat n'est pas vérifié ("can-i-deploy")
 
 ### Étape 4 — Évolution du contrat
@@ -49,6 +49,6 @@ Gere l'évolution :
 - Ajouter le "pending pacts" workflow (nouveau consumer sans bloquer le provider)
 
 ## Contraintes
-- Le consumer ne doit JAMAIS tester contre le provider reel (seulement le mock Pact)
+- Le consumer ne doit JAMAIS tester contre le provider réel (seulement le mock Pact)
 - Le provider doit vérifier TOUS les contrats de ses consumers
 - Le contrat doit couvrir au moins 3 endpoints critiques

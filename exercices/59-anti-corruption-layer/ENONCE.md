@@ -11,7 +11,7 @@ Implémenter un Anti-Corruption Layer (ACL) pour intégrer ShopArch avec un ERP 
 
 ## Contexte
 
-ShopArch doit synchroniser les produits et commandes avec un ERP legacy. L'ERP a un modèle de données tres différent : codes cryptiques (MATL_GRP au lieu de category), formats proprietaires (dates en YYYYMMDD string), et une API SOAP. Sans ACL, le domaine de ShopArch serait pollue par ces formats.
+ShopArch doit synchroniser les produits et commandes avec un ERP legacy. L'ERP à un modèle de données très différent : codes cryptiques (MATL_GRP au lieu de category), formats proprietaires (dates en YYYYMMDD string), et une API SOAP. Sans ACL, le domaine de ShopArch serait pollue par ces formats.
 
 ## Temps estime
 
@@ -37,7 +37,7 @@ Implemente les traducteurs :
 - `ERPProductTranslator.toDomain(erpMaterial): Product`
 - `ERPProductTranslator.toERP(product): ERPMaterial`
 - Gestion des valeurs manquantes (defaults)
-- Validation des données apres traduction
+- Validation des données après traduction
 
 ### Étape 4 — Résilience
 Ajoute la résilience a l'ACL :

@@ -21,7 +21,7 @@ Teste ta mémoire avant de continuer.
 Facade = simplifier. Adapter = traduire/convertir.
 </details>
 
-**Question 2 — Pourquoi la State Machine est-elle préférable a une serie de if/else pour gérer le cycle de vie d'un article ?**
+**Question 2 — Pourquoi la State Machine est-elle préférable à une serie de if/else pour gérer le cycle de vie d'un article ?**
 
 <details>
 <summary>Réponse</summary>
@@ -39,9 +39,9 @@ Avec les if/else, le comportement se disperse dans le code, et les cas invalides
 
 ## Analogie — La cuisine professionnelle
 
-Un chef etoile et un cuisinier amateur ont tous les deux accès aux memes ingredients et aux memes outils. La différence ? Le chef **range les ingredients de facon systematique**, nettoie son plan de travail apres chaque étape, garde les sauces dans des recipients identifies, et ne prepare jamais quelque chose dont il n'a pas encore besoin.
+Un chef etoile et un cuisinier amateur ont tous les deux accès aux memes ingredients et aux memes outils. La différence ? Le chef **range les ingredients de façon systematique**, nettoie son plan de travail après chaque étape, garde les sauces dans des recipients identifies, et ne prepare jamais quelque chose dont il n'a pas encore besoin.
 
-Le code propre suit la meme logique :
+Le code propre suit la même logique :
 - Chaque chose a sa place (**SoC, DRY**)
 - Rien d'inutile sur le plan de travail (**YAGNI, KISS**)
 - On travaille dans des petites zones propres (**Loi de Demeter**)
@@ -80,7 +80,7 @@ Respect DRY — la regle est centralisee :
 function validateArticle(article: Article): void { ... }  // UN seul endroit
 ```
 
-**Quand DRY ne s'applique PAS** : la règle des "trois strikes". Si tu as deux morceaux de code similaires, attends. Si un troisieme apparait et qu'ils representent vraiment la meme connaissance, alors abstrais. **Trois lignes similaires valent mieux qu'une abstraction prematuree**.
+**Quand DRY ne s'applique PAS** : la règle des "trois strikes". Si tu as deux morceaux de code similaires, attends. Si un troisieme apparait et qu'ils representent vraiment la même connaissance, alors abstrais. **Trois lignes similaires valent mieux qu'une abstraction prematuree**.
 
 ---
 
@@ -88,7 +88,7 @@ function validateArticle(article: Article): void { ... }  // UN seul endroit
 
 **"La solution la plus simple qui fonctionne est la bonne solution."**
 
-La complexité est le pire ennemi de la maintenabilité. Chaque niveau d'indirection, chaque généralisation prematuree, chaque pattern applique "au cas ou" ajoute une charge cognitive qui s'accumule.
+La complexité est le pire ennemi de la maintenabilité. Chaque niveau d'indirection, chaque généralisation prematuree, chaque pattern applique "au cas où" ajoute une charge cognitive qui s'accumule.
 
 ```
 Trop complexe (over-engineered) :
@@ -114,11 +114,11 @@ Simple et suffisant :
 
 ### YAGNI — You Ain't Gonna Need It
 
-**"N'implémenté pas quelque chose tant que tu n'en as pas reellement besoin."**
+**"N'implémenté pas quelque chose tant que tu n'en as pas réellement besoin."**
 
-Le futur est incertain. Le code que tu ecris "au cas ou" pour une fonctionnalité hypothetique :
+Le futur est incertain. Le code que tu ecris "au cas où" pour une fonctionnalité hypothetique :
 - Prend du temps a écrire maintenant
-- Doit etre maintenu meme s'il n'est jamais utilise
+- Doit etre maintenu même s'il n'est jamais utilise
 - Peut etre mal concu car le vrai besoin n'est pas encore clair
 - Augmente la surface testable
 
@@ -169,7 +169,7 @@ Si la DB change, seule la couche Infrastructure devrait changer.
 
 **"Un module ne doit interagir qu'avec ses dépendances directes, pas avec les dépendances de ses dépendances."**
 
-On appelle ca parfois le principe du **"une seule fleche"**. Chaque point dans `a.b.c.d()` est une connaissance de la structure interne d'un objet.
+On appelle ça parfois le principe du **"une seule fleche"**. Chaque point dans `a.b.c.d()` est une connaissance de la structure interne d'un objet.
 
 ```
 Violation — "train wreck" :
@@ -191,7 +191,7 @@ user.validatePostalCode()
 
 **"Prefere la composition de comportements a l'héritage de classe."**
 
-L'héritage cree un couplage fort et permanent entre la classe parente et les classes enfants. La composition reste flexible.
+L'héritage créé un couplage fort et permanent entre la classe parente et les classes enfants. La composition reste flexible.
 
 ```
 Heritage profond — fragile :
@@ -558,12 +558,12 @@ createUserTyped(email, 'admin', tenant);
 
 ---
 
-## Resume
+## Résumé
 
 - **DRY** : centralise la connaissance métier — mais attends trois occurrences similaires avant d'abstraire. Deux lignes similaires ne sont pas toujours une violation DRY.
-- **KISS et YAGNI** : la solution la plus simple qui resout le problème reel est la bonne. Ne code pas pour un futur hypothetique — "ca pourrait servir" est la première phrase du code mort.
+- **KISS et YAGNI** : la solution la plus simple qui resout le problème réel est la bonne. Ne code pas pour un futur hypothetique — "ça pourrait servir" est la première phrase du code mort.
 - **SoC et Loi de Demeter** : chaque module parle a ses voisins directs, pas aux voisins de ses voisins. Une chaine de points (`a.b.c.d()`) est un signal d'alarme — délégué plutot qu'explore.
-- **Composition > Héritage** : préféré assembler des comportements via des interfaces (Formatter, Sorter, Validator) plutot que d'hériter. L'héritage cree un couplage permanent, la composition reste flexible.
+- **Composition > Héritage** : préféré assembler des comportements via des interfaces (Formatter, Sorter, Validator) plutot que d'hériter. L'héritage créé un couplage permanent, la composition reste flexible.
 - **Fail Fast** : valide tes preconditions en premier avec des guard clauses, et échoué avec des messages clairs. Un code qui échoué silencieusement dans un mauvais état est infiniment plus dangereux qu'une exception explicite.
 
 

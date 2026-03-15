@@ -1,9 +1,9 @@
 # Async et gestion d'erreurs -- Promets-moi que tu n'ecriras plus `.then().catch()`
 
-Tu as probablement ecrit des centaines d'appels `fetch` en React. Et chaque fois, c'est
-le meme schema : `.then(res => res.json()).then(data => ...).catch(err => ...)`. Ca marche,
-mais les types disparaissent en route et la gestion d'erreurs se resume a un
-`console.log(err)` en priant. Cette lecon regle ca.
+Tu as probablement écrit des centaines d'appels `fetch` en React. Et chaque fois, c'est
+le même schema : `.then(res => res.json()).then(data => ...).catch(err => ...)`. Ça marche,
+mais les types disparaissent en route et la gestion d'erreurs se résumé à un
+`console.log(err)` en priant. Cette leçon regle ça.
 
 ---
 
@@ -23,7 +23,7 @@ Annote toujours le retour `Promise<T>` -- c'est de la documentation gratuite qui
 un `any` de se glisser.
 
 **Essaie :** Ecris une fonction `fetchProducts(): Promise<Product[]>` qui appelle
-`/api/products`, verifie `response.ok`, et retourne le JSON type.
+`/api/products`, vérifié `response.ok`, et retourne le JSON type.
 
 ---
 
@@ -44,7 +44,7 @@ async function getUser(id: string): Promise<User | null> {
 }
 ```
 
-Pour un narrowing plus fin, cree des classes d'erreur custom :
+Pour un narrowing plus fin, créé des classes d'erreur custom :
 
 ```typescript
 class HttpError extends Error {
@@ -78,8 +78,8 @@ catch (error: unknown) {
 **Essaie :** Cree une classe `TimeoutError extends Error` avec un champ `readonly url: string`.
 Ecris un `catch` qui distingue `TimeoutError`, `HttpError` et le reste.
 
-**Essaie :** Ecris un `catch` qui gere `instanceof TypeError` (reseau), `instanceof Error`
-(applicatif) et le cas par defaut, avec un message different pour chaque.
+**Essaie :** Ecris un `catch` qui géré `instanceof TypeError` (réseau), `instanceof Error`
+(applicatif) et le cas par defaut, avec un message différent pour chaque.
 
 ---
 
@@ -96,15 +96,15 @@ async function fetchProductsSafe(ids: string[]): Promise<Product[]> {
 }
 ```
 
-Le type guard inline `r is PromiseFulfilledResult<Product>` est necessaire pour que
-TypeScript sache que `.value` existe apres le filtre.
+Le type guard inline `r is PromiseFulfilledResult<Product>` est nécessaire pour que
+TypeScript sache que `.value` existe après le filtre.
 
 **Essaie :** Utilise `Promise.allSettled` pour fetcher 5 URLs. Affiche combien ont reussi
 et combien ont echoue. Collecte les messages d'erreur des echecs dans un tableau a part.
 
 ---
 
-## `AbortController` -- Annuler des requetes
+## `AbortController` -- Annuler des requêtes
 
 En React, quand un composant se demonte avant la fin d'un fetch, tu as un memory leak :
 
@@ -120,13 +120,13 @@ useEffect(() => {
 ```
 
 **Essaie :** Ecris une fonction `fetchWithAbort<T>(url: string, signal?: AbortSignal): Promise<T>`
-qui propage le signal au `fetch` et type la reponse en generique.
+qui propage le signal au `fetch` et type la réponse en générique.
 
 ---
 
 ## Le pattern Result -- Remplacer `try/catch` par des types
 
-`try/catch` a un defaut fondamental : rien dans la signature ne dit que la fonction peut
+`try/catch` à un defaut fondamental : rien dans la signature ne dit que la fonction peut
 echouer. Le pattern Result rend l'erreur explicite dans le type de retour :
 
 ```typescript
@@ -152,8 +152,8 @@ if (result.ok) console.log(result.value.name);   // type: User
 else console.log(result.error.status);            // type: HttpError
 ```
 
-L'erreur fait partie du contrat. C'est une discriminated union -- tu connais deja.
-La composition est naturelle : chaque etape peut echouer et le flux s'arrete proprement :
+L'erreur fait partie du contrat. C'est une discriminated union -- tu connais déjà.
+La composition est naturelle : chaque étape peut echouer et le flux s'arrete proprement :
 
 ```typescript
 async function createOrder(userId: string, productId: string): Promise<Result<Order, HttpError>> {
@@ -178,12 +178,12 @@ async function createOrder(userId: string, productId: string): Promise<Result<Or
 
 - `async/await` avec `Promise<T>` explicite remplace les chaines `.then()`.
 - Le `catch` recoit `unknown` -- utilise `instanceof` pour narrower vers le bon type.
-- Les classes d'erreur custom (`HttpError`, `NotFoundError`) permettent un narrowing precis.
-- `Promise.allSettled` est plus robuste que `Promise.all` quand certaines requetes peuvent echouer.
-- `AbortController` annule des requetes -- indispensable dans les `useEffect` React.
+- Les classes d'erreur custom (`HttpError`, `NotFoundError`) permettent un narrowing précis.
+- `Promise.allSettled` est plus robuste que `Promise.all` quand certaines requêtes peuvent echouer.
+- `AbortController` annule des requêtes -- indispensable dans les `useEffect` React.
 - Le pattern `Result<T, E>` rend les erreurs explicites dans le type de retour. C'est le
   pattern privilegie dans la formation.
 
 ---
 
-Lecon suivante : [Types avances -- Le niveau qui impressionne en code review](./05-types-avances.md)
+Leçon suivante : [Types avances -- Le niveau qui impressionne en code review](./05-types-avances.md)

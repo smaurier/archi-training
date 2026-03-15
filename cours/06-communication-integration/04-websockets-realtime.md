@@ -9,7 +9,7 @@
 <details>
 <summary>1. Qu'est-ce que le problème N+1 en GraphQL et comment le résoudre ?</summary>
 
-Le problème N+1 se produit quand une requête GraphQL qui récupéré N éléments effectue 1 requête supplementaire par élément pour résoudre une relation (ex: l'auteur de chaque article). Pour 20 articles, on obtient 1 + 20 = 21 requêtes SQL. **DataLoader** resout ce problème en collectant tous les IDs demandes dans un meme tick de l'event loop, puis en effectuant une seule requête batchee (`WHERE id IN (...)`). On passe de 21 a 2 requêtes.
+Le problème N+1 se produit quand une requête GraphQL qui récupéré N éléments effectue 1 requête supplementaire par élément pour résoudre une relation (ex: l'auteur de chaque article). Pour 20 articles, on obtient 1 + 20 = 21 requêtes SQL. **DataLoader** resout ce problème en collectant tous les IDs demandes dans un même tick de l'event loop, puis en effectuant une seule requête batchee (`WHERE id IN (...)`). On passe de 21 a 2 requêtes.
 </details>
 
 <details>
@@ -22,11 +22,11 @@ Le problème N+1 se produit quand une requête GraphQL qui récupéré N éléme
 
 ## Analogie — Le telephone, la radio et la boite aux lettres
 
-Trois facons de communiquer en temps reel :
+Trois facons de communiquer en temps réel :
 
 - **WebSocket = le telephone** : tu decroches, la ligne est ouverte dans les deux sens. Tu parles, l'autre repond immédiatement. La connexion reste etablie tant qu'on ne raccroche pas. Si la ligne coupe, il faut rappeler manuellement. Ideal pour une conversation (chat, collaboration).
-- **SSE = la radio** : tu allumes la radio (tu te connectes), et la station emet en continu. Tu ecoutes, mais tu ne peux pas parler au presentateur. Si tu perds le signal, la radio se reconnecte automatiquement a la bonne fréquence. Ideal pour des annonces (notifications, flux d'événements).
-- **Polling = la boite aux lettres** : toutes les 30 secondes, tu vas vérifier si tu as du courrier. Meme s'il n'y a rien, tu te deplaces. Couteux en effort, souvent pour rien. Le courrier peut attendre jusqu'a 30 secondes avant que tu le voies. Simple mais inefficace.
+- **SSE = la radio** : tu allumes la radio (tu te connectes), et la station emet en continu. Tu ecoutes, mais tu ne peux pas parler au presentateur. Si tu perds le signal, la radio se reconnecte automatiquement à la bonne fréquence. Ideal pour des annonces (notifications, flux d'événements).
+- **Polling = la boite aux lettres** : toutes les 30 secondes, tu vas vérifier si tu as du courrier. Même s'il n'y a rien, tu te deplaces. Couteux en effort, souvent pour rien. Le courrier peut attendre jusqu'a 30 secondes avant que tu le voies. Simple mais inefficace.
 
 ---
 
@@ -93,7 +93,7 @@ Architecture Rooms / Channels
 
 | Concept | Description |
 |---|---|
-| **Room** | Groupe logique de connexions — un message envoye a la room atteint tous ses membres |
+| **Room** | Groupe logique de connexions — un message envoye à la room atteint tous ses membres |
 | **Channel** | Pattern de topic (`tenant:{id}:{resource}`) pour router les messages |
 | **Namespace** | Isolation au niveau protocol (Socket.IO : `/admin`, `/public`) |
 | **Broadcast** | Envoyer a tous les membres d'une room sauf l'emetteur |
@@ -115,7 +115,7 @@ Strategie de reconnexion avec backoff exponentiel
   reconnectent exactement au meme instant (thundering herd).
 ```
 
-| Parametre | Valeur | Pourquoi |
+| Paramètre | Valeur | Pourquoi |
 |---|---|---|
 | **Delai initial** | 1s | Assez court pour une reprise rapide |
 | **Multiplicateur** | 2x | Exponentiel pour espacer les tentatives |
@@ -169,7 +169,7 @@ Scaling horizontal avec Redis adapter
 
 | Problème | Solution |
 |---|---|
-| **Sticky sessions** | Le load balancer doit router un client toujours vers le meme serveur (par IP ou cookie) |
+| **Sticky sessions** | Le load balancer doit router un client toujours vers le même serveur (par IP ou cookie) |
 | **Room cross-server** | Redis pub/sub — chaque serveur publie et s'abonne aux memes channels |
 | **Deconnexion serveur** | Le client se reconnecte → peut tomber sur un autre serveur → Redis synchronise |
 | **Mémoire** | 10K connexions WS = ~1GB RAM. Monitorer et scaler horizontalement |
@@ -421,7 +421,7 @@ export function useSocket({ url, token, onEvent }: UseSocketOptions) {
 }
 ```
 
-### SSE avec dernier event ID (reprise apres deconnexion)
+### SSE avec dernier event ID (reprise après deconnexion)
 
 ```typescript
 // sse.controller.ts — SSE avec Last-Event-ID
@@ -478,9 +478,9 @@ export class SseController {
 
 ---
 
-## Resume
+## Résumé
 
-1. **WebSocket** ouvre une connexion full-duplex persistante — ideal pour le chat, la collaboration temps reel, le gaming, ou toute interaction bidirectionnelle
+1. **WebSocket** ouvre une connexion full-duplex persistante — ideal pour le chat, la collaboration temps réel, le gaming, ou toute interaction bidirectionnelle
 2. **Rooms/channels** (`tenant:{id}:resource:{id}`) isolent les messages par contexte — toujours prefixer par le tenant pour respecter l'isolation multi-tenant
 3. **Reconnexion** avec backoff exponentiel + jitter pour éviter le thundering herd — plafonner a 30s, ne jamais arreter de tenter
 4. **Redis pub/sub adapter** permet de scaler horizontalement les WebSockets — chaque serveur publie/s'abonne, Redis synchronise les rooms cross-serveurs

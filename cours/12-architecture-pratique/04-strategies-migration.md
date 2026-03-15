@@ -9,7 +9,7 @@
 <details>
 <summary>1. Quels sont les 4 types de dette technique selon le quadrant de Fowler ?</summary>
 
-Deux axes : deliberee/accidentelle × prudente/imprudente. **Deliberee+prudente** : raccourci conscient, planifie pour remboursement. **Deliberee+imprudente** : "on n'a pas le temps". **Accidentelle+prudente** : on decouvre une meilleure solution apres coup. **Accidentelle+imprudente** : manque de connaissances.
+Deux axes : deliberee/accidentelle × prudente/imprudente. **Deliberee+prudente** : raccourci conscient, planifie pour remboursement. **Deliberee+imprudente** : "on n'a pas le temps". **Accidentelle+prudente** : on découvre une meilleure solution après coup. **Accidentelle+imprudente** : manque de connaissances.
 </details>
 
 <details>
@@ -37,7 +37,7 @@ Tu demenages ton magasin de l'autre côté de la rue. Tu ne peux pas fermer 3 mo
 
 | Stratégie | Description | Risque | Quand |
 |---|---|---|---|
-| **Big Bang** | Tout migrer d'un coup | Tres élevé | Presque jamais |
+| **Big Bang** | Tout migrer d'un coup | Très élevé | Presque jamais |
 | **Strangler Fig** | Feature par feature derriere un proxy | Faible | La plupart du temps |
 | **Parallel Run** | Les deux systèmes tournent en parallele | Moyen | Données critiques |
 
@@ -114,7 +114,7 @@ Redirect chain collapsing :
 | Pattern | Description | Complexite |
 |---|---|---|
 | **ETL** | Extract-Transform-Load batch | Faible |
-| **CDC** (Change Data Capture) | Stream les changements en temps reel | Moyenne |
+| **CDC** (Change Data Capture) | Stream les changements en temps réel | Moyenne |
 | **Dual-write** | Écrire dans les deux systèmes | Elevee (cohérence) |
 | **Backfill + CDC** | Copier l'existant puis streamer les deltas | Moyenne |
 
@@ -241,13 +241,13 @@ interface FeatureMigrator {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Strangler Fig** : migrer feature par feature derriere un proxy — jamais de Big Bang (échoué presque toujours)
 2. **Pre-flight diff report** : inventorier contenu, URLs, broken links AVANT de migrer — pas de surprises
 3. **AI HTML-to-block** : conversion automatique ~95%, review manuelle pour les 5% restants — accéléré massivement la migration
 4. **Redirect seeding + chain collapsing** : toujours 301 pour le SEO, max 1 hop, post-persist listener pour collapser
-5. **Zero-downtime** : les deux systèmes cohabitent, le proxy bascule progressivement, validation a chaque feature
+5. **Zero-downtime** : les deux systèmes cohabitent, le proxy bascule progressivement, validation à chaque feature
 
 ---
 

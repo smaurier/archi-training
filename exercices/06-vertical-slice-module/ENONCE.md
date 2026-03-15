@@ -44,7 +44,7 @@ src/wishlist/
 ### Étape 2 — Implémenter les 3 features (30 min)
 
 Pour chaque feature :
-1. **add-to-wishlist** : `POST /api/wishlists/items` — ajoute un produit a la wishlist de l'utilisateur. Contrainte : pas de doublon (meme produit 2 fois).
+1. **add-to-wishlist** : `POST /api/wishlists/items` — ajoute un produit à la wishlist de l'utilisateur. Contrainte : pas de doublon (même produit 2 fois).
 2. **remove-from-wishlist** : `DELETE /api/wishlists/items/:productId` — retire un produit.
 3. **get-wishlist** : `GET /api/wishlists` — retourne la wishlist de l'utilisateur connecte.
 

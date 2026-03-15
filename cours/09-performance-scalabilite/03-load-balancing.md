@@ -26,7 +26,7 @@ Un restaurant avec 10 serveurs (les serveurs d'application). Le maitre d'hotel (
 - **Round-robin** : table 1, table 2, table 3... a tour de role
 - **Least connections** : "qui a le moins de clients en ce moment ?"
 - **Weighted** : le serveur senior géré 3 tables, le stagiaire 1
-- **IP hash** : "Monsieur Dupont va toujours a la table 4" (sticky)
+- **IP hash** : "Monsieur Dupont va toujours à la table 4" (sticky)
 
 Si un serveur tombe malade (health check failed), le maitre d'hotel redirige ses clients vers les autres.
 
@@ -239,11 +239,11 @@ process.on('SIGTERM', async () => {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Round-robin** pour serveurs identiques, **least connections** pour charges variables, **weighted** pour capacités différentes
 2. **Layer 4** (TCP, rapide, sans inspection) vs **Layer 7** (HTTP, intelligent, routing par URL/header)
-3. **Health checks** : liveness (process vivant), readiness (peut servir du trafic), startup (demarrage termine)
+3. **Health checks** : liveness (process vivant), readiness (peut servir du trafic), startup (démarrage termine)
 4. **Stateless > sticky sessions** : stocker l'état dans Redis/DB, pas dans le serveur — scale horizontal trivial
 5. **Graceful shutdown** : SIGTERM → stop accept → drain connections → close resources → exit
 

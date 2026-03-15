@@ -20,12 +20,12 @@
 - [ ] GET retourne `ETag: "v{version}"` dans le response header
 - [ ] PUT requiert `If-Match` header
 - [ ] 412 Precondition Failed si version mismatch
-- [ ] La version est incrementee a chaque update
+- [ ] La version est incrementee à chaque update
 
 ## Pagination
 
 - [ ] Pagination cursor (pas offset)
-- [ ] Maximum 20 items par page (cap serveur meme si limit=100)
+- [ ] Maximum 20 items par page (cap serveur même si limit=100)
 - [ ] `hasMore` et `cursor` dans la réponse
 
 ## Erreurs

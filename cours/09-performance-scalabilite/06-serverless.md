@@ -15,14 +15,14 @@ La **réplication** duplique les memes données sur plusieurs noeuds (primary po
 <details>
 <summary>2. Pourquoi tenant_id est-il souvent le meilleur shard key ?</summary>
 
-Il a une haute cardinalite (beaucoup de tenants), une distribution relativement uniforme, et il est present dans pratiquement toutes les requêtes (filtre obligatoire en multi-tenant). Cela signifie que chaque requête va directement au bon shard (targeted query) au lieu de scanner tous les shards (scatter-gather).
+Il à une haute cardinalite (beaucoup de tenants), une distribution relativement uniforme, et il est present dans pratiquement toutes les requêtes (filtre obligatoire en multi-tenant). Cela signifie que chaque requête va directement au bon shard (targeted query) au lieu de scanner tous les shards (scatter-gather).
 </details>
 
 ---
 
 ## Analogie — Le taxi vs la voiture de fonction
 
-- **Containers** = voiture de fonction : tu paies le parking (infra), l'assurance (maintenance), l'essence (compute) meme quand tu roules pas. Mais elle est toujours prete, pas de temps d'attente.
+- **Containers** = voiture de fonction : tu paies le parking (infra), l'assurance (maintenance), l'essence (compute) même quand tu roules pas. Mais elle est toujours prete, pas de temps d'attente.
 - **Serverless** = taxi : tu paies uniquement la course. Pas de frais fixes. Mais il faut parfois attendre qu'un taxi soit disponible (cold start). Et si tu prends 50 courses par jour, le taxi coute plus cher que la voiture.
 
 ---
@@ -244,9 +244,9 @@ export async function thumbnailHandler(event: SQSEvent): Promise<void> {
 
 ---
 
-## Resume
+## Résumé
 
-1. **FaaS** (Lambda, Workers) : code exécuté a la demande, pay-per-invocation — ideal pour trafic sporadique et taches event-driven
+1. **FaaS** (Lambda, Workers) : code exécuté à la demandé, pay-per-invocation — ideal pour trafic sporadique et taches event-driven
 2. **Cold start** : 500ms-5s selon le runtime — mitigable avec provisioned concurrency ou runtimes légers (Node.js, Go)
 3. **Break-even** ~3-5M invocations/mois : en dessous serverless gagne, au dessus containers sont plus rentables
 4. **Edge Functions** : code exécuté sur le CDN edge node (~1ms cold start) — ideal pour auth, redirects, A/B testing
@@ -264,3 +264,14 @@ export async function thumbnailHandler(event: SQSEvent): Promise<void> {
 > - Compare le coût serverless vs container pour le pipeline d'images ShopArch
 > - Exercice(s) associé(s) : `exercices/45-serverless-vs-containers/`
 > - Checkpoint : Module 09, critère 2
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [42-cache-multi-niveaux](../../exercices/42-cache-multi-niveaux/ENONCE)
+2. **Exercice** : [43-cdn-image-pipeline](../../exercices/43-cdn-image-pipeline/ENONCE)
+3. **Exercice** : [44-capacity-planning](../../exercices/44-capacity-planning/ENONCE)
+4. **Exercice** : [45-serverless-vs-containers](../../exercices/45-serverless-vs-containers/ENONCE)
+:::

@@ -25,7 +25,7 @@
 ### Scénario 3 — Service paiement lent (Risque: moyen)
 | Champ | Detail |
 |---|---|
-| **Hypothese** | Le circuit breaker s'ouvre apres 5 timeouts, affiche un message "paiement temporairement indisponible" |
+| **Hypothese** | Le circuit breaker s'ouvre après 5 timeouts, affiche un message "paiement temporairement indisponible" |
 | **Injection** | Proxy toxiproxy avec 5s de latence sur le port du service paiement |
 | **Metriques** | Latence checkout, circuit breaker state, queue de commandes en attente |
 | **Succes** | Circuit breaker ouvert en < 30s, message user-friendly |

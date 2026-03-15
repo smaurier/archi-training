@@ -12,6 +12,6 @@
 - [ ] Secret write-only (jamais expose en lecture)
 
 ## Bonus
-- [ ] Circuit breaker (desactivation apres 10 echecs)
+- [ ] Circuit breaker (desactivation après 10 echecs)
 - [ ] Fan-out multi-subscribers
 - [ ] Filtre par event type

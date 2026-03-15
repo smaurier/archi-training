@@ -21,7 +21,7 @@ ShopArch a besoin d'une recherche produits performante. Avant d'investir dans El
 
 ### Étape 1 — Colonnes tsvector
 
-Ajoute une colonne `search_vector` de type `tsvector` a la table `products`. Elle doit combiner le nom (poids A) et la description (poids B) en francais.
+Ajoute une colonne `search_vector` de type `tsvector` à la table `products`. Elle doit combiner le nom (poids A) et la description (poids B) en français.
 
 ### Étape 2 — Index GIN
 

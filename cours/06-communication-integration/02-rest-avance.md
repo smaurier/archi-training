@@ -1,6 +1,6 @@
 # Cours 44 — REST avance
 
-> **Objectif** : Maîtriser HATEOAS et la découverte d'API, le versioning par URL, les headers de deprecation, la pagination cursor vs offset, les ETags conditionnels, le header Vary, la content negotiation (JSON-LD, Hydra), et la gouvernance API.
+> **Objectif** : Maîtriser HATEOAS et la découverte d'API, le versioning par URL, les headers de déprécation, la pagination cursor vs offset, les ETags conditionnels, le header Vary, la content negotiation (JSON-LD, Hydra), et la gouvernance API.
 
 ---
 
@@ -15,7 +15,7 @@ TCP impose un **head-of-line blocking** au niveau transport : si un seul paquet 
 <details>
 <summary>2. Quelle est la différence entre SSE et WebSocket ?</summary>
 
-**SSE** (Server-Sent Events) est unidirectionnel serveur vers client, utilise HTTP standard (`text/event-stream`), supporte la reconnexion automatique native, et passe les proxies/CDN sans problème. **WebSocket** est bidirectionnel, utilise un protocole propre apres un upgrade HTTP, nécessité une gestion manuelle de la reconnexion, mais permet au client d'envoyer des messages au serveur. SSE pour les notifications/flux, WebSocket pour le chat/collaboration.
+**SSE** (Server-Sent Events) est unidirectionnel serveur vers client, utilise HTTP standard (`text/event-stream`), supporte la reconnexion automatique native, et passe les proxies/CDN sans problème. **WebSocket** est bidirectionnel, utilise un protocole propre après un upgrade HTTP, nécessité une gestion manuelle de la reconnexion, mais permet au client d'envoyer des messages au serveur. SSE pour les notifications/flux, WebSocket pour le chat/collaboration.
 </details>
 
 ---
@@ -24,11 +24,11 @@ TCP impose un **head-of-line blocking** au niveau transport : si un seul paquet 
 
 Un restaurant gastronomique géré son menu comme une API :
 
-- **HATEOAS** = chaque plat du menu indique les actions possibles : "peut etre accompagne de...", "voir aussi le dessert assorti". Le client decouvre les possibilités en lisant le menu, sans avoir a connaitre la cuisine.
+- **HATEOAS** = chaque plat du menu indique les actions possibles : "peut etre accompagne de...", "voir aussi le dessert assorti". Le client découvre les possibilités en lisant le menu, sans avoir à connaître la cuisine.
 - **Versioning /v1/** = le menu d'ete (v1) coexiste avec le menu d'hiver (v2). Les habitues peuvent encore commander les plats du menu d'ete pendant la transition, mais un panneau indique "menu ete disponible jusqu'au 30 septembre".
-- **Deprecation header** = le petit asterisque a côté d'un plat : "* Ce plat sera retire le mois prochain. Essayez plutot le nouveau plat a la page 3."
-- **ETag** = le numéro de version du plat. Si tu reviens et que le plat n'a pas change (meme numéro), le serveur dit "c'est le meme, pas besoin de te le re-decrire".
-- **Pagination cursor** = au lieu de dire "donnez-moi la page 12 du menu de 200 plats", tu dis "donnez-moi les 20 plats apres le dernier que j'ai vu". Meme si le chef ajoute des plats entre-temps, tu ne rates rien et tu ne vois pas de doublons.
+- **Deprecation header** = le petit asterisque a côté d'un plat : "* Ce plat sera retire le mois prochain. Essayez plutot le nouveau plat à la page 3."
+- **ETag** = le numéro de version du plat. Si tu reviens et que le plat n'a pas change (même numéro), le serveur dit "c'est le même, pas besoin de te le re-decrire".
+- **Pagination cursor** = au lieu de dire "donnez-moi la page 12 du menu de 200 plats", tu dis "donnez-moi les 20 plats après le dernier que j'ai vu". Même si le chef ajoute des plats entre-temps, tu ne rates rien et tu ne vois pas de doublons.
 
 ---
 
@@ -36,7 +36,7 @@ Un restaurant gastronomique géré son menu comme une API :
 
 ### 1. HATEOAS — Hypermedia as the Engine of Application State
 
-HATEOAS signifie que l'API guide le client vers les actions possibles via des liens dans la réponse. Le client n'a pas besoin de construire les URL lui-meme.
+HATEOAS signifie que l'API guide le client vers les actions possibles via des liens dans la réponse. Le client n'a pas besoin de construire les URL lui-même.
 
 ```json
 {
@@ -63,7 +63,7 @@ HATEOAS signifie que l'API guide le client vers les actions possibles via des li
 | **Niveau 2** | Verbes HTTP corrects | GET pour lire, POST pour créer, DELETE pour supprimer |
 | **Niveau 3** | HATEOAS — hypermedia links | `_links` dans chaque réponse |
 
-### 2. URL versioning et deprecation
+### 2. URL versioning et déprécation
 
 ```
 URL Versioning Strategy
@@ -81,7 +81,7 @@ URL Versioning Strategy
 
 **Recommandation** : URL path (`/v1/`) pour les API publiques, header pour les API internes.
 
-Headers de deprecation (RFC 8594) :
+Headers de déprécation (RFC 8594) :
 
 ```
 HTTP/1.1 200 OK
@@ -92,13 +92,13 @@ Link: </api/v2/articles>; rel="successor-version"
 
 | Header | Role |
 |---|---|
-| **Deprecation** | Date a partir de laquelle l'endpoint est considere deprecie |
-| **Sunset** | Date a partir de laquelle l'endpoint sera supprime |
+| **Deprecation** | Date à partir de laquelle l'endpoint est considere deprecie |
+| **Sunset** | Date à partir de laquelle l'endpoint sera supprime |
 | **Link rel="successor-version"** | URL de la nouvelle version |
 
 ### 3. ETag conditionnel — If-Match vs If-None-Match
 
-Deux usages distincts du meme mecanisme :
+Deux usages distincts du même mécanisme :
 
 ```
 If-None-Match (lecture — cache validation)
@@ -161,7 +161,7 @@ Cursor-based (stable et performant) :
 
 | Critère | Offset | Cursor |
 |---|---|---|
-| **"Aller a la page 7"** | Oui (trivial) | Non (on ne peut que "page suivante") |
+| **"Aller à la page 7"** | Oui (trivial) | Non (on ne peut que "page suivante") |
 | **Performance sur grandes tables** | Degrade (O(offset + limit)) | Constante (O(limit)) |
 | **Stabilite (insertion entre pages)** | Doublons possibles | Aucun doublon |
 | **Cas d'usage** | Back-office, tables admin | Front-office, scroll infini, API publique |
@@ -252,7 +252,7 @@ Serveur → Client :
 | **Backward compatibility** | Ajouter des champs : OK. Supprimer/renommer : breaking change |
 | **Contract testing** | Tests qui verifient que le schema de réponse n'a pas change (Pact, Dredd) |
 | **API linting** | Spectral / Redocly pour valider l'OpenAPI spec automatiquement en CI |
-| **Deprecation policy** | Minimum 3 mois entre deprecation et suppression |
+| **Deprecation policy** | Minimum 3 mois entre déprécation et suppression |
 
 ---
 
@@ -428,13 +428,13 @@ export class ArticleRepository {
 
 ---
 
-## Resume
+## Résumé
 
-1. **HATEOAS** (niveau 3 de Richardson) : chaque réponse inclut des liens vers les actions possibles — le client decouvre l'API au lieu de hardcoder les URL
+1. **HATEOAS** (niveau 3 de Richardson) : chaque réponse inclut des liens vers les actions possibles — le client découvre l'API au lieu de hardcoder les URL
 2. **URL versioning** (`/v1/`) avec headers `Deprecation` + `Sunset` pour communiquer la timeline de fin de vie aux consommateurs
-3. **Cursor pagination** pour les API publiques et le scroll infini — performance O(limit) constante, aucun doublon meme avec des insertions concurrentes
+3. **Cursor pagination** pour les API publiques et le scroll infini — performance O(limit) constante, aucun doublon même avec des insertions concurrentes
 4. **Vary header** pour indiquer aux caches quels headers influencent la réponse — ne jamais utiliser `Vary: Cookie` sur un CDN
-5. **API governance** : style guide + changelog + contract testing + deprecation policy de 3 mois minimum — une API est un contrat, pas un detail d'implémentation
+5. **API governance** : style guide + changelog + contract testing + déprécation policy de 3 mois minimum — une API est un contrat, pas un detail d'implémentation
 
 ---
 

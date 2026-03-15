@@ -1,6 +1,6 @@
 # Cours 08 — Architecture Hexagonale (Ports & Adapters)
 
-**Objectif :** Comprendre comment isoler complètement le coeur métier de toute infrastructure technique, connaitre la distinction entre ports primaires et secondaires, et implémenter ce patron avec NestJS.
+**Objectif :** Comprendre comment isoler complètement le coeur métier de toute infrastructure technique, connaître la distinction entre ports primaires et secondaires, et implémenter ce patron avec NestJS.
 
 ---
 
@@ -475,7 +475,7 @@ describe('CreateOrderUseCase', () => {
 
 ---
 
-## Resume
+## Résumé
 
 - L'architecture hexagonale isole le **coeur applicatif** (Domain + Use Cases) de toute infrastructure — il ne connait que des interfaces (Ports).
 - Les **Ports Primaires** sont les interfaces d'entree que le coeur expose aux clients (REST, CLI, gRPC) ; les **Ports Secondaires** sont les interfaces de sortie que le coeur exige de l'infrastructure (BDD, email, cache).

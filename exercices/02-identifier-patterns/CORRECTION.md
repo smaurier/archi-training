@@ -199,7 +199,7 @@ class NotificationDispatcher {
 
 | Pattern | Quand l'utiliser | Quand l'éviter | Signal d'alerte |
 |---|---|---|---|
-| **Singleton** | Config read-only, logger global | Dès qu'il y a un état mutable partagé | "Je ne peux pas tester en parallèle" |
+| **Singleton** | Config read-only, logger global | Dès qu'il y à un état mutable partagé | "Je ne peux pas tester en parallèle" |
 | **Factory** | Création complexe, plusieurs variantes d'un même type | Objet simple créable avec `new` | "Mon Factory ne fait que `new X()`" |
 | **Builder** | Objet avec beaucoup de paramètres optionnels (>4) | Objet simple avec 2-3 params | "Mon Builder n'a que 2 méthodes" |
 | **Observer** | Découplage émetteur/récepteur, notifications multi-listeners | Un seul listener connu à l'avance | "Je dois connaître l'ordre des listeners" |

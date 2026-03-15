@@ -7,7 +7,7 @@
 
 ## Objectif
 
-Classifier les composants de ShopArch selon le theoreme CAP et choisir les stratégies de cohérence appropriees pour chaque cas d'usage.
+Classifier les composants de ShopArch selon le théorème CAP et choisir les stratégies de cohérence appropriees pour chaque cas d'usage.
 
 ## Contexte
 
@@ -35,7 +35,7 @@ Pour chaque classification, explique :
 - Quelle stratégie adopter en cas de partition réseau ?
 
 ### Étape 3 — Implémenter les stratégies
-Implemente les mecanismes concrets :
+Implemente les mécanismes concrets :
 - Stock : verrou pessimiste (CP) — `SELECT FOR UPDATE`
 - Catalogue : eventual consistency (AP) — cache avec TTL + invalidation
 - Panier : AP avec merge — si partition, chaque partition accepte les écritures, merge au retour
@@ -47,7 +47,7 @@ Quand la cohérence est eventuelle, implémenté une stratégie de compensation 
 - Saga de compensation si le paiement est accepte mais le stock insuffisant
 
 ### Bonus
-- Implémenter un Read-Your-Writes guarantee pour le catalogue (apres update, lire la version fraiche)
+- Implémenter un Read-Your-Writes guarantee pour le catalogue (après update, lire la version fraiche)
 - Dessiner un diagramme de sequence pour le scénario de partition
 
 ## Contraintes

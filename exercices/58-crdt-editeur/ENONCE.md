@@ -7,11 +7,11 @@
 
 ## Objectif
 
-Implémenter un editeur de descriptions produit collaboratif en temps reel pour le back-office de ShopArch, en utilisant les CRDTs (Conflict-free Replicated Data Types).
+Implémenter un editeur de descriptions produit collaboratif en temps réel pour le back-office de ShopArch, en utilisant les CRDTs (Conflict-free Replicated Data Types).
 
 ## Contexte
 
-Deux admins de ShopArch editent parfois la meme description produit en meme temps. Actuellement, le dernier qui sauvegarde ecrase le travail de l'autre. L'objectif est de permettre l'edition collaborative sans conflits.
+Deux admins de ShopArch editent parfois la même description produit en même temps. Actuellement, le dernier qui sauvegarde ecrase le travail de l'autre. L'objectif est de permettre l'edition collaborative sans conflits.
 
 ## Temps estime
 
@@ -27,9 +27,9 @@ Implemente un G-Counter (Grow-only Counter) comme premier CRDT :
 
 ### Étape 2 — LWW-Register (Last-Writer-Wins)
 Implemente un LWW-Register pour un champ texte simple :
-- Chaque écriture a un timestamp
+- Chaque écriture à un timestamp
 - Merge = garder la valeur avec le timestamp le plus recent
-- Résoudre les egalites par un ID de noeud (deterministe)
+- Résoudre les egalites par un ID de noeud (déterministe)
 
 ### Étape 3 — LWW-Map pour les champs produit
 Implemente un LWW-Map pour un produit avec plusieurs champs :
@@ -52,4 +52,4 @@ Implemente la synchronisation via WebSocket :
 ## Contraintes
 - Le merge doit etre commutatif, associatif et idempotent
 - Aucune perte de données lors d'un merge
-- Le système doit fonctionner meme si un client est temporairement deconnecte
+- Le système doit fonctionner même si un client est temporairement deconnecte

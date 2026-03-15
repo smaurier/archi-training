@@ -7,7 +7,7 @@
 - [ ] Merge independant par champ
 - [ ] Synchronisation via WebSocket
 - [ ] Modifications locales diffusees
-- [ ] Merge a la reception
+- [ ] Merge à la reception
 - [ ] Indicateur "Editing..." pour les autres
 - [ ] Merge commutatif, associatif, idempotent
 - [ ] Fonctionne avec deconnexion temporaire

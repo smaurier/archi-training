@@ -28,7 +28,7 @@ Cree 3 queues :
 
 ### Étape 2 — Producer
 
-Depuis le controller ou service, ajoute des jobs a la queue :
+Depuis le controller ou service, ajoute des jobs à la queue :
 
 ```typescript
 // Quand une commande est creee
@@ -55,7 +55,7 @@ Implemente les workers qui traitent les jobs :
 ### Étape 4 — Retry et error handling
 
 - Retry 3 fois avec backoff exponentiel (1s, 5s, 30s)
-- Dead letter queue pour les jobs en echec apres 3 retries
+- Dead letter queue pour les jobs en echec après 3 retries
 - Logging structure de chaque job (start, progress, complete, fail)
 
 ### Bonus
@@ -65,6 +65,6 @@ Implemente les workers qui traitent les jobs :
 
 ## Contraintes
 
-- Les jobs sont persistes dans Redis (survivent a un restart)
+- Les jobs sont persistes dans Redis (survivent à un restart)
 - Les workers tournent dans un process séparé de l'API
 - Chaque job est idempotent (safe to retry)

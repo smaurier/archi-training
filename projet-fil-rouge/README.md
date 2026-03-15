@@ -36,7 +36,7 @@ Chaque module ajoute une couche architecturale au projet. A la fin de la formati
 - Checkout avec résumé du panier
 - Paiement simule (pas de vrai gateway)
 - Historique des commandes
-- FSM : Created → Paid → Shipped → Delivered (ou Cancelled)
+- FSM : Created → Paid → Shipped → Delivered (où Cancelled)
 
 ### Compte utilisateur
 - Inscription / connexion via OIDC (Keycloak simule)
@@ -66,7 +66,7 @@ Chaque module ajoute une couche architecturale au projet. A la fin de la formati
 | File storage | S3 (MinIO en local) |
 | Testing | Vitest, Playwright, Pact, k6 |
 | CI/CD | GitHub Actions |
-| Observabilite | OpenTelemetry, Prometheus, Grafana |
+| Observabilité | OpenTelemetry, Prometheus, Grafana |
 
 ---
 
@@ -101,7 +101,7 @@ Chaque module ajoute une couche architecturale au projet. A la fin de la formati
 
 ## Bounded Contexts
 
-| Context | Responsabilite | Entités cles |
+| Context | Responsabilite | Entités clés |
 |---|---|---|
 | **Catalog** | Gestion du catalogue produits | Product, Category, Image, Review |
 | **Cart** | Panier d'achat temporaire | Cart, CartItem |
@@ -193,7 +193,7 @@ Chaque module ajoute une couche architecturale au projet. A la fin de la formati
 | **07 — Distribue** | CQRS catalogue/commandes. Outbox pattern. Circuit breaker sur payment gateway. |
 | **08 — Sécurité** | CSP hash-only. Rate limiting. Threat model STRIDE du checkout. CMP consentement analytics. |
 | **09 — Performance** | Cache Redis 3-niveaux. CDN images WebP/AVIF + focal-point. Capacity planning. Serverless thumbnails. |
-| **10 — Observabilite** | Logging OTel. SLOs Prometheus. CI/CD Helm + k6 + Lighthouse. Feature flag promo flash. Blue/Green deploy. |
+| **10 — Observabilité** | Logging OTel. SLOs Prometheus. CI/CD Helm + k6 + Lighthouse. Feature flag promo flash. Blue/Green deploy. |
 | **11 — Testing** | Tests E2E + a11y axe-core. Contract tests Pact. Load testing k6. MSW mock layer. |
 | **12 — Pratique** | ADR. Diagrammes C4. Fitness functions. Plugin "produits recommandes". Conway's Law analysis. Wardley Map. |
 | **13 — Culture** | API mobile-friendly (delta sync). Editeur collaboratif CRDT. Anti-corruption layer vers ERP legacy. |
@@ -241,7 +241,7 @@ shoparch/
 
 ---
 
-## Demarrage rapide
+## Démarrage rapide
 
 ```bash
 # 1. Cloner le repo

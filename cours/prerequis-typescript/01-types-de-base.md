@@ -1,10 +1,10 @@
 # Types de base -- Arrete de mettre `any` partout
 
-Si tu mets `any` quand TS te crie dessus, cette lecon est pour toi.
+Si tu mets `any` quand TS te crie dessus, cette leçon est pour toi.
 
 On va pas se mentir : la moitie des devs React qui "font du TypeScript" ont un projet
-JavaScript avec des `any` planques dans les coins. Ca marche... jusqu'au jour ou ca
-casse en prod. Cette lecon reprend les bases -- juste ce qu'il faut pour arreter de tricher.
+JavaScript avec des `any` planques dans les coins. Ça marche... jusqu'au jour ou ça
+casse en prod. Cette leçon reprend les bases -- juste ce qu'il faut pour arreter de tricher.
 
 ---
 
@@ -44,7 +44,7 @@ Differences : `interface` supporte `extends` et le declaration merging. `type` s
 les unions, tuples et alias de primitifs. Pour des objets simples, les deux marchent.
 
 **Essaie :** Cree une `interface UserCardProps` avec `username` (string), `avatarUrl`
-(string) et `isOnline` (optionnel, boolean). Puis cree un `type Theme` egal a
+(string) et `isOnline` (optionnel, boolean). Puis créé un `type Theme` egal a
 `"light" | "dark"`.
 
 ---
@@ -76,7 +76,7 @@ le `data` si ok, ou leve une erreur sinon.
 
 ## Literal types et `as const`
 
-Avec `const`, TypeScript infere un literal type. `as const` etend ca aux structures :
+Avec `const`, TypeScript infere un literal type. `as const` etend ça aux structures :
 
 ```typescript
 const mode = "dark";      // type: "dark" (pas string)
@@ -86,8 +86,8 @@ const config = { theme: "dark", lang: "fr" } as const;
 // config.theme est de type "dark", pas string -- et c'est readonly
 ```
 
-**Essaie :** Declare un objet `const endpoints` avec les cles `users` et `products`.
-Ajoute `as const` et survole dans ton IDE pour voir la difference.
+**Essaie :** Declare un objet `const endpoints` avec les clés `users` et `products`.
+Ajoute `as const` et survole dans ton IDE pour voir la différence.
 
 ---
 
@@ -156,7 +156,7 @@ Quand tu ne sais pas quel type mettre, trois options meilleures que `any` :
 | Situation | Utilise | Pourquoi |
 |-----------|---------|----------|
 | Tu sais rien du tout | `unknown` | Force le narrowing avant usage |
-| Ca peut etre null | `T \| null` | Explicite |
+| Ça peut etre null | `T \| null` | Explicite |
 | Type complexe | un `type` nomme | Documente ton intention |
 
 ```typescript
@@ -173,21 +173,21 @@ function parse(data: unknown) {
 ```
 
 **Essaie :** Tu as une fonction qui retourne `Promise<any>`. Change-la en
-`Promise<unknown>` et ajoute du narrowing pour acceder a `user.email` de facon sure.
+`Promise<unknown>` et ajoute du narrowing pour acceder a `user.email` de façon sure.
 
 **Essaie :** Reprends un de tes composants React et cherche les `any`. Remplace-en
-au moins un par un type plus precis.
+au moins un par un type plus précis.
 
 ---
 
 ## Ce que tu retiens
 
-- Laisse TypeScript inferer quand il peut -- n'ecris le type que quand c'est necessaire.
+- Laisse TypeScript inferer quand il peut -- n'ecris le type que quand c'est nécessaire.
 - `type` pour les unions et alias, `interface` pour les objets et props -- sois coherent.
 - Les union types + narrowing remplacent la majorite de tes `any`.
-- `unknown` est le `any` des gens responsables : il te force a verifier avant d'utiliser.
+- `unknown` est le `any` des gens responsables : il te force a vérifier avant d'utiliser.
 - `as const` fige les valeurs en literal types -- utile pour les configs et les enums maison.
 
 ---
 
-Lecon suivante : [Generiques et Utility Types -- Le superpouvoir que tu ignores](./02-generiques-utility.md)
+Leçon suivante : [Generiques et Utility Types -- Le superpouvoir que tu ignores](./02-generiques-utility.md)

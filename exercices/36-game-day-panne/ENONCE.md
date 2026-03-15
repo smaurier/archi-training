@@ -22,7 +22,7 @@ ShopArch n'a jamais ete teste en conditions de panne. L'équipe ne sait pas comm
 ### Étape 1 — Plan du Game Day
 Redige un plan de Game Day avec :
 - 5 scénarios de panne a simuler
-- Pour chaque scénario : hypothese, injection de la panne, metriques a observer, critère de succes/echec
+- Pour chaque scénario : hypothese, injection de la panne, metriques à observer, critère de succes/echec
 - Ordre d'exécution (du moins au plus risque)
 - Rollback plan pour chaque scénario
 
@@ -34,14 +34,14 @@ Cree les scripts pour simuler les pannes :
 - Database read-only : `SET default_transaction_read_only = on`
 - Perte réseau partielle : drop 50% des paquets
 
-### Étape 3 — Observabilite
+### Étape 3 — Observabilité
 Prepare le monitoring AVANT d'injecter les pannes :
-- Dashboard avec les metriques cles (latence p99, taux d'erreur, throughput)
+- Dashboard avec les metriques clés (latence p99, taux d'erreur, throughput)
 - Alertes configurees (pour vérifier qu'elles se declenchent)
 - Logs centralises pour correlate les erreurs
 
 ### Étape 4 — Rapport post-mortem
-Apres chaque scénario, documente :
+Après chaque scénario, documente :
 - Ce qui s'est passe (comportement observe)
 - Ce qui etait attendu vs realite
 - Actions correctives si le système n'a pas ete résilient
@@ -50,7 +50,7 @@ Apres chaque scénario, documente :
 ### Bonus
 - Automatiser les scénarios avec Chaos Monkey ou Litmus
 - Implémenter les corrections pour les scénarios echoues
-- Planifier un Game Day recurrent (trimestriel)
+- Planifier un Game Day récurrent (trimestriel)
 
 ## Contraintes
 - Tester en staging, jamais en production (pour cet exercice)

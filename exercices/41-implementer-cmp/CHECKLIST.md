@@ -6,10 +6,10 @@
 - [ ] Cookie first-party pour stocker le consentement
 - [ ] Duree 13 mois max
 - [ ] Versioning de la politique
-- [ ] Scripts charges uniquement apres consentement
+- [ ] Scripts charges uniquement après consentement
 - [ ] Scripts nécessaires toujours charges
 - [ ] Preuve de consentement enregistree côté serveur
-- [ ] Refuser aussi facile qu'accepter (meme nombre de clics)
+- [ ] Refuser aussi facile qu'accepter (même nombre de clics)
 
 ## Bonus
 - [ ] TCF v2.2 format

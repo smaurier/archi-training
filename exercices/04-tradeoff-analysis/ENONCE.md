@@ -1,4 +1,4 @@
-# Exercice 04 — Trade-off analysis d'un cas reel
+# Exercice 04 — Trade-off analysis d'un cas réel
 
 > 🟡 **Difficulté** : Conception | **Temps estimé** : 1h30 | **Ère** : 1 — Les Fondations
 >
@@ -60,7 +60,7 @@ Remplis cette matrice pour les 3 options :
 | Evolvabilite (facettes, suggestions, typo-tolerance) | | | |
 | Single point of failure | | | |
 
-Utilise : ✓✓ (excellent), ✓ (bon), ~ (acceptable), ✗ (mauvais), ✗✗ (tres mauvais)
+Utilise : ✓✓ (excellent), ✓ (bon), ~ (acceptable), ✗ (mauvais), ✗✗ (très mauvais)
 
 ### Étape 3 — Rediger un ADR (25 min)
 
@@ -102,6 +102,6 @@ Propose
 
 ## Contraintes
 
-- Pas de réponse "ca dépend" sans justification precise
-- Chaque choix doit etre argumente avec des données (meme estimees)
+- Pas de réponse "ça dépend" sans justification précisé
+- Chaque choix doit etre argumente avec des données (même estimees)
 - Si tu recommandes B avec migration possible vers C, explique le trigger de migration

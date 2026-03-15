@@ -14,7 +14,7 @@
 
 ### INP (380ms → < 200ms)
 1. **Code splitting** : dynamic imports pour les routes (Next.js le fait automatiquement)
-2. **Lazy loading** : composants below the fold charges a la demande
+2. **Lazy loading** : composants below the fold charges à la demandé
 3. **Debounce interactions** : 300ms sur search, 100ms sur scroll
 
 ### TTFB (1.2s → < 600ms)

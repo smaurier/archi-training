@@ -7,7 +7,7 @@
 
 ## Objectif
 
-Transformer un code tightly-coupled en code testable grace a l'injection de dépendances. Comprendre les différents scopes d'injection.
+Transformer un code tightly-coupled en code testable grâce à l'injection de dépendances. Comprendre les différents scopes d'injection.
 
 ## Temps estime
 
@@ -15,7 +15,7 @@ Transformer un code tightly-coupled en code testable grace a l'injection de dép
 
 ## Contexte
 
-L'application e-commerce ShopArch a un `ProductService` qui dépend directement de PostgreSQL, Redis et d'un service externe de pricing. Impossible de le tester sans infra reelle.
+L'application e-commerce ShopArch à un `ProductService` qui dépend directement de PostgreSQL, Redis et d'un service externe de pricing. Impossible de le tester sans infra réelle.
 
 ## Code a refactorer
 

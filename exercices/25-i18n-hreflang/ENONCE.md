@@ -11,7 +11,7 @@ Implémenter l'i18n complete : MultiLangField, hreflang tags, sitemap multilingu
 
 ## Contexte
 
-ShopArch est disponible en FR, EN, et DE. Chaque produit a un nom, une description et un slug par locale. Le SEO multilingue doit etre parfait.
+ShopArch est disponible en FR, EN, et DE. Chaque produit à un nom, une description et un slug par locale. Le SEO multilingue doit etre parfait.
 
 ## Temps estime
 

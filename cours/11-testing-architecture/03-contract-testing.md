@@ -9,7 +9,7 @@
 <details>
 <summary>1. Quels sont les 5 types de test doubles ?</summary>
 
-1. **Dummy** : remplit un parametre, jamais utilise
+1. **Dummy** : remplit un paramètre, jamais utilise
 2. **Stub** : retourne une valeur predeterminee
 3. **Spy** : enregistre les appels (wraps real)
 4. **Mock** : comportement programme + vérification stricte
@@ -19,7 +19,7 @@
 <details>
 <summary>2. Pourquoi utiliser MSW plutot que mocker axios/fetch directement ?</summary>
 
-MSW intercepte les **vraies requêtes HTTP** au niveau du réseau — il teste le chemin complet (serialisation, headers, status codes, body parsing). Mocker axios/fetch ne teste que l'appel de la fonction, pas le comportement HTTP reel. De plus, MSW fonctionne de la meme manière en tests Node.js et dans le navigateur.
+MSW intercepte les **vraies requêtes HTTP** au niveau du réseau — il teste le chemin complet (serialisation, headers, status codes, body parsing). Mocker axios/fetch ne teste que l'appel de la fonction, pas le comportement HTTP réel. De plus, MSW fonctionne de la même manière en tests Node.js et dans le navigateur.
 </details>
 
 ---
@@ -80,7 +80,7 @@ Flux Pact :
 | Critère | Contract test | Intégration test |
 |---|---|---|
 | Quoi | La forme de la réponse (schema) | Le comportement complet |
-| Vitesse | Rapide (pas de réseau reel) | Lent (services up) |
+| Vitesse | Rapide (pas de réseau réel) | Lent (services up) |
 | Couplage | Faible (consumer définit ses besoins) | Fort (services interconnectes) |
 | Scope | Inter-service boundaries | End-to-end flows |
 | Maintenance | Contrats evolues incrementalement | Fragile aux changements |
@@ -240,7 +240,7 @@ describe('OpenAPI Schema', () => {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Contract testing** : le consumer définit ses attentes, le provider vérifié qu'il les respecte — détecté les breaking changes AVANT le merge
 2. **Pact** : consumer généré un pact file → provider vérifié contre sa vraie API — state handlers pour les fixtures

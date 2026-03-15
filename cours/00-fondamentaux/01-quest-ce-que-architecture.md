@@ -1,5 +1,9 @@
 # 01 — Qu'est-ce que l'architecture logicielle ?
 
+<!-- nav-cours-précédent -->
+> **Cours précédent** : [HTTP & Caching](../../../07-http-caching/modules/15-projet-final.md). Si tu arrives ici sans avoir fait les cours précédents, consulte le [guide de démarrage](../../../GUIDE-DEMARRAGE.md).
+
+
 ## Objectif
 
 A la fin de ce cours, tu sauras **définir ce qu'est l'architecture logicielle**, distinguer le rôle de l'architecte de celui du développeur, et expliquer pourquoi les décisions d'architecture prises tôt dans un projet ont un coût exponentiel si elles sont mal faites.
@@ -11,7 +15,7 @@ A la fin de ce cours, tu sauras **définir ce qu'est l'architecture logicielle**
 Imagine que tu veuilles construire un immeuble.
 
 - Le **maçon** pose les briques, applique le mortier, construit les murs. Il sait parfaitement comment assembler des matériaux.
-- L'**architecte** décide : combien d'étages ? Où sont les escaliers de secours ? Comment les appartements communiquent-ils entre eux ? Comment l'immeuble résiste-t-il aux séismes ?
+- L'**architecte** décide : combien d'étages ? Ou sont les escaliers de secours ? Comment les appartements communiquent-ils entre eux ? Comment l'immeuble résiste-t-il aux séismes ?
 
 Le maçon peut construire n'importe quel mur que tu lui demandes. Mais si l'architecte a oublié de prévoir des gaines techniques pour les câbles électriques, **démolir et reconstruire coûtera dix fois plus cher** que de l'avoir prévu dès le début.
 
@@ -19,7 +23,7 @@ En logiciel, c'est exactement pareil :
 - Le **développeur** (maçon) écrit du code fonctionnel, implémente des fonctionnalités.
 - L'**architecte logiciel** décide de la structure globale, des frontières entre modules, des protocoles de communication, et des compromis entre qualité, coût et délai.
 
-> La différence fondamentale : le maçon répond à "comment faire ?", l'architecte répond à "quoi faire, où le mettre, et pourquoi".
+> La différence fondamentale : le maçon répond à "comment faire ?", l'architecte répond à "quoi faire, ou le mettre, et pourquoi".
 
 ---
 
@@ -51,7 +55,7 @@ Une définition souvent citée (Martin Fowler) :
 ├──────────────┬──────────────┬───────────────┬───────────────┤
 │  STRUCTURE   │ COMMUNICATION│  DÉCISIONS    │    VISION     │
 │              │              │               │               │
-│ Comment les  │ Comment les  │ Pourquoi ces  │ Où va le      │
+│ Comment les  │ Comment les  │ Pourquoi ces  │ Ou va le      │
 │ composants   │ composants   │ choix ont été │ système dans  │
 │ sont         │ échangent    │ faits (ADR)   │ 2 ans ?       │
 │ organisés    │ données      │               │               │
@@ -279,7 +283,7 @@ async function getArticleById(articleId: string): Promise<Article | null> {
 
 ---
 
-## Resume
+## Résumé
 
 - L'**architecture logicielle** est l'ensemble des décisions structurantes difficiles à changer, qui définissent la structure, la communication, les décisions et la vision d'un système.
 - L'**architecte** répond à "quoi faire et pourquoi", le **développeur** répond à "comment faire" — mais en pratique, tout développeur senior prend des décisions architecturales.

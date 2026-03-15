@@ -1,6 +1,6 @@
-# Cours 73 — Pyramide de tests & Accessibilite
+# Cours 73 — Pyramide de tests & Accessibilité
 
-> **Objectif** : Maîtriser la pyramide de tests (unit → intégration → E2E), savoir quand inverser la pyramide (honeycomb), intégrer les tests d'accessibilite (axe-core, WCAG 2.1 AA), et définir une stratégie de test pour un projet e-commerce.
+> **Objectif** : Maîtriser la pyramide de tests (unit → intégration → E2E), savoir quand inverser la pyramide (honeycomb), intégrer les tests d'accessibilité (axe-core, WCAG 2.1 AA), et définir une stratégie de test pour un projet e-commerce.
 
 ---
 
@@ -9,7 +9,7 @@
 <details>
 <summary>1. Qu'est-ce que l'Infrastructure as Code et pourquoi est-ce mieux que le click-ops ?</summary>
 
-L'IaC traite l'infrastructure comme du code versionne dans git. Avantages : **reproductible** (meme commande = meme infra), **reviewable** (PR avant apply), **rollback** (git revert), **documentation** (le code EST la doc). Le click-ops (console) n'est pas reproductible, pas auditable, et le drift est invisible.
+L'IaC traite l'infrastructure comme du code versionne dans git. Avantages : **reproductible** (même commande = même infra), **reviewable** (PR avant apply), **rollback** (git revert), **documentation** (le code EST la doc). Le click-ops (console) n'est pas reproductible, pas auditable, et le drift est invisible.
 </details>
 
 <details>
@@ -23,7 +23,7 @@ GitOps utilise un repo git comme **source of truth** pour l'état desire du clus
 ## Analogie — Le filet de sécurité du trapeziste
 
 Les tests sont le filet sous le trapeziste :
-- **Unit tests** (filet pres du trapeze) : attrapent les chutes courtes — rapides, precis, nombreux
+- **Unit tests** (filet pres du trapeze) : attrapent les chutes courtes — rapides, précis, nombreux
 - **Intégration tests** (filet a mi-hauteur) : attrapent les problèmes de coordination entre trapezistes
 - **E2E tests** (filet au sol) : dernier rempart — lents mais couvrent tout le spectacle
 
@@ -51,7 +51,7 @@ Sans filet, le trapeziste n'ose pas innover. Avec filet, il peut tenter des figu
 
 | Niveau | Vitesse | Stabilite | Cout maintenance | Quoi tester |
 |---|---|---|---|---|
-| **Unit** | <1ms | Tres stable | Faible | Logique métier, calculs, validations |
+| **Unit** | <1ms | Très stable | Faible | Logique métier, calculs, validations |
 | **Intégration** | 100ms-1s | Stable | Moyen | API routes, DB queries, cache |
 | **E2E** | 5-30s | Fragile | Eleve | Parcours utilisateur critiques |
 
@@ -73,7 +73,7 @@ Quand : services minces (peu de logique pure, beaucoup d'I/O)
 Pourquoi : un unit test qui mock tout ne teste rien d'utile
 ```
 
-### 3. Accessibilite — WCAG 2.1 AA
+### 3. Accessibilité — WCAG 2.1 AA
 
 | Critère | Exigence | Test |
 |---|---|---|
@@ -207,7 +207,7 @@ describe('POST /api/orders', () => {
 });
 ```
 
-### Test d'accessibilite avec Playwright + axe-core
+### Test d'accessibilité avec Playwright + axe-core
 
 ```typescript
 // a11y.e2e.test.ts
@@ -266,11 +266,11 @@ test.describe('Accessibility', () => {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Pyramide** : 60% unit (rapides, stables) + 30% intégration (API, DB) + 10% E2E (parcours critiques)
 2. **Honeycomb** : inverser pour les microservices minces — plus d'intégration, moins d'unit tests inutiles
-3. **Accessibilite WCAG 2.1 AA** : axe-core + Playwright, skip links, focus visible, contraste 4.5:1, touch targets 44px
+3. **Accessibilité WCAG 2.1 AA** : axe-core + Playwright, skip links, focus visible, contraste 4.5:1, touch targets 44px
 4. **3 niveaux E2E** : user flows critiques + SEO meta tags + security headers
 5. **Coverage** : viser les branches critiques (logique métier 90%+), pas le 100% aveugle
 

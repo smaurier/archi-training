@@ -27,7 +27,7 @@ Adopte le format ADR de Michael Nygard :
 - Consequences (positives, negatives, risques)
 
 ### Étape 2 — 3 ADR pour ShopArch
-Redige 3 ADR pour des decisions architecturales cles :
+Redige 3 ADR pour des decisions architecturales clés :
 1. **ADR-001** : Choix de PostgreSQL vs MongoDB pour la base principale
 2. **ADR-002** : Schema-per-tenant vs Row-Level Security pour le multi-tenant
 3. **ADR-003** : BFF vs API Gateway pour l'aggregation front-end

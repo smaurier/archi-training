@@ -68,5 +68,5 @@ Certaines requêtes ne peuvent pas etre optimisees juste avec un index. Reecris-
 ## Contraintes
 
 - Toujours mesurer AVANT et APRES avec EXPLAIN ANALYZE
-- Pas de sur-indexation (chaque index a un cout en écriture)
+- Pas de sur-indexation (chaque index à un cout en écriture)
 - Privilegier les partial indexes quand possible

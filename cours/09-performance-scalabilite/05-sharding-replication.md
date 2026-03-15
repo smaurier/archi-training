@@ -229,7 +229,7 @@ function ReadOnly(): MethodDecorator {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Réplication** : primary-replica pour distribuer les lectures — async (performance) vs sync (consistance)
 2. **Sharding** : diviser horizontalement les données — hash-based (uniforme) vs range-based (range queries)

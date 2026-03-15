@@ -10,7 +10,7 @@
 ## Cas B — Scale-up en croissance
 
 - [ ] J'ai recommande une decomposition progressive (pas Big Bang)
-- [ ] J'ai identifie les symptomes reels (deploy lent, conflits de merge, équipes bloquees)
+- [ ] J'ai identifie les symptomes réels (deploy lent, conflits de merge, équipes bloquees)
 - [ ] J'ai propose de commencer par un monolithe modulaire avant les microservices
 - [ ] J'ai propose un ordre de migration (modules les plus independants d'abord)
 

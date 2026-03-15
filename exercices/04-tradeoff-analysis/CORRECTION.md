@@ -20,9 +20,9 @@
 | Pertinence résultats | ✗ (pas de ranking) | ✓ (ts_rank, stemming) | ✓✓ (BM25, fuzzy, boosting) |
 | Complexite implémentation | ✓✓ (1 requête SQL) | ✓ (trigger tsvector, GIN) | ~ (cluster, indexation, sync) |
 | Cout operationnel | ✓✓ (zero — déjà en PG) | ✓✓ (zero — déjà en PG) | ✗ (cluster dédié ~100-300€/mois) |
-| Courbe apprentissage | ✓✓ (SQL basique) | ✓ (FTS PG a apprendre) | ~ (DSL Elasticsearch, mapping) |
+| Courbe apprentissage | ✓✓ (SQL basique) | ✓ (FTS PG à apprendre) | ~ (DSL Elasticsearch, mapping) |
 | Evolvabilite | ✗✗ (pas de facettes, pas de fuzzy) | ~ (facettes limitees) | ✓✓ (facettes, suggestions, synonymes, vector) |
-| SPOF | ✓✓ (meme DB) | ✓✓ (meme DB) | ✗ (cluster séparé = point de panne supplementaire) |
+| SPOF | ✓✓ (même DB) | ✓✓ (même DB) | ✗ (cluster séparé = point de panne supplementaire) |
 
 ## Étape 3 — ADR
 
@@ -165,4 +165,4 @@ Un cluster Elasticsearch requiert : monitoring, backup, mise a jour, synchronisa
 
 ### 4. Ne pas définir de trigger de migration
 
-"On migrera quand ca sera lent" n'est pas un plan. Un trigger mesurable (p95 > 150ms, volume > 1M) permet une decision objective.
+"On migrera quand ça sera lent" n'est pas un plan. Un trigger mesurable (p95 > 150ms, volume > 1M) permet une decision objective.

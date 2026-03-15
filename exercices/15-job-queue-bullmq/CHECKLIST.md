@@ -4,12 +4,12 @@
 
 - [ ] 3 queues définies (email, media, import)
 - [ ] Les queues sont configurees avec Redis
-- [ ] Les jobs sont persistes (survivent a un restart)
+- [ ] Les jobs sont persistes (survivent à un restart)
 
 ## Producer
 
 - [ ] Les jobs sont ajoutes depuis les services
-- [ ] Chaque job a un type et un payload type
+- [ ] Chaque job à un type et un payload type
 - [ ] Les jobs critiques ont une priorité haute
 
 ## Consumer

@@ -13,7 +13,7 @@
 2. **SQL Filters automatiques** — chaque requête est filtree par `tenant_id` / `site_id`
 3. **Storage prefix S3** — `{tenant}/{site}/media/...`
 
-Les 3 couches sont independantes : meme si l'une échoué, les autres protegent.
+Les 3 couches sont independantes : même si l'une échoué, les autres protegent.
 </details>
 
 <details>
@@ -150,7 +150,7 @@ Le Unit of Work traque toutes les modifications pendant une transaction et les c
 └────────────────────────────────────────┘
 ```
 
-TypeORM et Doctrine implementent le Unit of Work via l'Entity Manager — tu n'as généralement pas a le coder toi-meme.
+TypeORM et Doctrine implementent le Unit of Work via l'Entity Manager — tu n'as généralement pas a le coder toi-même.
 
 ### 4. Content versioning diff-based
 
@@ -207,8 +207,8 @@ Client                    API                     S3
 Avantages :
 - L'API n'est pas un bottleneck pour les gros fichiers
 - Upload parallele possible
-- Presigned URL expire apres 5 min (sécurité)
-- Deduplication par SHA256 (meme fichier = meme hash = pas de doublon)
+- Presigned URL expire après 5 min (sécurité)
+- Deduplication par SHA256 (même fichier = même hash = pas de doublon)
 
 ---
 
@@ -398,9 +398,9 @@ export class PresignedUploadService {
 
 ---
 
-## Resume
+## Résumé
 
-1. **Active Record** couple l'entité a la DB — rapide pour du CRUD, mauvais pour du DDD
+1. **Active Record** couple l'entité à la DB — rapide pour du CRUD, mauvais pour du DDD
 2. **Repository** + **Data Mapper** decoupent le domaine de l'infra — testable, évolutif
 3. **Unit of Work** traque les changements et commit en une transaction
 4. **Content versioning diff-based** economise ~92% de stockage avec reconstruction O(n) negligeable
@@ -408,7 +408,7 @@ export class PresignedUploadService {
 
 ---
 
-> **Prochain cours** : [Cours 24 — Validation & Error Handling](./06-validation-error-handling.md) — ou comment valider les données a chaque couche et communiquer les erreurs proprement.
+> **Prochain cours** : [Cours 24 — Validation & Error Handling](./06-validation-error-handling.md) — ou comment valider les données à chaque couche et communiquer les erreurs proprement.
 
 ---
 

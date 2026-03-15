@@ -2,7 +2,7 @@
 
 ## Résultat attendu
 
-Un raisonnement pragmatique qui montre que la réponse n'est pas toujours "microservices" ni toujours "monolithe" — ca dépend du contexte.
+Un raisonnement pragmatique qui montre que la réponse n'est pas toujours "microservices" ni toujours "monolithe" — ça dépend du contexte.
 
 ## Cas A — Startup MVP → NON aux microservices
 

@@ -1,18 +1,18 @@
 # Classes et immutabilite -- Pourquoi `readonly` va devenir ton meilleur ami
 
-Si tu fais du React, tu utilises probablement tres peu les classes. Des composants
+Si tu fais du React, tu utilises probablement très peu les classes. Des composants
 fonctionnels, des hooks, des objets litteraux -- pourquoi s'embeter avec `class` ?
 
-Parce que les classes en TypeScript ne servent pas a faire de l'heritage a rallonge
-comme dans le Java de 2005. Elles servent a **proteger tes donnees** -- creer des
-objets qui ne peuvent pas etre dans un etat invalide. Dans la formation, tu vas
-croiser le pattern **Value Object**. Cette lecon te donne les briques pour le construire.
+Parce que les classes en TypeScript ne servent pas à faire de l'héritage a rallonge
+comme dans le Java de 2005. Elles servent a **proteger tes donnees** -- créer des
+objets qui ne peuvent pas etre dans un état invalide. Dans la formation, tu vas
+croiser le pattern **Value Object**. Cette leçon te donne les briques pour le construire.
 
 ---
 
 ## Le raccourci constructeur
 
-Une classe TypeScript classique est verbeuse. Le raccourci constructeur regle ca :
+Une classe TypeScript classique est verbeuse. Le raccourci constructeur regle ça :
 
 ```typescript
 // Verbeux
@@ -35,8 +35,8 @@ class Product {
 }
 ```
 
-Les modificateurs devant les parametres creent et assignent automatiquement les
-proprietes :
+Les modificateurs devant les paramètres creent et assignent automatiquement les
+propriétés :
 
 | Modificateur | Visible dehors | Modifiable |
 |---|---|---|
@@ -74,10 +74,10 @@ class CartItem {
 }
 ```
 
-Remarque `withQuantity` : au lieu de modifier l'objet, elle en cree un nouveau.
+Remarque `withQuantity` : au lieu de modifier l'objet, elle en créé un nouveau.
 C'est le debut de l'immutabilite.
 
-**Essaie :** Ajoute un getter `unitPrice` a `CartItem` et une methode
+**Essaie :** Ajoute un getter `unitPrice` a `CartItem` et une méthode
 `withIncrementedQuantity()` qui retourne un nouveau `CartItem` avec quantite + 1.
 
 ---
@@ -103,22 +103,22 @@ Pour les Value Objects, `private readonly` suffit. Le `#` est utile si tu veux u
 protection au runtime aussi.
 
 **Essaie :** Cree une classe `Secret` avec un champ `#value: string`. Essaie d'y
-acceder depuis l'exterieur. Ajoute une methode `reveal()` qui retourne les trois
+acceder depuis l'exterieur. Ajoute une méthode `reveal()` qui retourne les trois
 premiers caracteres suivis de `"***"`.
 
 ---
 
 ## Pourquoi l'immutabilite compte
 
-En React, tu sais deja qu'on ne modifie pas le state directement. L'immutabilite
-dans le domaine metier suit la meme logique : un prix ne "change" pas -- tu en
+En React, tu sais déjà qu'on ne modifie pas le state directement. L'immutabilite
+dans le domaine metier suit la même logique : un prix ne "change" pas -- tu en
 crees un nouveau.
 
 Pourquoi c'est important :
 
-1. **Pas d'effets de bord** -- personne ne peut modifier un objet apres sa creation.
+1. **Pas d'effets de bord** -- personne ne peut modifier un objet après sa création.
 2. **Egalite previsible** -- deux objets avec les memes valeurs sont interchangeables.
-3. **Historique gratuit** -- chaque modification cree un nouvel objet.
+3. **Historique gratuit** -- chaque modification créé un nouvel objet.
 
 ---
 
@@ -162,16 +162,16 @@ const total = price.add(tax);    // nouveau Money(23.99, "EUR")
 // price vaut toujours 19.99 EUR -- il n'a pas bouge
 ```
 
-Validation dans le constructeur, `readonly` partout, methodes qui retournent de
-nouvelles instances, methode `equals` pour comparer par valeur.
+Validation dans le constructeur, `readonly` partout, méthodes qui retournent de
+nouvelles instances, méthode `equals` pour comparer par valeur.
 
-**Essaie :** Ajoute une methode `subtract(other: Money): Money` a `Money`. N'oublie
-pas la verification de devise. Enchaine : `price.add(tax).subtract(discount)`.
+**Essaie :** Ajoute une méthode `subtract(other: Money): Money` a `Money`. N'oublie
+pas la vérification de devise. Enchaine : `price.add(tax).subtract(discount)`.
 Verifie que `price` n'a pas change.
 
 **Essaie :** Cree une classe `Email` qui prend une string, valide qu'elle contient
 `@` et `.`, stocke la valeur en `readonly`, et expose `equals`. Essaie de modifier
-`email.value` apres creation.
+`email.value` après création.
 
 ---
 
@@ -187,8 +187,8 @@ const config = { theme: "dark", timeout: 5000 } as const;
 
 | | `readonly` | `as const` |
 |---|---|---|
-| S'applique a | une propriete | un litteral entier |
-| Profondeur | un niveau | recursif |
+| S'applique a | une propriété | un litteral entier |
+| Profondeur | un niveau | récursif |
 | Types | normaux | literal types |
 | Utilisation | classes, interfaces | objets, tableaux, constantes |
 
@@ -199,14 +199,14 @@ const CURRENCIES = ["EUR", "USD", "GBP"] as const;
 type Currency = typeof CURRENCIES[number];  // "EUR" | "USD" | "GBP"
 ```
 
-**Essaie :** Cree `const ROLES = ["admin", "editor", "viewer"] as const` et derive
+**Essaie :** Cree `const ROLES = ["admin", "editor", "viewer"] as const` et dérivé
 un type `Role`. Cree une fonction `hasRole(user: { roles: Role[] }, role: Role): boolean`.
 
 ---
 
 ## Les limites de `Object.freeze`
 
-Tu pourrais te dire "pourquoi pas juste `Object.freeze` ?" Le probleme : c'est shallow.
+Tu pourrais te dire "pourquoi pas juste `Object.freeze` ?" Le problème : c'est shallow.
 
 ```typescript
 const product = Object.freeze({
@@ -220,22 +220,22 @@ Les objets imbriques restent mutables. Prefere `readonly` et les types pour une
 protection au compile-time, complete et gratuite.
 
 **Essaie :** Cree un objet avec `tags: string[]`, applique `Object.freeze`. Verifie
-que `push` marche toujours sur `tags`. Puis cree un type `DeepReadonly` recursif
+que `push` marche toujours sur `tags`. Puis créé un type `DeepReadonly` récursif
 et applique-le -- TypeScript bloque-t-il le `push` ?
 
 ---
 
 ## Ce que tu retiens
 
-- Le raccourci constructeur (`public readonly` dans les parametres) elimine le
+- Le raccourci constructeur (`public readonly` dans les paramètres) elimine le
   boilerplate des classes TypeScript.
-- `readonly` empeche la reassignation au compile-time -- ta premiere ligne de defense.
+- `readonly` empeche la reassignation au compile-time -- ta première ligne de defense.
 - `as const` gele un litteral en profondeur avec des literal types -- ideal pour les
   configs et enums maison.
-- `Object.freeze` est shallow et runtime seulement -- prefere les types.
+- `Object.freeze` est shallow et runtime seulement -- préféré les types.
 - Le pattern Value Object (validation + `readonly` + nouvelles instances) est la
   fondation de la modelisation domaine dans cette formation.
 
 ---
 
-Lecon suivante : [Async et gestion d'erreurs -- Promets-moi que tu n'ecriras plus `.then().catch()`](./04-async-error-handling.md)
+Leçon suivante : [Async et gestion d'erreurs -- Promets-moi que tu n'ecriras plus `.then().catch()`](./04-async-error-handling.md)

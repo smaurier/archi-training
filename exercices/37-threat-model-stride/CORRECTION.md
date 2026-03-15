@@ -42,7 +42,7 @@ Trust boundaries :
 |---|---|---|---|---|---|
 | T1 | Modifier le prix dans la requête | Browser→BFF | 4 | 5 | 20 |
 | T2 | SQL injection sur recherche | BFF→PostgreSQL | 2 | 5 | 10 |
-| T3 | Modifier l'adresse de livraison apres paiement | OrderService | 2 | 3 | 6 |
+| T3 | Modifier l'adresse de livraison après paiement | OrderService | 2 | 3 | 6 |
 
 ### Repudiation (Nier une action)
 | # | Menace | Cible | Prob | Impact | Score |

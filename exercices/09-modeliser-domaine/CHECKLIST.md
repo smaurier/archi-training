@@ -15,12 +15,12 @@
 - [ ] La validation se fait dans le constructeur (fail fast)
 - [ ] `Money` refuse les montants negatifs
 - [ ] `Email` valide le format
-- [ ] `Address` a une méthode `equals()` basee sur les champs
+- [ ] `Address` à une méthode `equals()` basee sur les champs
 - [ ] Aucun setter
 
 ## Entités
 
-- [ ] Product a un `id: string` (UUID)
+- [ ] Product à un `id: string` (UUID)
 - [ ] Product a des méthodes métier (`decrementStock()`, pas `setStock()`)
 - [ ] Order est l'agregat root
 - [ ] Les OrderLines ne sont accessibles que via Order

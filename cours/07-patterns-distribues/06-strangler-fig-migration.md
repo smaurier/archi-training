@@ -11,7 +11,7 @@
 
 - **Closed** : le service fonctionne, les requêtes passent normalement
 - **Open** : le seuil d'echecs est atteint, les requêtes echouent immédiatement (fail fast) sans appeler le service
-- **Half-Open** : apres un timer, quelques requêtes de test sont autorisees. Si elles reussissent → retour a Closed. Si elles echouent → retour a Open.
+- **Half-Open** : après un timer, quelques requêtes de test sont autorisees. Si elles reussissent → retour a Closed. Si elles echouent → retour a Open.
 </details>
 
 <details>
@@ -265,7 +265,7 @@ const progress: MigrationProgress[] = [
 
 ---
 
-## Resume
+## Résumé
 
 1. **Strangler Fig** : migrer feature par feature derriere un proxy — jamais de Big Bang rewrite
 2. **Pre-flight diff report** : inventorier pages, URLs, broken links AVANT de migrer

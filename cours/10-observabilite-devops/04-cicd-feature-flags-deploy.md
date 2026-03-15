@@ -15,7 +15,7 @@
 <details>
 <summary>2. Pourquoi le tracing resout des problèmes que le logging seul ne peut pas ?</summary>
 
-Le logging montre ce qui se passe **dans** chaque service individuellement. Le tracing montre la latence **entre** les services — file d'attente, connection pool epuise, DNS lent. Un service rapide (45ms) peut contribuer a une requête lente (2s) si le temps d'attente avant son appel est long.
+Le logging montre ce qui se passe **dans** chaque service individuellement. Le tracing montre la latence **entre** les services — file d'attente, connection pool epuise, DNS lent. Un service rapide (45ms) peut contribuer à une requête lente (2s) si le temps d'attente avant son appel est long.
 </details>
 
 ---
@@ -24,7 +24,7 @@ Le logging montre ce qui se passe **dans** chaque service individuellement. Le t
 
 - **CI** (Continuous Intégration) : chaque piece est testee individuellement sur la chaine (tests unitaires, lint, build)
 - **CD** (Continuous Delivery) : la voiture assemblee passe au controle qualité (tests d'intégration, load tests)
-- **Feature flags** : certaines voitures sortent avec un toit ouvrant active, d'autres non — meme chaine, meme déploiement
+- **Feature flags** : certaines voitures sortent avec un toit ouvrant active, d'autres non — même chaine, même déploiement
 - **Blue/Green** : la nouvelle chaine de production est prete a côté de l'ancienne — on bascule les commandes en un instant
 - **Canary** : 5% des voitures passent sur la nouvelle chaine — si tout va bien, on monte a 100%
 
@@ -302,12 +302,12 @@ jobs:
 
 ---
 
-## Resume
+## Résumé
 
 1. **CI pipeline** : lint → typecheck → unit tests → security scan → build → intégration tests — chaque étape est un gate
 2. **Feature flags** : déployer du code inactif, activer progressivement (rollout %), kill switch en cas de problème
 3. **Blue/Green** : rollback instantane (rebascule), cout 2x infra temporaire — ideal pour les releases majeures
-4. **Canary** : 5% du trafic d'abord, observer les metriques, promouvoir ou rollback — blast radius minimal
+4. **Canary** : 5% du trafic d'abord, observer les metriques, promouvoir où rollback — blast radius minimal
 5. **Zero-downtime** : migrations backward-compatible + readiness probes + graceful shutdown + PodDisruptionBudget
 
 ---

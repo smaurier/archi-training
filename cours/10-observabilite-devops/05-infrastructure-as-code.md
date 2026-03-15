@@ -15,7 +15,7 @@
 <details>
 <summary>2. Quels sont les 3 types de feature flags ?</summary>
 
-1. **Build-time** (env vars `NEXT_PUBLIC_*`) : compile dans le build, pas modifiable apres
+1. **Build-time** (env vars `NEXT_PUBLIC_*`) : compile dans le build, pas modifiable après
 2. **Runtime** (config DB/Redis) : modifiable sans redeploy, rollout progressif
 3. **Per-user** (experimentation) : A/B testing, beta users, activation par utilisateur
 </details>
@@ -24,7 +24,7 @@
 
 ## Analogie — Le plan de l'architecte vs construire a l'intuition
 
-- **Click-ops** (configurer a la main dans la console AWS) : c'est comme construire une maison sans plan — tu sais ce que tu as fait, mais personne d'autre ne peut reproduire, et si ca brule, tu recommences de zero.
+- **Click-ops** (configurer à la main dans la console AWS) : c'est comme construire une maison sans plan — tu sais ce que tu as fait, mais personne d'autre ne peut reproduire, et si ça brule, tu recommences de zero.
 - **IaC** (Infrastructure as Code) : c'est le plan d'architecte — tout est documente, versionne, reproductible. Si la maison brule, tu reconstruis a l'identique en 1 heure.
 
 ---
@@ -50,7 +50,7 @@
 | State | Remote backend (S3) | Pulumi Cloud / self-hosted | CloudFormation |
 | Multi-cloud | Oui (AWS, GCP, Azure) | Oui | AWS uniquement |
 | Learning curve | Faible | Moyenne | Moyenne |
-| Maturite | Tres mature | Mature | Mature (AWS) |
+| Maturite | Très mature | Mature | Mature (AWS) |
 
 ### 3. Concepts fondamentaux Terraform
 
@@ -270,17 +270,17 @@ spec:
 
 ---
 
-## Resume
+## Résumé
 
 1. **IaC** : l'infra est du code versionne — reproductible, reviewable, rollback via `git revert`
 2. **State remote** : S3 + DynamoDB lock — jamais de state local en équipe, chiffrement obligatoire
-3. **Modules réutilisables** : meme module pour staging et production, seuls les variables changent
+3. **Modules réutilisables** : même module pour staging et production, seuls les variables changent
 4. **GitOps** (ArgoCD/Flux) : le cluster converge vers l'état dans git — audit trail complet, self-healing
-5. **Immutable infrastructure** : jamais de modification in-place — nouveau container/VM a chaque deploy, pas de drift
+5. **Immutable infrastructure** : jamais de modification in-place — nouveau container/VM à chaque deploy, pas de drift
 
 ---
 
-> **Prochain cours** : [Cours 73 — Pyramide de tests & Accessibilite](../11-testing-architecture/01-pyramide-tests-a11y.md)
+> **Prochain cours** : [Cours 73 — Pyramide de tests & Accessibilité](../11-testing-architecture/01-pyramide-tests-a11y.md)
 
 ---
 
@@ -290,3 +290,14 @@ spec:
 > - Configure les health checks (liveness, readiness, startup probes)
 > - Exercice(s) associé(s) : `exercices/49-blue-green-deploy/`
 > - Checkpoint : Module 10, critère 5
+
+---
+
+<!-- parcours-recommande -->
+
+::: tip Parcours recommandé
+1. **Exercice** : [46-pipeline-observabilité](../../exercices/46-pipeline-observabilite/ENONCE)
+2. **Exercice** : [47-slos-error-budgets](../../exercices/47-slos-error-budgets/ENONCE)
+3. **Exercice** : [48-cicd-feature-flags](../../exercices/48-cicd-feature-flags/ENONCE)
+4. **Exercice** : [49-blue-green-deploy](../../exercices/49-blue-green-deploy/ENONCE)
+:::

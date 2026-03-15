@@ -15,7 +15,7 @@
 <details>
 <summary>2. Comment fonctionne la surrogate-key invalidation ?</summary>
 
-Chaque réponse cachee porte un header `Surrogate-Key` avec des tags (ex: `product:abc category:shoes`). Quand un produit change, on envoie un `PURGE` au CDN avec le tag `product:abc`. Le CDN invalide **toutes** les pages contenant ce tag, sans connaitre les URLs exactes. C'est plus precis et plus maintenable que purger par URL.
+Chaque réponse cachee porte un header `Surrogate-Key` avec des tags (ex: `product:abc category:shoes`). Quand un produit change, on envoie un `PURGE` au CDN avec le tag `product:abc`. Le CDN invalide **toutes** les pages contenant ce tag, sans connaître les URLs exactes. C'est plus précis et plus maintenable que purger par URL.
 </details>
 
 ---
@@ -23,7 +23,7 @@ Chaque réponse cachee porte un header `Surrogate-Key` avec des tags (ex: `produ
 ## Analogie — Le réseau de boulangeries
 
 Une chaine de boulangeries avec une usine centrale :
-- **L'usine** (serveur origin) cuit les pains a la demande — qualité parfaite mais lent (il faut commander, attendre la cuisson, livrer)
+- **L'usine** (serveur origin) cuit les pains à la demandé — qualité parfaite mais lent (il faut commander, attendre la cuisson, livrer)
 - **Les depots regionaux** (CDN edge nodes) stockent des pains precuits — rapide car proche, mais en quantité limitee
 - **La vitrine** (cache navigateur) affiche les pains du jour — instantane mais petit
 
@@ -250,10 +250,10 @@ function getPreconnectLinks(): string[] {
 
 ---
 
-## Resume
+## Résumé
 
 1. **CDN edge-first** : cache les réponses au plus proche de l'utilisateur — sub-600ms TTFB EU, objectif <50ms edge hit
-2. **Surrogate keys + soft purge** : invalider par tag, servir le stale pendant revalidation — precision sans connaitre les URLs
+2. **Surrogate keys + soft purge** : invalider par tag, servir le stale pendant revalidation — précision sans connaître les URLs
 3. **Image pipeline** : upload original → transformation on-the-fly (WebP/AVIF, srcset responsive, focal-point) → CDN cache immutable
 4. **SHA-256 deduplication** : un seul fichier physique pour N références — 30-40% d'economie storage
 5. **`<link rel="preconnect">`** : negocier la connexion TCP+TLS en avance — 100-200ms gagnes sur le premier asset

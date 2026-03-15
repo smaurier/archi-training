@@ -10,7 +10,7 @@
 ## Schema-per-tenant
 
 - [ ] `SET search_path TO tenant_{slug}, public` est exécuté avant chaque requête
-- [ ] Le schema est reset apres la requête
+- [ ] Le schema est reset après la requête
 - [ ] Le middleware s'exécuté avant le controller
 
 ## S3 prefix

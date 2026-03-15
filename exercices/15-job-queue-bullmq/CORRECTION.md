@@ -252,7 +252,7 @@ BullMQ + Redis car Redis est déjà utilisé pour le cache et les sessions. Les 
 
 ## Ce que tu aurais pu oublier
 
-### 1. Worker dans le meme process que l'API
+### 1. Worker dans le même process que l'API
 
 ```
 FAUX — le worker partage le CPU avec les requetes HTTP

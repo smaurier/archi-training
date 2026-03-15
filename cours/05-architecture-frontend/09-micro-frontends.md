@@ -11,13 +11,13 @@
 
 - **UI locale** = la langue de l'interface (boutons, menus, messages d'erreur). Geree par un framework i18n (i18next).
 - **Content locale** = la langue du contenu métier (articles, produits, pages). Stockee dans un `MultiLangField` JSONB.
-Les deux sont independants : un editeur peut avoir l'interface en francais et editer du contenu en anglais.
+Les deux sont independants : un editeur peut avoir l'interface en français et editer du contenu en anglais.
 </details>
 
 <details>
 <summary>2. Qu'est-ce que le redirect chain collapsing et pourquoi est-ce important pour le SEO ?</summary>
 
-Quand un slug est modifie plusieurs fois, chaque changement cree un redirect 301. Sans collapsing, on obtient des chaines (A → B → C → D). Google penalise les chaines > 2 redirects et chaque redirect ajoute un round-trip. Le collapsing met a jour tous les anciens redirects pour pointer directement vers la destination finale.
+Quand un slug est modifie plusieurs fois, chaque changement créé un redirect 301. Sans collapsing, on obtient des chaines (A → B → C → D). Google penalise les chaines > 2 redirects et chaque redirect ajoute un round-trip. Le collapsing met a jour tous les anciens redirects pour pointer directement vers la destination finale.
 </details>
 
 ---
@@ -43,7 +43,7 @@ Un centre commercial n'est pas un seul magasin geant — c'est un ensemble de bo
 | Problème du monolithe front | Solution micro-frontend |
 |---|---|
 | Build de 10 min quand le projet grossit | Chaque app se build independamment (~1 min) |
-| 3 équipes sur le meme repo = merge conflicts | Chaque équipe a son repo |
+| 3 équipes sur le même repo = merge conflicts | Chaque équipe a son repo |
 | Une lib React 16 bloque le passage a React 18 | Chaque app choisit sa version |
 | Un bug dans l'admin casse le catalogue | Isolation : un crash ne propage pas |
 
@@ -70,12 +70,12 @@ Un centre commercial n'est pas un seul magasin geant — c'est un ensemble de bo
 
 | Approche | Isolation | Shared deps | Complexite | Cas d'usage |
 |---|---|---|---|---|
-| **Module Federation** | Faible (meme runtime) | Oui (shared config) | Moyenne | Equipes React, build rapide |
+| **Module Federation** | Faible (même runtime) | Oui (shared config) | Moyenne | Equipes React, build rapide |
 | **Single-SPA** | Moyenne (parcels) | Via import maps | Elevee | Mix de frameworks |
 | **iframes** | Totale (sandbox) | Non | Faible | Legacy, tiers non fiable |
 | **Web Components** | Forte (Shadow DOM) | Non | Moyenne | Composants partages cross-framework |
 
-### 3. Module Federation — comment ca marche
+### 3. Module Federation — comment ça marche
 
 ```
 ┌─────────────────┐      ┌─────────────────┐
@@ -104,7 +104,7 @@ Les `shared` dependencies (React, React-DOM) sont chargees une seule fois et par
 
 ### 4. Communication inter-micro-frontends
 
-| Pattern | Mecanisme | Cas d'usage |
+| Pattern | Mécanisme | Cas d'usage |
 |---|---|---|
 | **Custom Events** | `window.dispatchEvent(new CustomEvent(...))` | Notifications, actions simples |
 | **Shared state** | Micro store expose (Zustand partagé) | Panier, auth |
@@ -117,7 +117,7 @@ Les `shared` dependencies (React, React-DOM) sont chargees une seule fois et par
 
 | Situation | Pourquoi rester en monolithe |
 |---|---|
-| Équipe < 5 devs | Le cout d'orchestration depasse le benefice |
+| Équipe < 5 devs | Le cout d'orchestration dépasse le benefice |
 | Un seul domaine métier | Pas de frontiere naturelle pour couper |
 | Stack homogene | Pas besoin de mixer les frameworks |
 | MVP / prototype | Premature optimization |
@@ -269,7 +269,7 @@ function MicroFrontendBoundary({
 
 ---
 
-## Resume
+## Résumé
 
 1. **Module Federation** (Webpack 5) pour partager des composants React entre apps avec des deps partagees (singleton)
 2. **Communication** via Custom Events (`window.dispatchEvent`) — convention `{app}:{domain}:{action}`

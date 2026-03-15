@@ -41,7 +41,7 @@ C'est essentiel parce que :
 
 Dans une cuisine professionnelle, il y a deux rôles très différents :
 
-**Le commis** reçoit des instructions précises : "Coupe 500g d'oignons en brunoise, fais revenir à feu moyen pendant 8 minutes." Il exécute. Il ne se demande pas pourquoi on utilise des oignons plutôt que des échalotes, ni si le plat serait meilleur avec une cuisson différente. Il fait ce qu'on lui dit, bien et vite.
+**Le commis** reçoit des instructions précises : "Coupe 500g d'oignons en brunoise, fais revenir à feu moyen pendant 8 minutes." Il exécute. Il ne se demandé pas pourquoi on utilise des oignons plutôt que des échalotes, ni si le plat serait meilleur avec une cuisson différente. Il fait ce qu'on lui dit, bien et vite.
 
 **Le chef cuisinier** raisonne différemment : "Le client veut un plat réconfortant pour l'hiver, avec un budget de 12 euros par assiette, livrable en 15 minutes maximum. Quels ingrédients ? Quelle technique de cuisson ? Quel compromis entre coût et qualité ? Est-ce qu'on peut préparer une base à l'avance ?"
 
@@ -163,7 +163,7 @@ Scope : un fichier, une feature   Scope : tout le systeme
 
 2. **Documente tes raisonnements** — écrire un ADR te force à structurer ta pensée. Même si ta conclusion est fausse, le raisonnement est valuable. Un junior qui écrit "j'ai choisi X parce que Y, en acceptant le risque Z" est plus crédible qu'un senior qui dit "fais-moi confiance".
 
-3. **Pose des questions, pas des affirmations** — au lieu de dire "il faut utiliser Redux", demande "quel problème de state management avons-nous exactement ?". Les questions sont toujours légitimes, les affirmations peuvent être contestées.
+3. **Pose des questions, pas des affirmations** — au lieu de dire "il faut utiliser Redux", demandé "quel problème de state management avons-nous exactement ?". Les questions sont toujours légitimes, les affirmations peuvent être contestées.
 
 4. **Compare-toi a toi d'il y a 6 mois** — pas au tech lead qui a 15 ans d'experience. La progression est personnelle.
 
@@ -323,7 +323,7 @@ const ssgOption: TradeOffOption = {
 // → Mitigation : cache CDN de 5 minutes pour les pages catalogue
 ```
 
-**Le réflexe à développer** : chaque fois que quelqu'un te propose UNE solution, demande-toi immédiatement "quelle est l'alternative, et quels sont les trade-offs de chacune ?"
+**Le réflexe à développer** : chaque fois que quelqu'un te propose UNE solution, demandé-toi immédiatement "quelle est l'alternative, et quels sont les trade-offs de chacune ?"
 
 ---
 
@@ -830,7 +830,7 @@ Voici des pistes pour t'aider à structurer ta réflexion :
 
 - La transition d'exécutant à architecte passe par **4 niveaux de maturité** : exécutant (je code ce qu'on me dit), contributeur (je propose des améliorations), concepteur (je conçois des solutions), architecte (je fais des arbitrages business). Tu n'as pas besoin d'être au niveau 4 demain — chaque question "pourquoi ?" te fait monter d'un cran.
 
-- Le **syndrome de l'imposteur** est universel en architecture parce que le feedback est retardé et subjectif (contrairement au code où les tests passent ou non). Les antidotes : accepte l'incertitude, documente tes raisonnements, pose des questions plutôt que des affirmations, et commence petit.
+- Le **syndrome de l'imposteur** est universel en architecture parce que le feedback est retardé et subjectif (contrairement au code ou les tests passent ou non). Les antidotes : accepte l'incertitude, documente tes raisonnements, pose des questions plutôt que des affirmations, et commence petit.
 
 - **Penser en trade-offs** est le changement de mindset fondamental : il n'y a jamais UNE bonne solution, il y a des solutions dont les compromis sont mieux adaptés au contexte. Toute réponse architecturale commence par "ça dépend de..." suivi des axes de décision concrets.
 

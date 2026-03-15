@@ -22,7 +22,7 @@ Le monolithe distribue est un système ou le code est physiquement decouped en p
 <details>
 <summary>Réponse</summary>
 
-Parce que le partage de base de données cree un couplage au schema : si un service modifie une table (renomme une colonne, change un type), tous les services qui lisent cette table doivent etre mis a jour et déployés en meme temps — detruisant l'independance de déploiement. De plus, les transactions ACID inter-services sont impossibles sur plusieurs bases, et le schema devient un contrat implicite que personne ne peut modifier sans coordination globale. L'isolation des données est ce qui rend possible le déploiement veritablement independant.
+Parce que le partage de base de données créé un couplage au schema : si un service modifie une table (renomme une colonne, change un type), tous les services qui lisent cette table doivent etre mis a jour et déployés en même temps — detruisant l'independance de déploiement. De plus, les transactions ACID inter-services sont impossibles sur plusieurs bases, et le schema devient un contrat implicite que personne ne peut modifier sans coordination globale. L'isolation des données est ce qui rend possible le déploiement veritablement independant.
 
 </details>
 
@@ -30,7 +30,7 @@ Parce que le partage de base de données cree un couplage au schema : si un serv
 
 ## Analogie — La pizza
 
-Imagine que tu commandes une pizza. Tu reçois une pizza entiere — **chaque part (slice) contient tout** : la pate, la sauce, le fromage, la garniture. Tu peux prendre une part et avoir une experience complete.
+Imagine que tu commandes une pizza. Tu reçois une pizza entière — **chaque part (slice) contient tout** : la pate, la sauce, le fromage, la garniture. Tu peux prendre une part et avoir une experience complete.
 
 Maintenant compare avec un buffet organise en couches :
 - Un bol de pate (couche 1)
@@ -88,9 +88,9 @@ Le principe vient de Jimmy Bogard (auteur de MediatR) : **"Features, not layers"
 |---|---|---|
 | Organisation | Par type technique (Controller, Service, Repo) | Par feature (CreateOrder, ListOrders) |
 | Changement d'une feature | Touche N fichiers dans N dossiers | Touche 1 dossier |
-| Partage de code | Fort (la meme couche sert tout) | Faible (partage conscient uniquement) |
+| Partage de code | Fort (la même couche sert tout) | Faible (partage conscient uniquement) |
 | Autonomie d'équipe | Faible (équipes par couche se bloquent) | Forte (équipes par feature) |
-| Cohérence interne | Facile a voir (meme couche = meme style) | Variable (chaque slice peut varier) |
+| Cohérence interne | Facile a voir (même couche = même style) | Variable (chaque slice peut varier) |
 | Onboarding | Style uniforme mais feature dispersee | Feature groupee mais styles potentiellement mixtes |
 | Tests | Multi-niveaux (unit + intégration) | Feature-centric (test de bout en bout la slice) |
 
@@ -473,7 +473,7 @@ describe('CreateOrderHandler', () => {
 
 ---
 
-## Resume
+## Résumé
 
 - La **Vertical Slice Architecture** organise le code par feature (CreateOrder, ListOrders) plutot que par couche technique (Controllers, Services, Repositories) — chaque slice est autonome et contient tout ce dont elle a besoin.
 - Le changement d'une feature ne touche qu'**un seul dossier**, reduisant les conflits de merge et favorisant l'autonomie des équipes.
@@ -495,4 +495,4 @@ describe('CreateOrderHandler', () => {
 
 [Cours 13 — 12-Factor App & Idempotence](./07-twelve-factor-idempotency.md)
 
-> On va etudier les 12 facteurs qui rendent une application cloud-native, et le principe crucial d'idempotence — pourquoi appuyer deux fois sur "Payer" ne doit jamais debiter deux fois, et comment implémenter des cles d'idempotence et des retries surs.
+> On va etudier les 12 facteurs qui rendent une application cloud-native, et le principe crucial d'idempotence — pourquoi appuyer deux fois sur "Payer" ne doit jamais debiter deux fois, et comment implémenter des clés d'idempotence et des retries surs.

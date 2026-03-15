@@ -1,6 +1,6 @@
 # Cours 16 — Entités, Value Objects & Agregats
 
-**Objectif :** Distinguer ce qui a une identité (Entité) de ce qui n'en a pas (Value Object), comprendre pourquoi les Agregats sont les garantes de la cohérence métier, et maîtriser les patterns UUID v4, soft delete, optimistic locking et i18n JSON.
+**Objectif :** Distinguer ce qui à une identité (Entité) de ce qui n'en a pas (Value Object), comprendre pourquoi les Agregats sont les garantes de la cohérence métier, et maîtriser les patterns UUID v4, soft delete, optimistic locking et i18n JSON.
 
 ---
 
@@ -22,7 +22,7 @@ Une ACL est une couche de traduction qui isole votre domaine d'un modèle extern
 <details>
 <summary>Réponse</summary>
 
-Partager une entité entre deux contextes cree un couplage fort : un changement de schema dans le contexte A force une modification dans le contexte B. Les deux équipes se bloquent mutuellement. De plus, la meme entité prend des formes tres différentes selon le contexte (un "Produit" dans le catalogue a des images, des variantes, un SEO ; dans une commande, c'est un snapshot avec le prix au moment de l'achat). La solution : chaque contexte a son propre modèle, et les contextes communiquent par IDs et événements.
+Partager une entité entre deux contextes créé un couplage fort : un changement de schema dans le contexte A force une modification dans le contexte B. Les deux équipes se bloquent mutuellement. De plus, la même entité prend des formes très différentes selon le contexte (un "Produit" dans le catalogue a des images, des variantes, un SEO ; dans une commande, c'est un snapshot avec le prix au moment de l'achat). La solution : chaque contexte a son propre modèle, et les contextes communiquent par IDs et événements.
 
 </details>
 
@@ -32,7 +32,7 @@ Partager une entité entre deux contextes cree un couplage fort : un changement 
 
 **Entité = une personne. Value Object = un billet de banque. Agregat = une famille.**
 
-- **Entité** : Marie Dupont est une personne. Si elle change de nom, de couleur de cheveux, d'adresse, c'est toujours la meme personne. Son **identité** (numéro de sécurité sociale) ne change jamais. Deux personnes avec le meme prenom ne sont pas la meme personne.
+- **Entité** : Marie Dupont est une personne. Si elle change de nom, de couleur de cheveux, d'adresse, c'est toujours la même personne. Son **identité** (numéro de sécurité sociale) ne change jamais. Deux personnes avec le même prenom ne sont pas la même personne.
 
 - **Value Object** : Un billet de 20 euros n'a pas d'identité propre. Deux billets de 20 euros sont **interchangeables**. Ce qui compte, c'est la valeur, pas le numéro de serie. Si vous dechirez un billet et en collez les morceaux, ce n'est plus un billet valide — les Value Objects sont **immuables**.
 
@@ -49,7 +49,7 @@ Une Entité est un objet défini par son **identité**, qui persiste au travers 
 **Caractéristiques :**
 - Possede un identifiant unique (ID)
 - Peut changer d'état au fil du temps
-- Deux entités avec le meme ID sont la meme entité, meme si leurs attributs différent
+- Deux entités avec le même ID sont la même entité, même si leurs attributs différent
 - Cycle de vie : création, modification, (eventuelle) suppression
 
 ```
@@ -119,13 +119,13 @@ export class ArticleId {
 
 ### 2. Value Object (VO)
 
-Un Value Object est un objet défini par ses **attributs**, sans identité propre. Il est **immuable** : toute "modification" cree un nouvel objet.
+Un Value Object est un objet défini par ses **attributs**, sans identité propre. Il est **immuable** : toute "modification" créé un nouvel objet.
 
 **Caractéristiques :**
 - Pas d'ID
 - Immuable (readonly sur tous les champs)
 - Comparaison par valeur, pas par référence
-- Self-validating (valide ses propres invariants a la construction)
+- Self-validating (valide ses propres invariants à la construction)
 - Souvent riche en logique métier
 
 | | Entité | Value Object |
@@ -235,7 +235,7 @@ export class MultiLangField {
 
 ### 3. Agregat (Aggregate)
 
-Un Agregat est un **groupe d'objets** (entités + value objects) traite comme une unite de cohérence. Il a une **Racine d'Agregat** (Aggregate Root) qui est le seul point d'entree pour les modifications.
+Un Agregat est un **groupe d'objets** (entités + value objects) traite comme une unite de cohérence. Il à une **Racine d'Agregat** (Aggregate Root) qui est le seul point d'entree pour les modifications.
 
 **Regles d'or des Agregats :**
 
@@ -290,7 +290,7 @@ interface SoftDeletable {
 
 #### Version field — Optimistic Locking
 
-Sans protection, deux utilisateurs editant le meme article simultanement peuvent provoquer des pertes de données.
+Sans protection, deux utilisateurs editant le même article simultanement peuvent provoquer des pertes de données.
 
 ```
 SCENARIO SANS OPTIMISTIC LOCKING :
@@ -592,12 +592,12 @@ describe('Article — Aggregate', () => {
 
 ---
 
-## Resume
+## Résumé
 
 - Une **Entité** est définie par son identité stable (UUID v4) et peut changer d'état au fil du temps ; les UUIDs v4 empechent les attaques IDOR par enumeration.
 - Un **Value Object** est défini par sa valeur, est immuable et auto-validant : `Money`, `Email`, `MultiLangField` encapsulent leurs invariants et leur logique métier.
 - Un **Agregat** garantit la cohérence métier d'un groupe d'objets : toute modification passe par la Racine, les autres agregats ne sont références que par leur ID.
-- Le **soft delete** (`deletedAt`, `deletedBy`) preserves l'historique métier ; le **version field** (+1 a chaque modification) permet le verrouillage optimiste et détecté les conflits d'edition simultanee.
+- Le **soft delete** (`deletedAt`, `deletedBy`) preserves l'historique métier ; le **version field** (+1 à chaque modification) permet le verrouillage optimiste et détecté les conflits d'edition simultanee.
 - Le champ **MultiLangField** stocke les traductions en JSONB (`{ "fr": "...", "en": "..." }`) et encapsule la logique de fallback — un seul champ géré l'internationalisation sans tables de traduction séparées.
 
 

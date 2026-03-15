@@ -15,14 +15,14 @@
 <details>
 <summary>2. A partir de combien d'invocations les containers deviennent plus rentables que le serverless ?</summary>
 
-Environ **3-5 millions d'invocations par mois**. En dessous, le serverless est quasi gratuit (pay-per-invocation). Au-dela, le cout par invocation depasse celui d'un container tourne 24/7. Le break-even exact dépend du runtime, de la mémoire allouee et de la durée d'exécution.
+Environ **3-5 millions d'invocations par mois**. En dessous, le serverless est quasi gratuit (pay-per-invocation). Au-dela, le cout par invocation dépasse celui d'un container tourne 24/7. Le break-even exact dépend du runtime, de la mémoire allouee et de la durée d'exécution.
 </details>
 
 ---
 
 ## Analogie — Le carnet de bord du pilote
 
-Un pilote d'avion ne note pas "ca va bien" dans son carnet. Il écrit :
+Un pilote d'avion ne note pas "ça va bien" dans son carnet. Il écrit :
 - **Quand** : 14:32 UTC
 - **Quoi** : "Altitude 35000ft atteinte"
 - **Contexte** : Vol AF123, Paris-Tokyo, Airbus A350
@@ -284,7 +284,7 @@ export class RequestLogInterceptor implements NestInterceptor {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Logging structure JSON** : machine-parsable, filtrable, aggregable — jamais de `console.log("texte libre")`
 2. **Resource attributes** : `timestamp`, `level`, `message` (entity.action), `service`, `traceId`, `tenantId` — obligatoires sur chaque log

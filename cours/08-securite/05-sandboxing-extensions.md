@@ -9,7 +9,7 @@
 <details>
 <summary>1. Pourquoi le sliding window counter est-il préféré au fixed window pour le rate limiting ?</summary>
 
-Le fixed window découpé le temps en tranches fixes (ex: 00:00-01:00). Un attaquant peut envoyer 100 requêtes a 00:59 et 100 autres a 01:00, soit 200 en 2 secondes alors que la limite est 100/min. Le sliding window counter interpole entre la fenetre courante et la précédente (`total = count_prev * weight + count_current`) — il n'y a jamais plus de N requêtes dans n'importe quelle fenetre glissante de 60 secondes.
+Le fixed window découpé le temps en tranches fixes (ex: 00:00-01:00). Un attaquant peut envoyer 100 requêtes a 00:59 et 100 autres a 01:00, soit 200 en 2 secondes alors que la limite est 100/min. Le sliding window counter interpole entre la fenêtre courante et la précédente (`total = count_prev * weight + count_current`) — il n'y a jamais plus de N requêtes dans n'importe quelle fenêtre glissante de 60 secondes.
 </details>
 
 <details>
@@ -548,13 +548,13 @@ export class PluginCapabilitiesService {
 
 ---
 
-## Resume
+## Résumé
 
 1. **iframe sandbox** : isolation totale (DOM, JS, styles) pour les plugins tiers — commencer avec `sandbox=""` puis ajouter uniquement les permissions nécessaires, jamais `allow-top-navigation`
-2. **postMessage** : seul canal de communication entre l'app et le plugin isole — toujours vérifier `event.origin`, toujours specifier `targetOrigin` (jamais `*`), valider le schema de chaque message
+2. **postMessage** : seul canal de communication entre l'app et le plugin isole — toujours vérifier `event.origin`, toujours spécifier `targetOrigin` (jamais `*`), valider le schema de chaque message
 3. **HMAC challenge-response** : signer les manifests de plugins avec HMAC-SHA256 côté plateforme — au chargement, recalculer et comparer en temps constant, auto-disable si mismatch
 4. **CSS guardrails** : 15KB max, interdire `!important` sur les tokens, `*{}`, `@import`, `url(http...)`, et forcer le scope `#site-root` — chaque règle previent un vecteur d'attaque ou de casse CSS
-5. **Feature flags** : chaque plugin déclaré ses capacités, le système vérifié a chaque action, auto-disable apres 10 violations — defense en profondeur par limitation de surface
+5. **Feature flags** : chaque plugin déclaré ses capacités, le système vérifié à chaque action, auto-disable après 10 violations — defense en profondeur par limitation de surface
 
 ---
 

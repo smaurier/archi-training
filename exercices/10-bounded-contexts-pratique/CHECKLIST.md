@@ -3,14 +3,14 @@
 ## Identification
 
 - [ ] J'ai identifie au moins 4 bounded contexts distincts
-- [ ] Chaque context a un nom clair et non-ambigu
+- [ ] Chaque context à un nom clair et non-ambigu
 - [ ] Chaque context a son propre modèle de "Product"
 - [ ] Les termes ne sont pas ambigus DANS un context
 
 ## Glossaire
 
-- [ ] Chaque context a un glossaire de 3-5 termes
-- [ ] Le meme mot peut avoir des sens différents entre contexts (ex: "Product")
+- [ ] Chaque context à un glossaire de 3-5 termes
+- [ ] Le même mot peut avoir des sens différents entre contexts (ex: "Product")
 - [ ] Les définitions sont precises et non-ambigues
 
 ## Relations

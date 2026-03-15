@@ -197,7 +197,7 @@ k6 run --out json=results.json load-test.js
 | Error rate | 0% | 0.1% | 3.2% ❌ |
 | Throughput | 15 req/s | 284 req/s | 380 req/s |
 
-**Point de rupture** : ~350 VU (p99 depasse 1s, error rate depasse 1%)
+**Point de rupture** : ~350 VU (p99 dépasse 1s, error rate dépasse 1%)
 
 **Bottlenecks identifies** :
 1. Endpoint `/api/products?q=*` : p99 = 1.2s a 500 VU (manque d'index)

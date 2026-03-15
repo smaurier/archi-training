@@ -52,7 +52,7 @@ Pour chaque composant, identifie :
 - Conteneur (fetch data, géré le state) ?
 - Headless (logique sans UI, custom hook) ?
 
-### Étape 4 — Implémenter les composants cles
+### Étape 4 — Implémenter les composants clés
 
 Implemente au minimum :
 - `ProductPrice` (formattage, promotion, devise)

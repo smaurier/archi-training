@@ -1,6 +1,6 @@
 # Checklist — Exercice 23 : SSR/ISR hybrid
 
-- [ ] Chaque route a une stratégie justifiee
+- [ ] Chaque route à une stratégie justifiee
 - [ ] Pages SEO → SSR ou ISR (server components)
 - [ ] Pages privees → client-only ('use client')
 - [ ] Pages statiques → SSG (defaut App Router)

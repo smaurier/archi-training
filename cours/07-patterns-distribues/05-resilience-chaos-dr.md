@@ -9,8 +9,8 @@
 <details>
 <summary>1. Quelle est la différence entre une saga choreographiee et une saga orchestree ?</summary>
 
-- **Choreographiee** : chaque service écoute les events des autres et reagit. Pas de coordinateur central. Plus découplé, mais plus difficile a suivre.
-- **Orchestree** : un orchestrateur central appelle les services dans l'ordre et géré les compensations. Plus facile a comprendre, mais l'orchestrateur est un SPOF potentiel.
+- **Choreographiee** : chaque service écoute les events des autres et reagit. Pas de coordinateur central. Plus découplé, mais plus difficile à suivre.
+- **Orchestree** : un orchestrateur central appelle les services dans l'ordre et géré les compensations. Plus facile à comprendre, mais l'orchestrateur est un SPOF potentiel.
 </details>
 
 <details>
@@ -26,7 +26,7 @@ C'est l'inverse d'une transaction. Si l'étape 3 d'une saga échoué, on exécut
 Un disjoncteur dans une maison :
 - **Ferme** (closed) : le courant passe normalement
 - **Ouvert** (open) : trop de surcharge → le disjoncteur coupe le courant pour protéger l'installation
-- **Semi-ouvert** (half-open) : apres un moment, on teste si le problème est résolu en laissant passer un peu de courant
+- **Semi-ouvert** (half-open) : après un moment, on teste si le problème est résolu en laissant passer un peu de courant
 
 Le **Circuit Breaker** logiciel fait exactement pareil : il détecté qu'un service est en panne et arrete de l'appeler (open), puis teste periodiquement si le service est de retour (half-open).
 
@@ -56,7 +56,7 @@ Le **Circuit Breaker** logiciel fait exactement pareil : il détecté qu'un serv
 |---|---|---|
 | **Closed** | Requetes passent normalement | Service sain |
 | **Open** | Echec immédiat (fail fast), pas d'appel au service | Seuil d'echecs atteint |
-| **Half-Open** | N requêtes de test autorisees | Timer expire apres open |
+| **Half-Open** | N requêtes de test autorisees | Timer expire après open |
 
 ### 2. Bulkhead Pattern
 
@@ -103,7 +103,7 @@ function calculateDelay(attempt: number): number {
 }
 ```
 
-Sans jitter, si 1000 clients echouent en meme temps, ils retryent tous au meme moment → nouvelle surcharge. Le jitter etale les retries.
+Sans jitter, si 1000 clients echouent en même temps, ils retryent tous au même moment → nouvelle surcharge. Le jitter etale les retries.
 
 ### 5. Chaos Engineering
 
@@ -118,7 +118,7 @@ Types de pannes a injecter :
 - Kill un pod/container
 - Ajouter de la latence réseau (200ms)
 - Saturer le CPU/mémoire
-- Couper la connexion a la DB
+- Couper la connexion à la DB
 - Bloquer le DNS
 
 **Game Day** = exercice planifie ou l'équipe simule une panne majeure en staging et observe la reaction du système.
@@ -281,7 +281,7 @@ export class PaymentGateway {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Circuit Breaker** : closed → open (fail fast) → half-open (test) — protégé contre les cascading failures
 2. **Bulkhead** : isoler les thread pools/connexions par service — une panne locale ne contamine pas

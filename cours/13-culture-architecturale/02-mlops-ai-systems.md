@@ -15,7 +15,7 @@ Le réseau mobile est **intermittent** (metro, avion, zone blanche). L'applicati
 <details>
 <summary>2. Qu'est-ce que le delta sync et pourquoi est-il critique en mobile ?</summary>
 
-Au lieu de telecharger tous les produits a chaque ouverture (`GET /products` → 20MB), le delta sync envoie `GET /products?since=timestamp` et ne récupéré que les éléments modifies depuis le dernier sync (~100KB). Economise la bande passante, la batterie, et le temps de chargement.
+Au lieu de telecharger tous les produits à chaque ouverture (`GET /products` → 20MB), le delta sync envoie `GET /products?since=timestamp` et ne récupéré que les éléments modifies depuis le dernier sync (~100KB). Economise la bande passante, la batterie, et le temps de chargement.
 </details>
 
 ---
@@ -244,7 +244,7 @@ describe('Translation quality baseline', () => {
 
 ---
 
-## Resume
+## Résumé
 
 1. **ML Pipeline** : data → features → training → évaluation → serving → monitoring — chaque étape est automatisee et versionnee
 2. **Feature Store** : memes features en training et serving — évité le training/serving skew

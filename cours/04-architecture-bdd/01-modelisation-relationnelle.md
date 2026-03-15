@@ -13,18 +13,18 @@
 <details>
 <summary>Réponse</summary>
 
-Le **lock optimiste** utilise un champ `version` (ou un ETag). Avant de sauvegarder, on vérifié que la version en base n'a pas change depuis la lecture. Si elle a change, on rejette avec une erreur 409/412. Pas de verrou en base, donc pas de blocage — ideal pour les cas ou les conflits sont rares (ex : edition de contenu CMS).
+Le **lock optimiste** utilise un champ `version` (où un ETag). Avant de sauvegarder, on vérifié que la version en base n'a pas change depuis la lecture. Si elle a change, on rejette avec une erreur 409/412. Pas de verrou en base, donc pas de blocage — ideal pour les cas où les conflits sont rares (ex : edition de contenu CMS).
 
 Le **lock pessimiste** utilise `SELECT ... FOR UPDATE` qui verrouille la ligne en base tant que la transaction n'est pas terminee. Les autres transactions qui tentent de lire/modifier cette ligne sont bloquees. Utilise quand les conflits sont fréquents ou quand la cohérence est critique (ex : débit de solde, reservation de stock).
 
 </details>
 
-**Question 2 — Pourquoi le modèle event-loop single-thread de Node.js peut quand meme gérer des milliers de connexions simultanees ?**
+**Question 2 — Pourquoi le modèle event-loop single-thread de Node.js peut quand même gérer des milliers de connexions simultanees ?**
 
 <details>
 <summary>Réponse</summary>
 
-Parce que Node.js utilise des I/O non-bloquantes. Quand une requête attend une réponse de la base de données ou du réseau, le thread principal ne se bloque pas — il continue a traiter d'autres requêtes. Les opérations I/O sont deleguees au système d'exploitation (epoll/kqueue) via libuv, et le callback est exécuté quand le résultat est pret. C'est comme un serveur de restaurant avec un seul serveur tres rapide qui prend les commandes sans attendre que la cuisine ait fini — il passe a la table suivante.
+Parce que Node.js utilise des I/O non-bloquantes. Quand une requête attend une réponse de la base de données ou du réseau, le thread principal ne se bloque pas — il continue a traiter d'autres requêtes. Les opérations I/O sont deleguees au système d'exploitation (epoll/kqueue) via libuv, et le callback est exécuté quand le résultat est pret. C'est comme un serveur de restaurant avec un seul serveur très rapide qui prend les commandes sans attendre que la cuisine ait fini — il passe à la table suivante.
 
 </details>
 
@@ -34,7 +34,7 @@ Parce que Node.js utilise des I/O non-bloquantes. Quand une requête attend une 
 
 Imagine un immeuble de bureaux modulable :
 
-- **Les murs porteurs** = le schema de base de données. Ils définissent la structure. On ne les deplace pas a la légère — chaque modification nécessité un permis (migration).
+- **Les murs porteurs** = le schema de base de données. Ils définissent la structure. On ne les deplace pas à la légère — chaque modification nécessité un permis (migration).
 - **Les cloisons amovibles** = les données. Elles s'adaptent aux besoins du locataire. Chaque etage (tenant) peut reorganiser ses cloisons sans affecter les autres.
 - **Le plan d'architecte** = le DDL (Data Définition Language). Il est versionne, chaque modification est tracee.
 - **Les plaques de porte** = les identifiants. Si tu mets "Bureau 1, 2, 3..." en sequence, quelqu'un qui connait le "Bureau 5" peut deviner qu'il existe un "Bureau 6". Avec des UUID, c'est comme des noms de code aleatoires — impossible a deviner.
@@ -46,7 +46,7 @@ Les murs porteurs (schema) ne bougent pas, les cloisons (data) s'adaptent.
 
 ## Théorie
 
-### 1. UUID v4 comme cle primaire — Prevention IDOR
+### 1. UUID v4 comme clé primaire — Prevention IDOR
 
 Les IDs sequentiels (1, 2, 3...) sont un risque de sécurité majeur : **IDOR** (Insecure Direct Object Référence).
 
@@ -199,7 +199,7 @@ Isolation :
 ```
 
 **Pourquoi des schemas et pas des bases séparées ?**
-- Les schemas partagent le meme moteur PostgreSQL = connexion unique
+- Les schemas partagent le même moteur PostgreSQL = connexion unique
 - Les migrations s'appliquent a tous les schemas en boucle
 - Le backup peut etre global ou par tenant (`pg_dump -n tenant_acme`)
 - Cross-tenant queries possibles en cas de besoin admin (reporting)
@@ -478,9 +478,9 @@ WHERE site = $1
 
 ---
 
-## Resume
+## Résumé
 
-- **UUID v4 comme cle primaire** empeche l'enumeration IDOR, permet la génération côté application (pas de round-trip DB), et fonctionne en multi-node sans conflit de sequence.
+- **UUID v4 comme clé primaire** empeche l'enumeration IDOR, permet la génération côté application (pas de round-trip DB), et fonctionne en multi-node sans conflit de sequence.
 - **Les colonnes JSONB** pour l'i18n (`MultiLangField { fr, en, nl }`) evitent les jointures couteuses avec une table de traductions et permettent l'extraction directe en SQL via l'opérateur `->>`.
 - **Les 5 champs obligatoires** (`id`, `site`, `created_at`, `updated_at`, `version`) garantissent l'identification, l'isolation multi-site, l'audit temporel et l'optimistic locking sur chaque entité.
 - **Le soft delete via status** (`draft → scheduled → published → archived`) remplace la suppression physique — les données sont conservees, restaurables, et le status encode le workflow editorial métier.

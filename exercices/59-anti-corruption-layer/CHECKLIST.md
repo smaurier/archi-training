@@ -6,7 +6,7 @@
 - [ ] Types du domaine sans référence aux types ERP
 - [ ] Traducteur toDomain et toERP
 - [ ] Gestion des valeurs manquantes (defaults)
-- [ ] Validation apres traduction
+- [ ] Validation après traduction
 - [ ] Circuit breaker sur les appels ERP
 - [ ] Cache des données ERP (TTL par type)
 - [ ] Queue pour les mutations (retry si ERP down)

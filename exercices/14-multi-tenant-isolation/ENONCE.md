@@ -61,7 +61,7 @@ Ecris un test qui vérifié :
 
 ## Contraintes
 
-- L'isolation est AUTOMATIQUE (pas besoin de passer le tenantId a chaque query)
+- L'isolation est AUTOMATIQUE (pas besoin de passer le tenantId à chaque query)
 - 3 couches : DB schema + query filter + S3 prefix
 - Zero accès cross-tenant possible
 - Le middleware s'exécuté AVANT le controller

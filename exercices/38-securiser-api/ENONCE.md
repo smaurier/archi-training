@@ -27,9 +27,9 @@ Corrige les vulnérabilités d'injection :
 
 ### Étape 2 — Broken Access Control (A01:2021)
 Implemente le controle d'accès :
-- IDOR : vérifier que l'utilisateur a le droit d'accéder a la ressource demandee
+- IDOR : vérifier que l'utilisateur a le droit d'accéder à la ressource demandee
 - Mass assignment : utiliser des DTOs explicites (pas de spread `...body`)
-- Vérifier les permissions a chaque endpoint (pas seulement au niveau route)
+- Vérifier les permissions à chaque endpoint (pas seulement au niveau route)
 
 ### Étape 3 — Security Headers
 Configure les headers de sécurité :

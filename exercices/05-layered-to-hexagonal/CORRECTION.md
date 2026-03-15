@@ -262,7 +262,7 @@ describe('OrderService (Hexagonal)', () => {
 | Évolutivité long terme | Très bonne | Limitée | Excellente |
 
 ### Pour ShopArch, on choisit...
-L'architecture hexagonale car le domaine e-commerce (pricing, stock, promotions, commandes) est riche en règles métier. On veut tester le cœur sans démarrer PostgreSQL. On ne va pas jusqu'à la Clean Architecture car on a un seul port d'entrée (REST API) et pas besoin de 4 couches distinctes.
+L'architecture hexagonale car le domaine e-commerce (pricing, stock, promotions, commandes) est riche en règles métier. On veut tester le cœur sans démarrer PostgreSQL. On ne va pas jusqu'à la Clean Architecture car on à un seul port d'entrée (REST API) et pas besoin de 4 couches distinctes.
 
 ---
 

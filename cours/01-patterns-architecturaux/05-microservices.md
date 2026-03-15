@@ -1,6 +1,6 @@
 # Cours 11 — Microservices
 
-**Objectif :** Comprendre quand et comment decomposer un système en microservices, maîtriser les principes de séparation (domaine vs technique), connaitre les anti-patterns critiques, et disposer d'un cadre de decision clair.
+**Objectif :** Comprendre quand et comment decomposer un système en microservices, maîtriser les principes de séparation (domaine vs technique), connaître les anti-patterns critiques, et disposer d'un cadre de decision clair.
 
 ---
 
@@ -51,7 +51,7 @@ Une **chaine de restaurants specialises** = les microservices :
 
 **Le client ne va pas dans les cuisines** — il commande via le serveur (API Gateway).
 
-Si le restaurant Pizza brule, les restaurants Sushi et Desserts continuent de servir. Mais coordonner une commande mixte (une pizza ET des sushis) demande maintenant de la communication entre restaurants — c'est la complexité des microservices.
+Si le restaurant Pizza brule, les restaurants Sushi et Desserts continuent de servir. Mais coordonner une commande mixte (une pizza ET des sushis) demandé maintenant de la communication entre restaurants — c'est la complexité des microservices.
 
 ---
 
@@ -478,7 +478,7 @@ describe('CreateOrderUseCase (microservice)', () => {
 
 ---
 
-## Resume
+## Résumé
 
 - Les microservices se decoupent selon les **domaines métier** (Bounded Contexts), pas selon les couches techniques — chaque service a sa propre base de données, son propre déploiement et son propre cycle de vie.
 - Le principe **"Data per Service"** est absolu : aucun accès direct en base entre services. La communication passe par HTTP synchrone ou messagerie asynchrone (Kafka, RabbitMQ).
@@ -500,4 +500,4 @@ describe('CreateOrderUseCase (microservice)', () => {
 
 [Cours 12 — Vertical Slice Architecture](./06-vertical-slice.md)
 
-> On va découvrir une approche radicalement différente : organiser le code par feature plutot que par couche technique. Chaque "tranche verticale" contient tout ce qu'il faut pour une fonctionnalité — de l'API a la BDD — favorisant l'autonomie des équipes.
+> On va découvrir une approche radicalement différente : organiser le code par feature plutot que par couche technique. Chaque "tranche verticale" contient tout ce qu'il faut pour une fonctionnalité — de l'API à la BDD — favorisant l'autonomie des équipes.

@@ -11,7 +11,7 @@
 
 1. **Metrics** (Prometheus/Mimir) — valeurs numériques dans le temps (counters, gauges, histograms)
 2. **Traces** (Tempo/Jaeger) — parcours d'une requête a travers les services (spans hierarchiques)
-3. **Logs** (Loki/Elasticsearch) — événements structures detailles. Les 3 sont correles via le `traceId`.
+3. **Logs** (Loki/Elasticsearch) — événements structures détaillés. Les 3 sont correles via le `traceId`.
 </details>
 
 <details>
@@ -84,7 +84,7 @@ Resultat : tous les spans sont correles dans la meme trace
 | Stratégie | Description | Quand |
 |---|---|---|
 | **Head-based** | Decision au debut de la trace (1%) | Production haute charge |
-| **Tail-based** | Decision apres la trace complete | Collecter les erreurs/lents |
+| **Tail-based** | Decision après la trace complete | Collecter les erreurs/lents |
 | **Always-on** | Tout tracer (100%) | Staging, dev |
 | **Adaptive** | Ajuster le ratio selon la charge | Systèmes variables |
 
@@ -238,9 +238,9 @@ export class TracedHttpService {
 
 ---
 
-## Resume
+## Résumé
 
-1. **Trace** = parcours complet d'une requête, **Span** = une étape dans ce parcours — hierarchie parent/enfant
+1. **Trace** = parcours complet d'une requête, **Span** = une étape dans ce parcours — hiérarchie parent/enfant
 2. **W3C Trace Context** : header `traceparent` propage automatiquement le `traceId` entre services
 3. **Sampling** : 1% en prod (head-based) + 100% des erreurs/lentes (tail-based), 100% en staging
 4. **Le tracing montre la latence ENTRE les étapes** — les logs seuls ne revelent pas les temps d'attente (queue, connection pool)

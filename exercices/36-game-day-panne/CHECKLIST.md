@@ -13,4 +13,4 @@
 ## Bonus
 - [ ] Automatisation avec Chaos Monkey / Litmus
 - [ ] Corrections implémentées
-- [ ] Planning Game Day recurrent
+- [ ] Planning Game Day récurrent

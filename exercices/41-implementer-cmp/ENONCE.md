@@ -56,4 +56,4 @@ Enregistre la preuve de consentement côté serveur :
 ## Contraintes
 - Aucun cookie non-nécessaire AVANT le consentement explicite
 - Le consentement doit etre aussi facile a refuser qu'a accepter
-- Les préférences doivent survivre a la fermeture du navigateur (cookie, pas sessionStorage)
+- Les préférences doivent survivre à la fermeture du navigateur (cookie, pas sessionStorage)

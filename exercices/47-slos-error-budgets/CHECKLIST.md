@@ -10,6 +10,6 @@
 - [ ] Fenetre glissante de 30 jours
 
 ## Bonus
-- [ ] SLO dashboard temps reel
+- [ ] SLO dashboard temps réel
 - [ ] Composite SLO
 - [ ] Burn rate alerts

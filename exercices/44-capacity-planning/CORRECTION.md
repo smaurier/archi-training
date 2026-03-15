@@ -112,7 +112,7 @@ spec:
 
 ## Plan de degradation graceful
 
-Si le pic depasse 1500 req/s (150% de la capacité) :
+Si le pic dépasse 1500 req/s (150% de la capacité) :
 
 | Priorite | Feature a désactiver | Impact | Seuil |
 |---|---|---|---|
@@ -163,7 +163,7 @@ export class DegradationService {
 
 | Critère | Vertical (plus gros serveur) | Horizontal (plus de serveurs) |
 |---|---|---|
-| Simplicite | Tres simple (upgrade instance) | Plus complexe (load balancer, stateless) |
+| Simplicite | Très simple (upgrade instance) | Plus complexe (load balancer, stateless) |
 | Cout | Croissance exponentielle | Croissance lineaire |
 | Limite | Plafond hardware | Quasi illimite |
 | Downtime | Oui (reboot pour upgrade) | Non (rolling update) |
@@ -173,7 +173,7 @@ export class DegradationService {
 
 ### Pre-provisioning vs auto-scaling pur
 
-| Critère | Pre-provisioning (J-1) | Auto-scaling reactif |
+| Critère | Pre-provisioning (J-1) | Auto-scaling réactif |
 |---|---|---|
 | Cout | Plus élevé (resources reservees) | Optimal (paye a l'usage) |
 | Latence de scaling | Zero (déjà provisionne) | 30-60s (cold start) |
@@ -188,7 +188,7 @@ export class DegradationService {
 |---|---|---|
 | Experience utilisateur | Features manquantes mais site fluide | Attente mais site complet |
 | Complexite | Feature flags par composant | Queue management + UI d'attente |
-| Equite | Tous les users ont la meme experience degradee | Premier arrive, premier servi |
+| Equite | Tous les users ont la même experience degradee | Premier arrive, premier servi |
 | Cas d'usage | Pic général sur tout le site | Pic sur une feature spécifique (checkout) |
 
 **Verdict pour ShopArch** : degradation graceful pour le pic général (désactiver les recommandations, simplifier la recherche). File d'attente uniquement pour le checkout si nécessaire (ex: billetterie).

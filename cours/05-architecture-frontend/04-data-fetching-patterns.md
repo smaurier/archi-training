@@ -13,9 +13,9 @@ Chaque guard dépend du précédent : on doit d'abord restaurer la session (asyn
 </details>
 
 <details>
-<summary>2. D'ou doivent venir les breadcrumbs et pourquoi ?</summary>
+<summary>2. D'où doivent venir les breadcrumbs et pourquoi ?</summary>
 
-De la **hierarchie des routes**, pas des menus. Les menus peuvent changer independamment de la structure des pages. Les routes sont stables et refletent la vraie hierarchie de navigation. On généré les crumbs automatiquement via `useMatches()`.
+De la **hiérarchie des routes**, pas des menus. Les menus peuvent changer independamment de la structure des pages. Les routes sont stables et refletent la vraie hiérarchie de navigation. On généré les crumbs automatiquement via `useMatches()`.
 </details>
 
 ---
@@ -25,7 +25,7 @@ De la **hierarchie des routes**, pas des menus. Les menus peuvent changer indepe
 Le serveur (le hook de data fetching) géré les commandes du client (l'utilisateur) :
 
 - **AbortController** = le client annule sa commande ("en fait, je ne veux plus la salade"). Le serveur arrete de preparer le plat au lieu de le servir pour rien.
-- **Debounce** = le serveur attend que le client ait fini de parler avant de transmettre a la cuisine. "Je veux... euh... un steak... non, un poulet... finalement un steak" → une seule commande
+- **Debounce** = le serveur attend que le client ait fini de parler avant de transmettre à la cuisine. "Je veux... euh... un steak... non, un poulet... finalement un steak" → une seule commande
 - **Stale-While-Revalidate** = le serveur sert les restes d'hier (cache stale) pendant que la cuisine prepare le plat frais. Le client mange immédiatement.
 - **Priority** = les plats VIP (critical) passent avant les accompagnements (low). La cuisine traite dans l'ordre d'importance.
 - **Retry** = le serveur retourne en cuisine si le plat est rate, mais pas indefiniment (max 2 tentatives).
@@ -51,8 +51,8 @@ Sans annulation, les réponses arrivent et mettent a jour un état qui n'existe 
 |---|---|---|
 | Recherche front-office | 300ms | L'utilisateur tape vite, une requête par mot suffit |
 | Recherche back-office | 800ms | L'editeur reflechit plus longtemps entre les frappes |
-| Auto-save | 1000ms | Sauvegarder apres que l'utilisateur ait arrete de taper |
-| Resize observer | 200ms | Éviter des recalculs a chaque pixel |
+| Auto-save | 1000ms | Sauvegarder après que l'utilisateur ait arrete de taper |
+| Resize observer | 200ms | Éviter des recalculs à chaque pixel |
 
 ### 3. Stale-While-Revalidate (SWR)
 
@@ -289,7 +289,7 @@ const total = data?.['hydra:totalItems'] ?? 0;
 
 ---
 
-## Resume
+## Résumé
 
 1. **AbortController** sur unmount et route change — éviter les memory leaks et les updates sur des composants demontees
 2. **Debounce 300ms** pour la recherche front, 800ms pour le back-office — une requête quand l'utilisateur a fini de taper

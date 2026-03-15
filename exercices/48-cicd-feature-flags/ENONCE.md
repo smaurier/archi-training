@@ -23,7 +23,7 @@ ShopArch deploie manuellement 1 fois par semaine. Les branches longues causent d
 Implemente un système de feature flags :
 - 3 types : boolean (on/off), percentage (rollout progressif), user-based (beta testers)
 - Stockage : base de données + cache Redis (TTL 30s)
-- API pour modifier les flags en temps reel (sans redeploiement)
+- API pour modifier les flags en temps réel (sans redeploiement)
 - SDK front-end et back-end
 
 ### Étape 2 — Pipeline CI
@@ -38,8 +38,8 @@ Configure le pipeline CI (GitHub Actions) :
 Configure le déploiement continu :
 - Merge sur main → déploiement automatique en staging
 - Validation en staging (smoke tests automatiques)
-- Promotion staging → production (manuelle ou auto apres smoke tests)
-- Rollback automatique si le error rate augmente apres deploy
+- Promotion staging → production (manuelle ou auto après smoke tests)
+- Rollback automatique si le error rate augmente après deploy
 
 ### Étape 4 — Trunk-based development
 Definis le workflow de développement :

@@ -1,6 +1,6 @@
 # Cours 86 — Blockchain & Consensus distribue
 
-> **Objectif** : Comprendre les mecanismes de consensus distribue (PoW, PoS, BFT), savoir quand la blockchain fait sens (et surtout quand elle NE fait PAS sens), et connaitre les concepts Web3 (smart contracts, DApps, IPFS).
+> **Objectif** : Comprendre les mécanismes de consensus distribue (PoW, PoS, BFT), savoir quand la blockchain fait sens (et surtout quand elle NE fait PAS sens), et connaître les concepts Web3 (smart contracts, DApps, IPFS).
 
 ---
 
@@ -9,13 +9,13 @@
 <details>
 <summary>1. Qu'est-ce qu'un Feature Store et pourquoi est-il important ?</summary>
 
-Un Feature Store définit les features (variables d'entree du modèle) **une seule fois** et les calcule de manière identique en training (offline, batch) et en serving (online, temps reel). Sans Feature Store, les features peuvent etre calculees differemment → training/serving skew → predictions fausses en production.
+Un Feature Store définit les features (variables d'entree du modèle) **une seule fois** et les calcule de manière identique en training (offline, batch) et en serving (online, temps réel). Sans Feature Store, les features peuvent etre calculees differemment → training/serving skew → predictions fausses en production.
 </details>
 
 <details>
 <summary>2. Comment fonctionne le A/B testing ML champion/challenger ?</summary>
 
-Le modèle actuel (champion) recoit 90% du trafic, le nouveau modèle (challenger) recoit 10%. On compare les metriques business (click-through rate, conversion, revenue) sur une periode. Si le challenger est meilleur → il devient champion. Si pire → rollback. C'est le meme principe que le canary deployment, applique aux modèles ML.
+Le modèle actuel (champion) recoit 90% du trafic, le nouveau modèle (challenger) recoit 10%. On compare les metriques business (click-through rate, conversion, revenue) sur une periode. Si le challenger est meilleur → il devient champion. Si pire → rollback. C'est le même principe que le canary deployment, applique aux modèles ML.
 </details>
 
 ---
@@ -58,12 +58,12 @@ Proprietes :
 
 ### 2. Mecanismes de consensus
 
-| Mecanisme | Comment | Energie | Vitesse | Sécurité |
+| Mécanisme | Comment | Energie | Vitesse | Sécurité |
 |---|---|---|---|---|
-| **Proof of Work** (PoW) | Résoudre un puzzle crypto | Enorme | Lente (10min/block BTC) | Tres haute |
+| **Proof of Work** (PoW) | Résoudre un puzzle crypto | Enorme | Lente (10min/block BTC) | Très haute |
 | **Proof of Stake** (PoS) | Staker des tokens comme garantie | Faible | Rapide (~12s ETH) | Haute |
-| **BFT** (Byzantine Fault Tolerance) | Vote entre validateurs connus | Faible | Tres rapide | Haute (si < 1/3 malveillants) |
-| **Proof of Authority** (PoA) | Validateurs approuves | Negligeable | Tres rapide | Moyenne (centralise) |
+| **BFT** (Byzantine Fault Tolerance) | Vote entre validateurs connus | Faible | Très rapide | Haute (si < 1/3 malveillants) |
+| **Proof of Authority** (PoA) | Validateurs approuves | Negligeable | Très rapide | Moyenne (centralise) |
 
 ### 3. Smart contracts
 
@@ -114,7 +114,7 @@ Decision framework :
 
 | Concept | Description | Équivalent Web2 |
 |---|---|---|
-| **Wallet** | Identité = cle cryptographique | Compte utilisateur |
+| **Wallet** | Identité = clé cryptographique | Compte utilisateur |
 | **DApp** | Application decentralisee (front + smart contract) | App web + API |
 | **IPFS** | Stockage decentralise | S3 / CDN |
 | **DAO** | Organisation gouvernee par smart contracts | Entreprise |
@@ -234,7 +234,7 @@ function shouldUseBlockchain(answers: BlockchainDecision[]): {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Blockchain** : registre distribue, immutable, sans tiers de confiance — chaque block contient le hash du précédent
 2. **Consensus** : PoW (lent, sécurisé), PoS (rapide, ecologique), BFT (vote, validateurs connus)

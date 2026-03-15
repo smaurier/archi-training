@@ -13,7 +13,7 @@
 <details>
 <summary>Réponse</summary>
 
-Les IDs sequentiels (1, 2, 3...) permettent l'enumeration : un attaquant peut tester `GET /articles/43` apres avoir accès a `GET /articles/42`, revelant des ressources auxquelles il n'est pas sense avoir accès (attaque IDOR). Les UUID v4 generent 122 bits d'aleatoire (cryptographiquement sur avec `crypto.randomUUID()`), rendant l'enumeration impossible avec 2^122 possibilités. Ils permettent aussi de générer l'ID côté client sans round-trip en base.
+Les IDs sequentiels (1, 2, 3...) permettent l'enumeration : un attaquant peut tester `GET /articles/43` après avoir accès a `GET /articles/42`, revelant des ressources auxquelles il n'est pas sense avoir accès (attaque IDOR). Les UUID v4 generent 122 bits d'aleatoire (cryptographiquement sur avec `crypto.randomUUID()`), rendant l'enumeration impossible avec 2^122 possibilités. Ils permettent aussi de générer l'ID côté client sans round-trip en base.
 
 </details>
 
@@ -22,7 +22,7 @@ Les IDs sequentiels (1, 2, 3...) permettent l'enumeration : un attaquant peut te
 <details>
 <summary>Réponse</summary>
 
-L'optimistic locking (verrouillage optimiste) détecté les conflits d'edition simultanee sans bloquer les lectures. Chaque entité porte un champ `version` incremente a chaque modification. Lors d'une sauvegarde, on vérifié que la version lue est toujours la version actuelle en base (`WHERE id = ? AND version = ?`). Si une autre transaction a modifie l'entité entre temps, la version ne correspond plus et on leve une erreur de conflit. Cela évité les mises a jour silencieuses qui ecrasent les changements d'un autre utilisateur.
+L'optimistic locking (verrouillage optimiste) détecté les conflits d'edition simultanee sans bloquer les lectures. Chaque entité porte un champ `version` incremente à chaque modification. Lors d'une sauvegarde, on vérifié que la version lue est toujours la version actuelle en base (`WHERE id = ? AND version = ?`). Si une autre transaction a modifie l'entité entre temps, la version ne correspond plus et on leve une erreur de conflit. Cela évité les mises a jour silencieuses qui ecrasent les changements d'un autre utilisateur.
 
 </details>
 
@@ -32,7 +32,7 @@ L'optimistic locking (verrouillage optimiste) détecté les conflits d'edition s
 
 **Domain Event = un titre de journal. Domain Service = un notaire.**
 
-Un titre de journal annonce un fait accompli, irreversible : "L'article a ete publie". Il ne demande rien, il constate. Il arrive dans votre boite aux lettres, vous en faites ce que vous voulez (l'archiver, prevenir quelqu'un, mettre a jour des statistiques). Le journal ne sait pas ce que vous allez en faire.
+Un titre de journal annonce un fait accompli, irreversible : "L'article a ete publie". Il ne demandé rien, il constate. Il arrive dans votre boite aux lettres, vous en faites ce que vous voulez (l'archiver, prévenir quelqu'un, mettre a jour des statistiques). Le journal ne sait pas ce que vous allez en faire.
 
 Un notaire est un service sans "chez lui" : il n'a pas de dossier propre, mais il effectue des opérations qui impliquent plusieurs parties (vendeur + acheteur) et garantit qu'une règle juridique est respectee (tarif officiel, vérification d'identité). Vous ne lui dites pas comment faire son travail, vous lui donnez les entités concernees.
 
@@ -522,13 +522,13 @@ describe('PublishArticleUseCase', () => {
 
 ---
 
-## Resume
+## Résumé
 
 - Un **Domain Event** est un fait métier immutable, nomme au passe (`ArticlePublished`), horodate et auto-identifie ; les abonnes agissent dessus sans que l'emetteur sache ce qu'ils font.
-- La **FSM (machine a états finis)** encode les transitions autorisees de facon exhaustive et testable : `canTransitionTo()` et `assertCanTransition()` remplacent les cascades de `if/else` episparses.
+- La **FSM (machine a états finis)** encode les transitions autorisees de façon exhaustive et testable : `canTransitionTo()` et `assertCanTransition()` remplacent les cascades de `if/else` episparses.
 - Un **Domain Service** porte de la logique métier qui implique plusieurs agregats ou une règle sans foyer naturel ; un **Application Service** orchestre le flux (charger, valider, exécuter, sauvegarder, publier événements).
 - L'**audit trail append-only** enregistre chaque transition d'état sans jamais effacer : il fournit un historique complet et immuable de la vie de chaque entité.
-- L'**invalidation de cache** se fait apres la persistance, en réponse aux Domain Events, avec `UNLINK` Redis (non-bloquant) sur toutes les cles affectees par la transition.
+- L'**invalidation de cache** se fait après la persistance, en réponse aux Domain Events, avec `UNLINK` Redis (non-bloquant) sur toutes les clés affectees par la transition.
 
 
 ---

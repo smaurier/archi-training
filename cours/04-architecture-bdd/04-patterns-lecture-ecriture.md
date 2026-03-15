@@ -76,7 +76,7 @@ Probleme :
 | Latence réplication | — | ~100ms (async) |
 | Données | Source de vérité | Eventuellement cohérente |
 
-**Attention** : réplication asynchrone = les replicas peuvent etre "en retard" de quelques millisecondes. Ne JAMAIS lire d'un replica juste apres avoir écrit sur le master (le read-your-own-writes problem).
+**Attention** : réplication asynchrone = les replicas peuvent etre "en retard" de quelques millisecondes. Ne JAMAIS lire d'un replica juste après avoir écrit sur le master (le read-your-own-writes problem).
 
 ### 3. Materialized views
 
@@ -106,9 +106,9 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY mv_category_stats;
 
 | Aspect | Vue classique | Vue materialisee |
 |---|---|---|
-| Stockage | Aucun (requête a la volee) | Physique (résultat stocke) |
-| Performance lecture | Depend de la complexité | Tres rapide (données precalculees) |
-| Fraicheur | Temps reel | Aussi frais que le dernier REFRESH |
+| Stockage | Aucun (requête à la volee) | Physique (résultat stocke) |
+| Performance lecture | Depend de la complexité | Très rapide (données precalculees) |
+| Fraicheur | Temps réel | Aussi frais que le dernier REFRESH |
 | Index | Non | Oui |
 | REFRESH | — | CONCURRENTLY (sans bloquer les lectures) |
 
@@ -118,7 +118,7 @@ La normalisation (3NF) est la règle par defaut. On denormalise quand :
 
 | Critère | Normalise | Denormalise |
 |---|---|---|
-| Lectures simples/fréquentes | JOIN a chaque lecture | Données déjà assemblees |
+| Lectures simples/fréquentes | JOIN à chaque lecture | Données déjà assemblees |
 | Ecritures | Mise a jour 1 endroit | Mise a jour N endroits |
 | Cohérence | Garantie | A maintenir manuellement |
 | Stockage | Optimal | Redondant |
@@ -169,7 +169,7 @@ CQRS (Command Query Responsibility Segregation) pousse la séparation au maximum
 ```
 
 Le read model peut etre :
-- La meme DB avec des vues materialisees
+- La même DB avec des vues materialisees
 - Un read replica avec des index spécifiques
 - Elasticsearch pour la recherche
 - Redis pour les données chaudes
@@ -307,7 +307,7 @@ export class ProductCommandService {
 
 ---
 
-## Resume
+## Résumé
 
 1. **Read replicas** scalent les lectures horizontalement — attention au réplication lag (~100ms)
 2. **Materialized views** precalculent des agregats — `REFRESH CONCURRENTLY` pour ne pas bloquer les lectures

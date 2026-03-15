@@ -9,13 +9,13 @@
 <details>
 <summary>1. Quelle est la différence entre Cache First et Network First dans un Service Worker ?</summary>
 
-**Cache First** sert depuis le cache et ne va au réseau qu'en cas de miss — idéal pour les assets statiques (CSS, JS, images) qui ne changent pas souvent. **Network First** tente le réseau d'abord et tombe sur le cache en cas d'échec — idéal pour les appels API ou les pages dynamiques où la fraîcheur est prioritaire. Le choix dépend du type de contenu : un logo peut être Cache First, une liste de produits doit être Network First.
+**Cache First** sert depuis le cache et ne va au réseau qu'en cas de miss — idéal pour les assets statiques (CSS, JS, images) qui ne changent pas souvent. **Network First** tente le réseau d'abord et tombe sur le cache en cas d'échec — idéal pour les appels API ou les pages dynamiques ou la fraîcheur est prioritaire. Le choix dépend du type de contenu : un logo peut être Cache First, une liste de produits doit être Network First.
 </details>
 
 <details>
 <summary>2. Pourquoi Background Sync utilise-t-il IndexedDB et non localStorage ?</summary>
 
-**IndexedDB** est asynchrone, supporte les transactions, stocke des objets structurés (pas juste des strings), et a une capacité quasi illimitée (des centaines de MB). **localStorage** est synchrone (bloque le thread principal), limité à ~5MB, et ne stocke que des strings. Pour une queue d'actions offline qui peut accumuler des dizaines d'opérations, seul IndexedDB est viable.
+**IndexedDB** est asynchrone, supporte les transactions, stocke des objets structurés (pas juste des strings), et à une capacité quasi illimitée (des centaines de MB). **localStorage** est synchrone (bloque le thread principal), limité à ~5MB, et ne stocke que des strings. Pour une queue d'actions offline qui peut accumuler des dizaines d'opérations, seul IndexedDB est viable.
 </details>
 
 ---
@@ -26,7 +26,7 @@ Imagine que tu dois livrer 20 colis à un entrepôt situé à 100 km :
 
 - **HTTP/1.1 = autoroute à 1 voie** : tu envoies un camion, il livre, il revient, puis tu envoies le suivant. Si un camion tombe en panne (head-of-line blocking), tous les autres attendent derrière. Pour aller plus vite, tu ouvres 6 autoroutes parallèles (6 connexions TCP) — lourd et coûteux.
 - **HTTP/2 = autoroute à 6 voies** : une seule autoroute, mais 6 voies. Les camions circulent en parallèle sur la même route. Si un camion tombe en panne sur la voie 3, les voies 1, 2, 4, 5, 6 continuent... sauf que c'est toujours TCP — si un paquet se perd au niveau de la route (pas du camion), tout le monde attend.
-- **HTTP/3 = hélicoptère** : chaque colis a son propre hélicoptère (UDP/QUIC). Pas de route partagée, pas de blocage. Si un hélicoptère a un problème, les autres continuent sans ralentir. Et en plus, l'hélicoptère connaît déjà le chemin (0-RTT).
+- **HTTP/3 = hélicoptère** : chaque colis a son propre hélicoptère (UDP/QUIC). Pas de route partagée, pas de blocage. Si un hélicoptère à un problème, les autres continuent sans ralentir. Et en plus, l'hélicoptère connaît déjà le chemin (0-RTT).
 
 ---
 
@@ -84,7 +84,7 @@ HTTP/2 — Multiplexing sur une seule connexion TCP
 |---|---|
 | **Multiplexing** | Plusieurs requêtes/réponses en parallèle sur 1 connexion TCP |
 | **HPACK** | Compression des headers via table de référence statique + dynamique (Huffman) |
-| **Server Push** | Le serveur envoie des ressources avant que le client les demande (déprécié en pratique) |
+| **Server Push** | Le serveur envoie des ressources avant que le client les demandé (déprécié en pratique) |
 | **Binary framing** | Les messages sont en binaire, pas en texte — parsing plus rapide |
 | **Stream priority** | Le client indique quels streams sont prioritaires |
 
@@ -134,7 +134,7 @@ TLS 1.3 Handshake (1-RTT)
 
 | Concept | Description |
 |---|---|
-| **Certificate pinning** | Le client ne fait confiance qu'à un certificat spécifique (ou sa clef publique), pas à toute la chaîne CA — protégé contre les CA compromises |
+| **Certificate pinning** | Le client ne fait confiance qu'à un certificat spécifique (où sa clef publique), pas à toute la chaîne CA — protégé contre les CA compromises |
 | **mTLS** | Mutual TLS — le serveur aussi vérifie le certificat du client. Utilisé en inter-services (service A prouve son identité à service B) |
 | **ECDHE** | Échange de clefs Diffie-Hellman sur courbes elliptiques — forward secrecy (compromis de la clef privée ne décrypte pas le passé) |
 
@@ -387,7 +387,7 @@ export class ServiceBClient {
 
 ---
 
-> **Prochain cours** : [Cours 44 — REST avancé](./02-rest-avance.md) — où comment maîtriser HATEOAS, le versioning d'API, la pagination cursor, et la content negotiation.
+> **Prochain cours** : [Cours 44 — REST avancé](./02-rest-avance.md) — ou comment maîtriser HATEOAS, le versioning d'API, la pagination cursor, et la content negotiation.
 
 ---
 

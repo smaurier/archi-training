@@ -2,7 +2,7 @@
 
 ## Résultat attendu
 
-Deux implémentations (optimistic + pessimistic) qui garantissent que le stock ne passe jamais en negatif, meme sous charge concurrente.
+Deux implémentations (optimistic + pessimistic) qui garantissent que le stock ne passe jamais en negatif, même sous charge concurrente.
 
 ## Race condition expliquee
 

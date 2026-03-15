@@ -2,17 +2,17 @@
 
 ## Résultat attendu
 
-Un `OrderProcessor` qui orchestre 4 collaborateurs injectes, sans aucune logique métier directe. Chaque collaborateur a une responsabilité unique et est derriere une interface.
+Un `OrderProcessor` qui orchestre 4 collaborateurs injectes, sans aucune logique métier directe. Chaque collaborateur à une responsabilité unique et est derriere une interface.
 
 ## Violations identifiees
 
 | Principe | Violation | Consequence |
 |---|---|---|
-| **S** | OrderProcessor fait 5 choses (validation, pricing, persistance, notification, logging) | Impossible a tester, impossible a modifier sans risque |
+| **S** | OrderProcessor fait 5 choses (validation, pricing, persistance, notification, logging) | Impossible à tester, impossible a modifier sans risque |
 | **O** | Réduction VIP et TVA hardcodees dans `if` | Ajouter un pays ou un type de client = modifier le code |
 | **L** | Pas d'interface pour la DB — impossible de substituer une implémentation | Pas de mock possible pour les tests |
 | **I** | `any` partout — pas de contrat clair entre les couches | Bugs silencieux, pas d'autocompletion |
-| **D** | `new PostgresDatabase(...)` et `require('nodemailer')` dans le code | Couplage fort, impossible de tester sans infra reelle |
+| **D** | `new PostgresDatabase(...)` et `require('nodemailer')` dans le code | Couplage fort, impossible de tester sans infra réelle |
 
 ## Solution
 
@@ -254,7 +254,7 @@ constructor() {
 constructor(private readonly repo: OrderRepository) {}
 ```
 
-### 2. Garder `any` sur le parametre Order
+### 2. Garder `any` sur le paramètre Order
 
 ```typescript
 // FAUX — aucune securite de typage
