@@ -8,6 +8,8 @@
 
 A la fin de ce cours, tu sauras **définir ce qu'est l'architecture logicielle**, distinguer le rôle de l'architecte de celui du développeur, et expliquer pourquoi les décisions d'architecture prises tôt dans un projet ont un coût exponentiel si elles sont mal faites.
 
+> **Ressource transversale** : consulte [`00-pieges-frequents-archi.md`](../00-pieges-frequents-archi.md) régulièrement — il liste 20 pièges architecturaux classés par domaine, référencés depuis les cours concernés.
+
 ---
 
 ## Analogie — L'architecte du bâtiment vs le maçon

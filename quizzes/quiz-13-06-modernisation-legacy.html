@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz — Modernisation Legacy & ACL</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a1a2e; color: #e0e0e0; min-height: 100vh; padding: 2rem 1rem; }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { text-align: center; margin-bottom: 0.5rem; font-size: 1.8rem; color: #ffffff; }
+    .subtitle { text-align: center; color: #8892b0; margin-bottom: 2rem; font-size: 1rem; }
+    .progress-bar-container { background: #0d1117; border-radius: 10px; height: 14px; margin-bottom: 2rem; overflow: hidden; }
+    .progress-bar { background: linear-gradient(90deg, #0d6efd, #4dabf7); height: 100%; width: 0%; border-radius: 10px; transition: width 0.4s ease; }
+    .progress-text { text-align: center; color: #8892b0; margin-bottom: 1rem; font-size: 0.9rem; }
+    .card { background: #16213e; border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+    .question-label { font-size: 0.85rem; color: #4dabf7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+    .question-text { font-size: 1.15rem; margin-bottom: 1.2rem; line-height: 1.5; color: #ffffff; }
+    pre { background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 1rem; margin-bottom: 1.2rem; overflow-x: auto; font-size: 0.95rem; }
+    code { font-family: 'Consolas', 'Fira Code', 'Courier New', monospace; color: #c9d1d9; }
+    .options { list-style: none; }
+    .options li { margin-bottom: 0.5rem; }
+    .options label { display: flex; align-items: center; gap: 0.75rem; padding: 0.8rem 1rem; background: #0d1117; border: 2px solid #30363d; border-radius: 8px; cursor: pointer; transition: border-color 0.2s, background 0.2s; font-size: 1rem; }
+    .options label:hover { border-color: #4dabf7; background: #1c2a4a; }
+    .options input[type="radio"] { accent-color: #0d6efd; width: 18px; height: 18px; flex-shrink: 0; }
+    .btn { display: inline-block; padding: 0.7rem 2rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+    .btn-primary { background: #0d6efd; color: #fff; }
+    .btn-primary:hover { background: #3b82f6; }
+    .btn-primary:disabled { background: #374151; cursor: not-allowed; }
+    .btn-restart { background: #238636; color: #fff; margin-top: 1rem; padding: 0.7rem 2rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+    .btn-restart:hover { background: #2ea043; }
+    .feedback { margin-top: 1rem; padding: 1rem 1.2rem; border-radius: 8px; font-size: 0.95rem; line-height: 1.5; display: none; }
+    .feedback.correct { background: #0f5132; border: 1px solid #198754; color: #d1fae5; display: block; }
+    .feedback.wrong { background: #842029; border: 1px solid #dc3545; color: #fdd; display: block; }
+    .score-card { text-align: center; padding: 3rem 2rem; }
+    .score-card .score { font-size: 3rem; font-weight: 700; color: #4dabf7; margin-bottom: 0.5rem; }
+    .score-card .score-label { font-size: 1.2rem; color: #8892b0; margin-bottom: 1.5rem; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Quiz — Modernisation Legacy & ACL</h1>
+    <p class="subtitle">Module 13 — Culture architecturale (Cours 89)</p>
+    <div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+    <p class="progress-text" id="progressText">Question 1 / 5</p>
+    <div id="quizContainer"></div>
+    <div id="scoreContainer" class="card score-card hidden"></div>
+  </div>
+  <script>
+    const questions = [{"label":"ACL","text":"Quel est le role de l'Anti-Corruption Layer (ACL) ?","options":["Proteger contre les virus informatiques","Empecher les concepts et modeles du systeme legacy de contaminer le nouveau systeme — un mur coupe-feu entre les deux","Corrompre intentionnellement les donnees du legacy","Authentifier les appels entre systemes"],"answer":1,"explanation":"L'ACL traduit entre les modeles du legacy et du nouveau systeme. Le nouveau systeme ne voit jamais les concepts legacy directement. Si le legacy utilise des codes numeriques, l'ACL les traduit en enums propres."},{"label":"Pourquoi pas Big Bang","text":"Pourquoi ne pas tout refaire (Big Bang) pour un systeme legacy ?","options":["C'est interdit par la loi","Le code legacy contient des annees de regles metier implicites, les edge cases sont geres par du code que personne ne comprend, et le business ne peut pas s'arreter","Il suffit de bien documenter le legacy avant","Le Big Bang est toujours la meilleure approche"],"answer":1,"explanation":"Le legacy contient des annees de regles metier implicites. Le Big Bang echoue 70-80% du temps (Gartner) car les specs sont incompletes et le business ne peut pas s'arreter."},{"label":"Cohabitation","text":"Pourquoi la cohabitation legacy/nouveau est-elle necessaire ?","options":["Pour comparer les performances","Les deux systemes doivent fonctionner en parallele pendant la migration incrementale — le legacy reste operationnel tant que le nouveau n'est pas 100% pret","Pour des raisons legales","Pour faire plaisir aux utilisateurs du legacy"],"answer":1,"explanation":"La migration incrementale (Strangler Fig) implique que les deux systemes coexistent. Le proxy route vers l'un ou l'autre. Le legacy n'est decommissionne que quand le nouveau est 100% operationnel et valide."},{"label":"Integration patterns","text":"Quel pattern d'integration est le plus sûr pour connecter le nouveau systeme au legacy ?","options":["Appels directs a la base de donnees du legacy","Un API facade ou event bridge qui traduit entre les deux systemes, evitant le couplage direct a la DB legacy","Partager la meme base de donnees","Copier-coller le code du legacy"],"answer":1,"explanation":"Acceder directement a la DB du legacy cree un couplage fort et dangereux. Un API facade ou event bridge isole les systemes. Le legacy peut changer son schema sans casser le nouveau."},{"label":"Regles metier implicites","text":"Pourquoi les regles metier implicites du legacy sont-elles le plus grand risque d'une migration ?","options":["Elles ralentissent le systeme","Elles ne sont documentees nulle part et ne se revelent que quand un edge case survient en production sur le nouveau systeme","Elles sont faciles a reproduire","Elles n'existent pas vraiment"],"answer":1,"explanation":"Un if/else ajoute il y a 8 ans pour un client specifique, un arrondi fiscal dans une stored procedure, un tri special pour un pays... Ces regles ne sont dans aucune spec et se revelent par des bugs en production."}];
+    let currentQuestion = 0, score = 0, answered = false;
+    function renderQuestion() { const q = questions[currentQuestion]; const total = questions.length; document.getElementById('progressBar').style.width = ((currentQuestion / total) * 100) + '%'; document.getElementById('progressText').textContent = `Question ${currentQuestion + 1} / ${total}`; let html = `<div class="card"><p class="question-label">${q.label}</p><p class="question-text">${q.text}</p>`; if (q.code) html += `<pre><code>${q.code}</code></pre>`; html += `<ul class="options">`; q.options.forEach((opt, i) => { html += `<li><label><input type="radio" name="q" value="${i}"> ${opt}</label></li>`; }); html += `</ul><button class="btn btn-primary" id="validateBtn" onclick="validate()" disabled>Valider</button><div class="feedback" id="feedback"></div></div>`; document.getElementById('quizContainer').innerHTML = html; document.querySelectorAll('input[name="q"]').forEach(r => { r.addEventListener('change', () => { document.getElementById('validateBtn').disabled = false; }); }); answered = false; }
+    function validate() { if (answered) { currentQuestion++; if (currentQuestion < questions.length) renderQuestion(); else showScore(); return; } answered = true; const selected = document.querySelector('input[name="q"]:checked'); if (!selected) return; const val = parseInt(selected.value), q = questions[currentQuestion]; const fb = document.getElementById('feedback'), btn = document.getElementById('validateBtn'); document.querySelectorAll('input[name="q"]').forEach(r => r.disabled = true); if (val === q.answer) { score++; fb.className = 'feedback correct'; fb.innerHTML = `<strong>Correct !</strong> ${q.explanation}`; } else { fb.className = 'feedback wrong'; fb.innerHTML = `<strong>Incorrect.</strong> ${q.explanation}`; } btn.textContent = currentQuestion < questions.length - 1 ? 'Suivant' : 'Voir le score'; }
+    function showScore() { document.getElementById('quizContainer').classList.add('hidden'); document.getElementById('progressBar').style.width = '100%'; document.getElementById('progressText').textContent = 'Termine !'; const sc = document.getElementById('scoreContainer'); sc.classList.remove('hidden'); const pct = Math.round((score / questions.length) * 100); let msg = pct === 100 ? 'Parfait !' : pct >= 60 ? 'Bien joue !' : 'Continuez a reviser !'; sc.innerHTML = `<div class="score">${score} / ${questions.length}</div><div class="score-label">${msg} (${pct}%)</div><button class="btn-restart" onclick="restart()">Recommencer</button>`; }
+    function restart() { currentQuestion = 0; score = 0; answered = false; document.getElementById('scoreContainer').classList.add('hidden'); document.getElementById('quizContainer').classList.remove('hidden'); renderQuestion(); }
+    renderQuestion();
+  </script>
+</body>
+</html>
