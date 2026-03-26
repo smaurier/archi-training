@@ -19,7 +19,21 @@
     "test:ex42": "vitest run 42-cache-multi-niveaux",
     "test:ex58": "vitest run 58-crdt-editeur",
     "test:ex59": "vitest run 59-anti-corruption-layer",
-    "test:ex03": "vitest run 03-injection-dependances"
+    "test:ex03": "vitest run 03-injection-dependances",
+    "test:ex13": "vitest run 13-auth-oidc-rbac",
+    "test:ex14": "vitest run 14-multi-tenant-isolation",
+    "test:ex14b": "vitest run 14b-multi-site",
+    "test:ex20": "vitest run 20-search-abstraction",
+    "test:ex29": "vitest run 29-api-rest-avancee",
+    "test:ex30b": "vitest run 30b-webhook-consumer",
+    "test:ex31": "vitest run 31-bff-ecommerce",
+    "test:ex32": "vitest run 32-cap-classifier",
+    "test:ex38": "vitest run 38-securiser-api",
+    "test:ex47": "vitest run 47-slos-error-budgets",
+    "test:ex48": "vitest run 48-cicd-feature-flags",
+    "test:ex51": "vitest run 51-contract-tests-pact",
+    "test:ex54": "vitest run 54-fitness-functions",
+    "test:ex57": "vitest run 57-api-mobile-friendly"
   },
   "devDependencies": {
     "typescript": "^5.3.0",
