@@ -1,0 +1,17 @@
+{
+  "name": "architecture-course",
+  "version": "1.0.0",
+  "description": "Architecture logicielle fullstack : SOLID, DDD, patterns, microservices, sécurité, performance",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3"
+  }
+}
