@@ -9,8 +9,17 @@
     "test:ex05": "vitest run 05-layered-to-hexagonal",
     "test:ex11": "vitest run 11-fsm-commande",
     "test:ex12": "vitest run 12-api-rest-nestjs",
+    "test:ex15": "vitest run 15-job-queue-bullmq",
+    "test:ex16": "vitest run 16-race-condition-locking",
     "test:ex21": "vitest run 21-component-tree",
-    "test:ex33": "vitest run 33-cqrs-catalogue-commandes"
+    "test:ex30": "vitest run 30-webhook-hmac",
+    "test:ex33": "vitest run 33-cqrs-catalogue-commandes",
+    "test:ex34": "vitest run 34-saga-commande",
+    "test:ex35": "vitest run 35-outbox-pattern",
+    "test:ex42": "vitest run 42-cache-multi-niveaux",
+    "test:ex58": "vitest run 58-crdt-editeur",
+    "test:ex59": "vitest run 59-anti-corruption-layer",
+    "test:ex03": "vitest run 03-injection-dependances"
   },
   "devDependencies": {
     "typescript": "^5.3.0",
