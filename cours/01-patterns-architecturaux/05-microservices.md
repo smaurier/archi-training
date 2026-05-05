@@ -33,6 +33,7 @@ Un barrel file (généralement `index.ts`) est le fichier d'entree d'un module q
 Une seule grande cuisine qui fait tout (pizza, sushi, steak, desserts) = le monolithe. Si le chef de la pizza est malade, toute la cuisine souffre.
 
 Une **chaine de restaurants specialises** = les microservices :
+
 - Restaurant Pizza : sa propre cuisine, son propre stock, son propre personnel
 - Restaurant Sushi : idem, totalement autonome
 - Restaurant Desserts : idem
@@ -60,6 +61,7 @@ Si le restaurant Pizza brule, les restaurants Sushi et Desserts continuent de se
 ### 1. Définition et caractéristiques
 
 Un microservice est un **service autonome** qui :
+
 - Est responsable d'un **domaine métier delimite** (Bounded Context DDD)
 - Possede sa **propre base de données** (pas de partage)
 - Est **deployable independamment**
@@ -103,11 +105,20 @@ AUTORISE :
   Service Commandes ---[Kafka event: ProductUpdated]---> copie locale (Read Model)
 ```
 
-| Approche | Avantages | Inconvenients |
-|---|---|---|
-| HTTP synchrone | Simple, cohérent | Couplage temporel, latence |
-| Messagerie async | Découplage, résilience | Eventual consistency |
-| Read Model local | Performances, autonomie | Données dupliquees |
+| Approche         | Avantages               | Inconvenients              |
+| ---------------- | ----------------------- | -------------------------- |
+| HTTP synchrone   | Simple, cohérent        | Couplage temporel, latence |
+| Messagerie async | Découplage, résilience  | Eventual consistency       |
+| Read Model local | Performances, autonomie | Données dupliquees         |
+
+Quand vous utilisez des events entre services, formalisez aussi des **regles de compatibilite** pour eviter les regressions silencieuses :
+
+- un producteur peut **ajouter** un champ (compatible)
+- un producteur ne doit pas **supprimer** un champ sans versionner l'evenement
+- les consommateurs doivent ignorer les champs inconnus
+- les changements cassants passent par une nouvelle version (`OrderCreated.v2`)
+
+Repere pratique : visez au moins **1 test de contrat** par integration critique (publication + consommation).
 
 ---
 
@@ -245,7 +256,7 @@ Q4 : Etes-vous prets pour la complexite operationnelle ?
 
 ```typescript
 // src/orders/infrastructure/catalog.http-client.ts
-import { Injectable, HttpException } from '@nestjs/common';
+import { Injectable, HttpException } from "@nestjs/common";
 
 export interface ProductInfo {
   id: string;
@@ -262,7 +273,7 @@ export class CatalogHttpClient {
   constructor() {
     // Adresse resolue par Service Discovery (K8s DNS ou Consul)
     // En production : http://catalog-service.default.svc.cluster.local
-    this.baseUrl = process.env.CATALOG_SERVICE_URL ?? 'http://catalog-service';
+    this.baseUrl = process.env.CATALOG_SERVICE_URL ?? "http://catalog-service";
   }
 
   async getProduct(productId: string): Promise<ProductInfo> {
@@ -274,8 +285,8 @@ export class CatalogHttpClient {
         signal: controller.signal,
         headers: {
           // Propagation du contexte de tracing distribue
-          'X-Trace-Id': this.getTraceId(),
-          'X-Service-Name': 'orders-service',
+          "X-Trace-Id": this.getTraceId(),
+          "X-Service-Name": "orders-service",
         },
       });
 
@@ -288,8 +299,8 @@ export class CatalogHttpClient {
 
       return response.json();
     } catch (error) {
-      if ((error as Error).name === 'AbortError') {
-        throw new HttpException('Catalog service timeout', 503);
+      if ((error as Error).name === "AbortError") {
+        throw new HttpException("Catalog service timeout", 503);
       }
       throw error;
     } finally {
@@ -313,10 +324,10 @@ export class CatalogHttpClient {
 // avec des appels condamnes a echouer
 type ServiceCall<T> = () => Promise<T>;
 
-type CircuitState = 'CLOSED' | 'OPEN' | 'HALF_OPEN';
+type CircuitState = "CLOSED" | "OPEN" | "HALF_OPEN";
 
 export class CircuitBreaker {
-  private state: CircuitState = 'CLOSED';
+  private state: CircuitState = "CLOSED";
   private failureCount = 0;
   private lastFailureTime: number | null = null;
 
@@ -326,13 +337,13 @@ export class CircuitBreaker {
   ) {}
 
   async execute<T>(call: ServiceCall<T>): Promise<T> {
-    if (this.state === 'OPEN') {
+    if (this.state === "OPEN") {
       const elapsed = Date.now() - (this.lastFailureTime ?? 0);
       if (elapsed > this.recoveryTimeMs) {
         // Essai en mode HALF_OPEN : on laisse passer un seul appel
-        this.state = 'HALF_OPEN';
+        this.state = "HALF_OPEN";
       } else {
-        throw new Error('Circuit OPEN — service indisponible, appel bloque');
+        throw new Error("Circuit OPEN — service indisponible, appel bloque");
       }
     }
 
@@ -349,7 +360,7 @@ export class CircuitBreaker {
 
   private onSuccess(): void {
     this.failureCount = 0;
-    this.state = 'CLOSED';
+    this.state = "CLOSED";
   }
 
   private onFailure(): void {
@@ -357,12 +368,14 @@ export class CircuitBreaker {
     this.lastFailureTime = Date.now();
     if (this.failureCount >= this.failureThreshold) {
       // Trop d'echecs -> on ouvre le circuit, plus d'appels pendant recoveryTimeMs
-      this.state = 'OPEN';
+      this.state = "OPEN";
       console.warn(`Circuit breaker OPEN after ${this.failureCount} failures`);
     }
   }
 
-  getState(): CircuitState { return this.state; }
+  getState(): CircuitState {
+    return this.state;
+  }
 }
 ```
 
@@ -371,7 +384,7 @@ export class CircuitBreaker {
 ```typescript
 // src/orders/domain/events/order-placed.event.ts
 export interface OrderPlacedEvent {
-  eventType: 'ORDER_PLACED';
+  eventType: "ORDER_PLACED";
   orderId: string;
   customerId: string;
   items: Array<{ productId: string; quantity: number; unitPrice: number }>;
@@ -393,7 +406,7 @@ export class ReserveStockHandler {
         await this.inventoryRepo.reserveStock(item.productId, item.quantity);
         // Publie STOCK_RESERVED -> le service Paiement peut s'y abonner
         await this.publishEvent({
-          eventType: 'STOCK_RESERVED',
+          eventType: "STOCK_RESERVED",
           orderId: event.orderId,
           productId: item.productId,
           quantity: item.quantity,
@@ -401,7 +414,7 @@ export class ReserveStockHandler {
       } catch (error) {
         // Publie STOCK_RESERVATION_FAILED -> le service Orders annule la commande
         await this.publishEvent({
-          eventType: 'STOCK_RESERVATION_FAILED',
+          eventType: "STOCK_RESERVATION_FAILED",
           orderId: event.orderId,
           productId: item.productId,
           reason: (error as Error).message,
@@ -412,7 +425,7 @@ export class ReserveStockHandler {
 
   private async publishEvent(event: Record<string, unknown>): Promise<void> {
     // Kafka producer — implementation omise
-    console.log('Publishing event:', event);
+    console.log("Publishing event:", event);
   }
 }
 
@@ -427,13 +440,21 @@ interface IInventoryRepository {
 ```typescript
 // src/orders/use-cases/create-order.use-case.spec.ts
 
-import { CreateOrderUseCase } from './create-order.use-case';
+import { CreateOrderUseCase } from "./create-order.use-case";
 
 // Mock du client HTTP vers le service Catalog
 class MockCatalogClient {
   async getProduct(productId: string) {
-    const catalog: Record<string, { id: string; name: string; unitPrice: number; stockQuantity: number }> = {
-      'prod-A': { id: 'prod-A', name: 'Widget', unitPrice: 25, stockQuantity: 100 },
+    const catalog: Record<
+      string,
+      { id: string; name: string; unitPrice: number; stockQuantity: number }
+    > = {
+      "prod-A": {
+        id: "prod-A",
+        name: "Widget",
+        unitPrice: 25,
+        stockQuantity: 100,
+      },
     };
     const product = catalog[productId];
     if (!product) throw new Error(`Product ${productId} not found`);
@@ -443,17 +464,23 @@ class MockCatalogClient {
 
 class MockOrderRepo {
   orders: any[] = [];
-  async save(order: any) { this.orders.push(order); }
-  async findById() { return null; }
+  async save(order: any) {
+    this.orders.push(order);
+  }
+  async findById() {
+    return null;
+  }
 }
 
 class MockEventPublisher {
   events: any[] = [];
-  async publish(event: any) { this.events.push(event); }
+  async publish(event: any) {
+    this.events.push(event);
+  }
 }
 
-describe('CreateOrderUseCase (microservice)', () => {
-  it('cree une commande avec les prix recuperes du service Catalog', async () => {
+describe("CreateOrderUseCase (microservice)", () => {
+  it("cree une commande avec les prix recuperes du service Catalog", async () => {
     const repo = new MockOrderRepo();
     const eventPublisher = new MockEventPublisher();
     const useCase = new CreateOrderUseCase(
@@ -463,15 +490,15 @@ describe('CreateOrderUseCase (microservice)', () => {
     );
 
     const result = await useCase.execute({
-      customerId: 'cust-1',
-      items: [{ productId: 'prod-A', quantity: 4 }],
+      customerId: "cust-1",
+      items: [{ productId: "prod-A", quantity: 4 }],
     });
 
     expect(result.orderId).toBeDefined();
     // Le total est calcule avec le prix recupere du service Catalog
     expect(repo.orders[0].getTotalAmount()).toBe(100); // 4 * 25
     // L'evenement ORDER_PLACED est publie pour la saga
-    expect(eventPublisher.events[0].eventType).toBe('ORDER_PLACED');
+    expect(eventPublisher.events[0].eventType).toBe("ORDER_PLACED");
   });
 });
 ```
@@ -485,7 +512,6 @@ describe('CreateOrderUseCase (microservice)', () => {
 - Les trois anti-patterns fatals sont le **monolithe distribue** (services couples déployés ensemble), les **nano-services** (overhead sans valeur) et la **base partagee** (couplage de schema).
 - Le **Circuit Breaker** protégé le système global en bloquant les appels vers un service en panne, evitant les cascades d'echecs.
 - Commencer par les microservices est souvent une erreur : le cadre de decision recommande de partir d'un monolithe modulaire et de n'extraire des services que quand les frontieres de domaine sont claires et stables.
-
 
 ---
 
