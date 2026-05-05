@@ -23,3 +23,12 @@ cd exercices/
 ## Parcours
 
 Consulte `cours/parcours.md` ou ouvre le site VitePress pour le plan de formation détaillé.
+
+## Resultats pratiques
+
+Ce parcours aide a prendre de meilleures decisions sur des systemes backend reels :
+
+- decoupage monolithe vs microservices selon le contexte
+- architecture propre (hexagonale / clean) orientee evolutivite
+- gestion des integrations entre services (contrats, anti-corruption layer, asynchrone)
+- arbitrages entre simplicite, fiabilite, cout d'exploitation et vitesse de livraison
