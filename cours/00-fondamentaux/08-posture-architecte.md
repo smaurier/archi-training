@@ -1,4 +1,4 @@
-# Cours 7 — De l'exécutant au décideur : la posture d'architecte
+# Cours 8 — De l'exécutant au décideur : la posture d'architecte
 
 ## Objectif
 

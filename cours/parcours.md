@@ -118,8 +118,9 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 | 2 | Principes SOLID | `00-fondamentaux/02-principes-solid.md` | 1h15 |
 | 3 | Design patterns essentiels | `00-fondamentaux/03-design-patterns-essentiels.md` | 1h30 |
 | 4 | Principes de clean code | `00-fondamentaux/04-principes-clean-code.md` | 1h |
-| 5 | Dependency Injection & Inversion of Control | `00-fondamentaux/05-dependency-injection-ioc.md` | 1h |
-| 6 | Raisonner en architecte (trade-offs & -ilities) | `00-fondamentaux/06-raisonner-en-architecte.md` | 1h15 |
+| 5 | Code smells et refactoring | `00-fondamentaux/05-code-smells-et-refactoring.md` | 1h30 |
+| 6 | Dependency Injection & Inversion of Control | `00-fondamentaux/06-dependency-injection-ioc.md` | 1h |
+| 7 | Raisonner en architecte (trade-offs & -ilities) | `00-fondamentaux/07-raisonner-en-architecte.md` | 1h15 |
 
 **Cours 1** : Définition, role de l'architecte, architecture vs design, les 4 dimensions (structure, communication, decisions, vision). Analogie : l'architecte d'un immeuble vs le macon.
 
@@ -129,13 +130,16 @@ Chaque dossier `exercices/XX-slug/` contient 3 fichiers :
 
 **Cours 4** : DRY, KISS, YAGNI, SoC (Séparation of Concerns), LoD (Law of Demeter), Composition over Inheritance, Fail Fast. Quand CHAQUE principe ne s'applique PAS (anti-dogmatisme).
 
-**Cours 5** : IoC container, constructor injection, token-based injection, scope (singleton, request, transient). NestJS providers, Symfony services. Analogie : la prise electrique (interface) vs l'appareil (implémentation).
+**Cours 5** : Les 22 code smells (5 familles : Bloaters, OO Abusers, Change Preventers, Dispensables, Couplers) et les 66 techniques de refactoring (6 groupes). Refactoring par petits pas, tests verts, couplage smell → technique. Source de référence : refactoring.guru.
 
-**Cours 6** : Architecture characteristics (-ilities : scalability, maintainability, testability, deployability, security...). Trade-off analysis : chaque decision à un cout. Matrice impact/effort. Fitness functions (tests automatises pour invariants architecturaux). Analogie : le triangle qualité/cout/delai.
+**Cours 6** : IoC container, constructor injection, token-based injection, scope (singleton, request, transient). NestJS providers, Symfony services. Analogie : la prise electrique (interface) vs l'appareil (implémentation).
+
+**Cours 7** : Architecture characteristics (-ilities : scalability, maintainability, testability, deployability, security...). Trade-off analysis : chaque decision à un cout. Matrice impact/effort. Fitness functions (tests automatises pour invariants architecturaux). Analogie : le triangle qualité/cout/delai.
 
 | Exercice | Fichier | Temps |
 |---|---|---|
 | 01 — Refactoring SOLID | `exercices/01-refactoring-solid/` | 1h |
+| 01b — Refactoring par les code smells | `exercices/01b-refactoring-smells/` | 1h30 |
 | 02 — Identifier les design patterns | `exercices/02-identifier-patterns/` | 45 min |
 | 03 — Injection de dépendances | `exercices/03-injection-dependances/` | 45 min |
 | 04 — Trade-off analysis d'un cas réel | `exercices/04-tradeoff-analysis/` | 1h |
@@ -853,8 +857,9 @@ Voir : `projet-fil-rouge/README.md`
 | 2 | Principes SOLID | [ ] | [ ] | [ ] |
 | 3 | Design patterns essentiels | [ ] | [ ] | [ ] |
 | 4 | Principes de clean code | [ ] | [ ] | [ ] |
-| 5 | Dependency Injection & IoC | [ ] | [ ] | [ ] |
-| 6 | Raisonner en architecte (trade-offs) | [ ] | [ ] | [ ] |
+| 5 | Code smells et refactoring | [ ] | [ ] | [ ] |
+| 6 | Dependency Injection & IoC | [ ] | [ ] | [ ] |
+| 7 | Raisonner en architecte (trade-offs) | [ ] | [ ] | [ ] |
 
 ### Module 01 — Patterns architecturaux
 | # | Cours | J+1 | J+7 | J+30 |
