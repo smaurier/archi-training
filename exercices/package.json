@@ -6,6 +6,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ex01": "vitest run 01-refactoring-solid",
+    "test:ex01b": "vitest run 01b-refactoring-smells",
     "test:ex05": "vitest run 05-layered-to-hexagonal",
     "test:ex11": "vitest run 11-fsm-commande",
     "test:ex12": "vitest run 12-api-rest-nestjs",

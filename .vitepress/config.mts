@@ -45,13 +45,14 @@ export default defineConfig({
         {
           text: '0. Fondamentaux',
           items: [
-            { text: "Qu'est-ce que l'architecture ?", link: '/cours/00-fondamentaux/01-quest-ce-que-larchitecture' },
-            { text: 'SOLID', link: '/cours/00-fondamentaux/02-solid' },
-            { text: 'Clean Code', link: '/cours/00-fondamentaux/03-clean-code' },
-            { text: 'Principes de design', link: '/cours/00-fondamentaux/04-principes-de-design' },
-            { text: 'Refactoring', link: '/cours/00-fondamentaux/05-refactoring' },
-            { text: 'Documentation vivante', link: '/cours/00-fondamentaux/06-documentation-vivante' },
-            { text: 'Posture architecte', link: '/cours/00-fondamentaux/07-posture-architecte' }
+            { text: "Qu'est-ce que l'architecture ?", link: '/cours/00-fondamentaux/01-quest-ce-que-architecture' },
+            { text: 'Principes SOLID', link: '/cours/00-fondamentaux/02-principes-solid' },
+            { text: 'Design patterns essentiels', link: '/cours/00-fondamentaux/03-design-patterns-essentiels' },
+            { text: 'Principes de clean code', link: '/cours/00-fondamentaux/04-principes-clean-code' },
+            { text: 'Code smells et refactoring', link: '/cours/00-fondamentaux/05-code-smells-et-refactoring' },
+            { text: 'Dependency Injection & IoC', link: '/cours/00-fondamentaux/06-dependency-injection-ioc' },
+            { text: 'Raisonner en architecte', link: '/cours/00-fondamentaux/07-raisonner-en-architecte' },
+            { text: 'Posture architecte', link: '/cours/00-fondamentaux/08-posture-architecte' }
           ]
         },
         {

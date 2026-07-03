@@ -578,6 +578,6 @@ createUserTyped(email, 'admin', tenant);
 
 ## Prochain cours
 
-[05 — Injection de dépendances et IoC](./05-dependency-injection-ioc.md)
+[05 — Code smells et refactoring](./05-code-smells-et-refactoring.md)
 
-> Dans le prochain cours, nous verrons comment l'injection de dépendances (DI) et l'inversion de controle (IoC) permettent de construire des systèmes testables, modulaires et maintenables. Nous verrons l'injection par constructeur, les scopes (singleton, request, transient), les providers NestJS, et pourquoi le Service Locator est un anti-pattern.
+> Dans le prochain cours, nous passerons du "reconnaitre un mauvais code" au "le soigner" : les 22 code smells classés en 5 familles, et les 66 techniques de refactoring classées en 6 groupes. Tu apprendras à refactorer par petits pas sûrs, tests verts, avec le catalogue de référence refactoring.guru.

@@ -1,4 +1,4 @@
-# 05 — Injection de dépendances et inversion de controle
+# 06 — Injection de dépendances et inversion de controle
 
 ## Objectif
 
@@ -10,27 +10,21 @@ A la fin de ce cours, tu sauras **expliquer et implémenter l'injection de dépe
 
 Teste ta mémoire avant de continuer.
 
-**Question 1 — Que signifie "Fail Fast" et pourquoi est-ce préférable au "Fail Late" ?**
+**Question 1 — Qu'est-ce qui distingue un refactoring d'un ajout de fonctionnalité, et pourquoi ne jamais faire les deux en même temps ?**
 
 <details>
 <summary>Réponse</summary>
 
-**Fail Fast** : valider toutes les preconditions en debut de fonction (guard clauses) et lever une exception immédiate et explicite si quelque chose est invalide.
-
-**Fail Late** (le problème) : continuer avec des données potentiellement incorrectes jusqu'a ce que le code plante dans un endroit inattendu, souvent après avoir effectue des opérations partielles (écritures en base, envois d'emails) qui ne peuvent pas etre annulees.
-
-Fail Fast est préférable car l'erreur est claire, localisee, et aucune opération de "damage control" n'a eu lieu.
+Un **refactoring** change la structure interne **sans changer le comportement observable** : mêmes entrées, mêmes sorties, les tests restent verts. Un **ajout de feature** change le comportement (les tests évoluent). Fowler parle des "deux casquettes" : à tout instant tu portes l'une ou l'autre, jamais les deux — sinon, quand un test casse, tu ne sais pas si c'est ta feature ou ta restructuration qui l'a cassé.
 </details>
 
-**Question 2 — Quelle est la différence entre DRY et YAGNI ? Donne un exemple de situation où appliquer DRY trop tot est un problème.**
+**Question 2 — Donne le refactoring associé aux smells "Switch Statements" et "Message Chains".**
 
 <details>
 <summary>Réponse</summary>
 
-- **DRY** : ne duplique pas la connaissance métier. Concerne ce qui **existe** dans le code.
-- **YAGNI** : n'implémenté pas quelque chose que tu n'as pas besoin maintenant. Concerne ce qui n'existe **pas encore**.
-
-Exemple de DRY premature : deux boucles qui ressemblent à un tri sont abstracted dans une fonction générique `sortAnything<T>`, alors qu'elles trient des types différents pour des raisons différentes. Quand l'une doit changer, l'abstraction devient un obstacle. La règle : attendre trois occurrences similaires representant vraiment la même connaissance avant d'abstraire.
+- **Switch Statements** (un `switch` sur un type, souvent dupliqué) → **Replace Conditional with Polymorphism** : une sous-classe par cas, chacune avec sa méthode. Ajouter un cas = ajouter une classe (OCP), plus de switch à maintenir.
+- **Message Chains** (`a.getB().getC().getD()`, Loi de Demeter violée) → **Hide Delegate** : exposer une méthode sur `a` qui masque la navigation interne, pour que le client ne connaisse plus la structure de `b` et `c`.
 </details>
 
 ---
@@ -653,6 +647,6 @@ runTests().catch(console.error);
 
 ## Prochain cours
 
-[06 — Raisonner en architecte](./06-raisonner-en-architecte.md)
+[07 — Raisonner en architecte](./07-raisonner-en-architecte.md)
 
 > Dans le dernier cours de ce module, nous verrons comment penser comme un architecte : caractéristiques d'architecture (-ilities), analyse de trade-offs, matrice impact/effort, fitness functions, et comment documenter les decisions avec les ADR. C'est la synthese de tout ce que nous avons vu dans le module 00.

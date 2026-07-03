@@ -133,11 +133,13 @@ A ce stade tu seras un dev différent de celui qui a commencé.
 | 2 | `cours/00-fondamentaux/04-principes-clean-code.md` | 1h | Clean code — tu le fais déjà en partie |
 | 3 | `cours/00-fondamentaux/02-principes-solid.md` | 1h30 | SOLID — le vocabulaire de base |
 | 4 | `cours/00-fondamentaux/03-design-patterns-essentiels.md` | 2h | Les 6 patterns que tu utiliseras tout le temps |
-| 5 | `cours/00-fondamentaux/05-dependency-injection-ioc.md` | 1h30 | DI — le concept le plus important pour la suite |
-| 6 | `cours/00-fondamentaux/06-raisonner-en-architecte.md` | 1h30 | **Cours clé** — comment penser en architecte |
-| 7 | `cours/00-pieges-frequents-archi.md` | 1h | Les 20 erreurs classiques — tu en fais probablement 5 |
+| 5 | `cours/00-fondamentaux/05-code-smells-et-refactoring.md` | 1h30 | Nommer les smells, les soigner par petits pas (réf. refactoring.guru) |
+| 6 | `cours/00-fondamentaux/06-dependency-injection-ioc.md` | 1h30 | DI — le concept le plus important pour la suite |
+| 7 | `cours/00-fondamentaux/07-raisonner-en-architecte.md` | 1h30 | **Cours clé** — comment penser en architecte |
+| 8 | `cours/00-pieges-frequents-archi.md` | 1h | Les 20 erreurs classiques — tu en fais probablement 5 |
 | | **Exercices Ère 1** | 8-10h | |
 | | `exercices/01-refactoring-solid/` | 1h | 🟢 Refactorer du code avec SOLID |
+| | `exercices/01b-refactoring-smells/` | 1h30 | 🟢 Nommer les smells, les soigner (tests golden-master fournis) |
 | | `exercices/02-identifier-patterns/` | 1h30 | 🔵 Reconnaître les design patterns |
 | | `exercices/03-injection-dependances/` | 1h | 🟢 Câbler de la DI |
 | | `exercices/04-tradeoff-analysis/` | 1h30 | 🟡 Premier exercice de décision |
@@ -316,7 +318,7 @@ A ce stade tu seras un dev différent de celui qui a commencé.
 |---|---|---|---|
 | 78-84 | `cours/12-architecture-pratique/` (7 cours) | 8h | ADR, C4, dette technique, Conway |
 | 85-90 | `cours/13-culture-architecturale/` (6 cours) | 7h | Mobile, ML, IoT, CRDT, Legacy |
-| | `cours/00-fondamentaux/07-posture-architecte.md` | 1h | **NOUVEAU** — Passer d'exécutant à décideur |
+| | `cours/00-fondamentaux/08-posture-architecte.md` | 1h | **NOUVEAU** — Passer d'exécutant à décideur |
 | | **Exercices Ère 7** | 12-15h | Exercices 53-59 + katas décisionnels |
 
 **🏆 Checkpoint Ère 7** : Tu as au moins 3 ADRs, un diagramme C4, et tu peux défendre tes choix d'architecture à l'oral devant un CTO fictif.
