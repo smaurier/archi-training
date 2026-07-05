@@ -91,7 +91,7 @@ class InvitationService {
 | **Décision (C)** | « toujours refactorer » sans critère | tranche avec ≥ 2 critères du module | pèse ROI vs dette, propose un périmètre (ce sprint / plus tard) |
 
 **Smells attendus dans un bon diagnostic (référence coach — ne pas montrer avant l'auto-éval) :**
-- `email.indexOf('@') > 0 && indexOf('.') > 0` → validation fragile + **Primitive Obsession** (email est un `string` nu) → *Replace Data Value with Object* (`Email` value object). (Le fait que `indexOf('@') > 0` rejette `a@b` — bug — se note **à part**.)
+- `email.indexOf('@') > 0 && indexOf('.') > 0` → validation fragile + **Primitive Obsession** (email est un `string` nu) → *Replace Data Value with Object* (`Email` value object). (Le vrai défaut : la validation est **trop laxiste** — elle exige juste un `@` et un `.` présents, donc laisse passer des invalides comme `"a.@b"` ou `"a@.b"` ; ce fix se note **à part**.)
 - `db.getTribe(...).getMembers().getCount()` et `.getAll()` → **Message Chains** (Couplers, loi de Demeter violée) → *Hide Delegate* / méthode sur `Tribe`.
 - Boucle `for` + flag `already` → **Duplicate/awkward logic** + control flag → *Remove Control Flag* / `members.some(m => ...)`, ou mieux une query `tribe.hasMember(email)`.
 - `kind == 1/2/3`, `bonus = 100/50/20`, `< 50` → **Magic Numbers** + **Switch Statements** (chaîne d'`else if` sur un type) → *Replace Magic Number with Symbolic Constant* + table/polymorphisme.
@@ -106,7 +106,7 @@ class InvitationService {
 
 - **Fais nommer avant de laisser refactorer.** Si Sylvain saute au « je réécrirais ça comme… », ramène-le au diagnostic : *quel smell, quelle famille ?* Le vocabulaire précis est l'objectif du lab.
 - **Sonde le pas 0.** « Il n'y a aucun test. Ton premier pas, c'est quoi ? » Réponse visée : écrire un **golden master** qui fige les sorties (0/-1/-2/-3) pour les cas actuels *avant* de toucher au code. S'il commence à refactorer sans filet → drapeau rouge, c'est le piège n°2 du module.
-- **Traque le mélange de casquettes.** Le `indexOf('@') > 0` cache un bug (rejette un email dont `@` est en position 0 — impossible ici, mais la logique `.` peut valider `@.`). Vérifie qu'il le **note comme fix séparé** et ne le glisse pas dans le plan de refactoring.
+- **Traque le mélange de casquettes.** La validation `indexOf('@') > 0 && indexOf('.') > 0` cache un bug : elle est **trop laxiste** (elle vérifie seulement la *présence* d'un `@` et d'un `.`, jamais leur position), donc elle **accepte** des emails mal formés comme `"a.@b"` ou `"a@.b"`. Vérifie qu'il le **note comme fix séparé** et ne le glisse pas dans le plan de refactoring.
 - **Challenge la décision C.** S'il répond « on refactore toujours », rappelle le ROI : ici le module est touché chaque sprint → refactorer se justifie **fort** (avant-feature + règle de trois largement dépassée). Contre-exemple à lui faire formuler : un module figé jamais retouché → on laisse.
 - **Relance si silence.** Questions d'amorce : « Combien de raisons *différentes* de modifier `invite()` vois-tu ? » (→ Divergent Change) ; « Combien de points d'affilée dans `db.getTribe().getMembers().getCount()` ? » (→ Message Chains).
 - **Signaux de maîtrise :** il hiérarchise (renommer/typer d'abord car sans risque, structure ensuite), il cite les couples-miroirs, il sépare spontanément refactoring et fix.

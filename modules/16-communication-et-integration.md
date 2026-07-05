@@ -115,7 +115,7 @@ service RoutineService {
 }
 ```
 
-Forces : **overhead minimal** (binaire, 5-10× plus compact que JSON pour des payloads structurés), latence basse, **streaming natif** (4 formes : unary, server-stream, client-stream, bidirectionnel), contrat fort et versionnable. C'est le choix privilégié pour la communication **inter-services** interne où la performance compte.
+Forces : **overhead minimal** (binaire, souvent plusieurs fois plus compact que JSON pour des payloads structurés), latence basse, **streaming natif** (4 formes : unary, server-stream, client-stream, bidirectionnel), contrat fort et versionnable. C'est le choix privilégié pour la communication **inter-services** interne où la performance compte.
 
 Limites décisives :
 
@@ -149,7 +149,7 @@ Les trois **coexistent** légitimement dans un même système (gRPC entre servic
 Quand l'information naît côté serveur et doit remonter *sans* que le client redemande, trois options — à choisir par un arbre simple :
 
 - **A-t-on vraiment besoin de temps réel ?** Sinon, du **polling** court (REST toutes les 5-15 s) suffit : simple, sans état, cacheable. Ne paie pas une connexion persistante pour un statut qui bouge une fois par heure.
-- **Le flux est-il unidirectionnel (serveur → client) ?** Alors **SSE** (Server-Sent Events) : un flux HTTP `text/event-stream`, **reconnexion automatique native**, passe les proxies/CDN sans souci. Idéal pour notifications, flux d'événements, logs.
+- **Le flux est-il unidirectionnel (serveur → client) ?** Alors **SSE** (Server-Sent Events) : un flux HTTP `text/event-stream`, **reconnexion automatique native**, passe les proxies/CDN sans souci. Idéal pour notifications, flux d'événements, logs. *Nuance* : sur **HTTP/1.1**, le navigateur plafonne à ~6 connexions par domaine — quelques onglets SSE ouverts peuvent saturer ; en **HTTP/2** (multiplexé), cette limite tombe.
 - **Le client doit-il aussi émettre, à haute fréquence ?** Alors **WebSocket** : connexion **full-duplex** persistante, overhead par message minimal. Idéal pour chat, édition collaborative, présence.
 
 | Critère | Polling | SSE | WebSocket |

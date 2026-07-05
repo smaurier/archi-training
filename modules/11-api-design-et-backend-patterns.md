@@ -1,7 +1,7 @@
 ---
 titre: API design et backend patterns
 cours: 13-architecture
-notions: ["ressource vs endpoint", "contrat d'API", "verbes HTTP et codes de retour", "actions non-CRUD", "versioning d'API", "pipeline middleware (cross-cutting concerns)", "ordre du pipeline et court-circuit", "Repository pattern", "Unit of Work", "Active Record vs Data Mapper", "validation en couches (format / règle / persistance)", "erreurs structurées (Problem Details / RFC 7807)", "fail-fast"]
+notions: ["ressource vs endpoint", "contrat d'API", "verbes HTTP et codes de retour", "actions non-CRUD", "versioning d'API", "pipeline middleware (cross-cutting concerns)", "ordre du pipeline et court-circuit", "Repository pattern", "Unit of Work", "Active Record vs Data Mapper", "validation en couches (format / règle / persistance)", "erreurs structurées (Problem Details / RFC 9457, ex-7807)", "fail-fast"]
 outcomes:
   - "sait concevoir le contrat d'une API REST au niveau archi : modéliser les ressources, choisir verbes et codes, exprimer une action non-CRUD"
   - "sait décider d'une stratégie de versioning d'API et justifier son coût"
@@ -242,7 +242,7 @@ Le principe directeur est le **fail-fast** : rejeter **au plus tôt**, au niveau
 
 Ne **pas** confondre les niveaux : « le rôle est une string » = format (couche 1) ; « le rôle est un rôle TribuZen autorisé » = règle métier (couche 2). C'est le même piège qu'au module 05.
 
-Enfin, les erreurs elles-mêmes font partie du **contrat** et doivent avoir une **forme stable et structurée**, pas des chaînes ad hoc. Le standard de référence est **Problem Details** (RFC 7807) : un objet uniforme avec `type`, `title`, `status`, `detail`, `instance`, et une extension `violations` pour le détail par champ.
+Enfin, les erreurs elles-mêmes font partie du **contrat** et doivent avoir une **forme stable et structurée**, pas des chaînes ad hoc. Le standard de référence est **Problem Details** (RFC 9457, ex-7807) : un objet uniforme avec `type`, `title`, `status`, `detail`, `instance`, et une extension `violations` pour le détail par champ.
 
 ```json
 {
@@ -396,7 +396,7 @@ Décisions concrètes pour TribuZen :
 7. **Pipeline middleware :** les préoccupations transverses (log, auth, validation, erreurs) sont des étapes **ordonnées** et **court-circuitables** ; l'ordre est une décision.
 8. **Accès aux données :** Active Record (couplé, CRUD simple) vs Data Mapper (entité pure) ; **Repository** (interface dans le domaine) pour respecter la règle de dépendance ; **Unit of Work** pour l'écriture atomique.
 9. **Validation en 3 couches** (format / règle / persistance) + **fail-fast** ; ne pas confondre format (DTO) et règle métier (domaine).
-10. **Erreurs structurées** (Problem Details / RFC 7807), stables, sans fuite d'infra : le front mappe code + champ à un comportement.
+10. **Erreurs structurées** (Problem Details / RFC 9457, ex-7807), stables, sans fuite d'infra : le front mappe code + champ à un comportement.
 
 ---
 
@@ -413,7 +413,7 @@ Différence entre Active Record et Data Mapper ?|Active Record : l'entité héri
 Qu'est-ce que le Repository pattern et ses règles ?|Une interface façon collection (findById, save) définie DANS le domaine et implémentée dans l'infra. Règles : interface dans le domaine, retourne des entités (pas des rows), un repo par agrégat (pas par table), encapsule la requête (le domaine ignore SQL/Mongo).
 À quoi sert un Unit of Work ?|Regrouper plusieurs modifications (créations, updates, suppressions) et les commit en UNE transaction atomique : tout passe ou rien. Fourni par les ORM (prisma.$transaction, TypeORM/Doctrine EntityManager) — rarement codé à la main.
 Quelles sont les 3 couches de validation et le principe qui les gouverne ?|Format (DTO/présentation : bonne forme ?), Règle métier (domaine : action permise ?), Persistance (base : unicité, FK). Principe = fail-fast : rejeter au plus tôt. Exception : le format collecte toutes les violations d'un coup pour les renvoyer ensemble.
-Pourquoi structurer les erreurs (Problem Details / RFC 7807) plutôt qu'une chaîne libre ?|Un format stable (type, title, status, detail, instance, violations) permet au front de mapper code + champ à un comportement sans parser une phrase. Et on ne fuit jamais les détails internes (stack, SQL) : message générique côté client, log complet côté serveur.
+Pourquoi structurer les erreurs (Problem Details / RFC 9457, ex-7807) plutôt qu'une chaîne libre ?|Un format stable (type, title, status, detail, instance, violations) permet au front de mapper code + champ à un comportement sans parser une phrase. Et on ne fuit jamais les détails internes (stack, SQL) : message générique côté client, log complet côté serveur.
 ```
 
 ---
