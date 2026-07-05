@@ -162,7 +162,7 @@ La **pyramide** classe les tests par coût/vitesse/stabilité :
 
 Règle par défaut : **beaucoup d'unit** (la logique du domaine, testable sans I/O grâce à l'hexagonale), **de l'intégration** aux frontières, **peu d'E2E** (uniquement les parcours vitaux). Un test n'est utile que s'il teste **quelque chose qui peut casser** : tester des getters/setters gonfle la couverture sans rien protéger.
 
-Mais la forme n'est pas universelle. Le **honeycomb** (nid d'abeille, Fowler/Spotify) **inverse** la logique pour un composant **mince** — un adaptateur qui fait surtout de l'I/O et peu de logique pure. Là, un test unitaire qui *mocke tout* ne teste **rien d'utile** ; le gros de la valeur est dans les tests d'**intégration** qui vérifient la vraie frontière. Le choix de la forme est un **choix d'architecture** : il dépend de *où vit la complexité* du composant (logique pure → pyramide ; orchestration/I/O → honeycomb).
+Mais la forme n'est pas universelle. Le **honeycomb** (nid d'abeille, Spotify) **inverse** la logique pour un composant **mince** — un adaptateur qui fait surtout de l'I/O et peu de logique pure. Là, un test unitaire qui *mocke tout* ne teste **rien d'utile** ; le gros de la valeur est dans les tests d'**intégration** qui vérifient la vraie frontière. Le choix de la forme est un **choix d'architecture** : il dépend de *où vit la complexité* du composant (logique pure → pyramide ; orchestration/I/O → honeycomb).
 
 ### 2.10 Tester les frontières : le contract testing
 

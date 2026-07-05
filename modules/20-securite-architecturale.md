@@ -83,7 +83,6 @@ Le but n'est pas la paranoïa exhaustive : c'est de rendre les menaces **explici
 STRIDE se déroule **par élément** du schéma (chaque processus, chaque flux, chaque stockage) et surtout **à chaque frontière de confiance** (§2.4). C'est une checklist de créativité, pas une preuve : elle t'oblige à te poser les six questions au lieu d'oublier celles auxquelles tu ne penses pas naturellement.
 
 > **Lien avec OWASP :** STRIDE catégorise les *menaces* ; l'**OWASP Top 10** classe les *vulnérabilités web les plus répandues*. La catégorie architecturale la plus liée à ce module est **A04:2021 – Insecure Design** (les failles nées d'un manque de threat modeling, pas d'un bug d'implémentation) ainsi que **A01:2021 – Broken Access Control**. Le **détail** de chaque vulnérabilité OWASP et sa parade code relèvent du **cours 14**.
-> <!-- FLAG-DOC: enumération complète OWASP Top 10 2021 non re-vérifiée en ligne (owasp.org/Top10 redirige vers la version 2025 ; A01=Broken Access Control confirmé directement). Ne citer que A01 et A04 tant que la liste complète n'est pas re-fetchée. -->
 
 ### 2.4 Data flow diagram et trust boundaries
 

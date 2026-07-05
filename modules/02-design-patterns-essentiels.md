@@ -72,6 +72,8 @@ La question n'est jamais « quel pattern je mets ici ? » mais « **quel problè
 | « Je veux isoler mon domaine de la façon dont les données sont stockées » | **Repository** |
 | « Je veux une seule instance globale » | **Singleton** — presque toujours à éviter (§2.7) |
 
+> **Précision de vocabulaire (à connaître, sans pédantisme) :** tout ce tableau n'est pas du « GoF » au sens strict. Le **Repository** ne fait pas partie des 23 patterns du Gang of Four : il vient de Fowler (*PoEAA*) et d'Evans (*DDD*). Une factory à `switch` sur une clé (comme au §2.1) est un **Simple Factory** — un idiome courant, distinct du *Factory Method* GoF (qui délègue la création à une sous-classe via une méthode surchargée). Et un EventBus indexé par des topics en `string` (§2.3) relève du **Publish/Subscribe** (émetteur et abonnés découplés par un canal), pas de l'*Observer* GoF strict où le **sujet tient lui-même la liste** de ses observateurs. Les noms comptent moins que le problème résolu, mais autant les employer juste.
+
 ### 2.1 Factory — créer selon un type connu à l'exécution
 
 **Problème** : le type d'objet à instancier n'est connu qu'au runtime (venu d'une requête, d'une config, de la BDD), ou la construction est assez complexe pour mériter d'être centralisée.

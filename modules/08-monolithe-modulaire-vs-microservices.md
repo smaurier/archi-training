@@ -133,7 +133,7 @@ Le principe non négociable est **data per service** : chaque service **possède
 3. **Deux parties du système ont-elles des besoins de scaling franchement différents ?** Non → monolithe (tu scales l'artefact entier, c'est trivial). Oui → candidat à extraction ciblée.
 4. **Es-tu prêt·e à payer la complexité opérationnelle ?** (orchestration type Kubernetes, tracing distribué, gestion de pannes réseau, cohérence éventuelle — modules 18-19) Non → n'y va pas encore.
 
-Conseil de Martin Fowler, à graver : *« Don't start with microservices. Start with a monolith designed with module boundaries that mirror potential service boundaries. »* Autrement dit : soigne tes **frontières de modules** dès maintenant, pour que l'extraction d'un service reste **possible** — sans la faire tant qu'elle n'est pas **nécessaire**.
+Martin Fowler recommande, en substance (*MonolithFirst*, 2015), de **commencer par un monolithe bien découpé** dont les frontières de modules épousent de futures frontières de services, plutôt que de démarrer directement en microservices. Autrement dit : soigne tes **frontières de modules** dès maintenant, pour que l'extraction d'un service reste **possible** — sans la faire tant qu'elle n'est pas **nécessaire**.
 
 ### 2.7 Les trois anti-patterns distribués fatals
 
