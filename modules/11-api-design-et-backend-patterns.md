@@ -67,19 +67,19 @@ POST /updateRoutineTitle           PATCH  /routines/{{id}}
 POST /deleteRoutine                DELETE /routines/{{id}}
 ```
 
-L'intérêt : le client apprend **un** modèle (des ressources + 5 verbes) au lieu d'**un nom de fonction par action**. Les URL deviennent **prévisibles** : si `/routines/{{id}}` existe, tu devines `/routines`.
+L'intérêt : le client apprend **un** modèle (des ressources + 5 verbes) au lieu d'**un nom de fonction par action**. Les URL deviennent **prévisibles** : si <code v-pre>/routines/{{id}}</code> existe, tu devines `/routines`.
 
 ### 2.2 Le contrat d'API : ce que tu promets, indépendamment de l'impl
 
 Le **contrat** est l'ensemble des promesses faites au client : quelles ressources existent, quels verbes elles acceptent, quelle forme ont les corps de requête/réponse, quels codes et quelles erreurs sont possibles. C'est **l'interface publique** de ton backend — au sens du module 01 (ISP) et du module 06 (le contrat est un *port* côté entrant).
 
-Propriété clé : le contrat est **stable et découplé de l'implémentation**. Derrière `GET /routines/{{id}}`, tu peux changer d'ORM, de base, de langage — tant que la **forme** ne change pas, aucun client ne casse. C'est l'analogie du menu de restaurant : le client commande « entrecôte à point » sans connaître la cuisine ; changer de four ne change pas le menu.
+Propriété clé : le contrat est **stable et découplé de l'implémentation**. Derrière <code v-pre>GET /routines/{{id}}</code>, tu peux changer d'ORM, de base, de langage — tant que la **forme** ne change pas, aucun client ne casse. C'est l'analogie du menu de restaurant : le client commande « entrecôte à point » sans connaître la cuisine ; changer de four ne change pas le menu.
 
 ### 2.3 Verbes HTTP et codes de retour : de la sémantique gratuite
 
 Chaque verbe HTTP porte une **sémantique** et deux propriétés qui aident à raisonner :
 
-| Verbe | Sur `/routines` | Sur `/routines/{{id}}` | Sûr (safe) | Idempotent |
+| Verbe | Sur `/routines` | Sur <code v-pre>/routines/{{id}}</code> | Sûr (safe) | Idempotent |
 |-------|-----------------|------------------------|:----------:|:----------:|
 | GET | lister | lire | oui | oui |
 | POST | créer | — | non | non |
@@ -111,9 +111,9 @@ Le choix du code **est** une décision d'architecture : il dit au client **quoi 
 
 Toutes les opérations ne se plient pas à créer/lire/modifier/supprimer. « Compléter une routine aujourd'hui », « archiver une routine », « inviter un co-référent » sont des **actions métier**. Trois options, par ordre de préférence archi :
 
-1. **Modéliser l'action comme une sous-ressource** qu'on crée : compléter = créer une complétion → `POST /routines/{{id}}/completions`. Le plus RESTful : la complétion **est** une ressource (elle a une date, un enfant, un id).
-2. **Changer d'état via la ressource** : archiver = `PATCH /routines/{{id}}` avec `{ status: "archived" }`, quand c'est un simple champ.
-3. **Endpoint d'action explicite** quand ni l'un ni l'autre ne colle : `POST /routines/{{id}}/archive`. Assumé, pas honteux — mais à réserver aux vraies actions (effet de bord, transition d'état non trivial), pas à un déguisement de CRUD.
+1. **Modéliser l'action comme une sous-ressource** qu'on crée : compléter = créer une complétion → <code v-pre>POST /routines/{{id}}/completions</code>. Le plus RESTful : la complétion **est** une ressource (elle a une date, un enfant, un id).
+2. **Changer d'état via la ressource** : archiver = <code v-pre>PATCH /routines/{{id}}</code> avec `{ status: "archived" }`, quand c'est un simple champ.
+3. **Endpoint d'action explicite** quand ni l'un ni l'autre ne colle : <code v-pre>POST /routines/{{id}}/archive</code>. Assumé, pas honteux — mais à réserver aux vraies actions (effet de bord, transition d'état non trivial), pas à un déguisement de CRUD.
 
 Le piège : tout transformer en endpoint d'action (`/doThis`, `/doThat`) et revenir au style RPC. Cherche d'abord la **ressource cachée** derrière l'action.
 
@@ -279,13 +279,13 @@ On reprend le pêle-mêle RPC du §1 et on conçoit le **contrat** (pas le NestJ
 
 | Opération (métier) | Endpoint | Code succès | Pourquoi |
 |--------------------|----------|:-----------:|----------|
-| Lister les routines d'une famille | `GET /families/{{familyId}}/routines` | 200 | lecture, sûre, idempotente |
-| Créer une routine | `POST /families/{{familyId}}/routines` | 201 | création → 201 |
-| Lire une routine | `GET /routines/{{id}}` | 200 | lecture |
-| Renommer une routine | `PATCH /routines/{{id}}` | 200 | modification partielle d'un champ |
-| Archiver une routine | `PATCH /routines/{{id}}` `{status:"archived"}` | 200 | transition d'état = champ |
-| **Compléter aujourd'hui** | `POST /routines/{{id}}/completions` | 201 | **action non-CRUD → sous-ressource créée** |
-| Supprimer une routine | `DELETE /routines/{{id}}` | 204 | suppression, idempotente |
+| Lister les routines d'une famille | <code v-pre>GET /families/{{familyId}}/routines</code> | 200 | lecture, sûre, idempotente |
+| Créer une routine | <code v-pre>POST /families/{{familyId}}/routines</code> | 201 | création → 201 |
+| Lire une routine | <code v-pre>GET /routines/{{id}}</code> | 200 | lecture |
+| Renommer une routine | <code v-pre>PATCH /routines/{{id}}</code> | 200 | modification partielle d'un champ |
+| Archiver une routine | <code v-pre>PATCH /routines/{{id}}</code> `{status:"archived"}` | 200 | transition d'état = champ |
+| **Compléter aujourd'hui** | <code v-pre>POST /routines/{{id}}/completions</code> | 201 | **action non-CRUD → sous-ressource créée** |
+| Supprimer une routine | <code v-pre>DELETE /routines/{{id}}</code> | 204 | suppression, idempotente |
 
 Le point de conception clé : « compléter » n'est **pas** un `POST /completeRoutineToday`. C'est **créer une complétion** — une ressource qui a une date, un enfant, un id. On a trouvé la ressource cachée derrière l'action (§2.4).
 
