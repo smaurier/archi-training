@@ -47,7 +47,7 @@ Contexte métier (règles TribuZen à respecter) :
 1. **Chasse aux ressources.** Souligne, dans le brouillon, chaque **verbe** dans une URL (`createFamily`, `getFamilyMembers`…). Pour chacun, écris le **nom** de la ressource qu'il manipule. Regroupe : combien de ressources distinctes ? (`Family`, `Member`, `Invitation`.)
 2. **Hiérarchie d'URL.** Décide qui est sous qui : un membre appartient-il à une famille ? une invitation ? Écris les chemins, sans dépasser 2 niveaux d'imbrication.
 3. **Verbe + code.** Pour chaque opération, choisis le verbe (GET/POST/PATCH/DELETE) et le code de succès (200/201/204). À chaque ligne, note **sûr ?** et **idempotent ?** — et ce que ça change pour le client offline.
-4. **Actions non-CRUD.** « Inviter » : ressource cachée (`POST /families/{{id}}/invitations`, on **crée** une invitation) ou action ? « Accepter » : que se passe-t-il si on la modélise comme un changement d'état d'invitation vs un endpoint `/accept` ? « Révoquer » : DELETE d'un membre ou action ? Tranche et justifie.
+4. **Actions non-CRUD.** « Inviter » : ressource cachée (<code v-pre>POST /families/{{id}}/invitations</code>, on **crée** une invitation) ou action ? « Accepter » : que se passe-t-il si on la modélise comme un changement d'état d'invitation vs un endpoint `/accept` ? « Révoquer » : DELETE d'un membre ou action ? Tranche et justifie.
 5. **Contrat d'erreur de l'invitation.** Liste les échecs : famille introuvable, famille pleine (max 8), rôle invalide, adresse déjà membre, non authentifié, pas le droit d'inviter. Mappe chacun à un code (401/403/404/409/422) et écris l'objet Problem Details correspondant.
 6. **Validation en couches.** Range chaque vérification : `email` bien formé (format ?) ; `role` est une string (format ?) ; `role ∈ {owner,coreferent,reader}` (format ou règle ?) ; « max 8 » (règle) ; « déjà membre » (règle ou persistance ?). Attention au piège format-vs-règle.
 7. **Patterns de données + ADR.** La famille et l'invitation ont-elles de vraies règles ? Faut-il isoler le domaine ? Y a-t-il une écriture multi-entités atomique (créer invitation + notifier) ? Choisis Active Record ou Data Mapper + Repository, et si un Unit of Work est utile. Rédige le mini-ADR.
@@ -72,32 +72,32 @@ Trois ressources du domaine : **Family**, **Member** (co-référent), **Invitati
 /invitations/{{id}}                           une invitation (accès direct par id/token)
 ```
 
-Les membres et invitations sont **sous** la famille (relation d'appartenance), imbrication à 2 niveaux max. On expose aussi `/invitations/{{id}}` à plat pour l'accès direct (accepter via token sans connaître la famille).
+Les membres et invitations sont **sous** la famille (relation d'appartenance), imbrication à 2 niveaux max. On expose aussi <code v-pre>/invitations/{{id}}</code> à plat pour l'accès direct (accepter via token sans connaître la famille).
 
 ### 2. Tableau du contrat (versionné par URL)
 
 | Opération (brouillon) | Endpoint | Succès | Sûr | Idemp. | Pourquoi |
 |-----------------------|----------|:------:|:---:|:------:|----------|
 | createFamily | `POST /v1/families` | 201 | non | non | création |
-| getFamily | `GET /v1/families/{{id}}` | 200 | oui | oui | lecture |
-| getFamilyMembers | `GET /v1/families/{{id}}/members` | 200 | oui | oui | lecture d'une sous-collection |
-| renameFamily | `PATCH /v1/families/{{id}}` | 200 | non | non | modif partielle d'un champ |
-| inviteCoReferent | `POST /v1/families/{{id}}/invitations` | 201 | non | non | **crée une invitation** |
-| acceptInvitation | `PATCH /v1/invitations/{{id}}` `{status:"accepted"}` | 200 | non | oui | **transition d'état** de l'invitation |
-| revokeCoReferent | `DELETE /v1/families/{{id}}/members/{{memberId}}` | 204 | non | oui | suppression d'un membre |
-| getInvitationStatus | `GET /v1/invitations/{{id}}` | 200 | oui | oui | lecture |
+| getFamily | <code v-pre>GET /v1/families/{{id}}</code> | 200 | oui | oui | lecture |
+| getFamilyMembers | <code v-pre>GET /v1/families/{{id}}/members</code> | 200 | oui | oui | lecture d'une sous-collection |
+| renameFamily | <code v-pre>PATCH /v1/families/{{id}}</code> | 200 | non | non | modif partielle d'un champ |
+| inviteCoReferent | <code v-pre>POST /v1/families/{{id}}/invitations</code> | 201 | non | non | **crée une invitation** |
+| acceptInvitation | <code v-pre>PATCH /v1/invitations/{{id}}</code> `{status:"accepted"}` | 200 | non | oui | **transition d'état** de l'invitation |
+| revokeCoReferent | <code v-pre>DELETE /v1/families/{{id}}/members/{{memberId}}</code> | 204 | non | oui | suppression d'un membre |
+| getInvitationStatus | <code v-pre>GET /v1/invitations/{{id}}</code> | 200 | oui | oui | lecture |
 
 `/v1` d'emblée : l'app mobile est déployée (clients non contrôlés) → un futur breaking change vivra sur `/v2` sans casser les apps installées.
 
 ### 3. Actions non-CRUD — les décisions clés
 
-- **Inviter** → **ressource cachée** : une invitation **est** une ressource (token, statut, email, id). Donc `POST /families/{{id}}/invitations` (201), pas `POST /inviteCoReferent`. Bénéfice : on peut ensuite lister, lire le statut, accepter — tout devient CRUD sur `Invitation`.
-- **Accepter** → **transition d'état** de l'invitation : `PATCH /invitations/{{id}}` avec `{ status: "accepted" }` (idempotent : ré-accepter une invitation déjà acceptée aboutit au même état). Alternative acceptable : `POST /invitations/{{id}}/accept` si l'acceptation déclenche des effets de bord complexes — à assumer explicitement.
-- **Révoquer** → **DELETE d'un membre** : `DELETE /families/{{id}}/members/{{memberId}}` (204, idempotent). Ce n'est pas un endpoint d'action, c'est la suppression d'une ressource `Member`.
+- **Inviter** → **ressource cachée** : une invitation **est** une ressource (token, statut, email, id). Donc <code v-pre>POST /families/{{id}}/invitations</code> (201), pas `POST /inviteCoReferent`. Bénéfice : on peut ensuite lister, lire le statut, accepter — tout devient CRUD sur `Invitation`.
+- **Accepter** → **transition d'état** de l'invitation : <code v-pre>PATCH /invitations/{{id}}</code> avec `{ status: "accepted" }` (idempotent : ré-accepter une invitation déjà acceptée aboutit au même état). Alternative acceptable : <code v-pre>POST /invitations/{{id}}/accept</code> si l'acceptation déclenche des effets de bord complexes — à assumer explicitement.
+- **Révoquer** → **DELETE d'un membre** : <code v-pre>DELETE /families/{{id}}/members/{{memberId}}</code> (204, idempotent). Ce n'est pas un endpoint d'action, c'est la suppression d'une ressource `Member`.
 
 > Le piège évité : ne PAS créer `/acceptInvitation`, `/revokeCoReferent`, `/inviteCoReferent` comme trois RPC. Derrière chaque action, on a trouvé la ressource (`Invitation`, `Member`) et le verbe standard.
 
-### 4. Contrat d'erreur de `POST /families/{{id}}/invitations`
+### 4. Contrat d'erreur de <code v-pre>POST /families/{{id}}/invitations</code>
 
 | Situation | Code | Le client doit | Problem Details (extrait) |
 |-----------|:----:|----------------|----------------------------|
@@ -179,7 +179,7 @@ Seuil : **6/8** pour valider. En dessous, reprends la modélisation des ressourc
 1. **En 25 minutes, de mémoire**, sans relire ce corrigé ni le module 11.
 2. On te donne un **nouveau** pêle-mêle : la gestion des **journaux de gratitude** d'une famille — `POST /createEntry`, `POST /getEntries`, `POST /editEntry`, `POST /deleteEntry`, `POST /exportFamilyJournalPdf`, `POST /markEntryFavorite`. Conçois le contrat : ressources, verbes, codes, versioning.
 3. **Contrainte supplémentaire n°1 :** `exportFamilyJournalPdf` est un **piège de modélisation** — export long, résultat asynchrone. Est-ce un GET, un POST qui crée une ressource « export », ou un endpoint d'action ? Justifie en une phrase (indice : le pattern d'export asynchrone touche au **module 12**, à ne pas dérouler ici — mais nomme la ressource `Export` si tu la crées).
-4. **Contrainte supplémentaire n°2 :** `markEntryFavorite` — transition d'état (`PATCH`) ou sous-ressource (`PUT/DELETE /entries/{{id}}/favorite`) ? Tranche et justifie l'idempotence.
+4. **Contrainte supplémentaire n°2 :** `markEntryFavorite` — transition d'état (`PATCH`) ou sous-ressource (<code v-pre>PUT/DELETE /entries/{{id}}/favorite</code>) ? Tranche et justifie l'idempotence.
 
 **Critère de réussite :** tableau de contrat (verbes + codes) + contrat d'erreur d'une opération + choix de pattern de données, produits en 25 min, avec `exportPdf` correctement traité comme **création d'une ressource Export** (et non un GET qui bloque) et la distinction format/règle tenue.
 
