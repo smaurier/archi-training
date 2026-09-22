@@ -7,7 +7,7 @@
 <!-- labs-gestes:start -->
 ## Labs — refonte du 22/09/2026 : un lab = un geste métier complet
 
-> Règle qualité 5 du parcours : chaque lab est **un geste métier complet**, sous deux formes — **Zéro** (construire de zéro un artefact réel et entier) ou **Intervention** (modifier de l'existant avec consommateurs, findings avant code, non-régression). Un lab n'entre en file qu'avec un **oracle exécutable** (`src/` starter · `test/` · `solution/` séparée). Les labs historiques de ce cours (un concept par lab, sans oracle) restent dans `labs/` jusqu'à remplacement et **ne sont plus la file**. Cible détaillée : [`docs/gestes-complets.md`](../docs/gestes-complets.md). État : **4/5 avec oracle**.
+> Règle qualité 5 du parcours : chaque lab est **un geste métier complet**, sous deux formes — **Zéro** (construire de zéro un artefact réel et entier) ou **Intervention** (modifier de l'existant avec consommateurs, findings avant code, non-régression). Un lab n'entre en file qu'avec un **oracle exécutable** (`src/` starter · `test/` · `solution/` séparée). Les labs historiques de ce cours (un concept par lab, sans oracle) restent dans `labs/` jusqu'à remplacement et **ne sont plus la file**. Cible détaillée : [`docs/gestes-complets.md`](../docs/gestes-complets.md). État : **5/5 avec oracle**.
 
 | # | Lab | Forme | Geste | Oracle |
 |---|-----|-------|-------|--------|
@@ -15,7 +15,7 @@
 | 02 | [`lab-02-ddd-un-domaine-de-zero`](labs/lab-02-ddd-un-domaine-de-zero/README.md) | Zéro | modélisation + tests du domaine | ✅ vérifié |
 | 03 | [`lab-03-extraire-un-domaine`](labs/lab-03-extraire-un-domaine/README.md) | Intervention | d'un monolithe existant, sans casser les consommateurs | ✅ vérifié |
 | 04 | [`lab-04-relire-une-architecture`](labs/lab-04-relire-une-architecture/README.md) | Intervention | findings, sparring archi | ✅ vérifié |
-| 05 | `lab-05-contester-un-adr` | Intervention | réécrire un ADR existant avec preuves | · à écrire |
+| 05 | [`lab-05-contester-un-adr`](labs/lab-05-contester-un-adr/README.md) | Intervention | réécrire un ADR existant avec preuves | ✅ vérifié |
 
 <!-- labs-gestes:end -->
 
