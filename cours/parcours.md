@@ -627,7 +627,7 @@ Voir : `projet-fil-rouge/README.md`
 
 ## Index des patterns CMS theorises
 
-> Référence croisee : chaque pattern réel d'un CMS propriétaire et le cours ou il est enseigne.
+> Référence croisee : chaque pattern réel du CMS de la mission et le cours ou il est enseigne.
 
 ### Multi-tenancy & isolation
 | Pattern | Cours |
