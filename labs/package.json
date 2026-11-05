@@ -14,7 +14,9 @@
     "lab:04": "vitest run --root lab-04-relire-une-architecture",
     "solution:04": "vitest run --root lab-04-relire-une-architecture --config vitest.solution.config.ts",
     "lab:05": "vitest run --root lab-05-contester-un-adr",
-    "solution:05": "vitest run --root lab-05-contester-un-adr --config vitest.solution.config.ts"
+    "solution:05": "vitest run --root lab-05-contester-un-adr --config vitest.solution.config.ts",
+    "lab:06": "vitest run --root lab-06-invariant-entre-deux-agregats",
+    "solution:06": "vitest run --root lab-06-invariant-entre-deux-agregats --config vitest.solution.config.ts"
   },
   "engines": {
     "node": ">=20.0.0"
