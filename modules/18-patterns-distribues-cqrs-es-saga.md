@@ -301,4 +301,11 @@ Pourquoi les microservices "fabriquent"-ils le besoin de sagas ?|Découper en se
 
 ## Pont vers le lab
 
-> Lab associé : `labs/lab-18-patterns-distribues-cqrs-es-saga/README.md`. On te donne trois besoins TribuZen ; pour chacun tu décides si CQRS / Event Sourcing / Saga s'applique, tu justifies — et surtout tu sais **refuser** et proposer la version la moins chère. Exercice de décision, évalué par grille + coach. Zéro harnais.
+> **Deux labs, et ils ne s'opposent pas.**
+>
+> - **Le geste, avec oracle** : [`labs/lab-07-cqrs-event-sourcing-de-zero`](../labs/lab-07-cqrs-event-sourcing-de-zero/README.md)
+>   (forme Zéro, 42 tests). Tu écris l'agrégat event-sourced, la concurrence optimiste par version
+>   de flux, deux projections rejouables et l'upcast d'un vieux fait. TypeScript pur, aucune base.
+>   Sa variante J+30 te fait instruire le procès du pattern, parce que savoir le refuser en fait
+>   partie. **À faire d'abord.**
+> - **La décision, sans harnais** : `labs/lab-18-patterns-distribues-cqrs-es-saga/README.md`. On te donne trois besoins TribuZen ; pour chacun tu décides si CQRS / Event Sourcing / Saga s'applique, tu justifies — et surtout tu sais **refuser** et proposer la version la moins chère. Exercice de décision, évalué par grille + coach. Zéro harnais.

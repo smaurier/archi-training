@@ -431,5 +431,8 @@ async listProducts(
 >
 > - Implémente CQRS léger pour le catalogue ShopArch (read model = materialized view)
 > - Sépare les commandes (CreateProduct) des queries (GetProductList)
-> - Exercice(s) associé(s) : `exercices/33-cqrs-catalogue-commandes/`
+> - Exercice(s) associé(s) : `exercices/33-cqrs-catalogue-commandes/` (⚠️ sa correction est dans le
+>   même dossier : ne l'ouvre pas si tu veux garder la page blanche)
+> - **Lab-geste avec oracle** : [`labs/lab-07-cqrs-event-sourcing-de-zero`](../../labs/lab-07-cqrs-event-sourcing-de-zero/README.md)
+>   — sur TribuZen, pas sur ShopArch, et vérifié par un test-runner
 > - Checkpoint : Module 07, critère 1

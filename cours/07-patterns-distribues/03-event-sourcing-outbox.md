@@ -548,4 +548,6 @@ export class OrderListingProjection {
 > - Implémente le transactional outbox pour publier les events OrderPlaced de manière fiable
 > - Le polling publisher lit la table outbox et publie vers Redis/BullMQ
 > - Exercice(s) associé(s) : `exercices/35-outbox-pattern/`
+> - **Lab-geste avec oracle** : [`labs/lab-07-cqrs-event-sourcing-de-zero`](../../labs/lab-07-cqrs-event-sourcing-de-zero/README.md)
+>   — rejeu, version de flux, projections rejouables, upcast d'un fait v1
 > - Checkpoint : Module 07, critère 2
