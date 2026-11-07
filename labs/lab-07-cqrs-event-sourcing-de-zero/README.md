@@ -14,6 +14,13 @@
 
 `npm install` depuis `13-architecture/labs`.
 
+## Quand faire ce lab
+
+**Pas dans la file du cours 08** (décision du 07/11/2026). CQRS et event sourcing restent déférés
+aux systèmes distribués : ce lab s'ouvre au **cours 17**, juste avant son `lab-12` qui refait le
+même geste sur un vrai PostgreSQL. Il vit ici parce que le cours d'architecture porte les modules
+qui l'expliquent, pas parce qu'il se fait ici.
+
 ## Prérequis pédagogique
 
 Le **lab 06** d'abord. Il t'a fait écrire un fait qui franchit une frontière, une compensation et

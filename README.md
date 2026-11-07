@@ -8,6 +8,12 @@
 ## Labs — refonte du 22/09/2026 : un lab = un geste métier complet
 
 > Règle qualité 5 du parcours : chaque lab est **un geste métier complet**, sous deux formes — **Zéro** (construire de zéro un artefact réel et entier) ou **Intervention** (modifier de l'existant avec consommateurs, findings avant code, non-régression). Un lab n'entre en file qu'avec un **oracle exécutable** (`src/` starter · `test/` · `solution/` séparée). Les labs historiques de ce cours (un concept par lab, sans oracle) restent dans `labs/` jusqu'à remplacement et **ne sont plus la file**. Cible détaillée : [`docs/gestes-complets.md`](../docs/gestes-complets.md). État : **7/7 avec oracle**.
+>
+> ⛔ **`lab-07` est hors file (décision du 07/11/2026).** Il est écrit et vérifié, mais CQRS et
+> event sourcing restent déférés aux systèmes distribués : le geste se fait là-bas, en ouverture
+> du cours 17, juste avant son `lab-12` sur PostgreSQL réel. Les **7/7** ci-dessus comptent le
+> contenu écrit, pas une file à faire ; la file de ce cours est **6/7**, labs 01 à 06. Raison : un
+> lab prêt n'est pas une raison d'avancer un sujet dans l'ordre d'apprentissage.
 
 | # | Lab | Forme | Geste | Oracle |
 |---|-----|-------|-------|--------|
